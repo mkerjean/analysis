@@ -82,7 +82,7 @@ Lemma squeeze (T : Type) (R : realFieldType) (f g h : T -> R) (a : filter_on T) 
   (\forall x \near a, f x <= g x <= h x) -> forall (l : R),
   f @ a --> (l : R^o) -> h @ a --> (l : R^o) -> g @ a --> (l : R^o).
 Proof.
-move=> afgh l fal hal; apply/(@flim_locally _ [uniformType R of R^o])=> _/posnumP[/= e].
+move=> afgh l fal hal; apply/(@flim_locally _ [pseudoMetricType R of R^o])=> _/posnumP[/= e].
 rewrite near_map; near=> x.
 rewrite /ball /= ltr_norml; apply/andP; split.
 - rewrite ltr_oppl opprB (@le_lt_trans _ _ (h x - l)) //.
@@ -90,14 +90,14 @@ rewrite /ball /= ltr_norml; apply/andP; split.
     by have /(_ _) /andP[//|_ ->] := near afgh x.
   + rewrite (@le_lt_trans _ _ `|h x - l|) // ?real_ler_norm // ?num_real // distrC.
     near: x.
-    move/(@flim_locally _ [uniformType R of R^o]) : hal => /(_ e%:num (posnum_gt0 e)).
+    move/(@flim_locally _ [pseudoMetricType R of R^o]) : hal => /(_ e%:num (posnum_gt0 e)).
     by rewrite near_map.
 - rewrite (@le_lt_trans _ _ (l - f x)) //.
   + rewrite ler_sub //.
     by have /(_ _) /andP[|] := near afgh x.
   + rewrite (@le_lt_trans _ _ `|l - f x|) // ?real_ler_norm // ?num_real //.
     near: x.
-    move/(@flim_locally _ [uniformType R of R^o]) : fal => /(_ e%:num (posnum_gt0 e)).
+    move/(@flim_locally _ [pseudoMetricType R of R^o]) : fal => /(_ e%:num (posnum_gt0 e)).
     by rewrite near_map.
 Grab Existential Variables. all: end_near. Qed.
 
@@ -175,7 +175,7 @@ Qed.
 Lemma cvg_scalel (u_ : R^o ^nat) (k : R^o) : cvg u_ -> cvg (fun n => k * u_ n).
 Proof.
 move=> /cvg_ex[l ul]; apply/cvg_ex; exists (k * l).
-apply: (@lim_scale _ _ nat_topologicalType) => //; exact: (@flim_const _ [uniformType R of R^o]).
+apply: (@lim_scale _ _ nat_topologicalType) => //; exact: (@flim_const _ [pseudoMetricType R of R^o]).
 Qed.
 
 Lemma cvg_scaler (u_ : R^o ^nat) (k : R^o) : cvg u_ -> cvg (fun n => u_ n * k).
@@ -646,7 +646,7 @@ have H : forall n : nat, ratr (1%:Q / (2 ^ n)%:~R) <= harmonic_seq n.
   by destruct n => //; rewrite (le_trans _ ih).
 apply (@squeeze _ _ (fun=> (0 : R^o)) geometric_seq_half harmonic_seq).
 near=> n; by rewrite H andbT ler0q divr_ge0 // ler0z -exprnP exprn_ge0.
-exact: (@flim_const _ [uniformType R of R^o]).
+exact: (@flim_const _ [pseudoMetricType R of R^o]).
 exact: approach_harmonic_seq.
 Grab Existential Variables. all: end_near. Qed.
 
