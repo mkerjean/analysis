@@ -263,9 +263,8 @@ Canonical regular_filteredType U (R: filteredType U) :=
 Canonical regular_topologicalType (R : topologicalType) :=
   [topologicalType of R^o].
 
-Canonical regular_uniformType U (R : uniformType U):=
-  [uniformType U of R^o].
-(*Update the header of topologicaltype.v *)
+Canonical regular_pseudoMetricType U (R : pseudoMetricType U):=
+  [pseudoMetricType U of R^o].
 
 Canonical regular_completeType U (R : completeType U) :=
   @Complete.clone U R^o _ _ id.
@@ -361,7 +360,7 @@ Definition CauchyRiemanEq_R2 (f : RComplex -> RComplex) c :=
   'D_1%:C u c = 'D_'i v c /\ 'D_1%:C v c = - 'D_'i u c.
 
 (* NB: not used *)
-+Definition Cderivable (V W : normedModType C) (f : V -> W) := derivable f.
+Definition Cderivable (V W : normedModType C) (f : V -> W) := derivable f.
 
 Definition CauchyRiemanEq (f : C -> C) z :=
   'i * lim ((fun h : R => h^-1 *: ((f \o shift z) (h *: 1%:C) - f z)) @ (locally' (0:R^o))) =
@@ -377,7 +376,7 @@ looked a long time of it as I was looking for a [filter of lim]*
 Definition Rderivable (V W : normedModType R) (f : V -> W) := derivable f.
 
 (*The topological structure on R is given by R^o *)
-Lemma holo_derivable (f : (C)^o -> (C)^o) c :
+Lemma holo_derivable (f : C^o -> C^o) c :
   holomorphic f c -> (forall v : C, Rderivable (complex_realfun f) c v).
 Proof.
 move=> /cvg_ex [l H]; rewrite /Rderivable /derivable => v /=.
@@ -389,14 +388,15 @@ pose quotC (h : C) : C^o := h^-1 *: ((f \o shift c) h - f c).
 case: (EM (v = 0)) => [eqv0|/eqP vneq0].
 - apply (cvgP (l := (0:RComplex))).
   have eqnear0 : {near locally' (0:R^o), 0 =1 quotR}.
-    by exists 1=> // h _ _ ; rewrite /quotR /shift eqv0 /= scaler0 add0r addrN scaler0.
+    exists 1 => // h _ _.
+    by rewrite /quotR /shift eqv0 /= scaler0 add0r addrN scaler0.
   apply: flim_trans.
   + exact (flim_eq_loc eqnear0).
   + exact: cst_continuous.
     (*lim_cst from normedtype applies only to endofunctions
      That should NOT be the case, as one could use it insteas of cst_continuous *)
 - apply (cvgP (l := v *: l : RComplex)).
-  (*normedtype seem difficulut to infer *)
+  (*normedtype seem difficult to infer *)
   (*Est-ce que on peut faire cohabiter plusieurs normes ? *)
   have eqnear0 : {near (locally' (0 : R^o)), (v \*: quotC) \o mulv =1 quotR}.
     exists 1 => // h _ neq0h //=; rewrite /quotC /quotR /mulv scale_inv //.
@@ -471,7 +471,7 @@ have <- : lim (quotiR @ (locally' (0:R^o))) =
      'i * lim (quotC @ (locally' (0:C^o))) .
   have -> : 'i * lim (quotC @ (locally' (0:C^o))) =  lim ('i \*: quotC @ (locally' (0:C^o))).
     by rewrite scalei_muli limin_scaler. (* exact: H. *)
-  Set Printing All. Set Printing Depth 20.
+  (*Set Printing All. Set Printing Depth 20.*)
   (*simpl.
   rewrite {1}/type_of_filter.*) (*too violent*)
   have := flim_map_lim _ .
