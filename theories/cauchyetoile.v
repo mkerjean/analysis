@@ -263,9 +263,8 @@ Canonical regular_filteredType U (R: filteredType U) :=
 Canonical regular_topologicalType (R : topologicalType) :=
   [topologicalType of R^o].
 
-Canonical regular_uniformType U (R : uniformType U):=
-  [uniformType U of R^o].
-(*Update the header of topologicaltype.v *)
+Canonical regular_pseudoMetricType U (R : pseudoMetricType U):=
+  [pseudoMetricType U of R^o].
 
 Canonical regular_completeType U (R : completeType U) :=
   @Complete.clone U R^o _ _ id.
