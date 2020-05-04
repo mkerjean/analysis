@@ -38,28 +38,14 @@ let
               };
             } // (cfg-fun all-pkgs);
           in {
-            mathcomp-extra-config =
-              let mec = super-coqPackages.mathcomp-extra-config; in
-              lib.recursiveUpdate mec {
-                initial = {
-                  # fixing mathcomp analysis to depend on real-closed
-                  mathcomp-analysis = {version, coqPackages} @ args:
-                    let mca = mec.initial.mathcomp-analysis args; in
-                    mca // (
-                      if elem version [ "master" "cauchy_etoile" "holomorphy" ]
-                      then {
-                        propagatedBuildInputs = mca.propagatedBuildInputs ++
-                                                [ coqPackages.mathcomp-real-closed coqPackages.hierarchy-builder ];
-                      } else {
-                        propagatedBuildInputs = mca.propagatedBuildInputs ++
-                                                (with coqPackages; [ coq-elpi hierarchy-builder ]);
-                      });
-                };
-                for-coq-and-mc.${coqPackages.coq.coq-version}.${coqPackages.mathcomp.version} =
-                  (super-coqPackages.mathcomp-extra-config.${coqPackages.coq.coq-version}.${coqPackages.mathcomp.version} or {}) //
-                  (removeAttrs cfg [ "mathcomp" "coq" "mathcomp-fast" "mathcomp-full" ]);
+            mathcomp-extra-config = lib.recursiveUpdate super.mathcomp-extra-config {
+              initial = {
+                mathcomp-analysis = version:
+                  let mca = super.mathcomp-extra-config.initial.mathcomp-analysis version; in
+                  mca // { propagatedBuildInputs = mca.propagatedBuildInputs ++ [self.mathcomp-real-closed]; };
               };
-            mathcomp = if cfg?mathcomp then coqPackages.mathcomp_ cfg.mathcomp else super-coqPackages.mathcomp;
+            };
+            mathcomp = if cfg?mathcomp then self.mathcomp_ cfg.mathcomp else super.mathcomp_ "1.11.0+beta1";
           } // mapAttrs
             (package: version: coqPackages.mathcomp-extra package version)
             (removeAttrs cfg ["mathcomp" "coq"])
