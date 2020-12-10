@@ -1,6 +1,6 @@
 
 (* mathcomp analysis (c) 2017 Inria and AIST. License: CeCILL-C.              *)
-Require Import ssrsearch.
+(*Require Import ssrsearch.*)
 From mathcomp Require Import ssreflect ssrfun ssrbool.
 From mathcomp Require Import ssrnat eqtype choice fintype bigop order ssralg ssrnum.
 From mathcomp Require Import complex.
@@ -118,7 +118,7 @@ Lemma mulrnc (a b : R) k : a +i* b *+ k = (a *+ k) +i* (b *+ k).
 Proof.
 by elim: k => // k ih; apply/eqP; rewrite !mulrS eq_complex !ih !eqxx.
 Qed.
- 
+
 Lemma real_complexM (a b :R) : a%:C * b%:C = (a * b)%:C.
 Proof. by rewrite eqE_complex /= !mulr0 mul0r addr0 subr0. Qed.
 
@@ -270,7 +270,7 @@ set quotR := (X in (X @ _)).
 simpl in (type of quotR).
 pose mulrv (h : R^o) := (h%:C * v).
 pose quotC (h : C^o) : C^o := h^-1 *: ((f \o shift c) h - f c).
-have -> :  quotR @ (real_complex @ nbhs' 0) =  (quotR \o (real_complex)) @ nbhs' 0 by []. 
+have -> :  quotR @ (real_complex @ nbhs' 0) =  (quotR \o (real_complex)) @ nbhs' 0 by [].
 case: (v =P 0) =>  [eqv0|/eqP vneq0].
   have -> :  quotR \o real_complex = 0.
     apply: funext => h; rewrite  /quotR  /= eqv0.
@@ -289,10 +289,10 @@ apply: cvg_trans subsetfilters _.
 suff: v \*o quotC \o mulrv @ nbhs' 0 `=>` nbhs (v *: l) by move/cvg_trans; apply.
 apply: (@cvg_comp _ _ _ _ _ _ (nbhs' (0:C^o))); last by apply: cvgZr.
 move => //= A [r leq0r /= ballrA].   exists ( normc r / normc v ).
- by  rewrite mulr_gt0 // ?normc_gt0 ?gt_eqF //= ?invr_gt0 ?normc_gt0.
-move=> b ; rewrite /ball_ sub0r normrN => ballrb neqb0.
+ by  rewrite /= mulr_gt0 // ?normc_gt0 ?gt_eqF //= ?invr_gt0 ?normc_gt0.
+move=> b ; rewrite /ball_ /= sub0r normrN => ballrb neqb0.
 have ballCrb : (@ball_ _ _ (fun x => `|x|) 0 r (mulrv b)).
-  rewrite /ball_ sub0r normrN /mulrv normrM.
+  rewrite /ball_ /= sub0r normrN /mulrv normrM.
   rewrite ltr_pdivl_mulr in ballrb; last by rewrite normc_gt0.
   by rewrite -(ger0_norm (ltW leq0r)) real_norm real_complexM ltcR.
   by apply: (ballrA (mulrv b) ballCrb); apply: mulf_neq0 ; rewrite ?eqCr.
@@ -314,10 +314,10 @@ set quotR := fun h => h^-1 *: ((f \o shift c) (h * 'i) - f c) .
 simpl in (type of quotR).
 (* set locR0 := real_complex @ (nbhs' (0 : R^o)). *)
 move => [l H].
-have -> :  quotR @ (real_complex @ nbhs' 0) =  (quotR \o (real_complex)) @ nbhs' 0 by []. 
+have -> :  quotR @ (real_complex @ nbhs' 0) =  (quotR \o (real_complex)) @ nbhs' 0 by [].
 have HR0:(quotC \o (real_complex) @ nbhs' 0)  --> l.
   apply: cvg_comp; last by exact: H.
-  move => A [[r ri]];  rewrite ltcE=> /andP /= [/eqP -> r0]; rewrite complexr0 => ball.
+  move => A [[r ri]];  rewrite /= ltcE=> /andP /= [/eqP -> r0]; rewrite complexr0 => ball.
   exists r; first by [].
   move=> a /=; rewrite sub0r normrN => ar aneq0.
   apply: ball; last by rewrite eqCr.
@@ -325,7 +325,7 @@ have HR0:(quotC \o (real_complex) @ nbhs' 0)  --> l.
 have lem : quotC \o  *%R^~ 'i%R @ (real_complex @ (nbhs' (0 : R^o))) --> l.
   apply: cvg_comp; last by exact: H.
   move => A /= [ [r ri] ].
-  rewrite ltcE=> /andP /= [/eqP -> r0]; rewrite complexr0 => ball.
+  rewrite /= ltcE=> /andP /= [/eqP -> r0]; rewrite complexr0 => ball.
   exists r; first by [].
   move => a /= ; rewrite sub0r normrN => ar aneq0; apply: ball.
     simpl; rewrite sub0r normrN normrM /=.
@@ -376,9 +376,9 @@ Canonical Rcomplex_fieldType (R : rcfType) := [fieldType of Rcomplex R].
 Canonical Rcomplex_lmodType (R : rcfType) :=
   LmodType R (Rcomplex R) (complex_real_lmodMixin R).
 
-Canonical Rcomplex_pointedType  (R: realType)  := PointedType (Rcomplex R) 0. 
+Canonical Rcomplex_pointedType  (R: realType)  := PointedType (Rcomplex R) 0.
 Canonical Rcomplex_filteredType (R: realType) :=
-  FilteredType (Rcomplex R) (Rcomplex R) (nbhs_ball_ (ball_ (@normc R))). 
+  FilteredType (Rcomplex R) (Rcomplex R) (nbhs_ball_ (ball_ (@normc R))).
 (* badly constructed, Filter (c : Rcomplex R) is not automatical *)
 
 Definition Rcomplex_normedZmodMixin (R: realType) :=
@@ -464,7 +464,7 @@ Admitted.
 Lemma real_complex_alg (a : R) :  a *: (1%:Rc) = a%:C.
 Proof.
 apply/eqP; rewrite eq_complex; apply/andP.
-by split; simpl; apply/eqP; rewrite ?mulr1 ?mulr0. 
+by split; simpl; apply/eqP; rewrite ?mulr1 ?mulr0.
 Qed.
 
 Lemma scalecr: forall w: C^o, forall r : R, r *: (w: Rcomplex) = r%:C *: w .
@@ -523,8 +523,8 @@ split; move => /= H A /=.
   move/(nbhs_ex (x:=l : Rcomplex_normedModType R)) =>  [[r r0] /=].
   rewrite -ball_normE /= => Br.
   have : nbhs (l: C^o) A.
-    exists r%:C; first by rewrite ltcR.
-    by move => y /=; rewrite ltcR; apply: Br.
+    exists r%:C; first by rewrite /= ltcR.
+    by move => y /=; rewrite /= ltcR; apply: Br.
   by move/(H A).
 move/(nbhs_ex (x:=l : C^o))=>  [[[r ri] r0] /=].
 move: r0; rewrite ltcE /= => /andP [/eqP ri0 r0] //.
@@ -648,41 +648,31 @@ move=> e_gt0; apply/nbhs_ballP; exists e => // x.
 by rewrite -ball_normE /= sub0r normrN.
 Qed.
 
-(* (* Local Notation differentiable f F :=
-(@differentiable_def _ _ _ f _ (Phantom _ [filter of F])). *) *)
-(* (* Local Notation "''d' f x" := (@diff _ _ _ _ (Phantom _ [filter of x]) f). *) *)
-(* (* ( *)* Les phantom (filter of x) ne s'inferent pas *)
-
-Notation Rcomplex_differentiable f c :=
-  (@differentiable_def _ _ _  (f%:Rfun)_
-     (Phantom (set (set (Rcomplex_normedModType R))) ([filter of c%:Rc]))).
-
-(* Variable (f: C -> C). Fail Check (differentiable f%:Rfun c). *)
-
-
-
 Lemma normc_ge_Im (x : R[i]) : `|complex.Im x|%:C <= `|x|.
 Proof.
 by case: x => a b; simpc; rewrite -sqrtr_sqr ler_wsqrtr // ler_addr sqr_ge0.
 Qed.
 
-(* working without differentiabily needs to prove by hand that continuous 
-partial derivative --> differentiabilyt using mean value them *)
+
+
+
+Notation Rdifferentiable f c := (differentiable f%:Rfun c%:Rc).
 
 (*Partial proof using the specific differentiabily notations enforced for Rcomplex *)
 (* issue with linear scope *)
+
 Lemma Diff_CR_holo (f : C^o -> C^o)  (c: C):
-   (Rcomplex_differentiable  f c) /\
+   (Rdifferentiable f c) /\
   (CauchyRiemanEq f c)
   -> (holomorphic f c).
 Proof.
 move => []  H; have derf := H ; move: H.
 move/diff_locally /eqaddoP => der.
-(* diff_locally to be renamed diff_nbhs *)  
+(* TODO : diff_locally to be renamed diff_nbhs *)
 rewrite /CauchyRiemanEq Rdiff1 Rdiffi.
 move => CR.
 rewrite /holomorphic; apply: (cvgP (('D_1 f%:Rfun c) : C^o)).
-apply/(cvg_distP (('D_1 f%:Rfun c) : C^o)). 
+apply/(cvg_distP (('D_1 f%:Rfun c) : C^o)).
 move => eps eps_lt0 /=.
 pose er := complex.Re eps.
 have eq_ereps := gt0_real_complex eps_lt0.
@@ -690,14 +680,8 @@ have er_lt0 : 0 < er/2 by rewrite mulr_gt0 // -?complex_gt0E //.
 move /(_ (er/2) er_lt0): der; rewrite /= nearE.
 move => /(@nbhs_ex _  _ (0 : Rcomplex_normedModType R)) [[d d0]] /= der.
 rewrite nearE /= nbhs_filterE.
-exists d%:C; first by rewrite ltcR.
-move=> z /=; rewrite sub0r normrN => lt_nzd z0. 
-(* rewrite -[`|(_)z|]/(`|_ z + _ z|) /=. *)
-(* set b := ((cst (f c)) : C -> C^o). *)
-(* rewrite -[(- (b + _)) z]/(- ( f c + _ z))  /= mulrC opprD. *)
-(* have ltz : (normc z) < d. *)
-(*   near: z; rewrite nbhs_filterE nearE; exists d%:C; first by rewrite ltcR //. *)
-(*   by move => z /=; rewrite sub0r normrN ltcR. *)
+exists d%:C; first by rewrite /= ltcR.
+move=> z /=; rewrite sub0r normrN => lt_nzd z0.
 have ltr_nzd : (normc z) < d by rewrite -ltcR.
 have -> : eps  =  `|z|^-1 * `|z| * eps.
   rewrite [X in X*_]mulrC mulfV; first by rewrite  ?mul1r.
@@ -709,24 +693,19 @@ rewrite -[`|(_)z|]/(`|_ z + _ z|) /=.
 set b := ((cst (f c)) : C -> Rcomplex).
 rewrite -[(- (b + _)) z]/(- ( f c + _ z))  /= mulrC opprD.
 set x := complex.Re z; set y := complex.Im z.
-(* notation 'd doesnt work for Rcomplex *)
 have zeq : z = x *: 1 %:Rc + y *: 'i%:Rc.
-by rewrite [LHS]complexE /= real_complex_alg scalecr scalecM [in RHS]mulrC.
-rewrite [X in 'd _ _ X]zeq addrC linearP linearZ -!deriveE; last by exact: derf. 
-  (* set dfx := (X in _ + X = _). *)
-  (*  About diff. *)
-  (*  have -> : dfx  = (@diff _ _ _ _ (Phantom (set (set (Rcomplex_normedModType R))) 
-                       ([filter of c%:Rc])) (f%:Rfun))  (x *: 1 %:Rc) by [].  *)
-rewrite -CR. Fail  rewrite (scalecAl y 'i  ('D_1 f%:Rfun c)).
+  by rewrite [LHS]complexE /= real_complex_alg scalecr scalecM [in RHS]mulrC.
+rewrite [X in 'd _ _ X]zeq addrC linearP linearZ -!deriveE; last by exact: derf.
+rewrite -CR. Fail  rewrite (scalecAl y 'i  ('D_1 f%:Rfun c%:Rc)).
 rewrite -lecR -real_complexM !/normr /= eq_ereps. admit.
-exact: derf. 
+exact: derf.
 Admitted.
 
 
 (* Partial proof using continuity of partial derivatices and resketching
   continuity of parital der => diff *)
 Lemma Der_CR_holo (f : C^o -> C^o)  (c: C):
-  (forall d v : C^o, Rderivable_fromcomplex f d v)/\ 
+  (forall d v : C^o, Rderivable_fromcomplex f d v)/\
    (('D_'i f%:Rfun)@ c%:Rc --> 'D_'i f%:Rfun c%:Rc) /\
    (CauchyRiemanEq f c)
   -> (holomorphic f c).
@@ -735,7 +714,7 @@ move => [der] [CL]; rewrite /CauchyRiemanEq Rdiff1 Rdiffi.
 set  L: C^o := (X in 'i * X) => CR.
 suff lem: (fun h : C^o => h^-1 *: ((f \o shift c) h - f c))
            @ nbhs' 0 --> L.
-  by rewrite /holomorphic; apply: (cvgP L). 
+  by rewrite /holomorphic; apply: (cvgP L).
 move => A /=; simpl in (type of A).
 move => H; have nbhsAL := H; move: H.
 move/(nbhs_ex (x:=L : C^o)) => [[d d0]  /= AL].
@@ -749,19 +728,19 @@ move: (der c (1%:Rc)) ; rewrite Rdiff=> /derivable_nbhsP /eqaddoP /(_ dr').
  elim; last by []; move => rx rx0 /= Dx.
 have foo : Filter ('D_'i f%:Rfun @ c%:Rc).  (* complicated - issue with filteredtype *)
    apply: fmap_filter; apply: filter_from_filter; first by exists 1.
-    move => i j i0 j0; exists (minr i j); first by rewrite lt_minr; apply/andP; split.
+    move => i j i0 j0; exists (minr i j); first by rewrite /= lt_minr; apply/andP; split.
     move => r /= H; split; apply: lt_le_trans.
       by exact:H ; rewrite le_minl; apply/orP; left.
       by rewrite le_minl; apply/orP; left.
     by exact:H ; rewrite le_minl; apply/orP; right.
-    by rewrite le_minl; apply/orP; right. 
+    by rewrite le_minl; apply/orP; right.
 move/cvg_dist: CL => /(_ dr3 lt0_dr3); rewrite nearE.
 move => /(@nbhs_ex _ (Rcomplex_pseudoMetricType R)) [[e' e0] /=].
 rewrite -ball_normE /= /normr /= => Bc.
 near (nbhs' (0 : C^o) : set (set C^o)) => e.
 exists (`|e| : C).
   near: e; rewrite nearE nbhs_filterE.
-  by apply/(@nbhs_ballP); exists 1; first by []; move => x _ ; rewrite normr_gt0.
+  by apply/(@nbhs_ballP); exists 1; first by []; move => x _ ; rewrite /= normr_gt0.
 move => z /=; rewrite sub0r normrN => nze z0 ; apply: AL.
 rewrite -ball_normE /=.
 set x := complex.Re z; set y := complex.Im z.
@@ -772,12 +751,12 @@ have -> : d =  `|z|^-1 * `|z| * d.
 rewrite -mulrA ltr_pdivl_mull ?normr_gt0 // -normrM mulrDr mulrN.
 rewrite scalecM mulrA mulfV // mul1r.
 have -> : z * L - (f (z + c) - f c) =
-          ((f c + x *: 'D_1 f%:Rfun c)%:Rc) - f (c + x *: 1%:Rc ) 
+          ((f c + x *: 'D_1 f%:Rfun c)%:Rc) - f (c + x *: 1%:Rc )
           + (f (c + x *: 1%:Rc) - (f(c + x *: 1%:Rc + y *: 'i%:Rc) -
             y *: 'D_'i f%:Rfun c)).
   have -> : z = (x *: 1%:Rc + y *: 'i%:Rc)
   by rewrite eqE_complex /=; rewrite !mulr1 !mulr0 addr0 add0r.
-  rewrite  subrKA !scalecr !scalecM -CR  !/L !opprB.  
+  rewrite  subrKA !scalecr !scalecM -CR  !/L !opprB.
   rewrite -[RHS]addrA [X in _ = _ + X]addrA mulrA-[in RHS]mulrDl.
   rewrite addrCA mulr1 complexiE.
   by rewrite [X in (- f X)]addrAC [X in (- f (X + _))]addrC.
@@ -803,16 +782,16 @@ have ltDx: normc((f c + x *: 'D_1 f%:Rfun c)%:Rc - f (c + x *: 1%:Rc))
   move/le_trans => /(_ _ lem1x) /(le_lt_trans) /(_ lem2).
   by rewrite -opprB normrN [X in - f X]addrC.
 apply: le_lt_trans; first by apply ler_norm_add.
-apply: le_lt_trans;first by apply: ler_add. 
+apply: le_lt_trans;first by apply: ler_add.
 have -> : `|z|*d= `|z|*dr3%:C+ `|z|*dr3%:C.
   rewrite -!mulrDl /dr3 -real_complexM -eq_drd mulrCA [RHS]mulrC.
-  apply/(@mulIf _ d^-1); first by apply:invr_neq0; apply: lt0r_neq0. 
+  apply/(@mulIf _ d^-1); first by apply:invr_neq0; apply: lt0r_neq0.
   rewrite -!mulrA !mulfV ?lt0r_neq0 // !mulr1 complexV //.  admit. (*argh*)
 apply: ltr_le_add; first by rewrite real_complexM ltcR.
 rewrite opprB addrCA.
 have [a leny ->] : exists2 a : R, `|a| <= `|y| &
                    (f (c + x *: 1%:Rc) - f (c + x *: 1%:Rc + y *: 'i%:Rc) =
-                           - y *: 'D_'i f%:Rfun (c + (x *: 1%:Rc+ a*:'i%:Rc))).  
+                           - y *: 'D_'i f%:Rfun (c + (x *: 1%:Rc+ a*:'i%:Rc))).
 (* use MVT *) (* distinguish real and complex projections *) admit.
 rewrite scaleNr !scalecr !scalecM -mulrBr normrM ler_pmul //.
   by rewrite real_norm  normc_ge_Im.
@@ -820,21 +799,21 @@ rewrite ltW // ltcR; apply: Bc.
 rewrite opprD !addrA addrN add0r normcN mulr1 /normc /=.
 rewrite !mulr0 mul0r !add0r addr0 subr0 mulr1.
 apply: le_lt_trans; last first.
-  apply: lt_le_trans; first by rewrite -ltcR; exact nze. 
+  apply: lt_le_trans; first by rewrite -ltcR; exact nze.
   rewrite -lecR; near: e; rewrite nbhs_filterE; apply: nbhs'0_le.
     by rewrite ltcR.
 case: (eqVneq z 0).
-      rewrite eqE_complex. admit. 
+      rewrite eqE_complex. admit.
 rewrite -normr_gt0  ltcR !/normc zxy sqrtr_gt0 => lem; rewrite ler_sqrt //.
-rewrite ler_add //  -real_normK -?(@real_normK _ y) ?num_real //. 
+rewrite ler_add //  -real_normK -?(@real_normK _ y) ?num_real //.
 rewrite ler_sqr // !nnegrE !normr_ge0 //.
-Admitted. 
+Admitted.
 
 
 
 (* failed proof using continuity of partial derivative *)
 Lemma Der_CR_holo' (f : C^o -> C^o)  (c: C):
-  (forall d v : C^o, Rderivable_fromcomplex f d v)/\ 
+  (forall d v : C^o, Rderivable_fromcomplex f d v)/\
    (('D_'i f%:Rfun)@ c%:Rc --> 'D_'i f%:Rfun c%:Rc) /\
    (CauchyRiemanEq f c)
   -> (holomorphic f c).
@@ -862,7 +841,7 @@ move: (der c ('i%:Rc)); rewrite Rdiff.
 near (nbhs' (0 : C^o) : set (set C^o)) => e.
 exists (`|e| : C).
   near: e; rewrite nearE nbhs_filterE.
-  by apply/(@nbhs_ballP); exists 1; first by []; move => x _ ; rewrite normr_gt0.
+  by apply/(@nbhs_ballP); exists 1; first by []; move => x _ ; rewrite /= normr_gt0.
 move => z /=; rewrite sub0r normrN => nze z0 ; apply: AL.
 rewrite -ball_normE /=.
 set x := complex.Re z; set y := complex.Im z.
@@ -872,7 +851,7 @@ have -> : d =  `|z|^-1 * `|z| * d.
 rewrite -mulrA ltr_pdivl_mull ?normr_gt0 // -normrM mulrDr mulrN.
 rewrite scalecM mulrA mulfV // mul1r.
 have -> : z * L - (f (z + c) - f c) =
-          (f c + x *: 'D_1 f%:Rfun c)%:Rc - f (c + x *: 1%:Rc ) 
+          (f c + x *: 'D_1 f%:Rfun c)%:Rc - f (c + x *: 1%:Rc )
           + (f (c + x *: 1%:Rc) +
              (- f(c + x *: 1%:Rc + y *: 'i%:Rc) +
             y *: 'D_'i f%:Rfun (c + x *: 1%:Rc)))
@@ -881,7 +860,7 @@ have -> : z * L - (f (z + c) - f c) =
   rewrite -[in RHS]opprB -[X in _= _ - X]addrA addrKA !opprB !opprK.
   rewrite [X in _ =_ + X]addrC [RHS]addrCA [X in - f X]addrC.
   suff -> : z = (x *: 1%:Rc + y *: 'i%:Rc) by [].
-  by rewrite eqE_complex /=; rewrite !mulr1 !mulr0 addr0 add0r. 
+  by rewrite eqE_complex /=; rewrite !mulr1 !mulr0 addr0 add0r.
 
 have lem1y:  `|y| * dr' <=  (normc z * dr').
     rewrite -lter_pdivr_mulr // -mulrA mulfV; last by apply: lt0r_neq0.
@@ -924,16 +903,16 @@ have ltDx: normc((f c + x *: 'D_1 f%:Rfun c)%:Rc - f (c + x *: 1%:Rc))
 (*   by move => H; rewrite [X in _ + X ]addrC addrA. *)
 have CLy : normc ((y *:  'D_'i f%:Rfun  (c + x *: 1%:Rc) +
                    (x *: 'D_1 f%:Rfun c - z*L)))  <= (normc z)*dr3.
-  rewrite -(subrKA (y *: 'D_'i f%:Rfun c)). 
+  rewrite -(subrKA (y *: 'D_'i f%:Rfun c)).
   have -> : y *: 'D_'i f%:Rfun c + (x *: 'D_1 f%:Rfun c - z * L) = 0.
     rewrite -CR /L addrA scalecAl !scalecr !scalecM -mulrDl [X in X *_]addrC.
     suff -> : (x%:C + y%:C * 'i) = z by rewrite addrN.
     by rewrite mulrC [RHS]complexE /=.
-  rewrite addr0 -scalerBr normcZ ler_pmul ?normr_ge0 ?normc_ge0 -?lecR ?normc_ge_Im //. 
-  rewrite lecR. move /cvg_dist : CL. 
+  rewrite addr0 -scalerBr normcZ ler_pmul ?normr_ge0 ?normc_ge0 -?lecR ?normc_ge_Im //.
+  rewrite lecR. move /cvg_dist : CL.
   have : Filter ('D_'i f%:Rfun @ c%:Rc). (* why is it so complicated *)
    apply: fmap_filter; apply: filter_from_filter; first by exists 1.
-    move => i j i0 j0; exists (minr i j); first by rewrite lt_minr; apply/andP; split.
+    move => i j i0 j0; exists (minr i j); first by rewrite /= lt_minr; apply/andP; split.
     move => r /= H; split; apply: lt_le_trans.
       by exact:H ; rewrite le_minl; apply/orP; left.
       by rewrite le_minl; apply/orP; left.
@@ -951,17 +930,17 @@ have CLy : normc ((y *:  'D_'i f%:Rfun  (c + x *: 1%:Rc) +
     near: e; rewrite locked_withE /= => x0.
      admit. (* near `|_| *)
 apply: le_lt_trans; first by apply ler_norm_add.
-apply: le_lt_trans;first by apply: ler_add; first by apply:ler_norm_add. 
+apply: le_lt_trans;first by apply: ler_add; first by apply:ler_norm_add.
 have -> : `|z|*d= `|z|*dr3%:C+ `|z|*dr3%:C + `|z|*dr3%:C.
   rewrite -!mulrDl /dr3 -real_complexM -eq_drd mulrCA [RHS]mulrC.
-  apply/(@mulIf _ d^-1); first by apply:invr_neq0; apply: lt0r_neq0. 
+  apply/(@mulIf _ d^-1); first by apply:invr_neq0; apply: lt0r_neq0.
   rewrite -!mulrA !mulfV ?lt0r_neq0 // !mulr1 complexV //; admit. (*argh*)
-apply: ltr_le_add ; last by rewrite real_complexM lecR normcN.
-by apply: ltr_add; rewrite real_complexM ltcR.
+apply: ltr_le_add; last by rewrite real_complexM lecR normcN.
+  apply: ltr_add; rewrite real_complexM ltcR //=.
 Admitted.
 
-Lemma Der_CR_holo (f : C^o -> C^o)  (c: C):
-  (forall d v : C^o, Rderivable_fromcomplex f d v)/\ 
+Lemma Der_CR_holo'' (f : C^o -> C^o)  (c: C):
+  (forall d v : C^o, Rderivable_fromcomplex f d v)/\
    {for c, continuous f%:Rfun} /\
    (CauchyRiemanEq f c)
   -> (holomorphic f c).
@@ -970,7 +949,7 @@ move => [der] [Cf]; rewrite /CauchyRiemanEq Rdiff1 Rdiffi.
 set L: C^o := (X in 'i * X) => CR.
 suff : (fun h : C^o => h^-1 *: ((f \o shift c) h - f c))
            @ nbhs' 0 --> L.
-  by rewrite /holomorphic; apply: (cvgP L). 
+  by rewrite /holomorphic; apply: (cvgP L).
 move => A /=; simpl in (type of A).
 move => H; have nbhsAL := H; move: H.
 move/(nbhs_ex (x:=L : C^o)) => [[d d0]  /= AL].
@@ -981,7 +960,7 @@ pose dr' := (dr/4%:R/2%:R).
 have lt0_dr3 : 0 < dr3 by rewrite !pmulr_lgt0 // -ltr0c -eq_drd.
 have lt0_dr' : 0 < dr' by rewrite !pmulr_lgt0 // -ltr0c -eq_drd.
 have AL' := AL.
-have foo: Filter (f @ (c%:Rc)). apply: fmap_filter. (*issue with Filter on Rcomplex *) admit. 
+have foo: Filter (f @ (c%:Rc)). apply: fmap_filter. (*issue with Filter on Rcomplex *) admit.
 move/cvg_distP /(_ dr' lt0_dr'): Cf => Cf.
 move: (der c (1%:Rc)) ; rewrite Rdiff=> /derivable_nbhsP /eqaddoP /(_ dr').
  elim; last by []; move => rx rx0 /= Dx.
@@ -991,7 +970,7 @@ move: (der c ('i%:Rc)); rewrite Rdiff.
 near (nbhs' (0 : C^o) : set (set C^o)) => e.
 exists (`|e| : C).
   near: e; rewrite nearE nbhs_filterE.
-  by apply/(@nbhs_ballP); exists 1; first by []; move => x _ ; rewrite normr_gt0.
+  by apply/(@nbhs_ballP); exists 1; first by []; move => x _ ; rewrite /= normr_gt0.
 move => z /=; rewrite sub0r normrN => nze z0 ; apply: AL.
 rewrite -ball_normE /=.
 set x := complex.Re z; set y := complex.Im z.
@@ -1002,12 +981,12 @@ rewrite -mulrA ltr_pdivl_mull ?normr_gt0 // -normrM mulrDr mulrN.
 rewrite scalecM mulrA mulfV // mul1r.
 have -> : z * L - (f (z + c) - f c) = (* not working *)
          (f (c + y *: 'i%:Rc ) - f (c)) +
-         (f c - f (c + z)) + 
-         (f (c + x *: 1%:Rc ) - f c) +  
+         (f c - f (c + z)) +
+         (f (c + x *: 1%:Rc ) - f c) +
          ((f c + x *: 'D_1 f%:Rfun c)%:Rc - f (c + x *: 1%:Rc ))
        + (f c + y *: 'D_'i f%:Rfun c - f(c + y *: 'i%:Rc)).
   have -> : z * L = y *: 'D_'i f%:Rfun c + x *: 'D_1 f%:Rfun c.
-     have <- : (x%:C + y%:C * 'i) = z by rewrite [RHS]complexE /= mulrC. 
+     have <- : (x%:C + y%:C * 'i) = z by rewrite [RHS]complexE /= mulrC.
      by rewrite -CR /L mulrDl addrC !scalecr !scalecM mulrA.
   admit.
 have lem1y:  `|y| * dr' <=  (normc z * dr').
@@ -1086,11 +1065,11 @@ by apply: ler_add; first by apply ler_add; first by apply: ler_norm_add.
 
 have -> : `|z|*d= `|z|*dr3%:C+ `|z|*dr3%:C + `|z|*dr3%:C + `|z|*dr3%:C.
   rewrite -!mulrDl /dr3 -real_complexM -eq_drd mulrCA [RHS]mulrC.
-  apply/(@mulIf _ d^-1); first by apply:invr_neq0; apply: lt0r_neq0. 
+  apply/(@mulIf _ d^-1); first by apply:invr_neq0; apply: lt0r_neq0.
   rewrite -!mulrA !mulfV ?lt0r_neq0 // !mulr1 complexV //; admit. (*argh*)
 apply: ltr_le_add; last by  rewrite real_complexM lecR ltW.
 apply: ltr_add; last by  rewrite real_complexM ltcR.
-apply: ltr_add. apply: ltr_add.
+apply: ltr_add. Fail apply: ltr_add.
 Admitted.
 
 
@@ -1152,7 +1131,7 @@ case: (v =P 0) =>  [eqv0|/eqP vneq0].
   by apply: (cvg_cst (0 : C^o)).
 apply: (cvgP (v *: l)).
 have eqnear0 : {near (locR0), (v \*: quotC) \o mulv =1 quotR}.
-  exists 1 => // h _ neq0h //=; rewrite /quotC /quotR /mulv invrM /= ?unitfE //=.  
+  exists 1 => // h _ neq0h //=; rewrite /quotC /quotR /mulv invrM /= ?unitfE //=.
   (*hiatus invrM and scale_inv *)
   rewrite scalerAl scalerCA  mulrA -(mulrC v) mulrA // divff ?div1r //=.
 have subsetfilters : quotR @ locR0 `=>` (v *: quotC) \o mulv @ locR0.
@@ -1214,7 +1193,7 @@ have lem : quotC \o  *%R^~ 'i%R @ locR0 --> l.
   have: a * 'i != 0 by apply: mulf_neq0; last by rewrite neq0Ci.
   have: ball_ [eta normr] 0 r (a * 'i).
     simpl; rewrite sub0r normrN normrM /=.
-    have ->: `|'i| = 1 by move => T;  simpc; rewrite expr0n expr1n /= add0r sqrtr1. 
+    have ->: `|'i| = 1 by move => T;  simpc; rewrite expr0n expr1n /= add0r sqrtr1.
     by rewrite mulr1.
   by move => /ball. have HRcomp: cvg (quotC \o *%R^~ 'i%R @ locR0).
   by apply/cvg_ex;  simpl; exists l.
