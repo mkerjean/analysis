@@ -1,7 +1,7 @@
 
 (* mathcomp analysis (c) 2017 Inria and AIST. License: CeCILL-C.              *)
 (*Require Import ssrsearch.*)
-From mathcomp Require Import ssreflect ssrfun ssrbool.
+From mathcomp Require Import ssreflect ssrfun ssrbool (*fieldext falgebra*).
 From mathcomp Require Import ssrnat eqtype choice fintype bigop order ssralg ssrnum.
 From mathcomp Require Import complex.
 From mathcomp Require Import boolp reals ereal derive.
@@ -20,16 +20,13 @@ Unset Printing Implicit Defensive.
 I don't want the canonical lmodtype structure on C,
 Therefore this is based on a fork of real-closed *)
 
-
 Section complex_extras.
 Variable R : rcfType.
 Local Notation sqrtr := Num.sqrt.
 Local Notation C := R[i].
-(* Local Notation Re := (@complex.Re R). (* clean redundancy with Re in algC TODO *) *)
-(* Local Notation Im := (@complex.Im R). *)
 
 (*Adapting lemma eq_complex from complex.v, which was done in boolean style*)
-Lemma eqE_complex : forall (x y : C), (x = y) = ((Re x = Re y) /\ (Im x = Im y)). (*Locate Re.*)
+Lemma eqE_complex : forall (x y : C), (x = y) = ((Re x = Re y) /\ (Im x = Im y)). 
 Proof.
 move=> [a b] [c d]; apply : propositional_extensionality ; split.
 by move=> -> ; split.
@@ -152,7 +149,7 @@ Qed.
 Lemma gt0_realC (r : C) : 0 < r -> r = (Re r)%:C.
 Proof.
 by move=> r0; rewrite eqE_complex /=; split; last by apply: ger0_Im; apply: ltW.
-Qed. (* TODO : utiliser algC *)
+Qed. 
 
 Lemma ltr0c  (k : R): (0 < k%:C) = (0 < k).
 Proof.  by simpc. Qed.
@@ -161,12 +158,12 @@ Proof.  by simpc. Qed.
 Lemma complex_pos (r : {posnum C}) :  0 < (Re r%:num).
 Proof.  by rewrite -ltr0c -gt0_realC. Qed.
 
-(*TBA algC *)
-Lemma realC_gt0 (d : C) :  0 < d = (0 < Re d :> R). 
-Proof. Admitted.
+(* (*TBA algC *) *)
+Lemma realC_gt0 (d : C) :  0 < d -> (0 < Re d :> R).
+Proof. by rewrite ltcE => /andP [] //. Qed.
 
-Lemma Creal_gtE (c d : C) :  c < d = (complex.Re c < complex.Re d). (*name*)
-Proof. Admitted.
+Lemma Creal_gtE (c d : C) :  c < d -> (complex.Re c < complex.Re d).
+Proof. rewrite ltcE => /andP [] //. Qed.
 
 Canonical complex_Re_posnum (x : {posnum C}) := PosNum (complex_pos x).
 
@@ -223,6 +220,7 @@ Local Notation C := R[i].
 (* Local Notation Im := (@complex.Im R). *)
 
 (*TODO : introduce Rcomplex at top, and use notation Rdifferentiable everywhere *)
+(* TODO: default notations are _*_ on C and _*: on Rcomplex*)
 
 Lemma is_cvg_scaler (K : numFieldType) (V : normedModType K) (T : topologicalType)
  (F : set (set T)) (H :Filter F) (f : T -> V) (k : K) :
@@ -244,7 +242,7 @@ so the following line shouldn't type check. *)
 Fail Definition Rderivable_fromcomplex_false (f : C^o -> C^o) (c v: C^o) :=
   cvg (fun (h : R^o) =>  h^-1 *: (f (c +h *: v) - f c)) @ (nbhs' (0:R^o)).
 
-Definition realC : R^o -> C := ( fun r => r%:C ). 
+Definition realC : R^o -> C := (fun r => r%:C ).
 
 Definition Rderivable_fromcomplex (f : C^o -> C^o) (c v: C^o) :=
   cvg ((fun (h : C^o) => h^-1 *: (f(c + h *: v) - f c)) @
@@ -258,7 +256,7 @@ Definition CauchyRiemanEq (f : C^o -> C^o) z :=
 
 (* todo : faire des réécritures par conversion dans le script de preuve *)
 
-Lemma holo_derivable (f : (C)^o -> (C)^o) c :
+Lemma holo_derivable (f : C^o -> C^o) c :
   holomorphic f c -> (forall v : C^o, Rderivable_fromcomplex f c v).
 Proof.
 move=> /cvg_ex; rewrite /type_of_filter /=.
@@ -353,7 +351,6 @@ End Holomorphe_der.
 Module CR_holo.
 
 Section Rcomplex.
-
 Canonical Rcomplex_eqType (R : eqType) := [eqType of Rcomplex R].
 Canonical Rcomplex_countType (R : countType) := [countType of Rcomplex R].
 Canonical Rcomplex_choiceType (R : choiceType) := [choiceType of Rcomplex R].
@@ -367,7 +364,23 @@ Canonical Rcomplex_fieldType (R : rcfType) := [fieldType of Rcomplex R].
 Canonical Rcomplex_lmodType (R : rcfType) :=
   LmodType R (Rcomplex R) (complex_real_lmodMixin R).
 
-Canonical Rcomplex_pointedType  (R: realType)  := PointedType (Rcomplex R) 0.
+
+Lemma scalecAl (R : rcfType) (h : R) (x y : Rcomplex R) : h *: (x * y) = h *: x * y.
+Proof.
+by move: h x y => h [a b] [c d]; simpc; rewrite -!mulrA -mulrBr -mulrDr.
+Qed.
+
+
+Canonical C_RLalg  (R : rcfType):= LalgType R (Rcomplex R) (@scalecAl R).
+
+(* Variable (R : rcfType) (x : (Rcomplex R)). Check (x%:A). *)
+
+(*Variable (R: realFieldType). 
+Fail Check [FalgType R of (R[i])].*)
+(* Constructing a FieldExt R structure on R[i] necessitates a Falgstructure, 
+and thus a finite dimensional vector space structure *)
+
+Canonical Rcomplex_pointedType  (R: realType) := PointedType (Rcomplex R) 0.
 Canonical Rcomplex_filteredType (R: realType) :=
   FilteredType (Rcomplex R) (Rcomplex R) (nbhs_ball_ (ball_ (@normc R))).
 
@@ -462,18 +475,11 @@ Lemma scalecr: forall w: C^o, forall r : R, r *: (w: Rcomplex) = r%:C *: w .
 Proof.
 Proof. by move=> [a b] r; rewrite eqE_complex //=; split; simpc. Qed.
 
-Lemma scalecAl (h : R) (x y : Rcomplex) : h *: (x * y) = h *: x * y.
-Proof.
-by move: h x y => h [a b] [c d]; simpc; rewrite -!mulrA -mulrBr -mulrDr.
-Qed.
-
 Lemma scalecV (h: R) (v: Rcomplex):
   h != 0 -> v != 0 -> (h *: v)^-1 = h^-1 *: v^-1. (* scaleCV *)
 Proof.
 by move=> h0 v0; rewrite scalecr invrM // ?unitfE ?eqCr // mulrC scalecr realCV.
 Qed.
-
-Definition C_RLalg := LalgType R (Rcomplex) scalecAl.
 
 Lemma complex0 : 0%:C = 0 :> C.
 Proof. rewrite eqE_complex //=. Qed.
@@ -557,40 +563,38 @@ Lemma Rdiff (f : C^o -> C^o) c v:
   (derivable (f%:Rfun) c v).
 Proof.
 rewrite /Rderivable_fromcomplex /derivable cvg_compE.
-have -> :  (fun h : (R[i])^o => h^-1 * ((f \o shift c) (h *: v) - f c)) \o
+have -> :  (fun h : (R[i])^o => h^-1 *: ((f (c + h *: v) - f c))) \o
            realC (R:=R)  =
           (fun h : R => h^-1 *: ((f%:Rfun \o shift c) (h *: v%:Rc) - f c)).
-  by apply: funext => h /=; rewrite Inv_realC -scalecM -!scalecr.
-by split;  move/complex_cvgP => /=.
+   by apply: funext => h /=; rewrite Inv_realC /= -!scalecr [X in f X]addrC.
+by split; move/complex_cvgP => /=.
 Qed.
 
-
-
 Lemma Rdiff1 (f : C^o -> C^o) c:
-          lim ( (fun h : C^o => h^-1 *: ((f \o shift c) (h) - f c))
+          lim ( (fun h : C^o => h^-1 *: ((f (c +  h) - f c)))
                  @ (((@realC R))@ (nbhs' (0:R^o))))
          = 'D_1 (f%:Rfun) c%:Rc.
 Proof.
 rewrite /derive lim_compE.
-suff -> :  (fun h : (R[i])^o => h^-1 * ((f \o shift c) (h ) - f c)) \o
+suff -> :  (fun h : (R[i])^o => h^-1 * (f (c +  h) - f c)) \o
 realC (R:=R) = fun h : R => h^-1 *: ((f%:Rfun \o shift c) (h *: (1%:Rc)) - f c).
   by rewrite complex_liminP /=.
 apply: funext => h /=.
-by rewrite Inv_realC -scalecM -!scalecr realC_alg.
+by rewrite Inv_realC -scalecM -!scalecr realC_alg [X in f X]addrC.
 Qed.
 
 
 Lemma Rdiffi (f : C^o -> C^o) c:
-         lim ( (fun h : C^o => h^-1 *: ((f \o shift c) (h * 'i) - f c))
+         lim ( (fun h : C^o => h^-1 *: ((f (c + h * 'i) - f c)))
                  @ (((@realC R))@ (nbhs' (0:R^o))))
          = 'D_('i) (f%:Rfun)  c%:Rc.
 Proof.
 rewrite /derive lim_compE.
-suff -> :  (fun h : (R[i])^o => h^-1 * ((f \o shift c) (h * 'i) - f c)) \o
+suff -> :  (fun h : (R[i])^o => h^-1 * (f (c + h * 'i) - f c)) \o
 realC (R:=R) = fun h : R => h^-1 *: ((f%:Rfun \o shift c) (h *: ('i%:Rc)) - f c).
   by rewrite complex_liminP /=.
 apply: funext => h /=.
-by rewrite Inv_realC -scalecM -!scalecr realCZ.
+by rewrite Inv_realC -scalecM -!scalecr realCZ [X in f X]addrC.
 Qed.
 
 Lemma continuous_near (T U: topologicalType) (f: T -> U) (P : set U) (a : T):
@@ -602,9 +606,9 @@ Proof. by move/(_ P) => /=; near_simpl. Qed.
 Lemma holomorphicP (f : C^o -> C^o)  (c: C^o) : holomorphic f c <-> derivable f c 1.
 Proof.
 rewrite /holomorphic /derivable.
-suff -> : (fun h : C => h^-1 *: ((f \o shift c) h - f c)) =
-         ((fun h : C => h^-1 *: ((f \o shift c) (h *: 1) - f c))) by [].
-by apply: funext =>h; rewrite complexA.
+suff -> : (fun h : C => h^-1 *: ((f(c + h) - f c))) =
+                    ((fun h : C => h^-1 *: ((f \o shift c) (h *: 1) - f c))) by [].              
+by apply: funext =>h; rewrite complexA [X in f X]addrC.
 Qed.
 
 (*TBA normedType- Cyril's suggestion *)
@@ -651,7 +655,7 @@ Lemma Diff_CR_holo (f : C^o -> C^o)  (c: C):
   (CauchyRiemanEq f c)
   -> (holomorphic f c).
 Proof.
-move => [] H; have derf := H ; move: H.
+move => [] /= H; have derf := H ; move: H.
 move/diff_locally /eqaddoP => der.
 (* TODO : diff_locally to be renamed diff_nbhs *)
 rewrite /CauchyRiemanEq Rdiff1 Rdiffi.
@@ -661,7 +665,7 @@ apply/(cvg_distP (('D_1 f%:Rfun c) : C^o)).
 move => eps eps_lt0 /=.
 pose er := Re eps.
 have eq_ereps := gt0_realC eps_lt0.
-have er_lt0 : 0 < er/2 by rewrite mulr_gt0 // -realC_gt0.
+have er_lt0 : 0 < er/2 by rewrite mulr_gt0 // realC_gt0 //.
 move /(_ (er/2) er_lt0): der; rewrite /= nearE.
 move => /(@nbhs_ex _  _ (0 : Rcomplex_normedModType R)) [[d d0]] /= der.
 rewrite nearE /= nbhs_filterE.
@@ -684,12 +688,13 @@ rewrite [X in 'd _ _ X]zeq addrC linearP linearZ /= -!deriveE //.
 rewrite -CR (scalecAl y) (* why scalec *) -scalecM !scalecr.
 rewrite -(scalerDl  (('D_1 f%:Rfun c%:Rc): C^o) x%:C). (*clean, do it in Rcomplex *)
 rewrite addrAC -!scalecr -realC_alg -zeq. (*clean*)
-rewrite addrC [X in (-_ + X)]addrC -[X in `|_ + X|]opprK -opprD normrN scalecM.
-rewrite -lecR => H. rewrite /normr /=. apply: le_lt_trans; first by exact H.
+rewrite addrC  [X in (-_ + X)]addrC [X in f X]addrC -[X in `|_ + X|]opprK -opprD.
+rewrite normrN scalecM -lecR => H.
+rewrite /normr /=; apply: le_lt_trans; first by exact H.
 rewrite eq_ereps realCM ltcR /normr /= ltr_pmul2l ?normc_gt0 //.
 rewrite /er -[X in (_ < X)]mulr1 ltr_pmul2l //= ?invf_lt1 ?ltr1n //.
 rewrite -ltr0c -eq_ereps //.
-Qed. 
+Qed.
 
 (* (* Partial proof using continuity of partial derivatices and resketching *)
 (*   continuity of parital der => diff *) *)
