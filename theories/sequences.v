@@ -56,7 +56,7 @@ Require Import classical_sets posnum topology normedtype landau.
 (*   eseries, etelescope, etc.                                                *)
 (*                                                                            *)
 (* Section sequences_ereal contain properties of sequences of extended real   *)
-(* numbers.                                                                   *)
+(* numbers.                                                                   *)           
 (*                                                                            *)
 (* * Limit superior and inferior:                                             *)
 (*             sdrop u n := {u_k | k >= n}                                    *)
@@ -67,6 +67,10 @@ Require Import classical_sets posnum topology normedtype landau.
 (*               einfs u := [sequence ereal_inf (sdrop u n)]_n                *)
 (*        elim_{inf,sup} == limit inferior/superior for \bar R                *)
 (*                                                                            *)
+(* Theorems:                                                                  *)  
+(*             Baire == A completeNormedModType is a Baire Space              *)
+(*  Banach_Steinhaus == a poinwise bounded family of bounded linear maps      *)
+(*                      over a completenormedmodtype is uniformly bounded.    *)
 (******************************************************************************)
 
 Set Implicit Arguments.
@@ -1975,6 +1979,7 @@ Lemma ereal_pseries_mkcond [R : realFieldType] [P : pred nat] (f : nat -> \bar R
 Proof. by congr (lim _); apply: eq_fun => n /=; apply: big_mkcond. Qed.
 
 End sequences_ereal.
+ 
 
 Definition sdrop T (u : T^nat) n := [set u k | k in [set k | k >= n]]%N.
 
@@ -2582,7 +2587,7 @@ have : cvg (a @ \oo).
       exists `|ceil eps^-1|%N.
       rewrite -ltf_pinv ?(posrE,divr_gt0)// invrK -addn1 natrD.
       rewrite gtz0_norm ?(ceil_gt0,invr_gt0,divr_gt0)//.
-      by rewrite (le_lt_trans (ler_ceil _)) // ltr_addl.
+      by rewrite (le_lt_trans (ceil_ge _)) // ltr_addl.
     exists n.+1; rewrite -ltr_pdivl_mull //.
     have /lt_trans : (r n.+1)%:num < n.+1%:R^-1.
       have [_ ] : P n.+1 (a n, r n) (a n.+1, r n.+1) by apply: (Pf (n, ar n)).
@@ -2598,22 +2603,22 @@ have : cvg (a @ \oo).
 rewrite cvg_ex //= => -[l Hl]; exists l; split.
 - have Hinter : (closed_ball a0 r0%:num) l.
     apply: (@closed_cvg _ _ \oo eventually_filter a) => //.
-    + move=> m; have /(_ (a m)) := Suite_ball 0%N m (leq0n m).
-      by apply; exact: closed_ballxx.
-    + exact: closed_ball_closed.
+    + by exact: closed_ball_closed.
+    + near=> m;  have /(_ (a m)) := Suite_ball 0%N m (leq0n m). 
+      by apply; exact: closed_ballxx. 
   suff : closed_ball a0 r0%:num `<=` D by move/(_ _ Hinter).
   by move: Ball_a0; rewrite closed_ballE //= subsetI; apply: proj1.
 - move=> i _.
   have : closed_ball (a i) (r i)%:num l.
     rewrite -(@cvg_shiftn i _ a l) /= in Hl.
     apply: (@closed_cvg _ _ \oo eventually_filter (fun n => a (n + i)%N)) => //=.
-    + by move=> n; exact/(Suite_ball _ _ (leq_addl n i))/closed_ballxx.
     + exact: closed_ball_closed.
+    + by near=> n; exact/(Suite_ball _ _ (leq_addl n i))/closed_ballxx.
   move: i => [|n].
     by move: Ball_a0; rewrite subsetI => -[_ p] la0; move: (p _ la0).
   have [+ _] : P n.+1 (a n, r n) (a n.+1, r n.+1) by apply : (Pf (n , ar n)).
   by rewrite subsetI => -[_ p] lan1; move: (p l lan1).
-Qed.
+Unshelve. all: by end_near. Qed.
 
 End Baire.
 
@@ -2669,7 +2674,7 @@ have O_infempty : O_inf = set0.
   rewrite -subset0 => x.
   have [M FxM] := BoundedF x; rewrite /O_inf /O /=.
   move=> /(_ `|ceil M|%N Logic.I)[f Ff]; apply/negP; rewrite -leNgt.
-  rewrite (le_trans (FxM _ Ff))// (le_trans (ler_ceil _))//.
+  rewrite (le_trans (FxM _ Ff))// (le_trans (ceil_ge _))//.
   by have := lez_abs (ceil M); rewrite -(@ler_int K).
 have ContraBaire : exists i, not (dense (O i)).
   have dOinf : ~ dense O_inf.
@@ -2693,7 +2698,7 @@ case: (eqVneq y 0) => [-> | Zeroy].
   by rewrite normr0 !mulr_ge0 // (le_trans _ Hx).
 have majballi : forall f x, F f -> (ball x0 r%:num) x -> `|f x | <= n%:R.
   move=> g x Fg /(H x); rewrite leNgt.
-  by rewrite /O /= setC_bigcup /= => /(_ _ Fg)/negP.
+  by rewrite /O setC_bigcup /= => /(_ _ Fg)/negP.
 have majball : forall f x, F f -> (ball x0 r%:num) x -> `|f (x - x0)| <= n%:R + n%:R.
   move=> g x Fg; move: (Propf g Fg) => [Bg Lg].
   move: (linearB (Linear Lg)) => /= -> Ballx.
