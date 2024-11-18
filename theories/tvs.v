@@ -400,3 +400,17 @@ HB.instance Definition _ :=
   prod_add_continuous prod_scale_continuous prod_locally_convex.
 
 End prod_Tvs.
+
+
+
+Definition dual {R : ringType} (E : lmodType R) : Type := {scalar E}.
+(* Check fun {R : ringType} (E : lmodType R) => dual E : ringType. *)
+
+HB.mixin Record hasDual (R : ringType) (E' : lmodType R) E of GRing.Lmodule R E :=  {
+ dual_pair : E -> E' -> R;
+ dual_pair_rlinear : forall x, scalar (dual_pair x);
+ dual_pair_llinear : forall x, scalar (dual_pair^~ x);
+ ipair : injective ( fun x =>  dual_pair^~ x)
+}.
+
+  
