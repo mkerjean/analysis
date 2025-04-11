@@ -629,19 +629,40 @@ Notation "{ 'family_lcfun' fam , F --> f }" :=
   (cvg_to F (@nbhs _ {family_lcfun fam,  _ -> _ } f)) : type_scope.
 
 (* we can´t use unfiorm, it is defined on E -> F and not on our space. We need to define it on {linear_continuous E -> F} , inducing its topology from uniform` E- > F *)
-HB.instance Definition _  R {E : tvsType R} (F : tvsType R)  (fam : set E -> Prop) :=
-  Topological.copy {family_lcfun fam, E -> F} (sup_topology (fun k : sigT fam =>
-       Uniform.class {uniform` projT1 k -> F})).
 
-HB.instance Definition _ {R} {U V : tvsType R}  (fam : set U -> Prop) :=
-  Uniform.copy {family_lcfun fam, U -> V} (sup_topology (fun k : sigT fam =>
-  Uniform.class {uniform` projT1 k -> V})).
+Locate sup_topology.
+Search (continuousType _ _). Locate continuousEP.
 
-HB.factory Record UniformLinCont_isTvs (R : numDomainType) (E : tvsType R) (F : tvsType R) (B : set_system  E) of Topological {family_lcfun B , E -> F} & GRing.Lmodule {linear_continuous E -> F }  := {
-  bornoC : forall x : E, exists b : set E,  (B b) /\ (b x) ;
-  bornoU : forall P Q  : set E, B P -> B Q -> B (P `|` Q) ;
-  bornoS : forall P Q : set E, P `<=` Q -> B Q -> B  P
-  }.
+(** examples **)
+(* HB.instance Definition _ (U : Type) (T : U -> topologicalType) := *)
+(*   Topological.copy (forall x : U, T x) (prod_topology T). *)
+
+(* HB.instance Definition _ (U : Type) (T : U -> uniformType) := *)
+(*   Uniform.copy (forall x : U, T x) (prod_topology T). *)
+
+(* HB.instance Definition _ (U T : topologicalType) := *)
+(*   Topological.copy  *)
+(*     (continuousType U T)  *)
+(*     (weak_topology (id : continuousType U T -> (U -> T))). *)
+
+(* HB.instance Definition _ (U : topologicalType) (T : uniformType) := *)
+(*   Uniform.copy  *)
+(*     (continuousType U T)  *)
+(*     (weak_topology (id : continuousType U T -> (U -> T))). *)
+
+(* HB.instance Definition _  R {E : tvsType R} (F : tvsType R)  (fam : set E -> Prop) := *)
+(*   Topological.copy {family_lcfun fam, E -> F} (sup_topology (fun k : sigT fam => *)
+(*        Uniform.class {uniform` projT1 k -> F})). *)
+
+(* HB.instance Definition _ {R} {U V : tvsType R}  (fam : set U -> Prop) := *)
+(*   Uniform.copy {family_lcfun fam, U -> V} (sup_topology (fun k : sigT fam => *)
+(*   Uniform.class {uniform` projT1 k -> V})). *)
+
+(* HB.factory Record UniformLinCont_isTvs (R : numDomainType) (E : tvsType R) (F : tvsType R) (B : set_system  E) of Topological {family_lcfun B , E -> F} & GRing.Lmodule {linear_continuous E -> F }  := { *)
+(*   bornoC : forall x : E, exists b : set E,  (B b) /\ (b x) ; *)
+(*   bornoU : forall P Q  : set E, B P -> B Q -> B (P `|` Q) ; *)
+(*   bornoS : forall P Q : set E, P `<=` Q -> B Q -> B  P *)
+(*   }. *)
 
 (* HB.builders Context R E F B of UniformLinCont_isTvs R E F B. *)
 
