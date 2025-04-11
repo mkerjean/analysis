@@ -86,7 +86,7 @@ Definition convex (R : numDomainType) (M : lmodType R) (A : set M) :=
   0 < lambda -> lambda < 1 -> lambda *: x + (1 - lambda) *: y \in A.
 
 (*TODO : name it convexTvs*)
-HB.mixin Record Uniform_isTvs (R : numDomainType) E
+HB.mixin Record Uniform_isConvexTvs (R : numDomainType) E
     of Uniform E & GRing.Lmodule R E := {
   add_continuous : continuous (fun x : E * E => x.1 + x.2) ;
   scale_continuous : continuous (fun z : R^o * E => z.1 *: z.2) ;
@@ -94,9 +94,9 @@ HB.mixin Record Uniform_isTvs (R : numDomainType) E
     (forall b, b \in B -> convex b) & basis B
 }.
 
-#[short(type="tvsType")]
-HB.structure Definition Tvs (R : numDomainType) :=
-  {E of Uniform_isTvs R E & Uniform E & GRing.Lmodule R E}.
+#[short(type="ctvsType")]
+HB.structure Definition ConvexTvs (R : numDomainType) :=
+  {E of Uniform_isConvexTvs R E & Uniform E & GRing.Lmodule R E}.
 
 Section properties_of_topologicalLmodule.
 Context (R : numDomainType) (E : topologicalLmodType R) (U : set E).
@@ -134,7 +134,7 @@ Unshelve. all: by end_near. Qed.
 
 End properties_of_topologicalLmodule.
 
-HB.factory Record TopologicalLmod_isTvs (R : numDomainType) E
+HB.factory Record TopologicalLmod_isConvexTvs (R : numDomainType) E
     of Topological E & GRing.Lmodule R E := {
   add_continuous : continuous (fun x : E * E => x.1 + x.2) ;
   scale_continuous : continuous (fun z : R^o * E => z.1 *: z.2) ;
@@ -142,7 +142,7 @@ HB.factory Record TopologicalLmod_isTvs (R : numDomainType) E
     (forall b, b \in B -> convex b) & basis B
   }.
 
-HB.builders Context R E of TopologicalLmod_isTvs R E.
+HB.builders Context R E of TopologicalLmod_isConvexTvs R E.
 
 Definition entourage : set_system (E * E) :=
   fun P => exists (U : set E), nbhs (0 : E) U  /\
@@ -232,7 +232,7 @@ HB.instance Definition _ := Nbhs_isUniform_mixin.Build E
 HB.end.
 
 Section Tvs_numDomain.
-Context (R : numDomainType) (E : tvsType R) (U : set E).
+Context (R : numDomainType) (E : ctvsType R) (U : set E).
 
 Lemma nbhs0N : nbhs 0 U -> nbhs 0 (-%R @` U).
 Proof. exact/nbhs0N_subproof/scale_continuous. Qed.
@@ -247,7 +247,7 @@ End Tvs_numDomain.
 
 Section Tvs_numField.
 
-Lemma nbhs0Z (R : numFieldType) (E : tvsType R) (U : set E) (r : R) :
+Lemma nbhs0Z (R : numFieldType) (E : ctvsType R) (U : set E) (r : R) :
   r != 0 -> nbhs 0 U -> nbhs 0 ( *:%R r @` U ).
 Proof.
 move=> r0 U0; have /= := scale_continuous (r^-1, 0) U.
@@ -256,7 +256,7 @@ near=> x => //=; exists (r^-1 *: x); last by rewrite scalerA divff// scale1r.
 by apply: (BU (r^-1, x)); split => //=;[exact: nbhs_singleton|near: x].
 Unshelve. all: by end_near. Qed.
 
-Lemma nbhsZ  (R : numFieldType) (E : tvsType R) (U : set E) (r : R) (x :E) :
+Lemma nbhsZ  (R : numFieldType) (E : ctvsType R) (U : set E) (r : R) (x :E) :
   r != 0 -> nbhs x U -> nbhs (r *:x) ( *:%R r @` U ).
 Proof.
 move=> r0 U0; have /= := scale_continuous ((r^-1, r *: x)) U.
@@ -358,13 +358,13 @@ move=> x B; rewrite -nbhs_ballE/= => -[r] r0 Bxr /=.
 by exists (ball x r) => //; split; [exists x, r|exact: ballxx].
 Qed.
 
-HB.instance Definition _ := Uniform_isTvs.Build R R^o
+HB.instance Definition _ := Uniform_isConvexTvs.Build R R^o
   standard_add_continuous standard_scale_continuous standard_locally_convex.
 
 End standard_topology.
 
 Section prod_Tvs.
-Context (K : numFieldType) (E F : tvsType K).
+Context (K : numFieldType) (E F : ctvsType K).
 
 Local Lemma prod_add_continuous : continuous (fun x : (E * F) * (E * F) => x.1 + x.2).
 Proof.
@@ -412,7 +412,7 @@ by split; rewrite -inE; [apply: Bcb; rewrite ?inE|apply: Bcf; rewrite ?inE].
 Qed.
 
 HB.instance Definition _ :=
-  Uniform_isTvs.Build K (E * F)%type
+  Uniform_isConvexTvs.Build K (E * F)%type
   prod_add_continuous prod_scale_continuous prod_locally_convex.
 
 End prod_Tvs.
@@ -526,7 +526,7 @@ HB.instance Definition _ := @isLinearContinuous.Build R E S s (g \o f)
 End lcfun_comp.
 
 Section lcfun_lmodtype.
-  Context {R : numFieldType} {E F G: tvsType R}.
+  Context {R : numFieldType} {E F G: ctvsType R}.
     (* {s : GRing.Scale.law R F}. *)
 
 Implicit Types (r : R) (f g : {linear_continuous E -> F}) (h : {linear_continuous F -> G}).  
@@ -606,7 +606,7 @@ tvstype *)
  
 (*What follows is adapted from {family fam, U -> V} in
 function_space.v. Should we copy instances from family fam to family_lcfun fam ? *)
-Definition uniform_lcfun_family R {E : tvsType R} (F : tvsType R)  (fam : set E -> Prop) : Type :=
+Definition uniform_lcfun_family R {E : ctvsType R} (F : ctvsType R)  (fam : set E -> Prop) : Type :=
   {linear_continuous E -> F}.
 
 (* Reserved Notation "'{' 'family_lcfun' fam , U '->' V '|' s '}'" *)
@@ -632,6 +632,19 @@ Notation "{ 'family_lcfun' fam , F --> f }" :=
 
 Locate sup_topology.
 Search (continuousType _ _). Locate continuousEP.
+
+
+(*md
+Define bounded 
+Define bornology
+Define uniform convergence on bornology
+Prove continuous embedding into topologies already defined on spaces of functions.
+*)
+
+(*First lemma to formalize : Prop 1 in 2.10 Jarchow *)
+
+(* W is a 0-basis for a linear topology 3~aonG iff 38 consists ofG-bounded
+sets only. In that case, if F is Hausdorff and 38 covers X, then J~a is Hausdorff*)
 
 (** examples **)
 (* HB.instance Definition _ (U : Type) (T : U -> topologicalType) := *)
@@ -676,7 +689,7 @@ Search (continuousType _ _). Locate continuousEP.
 
 
 Section dual.
-Context {R : numDomainType} {E : tvsType R}.
+Context {R : numDomainType} {E : ctvsType R}.
 
 (* Reserved Notation " E ''' " (at level 80, format "E ''' "). *)
 
