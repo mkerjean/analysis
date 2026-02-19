@@ -79,6 +79,20 @@
           </ul>
           </details>
           </li>
+<li><details id="mathcomp.analysis.probability_theory"><summary>probability_theory</summary>
+          <ul>
+          <li><a href="mathcomp.analysis.probability_theory.bernoulli_distribution.html">bernoulli_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.beta_distribution.html">beta_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.binomial_distribution.html">binomial_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.exponential_distribution.html">exponential_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.normal_distribution.html">normal_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.poisson_distribution.html">poisson_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.probability.html">probability</a></li>
+<li><a href="mathcomp.analysis.probability_theory.random_variable.html">random_variable</a></li>
+<li><a href="mathcomp.analysis.probability_theory.uniform_distribution.html">uniform_distribution</a></li>
+          </ul>
+          </details>
+          </li>
 <li><details id="mathcomp.analysis.showcase"><summary>showcase</summary>
           <ul>
           <li><a href="mathcomp.analysis.showcase.pnt.html">pnt</a></li>
@@ -92,7 +106,9 @@
 <li><a href="mathcomp.analysis.topology_theory.compact.html">compact</a></li>
 <li><a href="mathcomp.analysis.topology_theory.connected.html">connected</a></li>
 <li><a href="mathcomp.analysis.topology_theory.discrete_topology.html">discrete_topology</a></li>
+<li><a href="mathcomp.analysis.topology_theory.initial_topology.html">initial_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.matrix_topology.html">matrix_topology</a></li>
+<li><a href="mathcomp.analysis.topology_theory.metric_structure.html">metric_structure</a></li>
 <li><a href="mathcomp.analysis.topology_theory.nat_topology.html">nat_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.num_topology.html">num_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.one_point_compactification.html">one_point_compactification</a></li>
@@ -133,7 +149,6 @@
 <li><a href="mathcomp.analysis.measurable_realfun.html">measurable_realfun</a></li>
 <li><a href="mathcomp.analysis.numfun.html">numfun</a></li>
 <li><a href="mathcomp.analysis.pi_irrational.html">pi_irrational</a></li>
-<li><a href="mathcomp.analysis.probability.html">probability</a></li>
 <li><a href="mathcomp.analysis.realfun.html">realfun</a></li>
 <li><a href="mathcomp.analysis.sequences.html">sequences</a></li>
 <li><a href="mathcomp.analysis.trigo.html">trigo</a></li>
@@ -257,7 +272,7 @@ This file provides various formulations of compactness, and some theory.
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="inferP" class="id"><a name="inferP" class="" title="inferP : forall [P : Prop], P -> infer P
 
 inferP is not universe polymorphic
-Arguments inferP [P]%type_scope _
+Arguments inferP [P]%_type_scope _
 inferP is opaque
 Expands to: Constant mathcomp.analysis.topology_theory.compact.inferP
 Declared in
@@ -336,7 +351,7 @@ library mathcomp.analysis.topology_theory.compact, line 60, characters 6-14
 forall {T : topologicalType} (E : set T), closure E = cluster (globally E)
 
 closureEcluster is not universe polymorphic
-Arguments closureEcluster {T} E%classical_set_scope
+Arguments closureEcluster {T} E%_classical_set_scope
 closureEcluster is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.closureEcluster
@@ -423,7 +438,7 @@ closure E =
             ProperFilter G & G --> p /\ globally E `<=` G)]%classic
 
 closureEcvg is not universe polymorphic
-Arguments closureEcvg {T} E%classical_set_scope
+Arguments closureEcvg {T} E%_classical_set_scope
 closureEcvg is opaque
 Expands to: Constant mathcomp.analysis.topology_theory.compact.closureEcvg
 Declared in
@@ -439,7 +454,7 @@ library mathcomp.analysis.topology_theory.compact, line 97, characters 6-17
 <span class="vernacular">Definition</span><span class="id"> </span><span id="compact" class="id"><a name="compact" class="" title="compact : forall {T : topologicalType}, set T -> Prop
 
 compact is not universe polymorphic
-Arguments compact {T} A%classical_set_scope
+Arguments compact {T} A%_classical_set_scope
 compact is transparent
 Expands to: Constant mathcomp.analysis.topology_theory.compact.compact
 Declared in
@@ -480,7 +495,7 @@ compact B ->
 forall [F : set_system T],
 ProperFilter F -> F A -> exists a : T, (A `&` cluster F)%classic a
 
-Arguments subclosed_compact {T} [A B]%classical_set_scope _ _ _ [F] _ _
+Arguments subclosed_compact {T} [A B]%_classical_set_scope _ _ _ [F] _ _
 subclosed_compact is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.subclosed_compact
@@ -544,7 +559,7 @@ forall [F : set_system T],
 ProperFilter F ->
 F (A `&` B)%classic -> exists a : T, (A `&` B `&` cluster F)%classic a
 
-Arguments compact_closedI {T} [A B]%classical_set_scope _ _ [F] _ _
+Arguments compact_closedI {T} [A B]%_classical_set_scope _ _ [F] _ _
 compact_closedI is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.compact_closedI
@@ -568,7 +583,7 @@ Qed.</div></details>
 <span class="vernacular">Definition</span><span class="id"> </span><span id="near_covering" class="id"><a name="near_covering" class="" title="near_covering : forall {X : topologicalType}, set X -> Prop
 
 near_covering is not universe polymorphic
-Arguments near_covering {X} K%classical_set_scope
+Arguments near_covering {X} K%_classical_set_scope
 near_covering is transparent
 Expands to: Constant mathcomp.analysis.topology_theory.compact.near_covering
 Declared in
@@ -627,7 +642,7 @@ library mathcomp.analysis.topology_theory.compact, line 145, characters 11-24
 forall {X : topologicalType} (A : set X), compact A <-> near_covering A
 
 compact_near_coveringP is not universe polymorphic
-Arguments compact_near_coveringP {X} A%classical_set_scope
+Arguments compact_near_coveringP {X} A%_classical_set_scope
 compact_near_coveringP is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.compact_near_coveringP
@@ -643,7 +658,7 @@ Qed.</div></details>
 <span class="vernacular">Definition</span><span class="id"> </span><span id="near_covering_within" class="id"><a name="near_covering_within" class="" title="near_covering_within : forall {X : topologicalType}, set X -> Prop
 
 near_covering_within is not universe polymorphic
-Arguments near_covering_within {X} K%classical_set_scope
+Arguments near_covering_within {X} K%_classical_set_scope
 near_covering_within is transparent
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.near_covering_within
@@ -660,7 +675,7 @@ forall {X : topologicalType} (K : set X),
 near_covering_within K <-> near_covering K
 
 near_covering_withinP is not universe polymorphic
-Arguments near_covering_withinP {X} K%classical_set_scope
+Arguments near_covering_withinP {X} K%_classical_set_scope
 near_covering_withinP is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.near_covering_withinP
@@ -744,7 +759,7 @@ forall [F : set_system X],
 ProperFilter F ->
 F (A `|` B)%classic -> exists a : X, ((A `|` B) `&` cluster F)%classic a
 
-Arguments compactU {X} [A B]%classical_set_scope _ _ [F] _ _
+Arguments compactU {X} [A B]%_classical_set_scope _ _ [F] _ _
 compactU is opaque
 Expands to: Constant mathcomp.analysis.topology_theory.compact.compactU
 Declared in
@@ -777,8 +792,8 @@ ProperFilter F0 ->
 F0 (\big[setU/set0]_(i <- s | P i) F i) ->
 exists a : X, (\big[setU/set0]_(i <- s | P i) F i `&` cluster F0)%classic a
 
-Arguments bigsetU_compact {X} [I]%type_scope [F]%function_scope 
-  [s]%seq_scope [P] _%function_scope [F] _ _
+Arguments bigsetU_compact {X} [I]%_type_scope [F]%_function_scope
+  [s]%_seq_scope [P] _%_function_scope [F] _ _
 bigsetU_compact is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.bigsetU_compact
@@ -808,7 +823,7 @@ library mathcomp.analysis.topology_theory.compact, line 253, characters 11-23
 <span class="vernacular">Definition</span><span class="id"> </span><span id="precompact" class="id"><a name="precompact" class="" title="precompact : forall {X : topologicalType}, set X -> Prop
 
 precompact is not universe polymorphic
-Arguments precompact {X} C%classical_set_scope
+Arguments precompact {X} C%_classical_set_scope
 precompact is transparent
 Expands to: Constant mathcomp.analysis.topology_theory.compact.precompact
 Declared in
@@ -819,7 +834,7 @@ library mathcomp.analysis.topology_theory.compact, line 256, characters 11-21
 forall {X : topologicalType} (C : set X), precompact C = compact (closure C)
 
 precompactE is not universe polymorphic
-Arguments precompactE {X} C%classical_set_scope
+Arguments precompactE {X} C%_classical_set_scope
 precompactE is opaque
 Expands to: Constant mathcomp.analysis.topology_theory.compact.precompactE
 Declared in
@@ -840,7 +855,7 @@ forall {X : topologicalType} [A B : set X],
 (A `<=` B)%classic -> precompact B -> precompact A
 
 precompact_subset is not universe polymorphic
-Arguments precompact_subset {X} [A B]%classical_set_scope _ _
+Arguments precompact_subset {X} [A B]%_classical_set_scope _ _
 precompact_subset is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.precompact_subset
@@ -859,7 +874,7 @@ forall {X : topologicalType} [A : set X],
 closed A -> precompact A = compact A
 
 precompact_closed is not universe polymorphic
-Arguments precompact_closed {X} [A]%classical_set_scope _
+Arguments precompact_closed {X} [A]%_classical_set_scope _
 precompact_closed is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.precompact_closed
@@ -877,7 +892,7 @@ Qed.</div></details>
 <span class="vernacular">Definition</span><span class="id"> </span><span id="locally_compact" class="id"><a name="locally_compact" class="" title="locally_compact : forall {X : topologicalType}, set X -> Prop
 
 locally_compact is not universe polymorphic
-Arguments locally_compact {X} A%classical_set_scope
+Arguments locally_compact {X} A%_classical_set_scope
 locally_compact is transparent
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.locally_compact
@@ -892,8 +907,8 @@ forall [I : choiceType],
 set I -> forall [U : Type], (I -> set U) -> set U -> Prop
 
 finite_subset_cover is not universe polymorphic
-Arguments finite_subset_cover [I] D%classical_set_scope 
-  [U]%type_scope F%function_scope A%classical_set_scope
+Arguments finite_subset_cover [I] D%_classical_set_scope 
+  [U]%_type_scope F%_function_scope A%_classical_set_scope
 finite_subset_cover is transparent
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.finite_subset_cover
@@ -909,7 +924,7 @@ library mathcomp.analysis.topology_theory.compact, line 284, characters 11-30
 <span class="vernacular">Definition</span><span class="id"> </span><span id="cover_compact" class="id"><a name="cover_compact" class="" title="cover_compact : forall [T : topologicalType], set T -> Prop
 
 cover_compact is not universe polymorphic
-Arguments cover_compact [T] A%classical_set_scope
+Arguments cover_compact [T] A%_classical_set_scope
 cover_compact is transparent
 Expands to: Constant mathcomp.analysis.topology_theory.compact.cover_compact
 Declared in
@@ -924,8 +939,8 @@ forall [T : topologicalType],
 set T -> forall [I : Type], set I -> (I -> set T) -> Prop
 
 open_fam_of is not universe polymorphic
-Arguments open_fam_of [T] A%classical_set_scope [I]%type_scope
-  D%classical_set_scope f%function_scope
+Arguments open_fam_of [T] A%_classical_set_scope [I]%_type_scope
+  D%_classical_set_scope f%_function_scope
 open_fam_of is transparent
 Expands to: Constant mathcomp.analysis.topology_theory.compact.open_fam_of
 Declared in
@@ -972,8 +987,8 @@ forall [T : topologicalType],
 set T -> forall [I : Type], set I -> (I -> set T) -> Prop
 
 closed_fam_of is not universe polymorphic
-Arguments closed_fam_of [T] A%classical_set_scope 
-  [I]%type_scope D%classical_set_scope f%function_scope
+Arguments closed_fam_of [T] A%_classical_set_scope 
+  [I]%_type_scope D%_classical_set_scope f%_function_scope
 closed_fam_of is transparent
 Expands to: Constant mathcomp.analysis.topology_theory.compact.closed_fam_of
 Declared in
@@ -1090,7 +1105,7 @@ finite_set A ->
 forall [F : set_system X],
 ProperFilter F -> F A -> exists a : X, (A `&` cluster F)%classic a
 
-Arguments finite_compact {X} [A]%classical_set_scope _ [F] _ _
+Arguments finite_compact {X} [A]%_classical_set_scope _ [F] _ _
 finite_compact is opaque
 Expands to: Constant mathcomp.analysis.topology_theory.compact.finite_compact
 Declared in
@@ -1158,7 +1173,7 @@ forall {T : puniformType} [U : set T] [F : set_system T],
 ProperFilter F ->
 cauchy F -> F U -> compact U -> forall [t : set T], nbhs (lim F) t -> F t
 
-Arguments compact_cauchy_cvg {T} [U]%classical_set_scope [F] _ _ _ _ [t] _
+Arguments compact_cauchy_cvg {T} [U]%_classical_set_scope [F] _ _ _ _ [t] _
 compact_cauchy_cvg is opaque
 Expands to: Constant
             mathcomp.analysis.topology_theory.compact.compact_cauchy_cvg

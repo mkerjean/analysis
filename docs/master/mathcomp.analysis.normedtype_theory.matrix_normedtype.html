@@ -79,6 +79,20 @@
           </ul>
           </details>
           </li>
+<li><details id="mathcomp.analysis.probability_theory"><summary>probability_theory</summary>
+          <ul>
+          <li><a href="mathcomp.analysis.probability_theory.bernoulli_distribution.html">bernoulli_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.beta_distribution.html">beta_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.binomial_distribution.html">binomial_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.exponential_distribution.html">exponential_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.normal_distribution.html">normal_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.poisson_distribution.html">poisson_distribution</a></li>
+<li><a href="mathcomp.analysis.probability_theory.probability.html">probability</a></li>
+<li><a href="mathcomp.analysis.probability_theory.random_variable.html">random_variable</a></li>
+<li><a href="mathcomp.analysis.probability_theory.uniform_distribution.html">uniform_distribution</a></li>
+          </ul>
+          </details>
+          </li>
 <li><details id="mathcomp.analysis.showcase"><summary>showcase</summary>
           <ul>
           <li><a href="mathcomp.analysis.showcase.pnt.html">pnt</a></li>
@@ -92,7 +106,9 @@
 <li><a href="mathcomp.analysis.topology_theory.compact.html">compact</a></li>
 <li><a href="mathcomp.analysis.topology_theory.connected.html">connected</a></li>
 <li><a href="mathcomp.analysis.topology_theory.discrete_topology.html">discrete_topology</a></li>
+<li><a href="mathcomp.analysis.topology_theory.initial_topology.html">initial_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.matrix_topology.html">matrix_topology</a></li>
+<li><a href="mathcomp.analysis.topology_theory.metric_structure.html">metric_structure</a></li>
 <li><a href="mathcomp.analysis.topology_theory.nat_topology.html">nat_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.num_topology.html">num_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.one_point_compactification.html">one_point_compactification</a></li>
@@ -133,7 +149,6 @@
 <li><a href="mathcomp.analysis.measurable_realfun.html">measurable_realfun</a></li>
 <li><a href="mathcomp.analysis.numfun.html">numfun</a></li>
 <li><a href="mathcomp.analysis.pi_irrational.html">pi_irrational</a></li>
-<li><a href="mathcomp.analysis.probability.html">probability</a></li>
 <li><a href="mathcomp.analysis.realfun.html">realfun</a></li>
 <li><a href="mathcomp.analysis.sequences.html">sequences</a></li>
 <li><a href="mathcomp.analysis.trigo.html">trigo</a></li>
@@ -263,7 +278,7 @@ exists2
     [set my | (forall (i1 : 'I_m) (j0 : 'I_n), P i1 j0 (my i1 j0))]) i0
    `<=` (fun M : 'M_(m, n) => M i j) @^-1` t)%classic
 
-Arguments coord_continuous {K} [m n]%nat_scope [i j x t] _
+Arguments coord_continuous {K} [m n]%_nat_scope [i j x t] _
 coord_continuous is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.coord_continuous
@@ -357,8 +372,8 @@ F [set v | (forall i : 'I_n, A i (v ord0 i))]%classic ->
 exists a : matrix_matrix__canonical__topology_structure_Topological 1 n T,
   ([set v | (forall i : 'I_n, A i (v ord0 i))] `&` cluster F)%classic a
 
-Arguments rV_compact [T] [n]%nat_scope [A]%function_scope 
-  _%function_scope [F] _ _
+Arguments rV_compact [T] [n]%_nat_scope [A]%_function_scope 
+  _%_function_scope [F] _ _
 rV_compact is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.rV_compact
@@ -384,7 +399,7 @@ Qed.</div></details>
 <span class="vernacular">Definition</span><span class="id"> </span><span id="mx_norm" class="id"><a name="mx_norm" class="" title="mx_norm : forall [K : numDomainType] [m n : nat], 'M_(m, n) -> K
 
 mx_norm is not universe polymorphic
-Arguments mx_norm [K] [m n]%nat_scope x%ring_scope
+Arguments mx_norm [K] [m n]%_nat_scope x%_ring_scope
 mx_norm is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_norm
@@ -399,7 +414,7 @@ mx_norm (K:=K) x =
     (widen_itv `|x i.1 i.2|%:itv : {nonneg K}))%:num%R
 
 mx_normE is not universe polymorphic
-Arguments mx_normE [K] [m n]%nat_scope x%ring_scope
+Arguments mx_normE [K] [m n]%_nat_scope x%_ring_scope
 mx_normE is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_normE
@@ -416,7 +431,7 @@ forall [K : numDomainType] [m n : nat] (x y : 'M_(m, n)),
 (mx_norm (K:=K) (x + y) <= mx_norm (K:=K) x + mx_norm (K:=K) y)%R
 
 ler_mx_norm_add is not universe polymorphic
-Arguments ler_mx_norm_add [K] [m n]%nat_scope (x y)%ring_scope
+Arguments ler_mx_norm_add [K] [m n]%_nat_scope (x y)%_ring_scope
 ler_mx_norm_add is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.ler_mx_norm_add
@@ -437,7 +452,7 @@ forall [K : numDomainType] [m n : nat] [x : 'M_(m, n)],
 mx_norm (K:=K) x = 0%R -> x = 0%R
 
 mx_norm_eq0 is not universe polymorphic
-Arguments mx_norm_eq0 [K] [m n]%nat_scope [x]%ring_scope _
+Arguments mx_norm_eq0 [K] [m n]%_nat_scope [x]%_ring_scope _
 mx_norm_eq0 is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_norm_eq0
@@ -455,7 +470,7 @@ Qed.</div></details>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="mx_norm0" class="id"><a name="mx_norm0" class="" title="mx_norm0 : forall (K : numDomainType) (m n : nat), mx_norm (K:=K) 0 = 0%R
 
 mx_norm0 is not universe polymorphic
-Arguments mx_norm0 K (m n)%nat_scope
+Arguments mx_norm0 K (m n)%_nat_scope
 mx_norm0 is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_norm0
@@ -476,7 +491,7 @@ mx_norm (K:=K) x != 0%R ->
 exists i : 'I_m * 'I_n, mx_norm (K:=K) x = `|x i.1 i.2|%R
 
 mx_norm_neq0 is not universe polymorphic
-Arguments mx_norm_neq0 [K] [m n]%nat_scope [x]%ring_scope _
+Arguments mx_norm_neq0 [K] [m n]%_nat_scope [x]%_ring_scope _
 mx_norm_neq0 is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_norm_neq0
@@ -500,7 +515,7 @@ forall [K : numDomainType] [m n : nat] (x : 'M_(m, n)) (k : nat),
 mx_norm (K:=K) (x *+ k) = (mx_norm (K:=K) x *+ k)%R
 
 mx_norm_natmul is not universe polymorphic
-Arguments mx_norm_natmul [K] [m n]%nat_scope x%ring_scope k%nat_scope
+Arguments mx_norm_natmul [K] [m n]%_nat_scope x%_ring_scope k%_nat_scope
 mx_norm_natmul is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_norm_natmul
@@ -527,7 +542,7 @@ forall [K : numDomainType] [m n : nat] (x : 'M_(m, n)),
 mx_norm (K:=K) (- x) = mx_norm (K:=K) x
 
 mx_normN is not universe polymorphic
-Arguments mx_normN [K] [m n]%nat_scope x%ring_scope
+Arguments mx_normN [K] [m n]%_nat_scope x%_ring_scope
 mx_normN is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_normN
@@ -548,7 +563,7 @@ forall [K : realDomainType] [m n : nat] (x : 'M_(m, n)),
 mx_norm (K:=K) x = \big[maxr/0%R]_ij `|x ij.1 ij.2|%R
 
 mx_normrE is not universe polymorphic
-Arguments mx_normrE [K] [m n]%nat_scope x%ring_scope
+Arguments mx_normrE [K] [m n]%_nat_scope x%_ring_scope
 mx_normrE is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_normrE
@@ -568,7 +583,7 @@ Qed.</div></details>
 forall K : numDomainType, nat -> nat -> normedZmodType K
 
 matrix_matrix__canonical__Num_NormedZmodule is not universe polymorphic
-Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%nat_scope
+Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%_nat_scope
 matrix_matrix__canonical__Num_NormedZmodule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__Num_NormedZmodule
@@ -578,7 +593,7 @@ library mathcomp.analysis.normedtype_theory.matrix_normedtype, line 179, charact
 forall K : numDomainType, nat -> nat -> normedZmodType K
 
 matrix_matrix__canonical__Num_NormedZmodule is not universe polymorphic
-Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%nat_scope
+Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%_nat_scope
 matrix_matrix__canonical__Num_NormedZmodule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__Num_NormedZmodule
@@ -588,7 +603,7 @@ library mathcomp.analysis.normedtype_theory.matrix_normedtype, line 179, charact
 forall K : numDomainType, nat -> nat -> normedZmodType K
 
 matrix_matrix__canonical__Num_NormedZmodule is not universe polymorphic
-Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%nat_scope
+Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%_nat_scope
 matrix_matrix__canonical__Num_NormedZmodule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__Num_NormedZmodule
@@ -598,7 +613,7 @@ library mathcomp.analysis.normedtype_theory.matrix_normedtype, line 179, charact
 forall K : numDomainType, nat -> nat -> normedZmodType K
 
 matrix_matrix__canonical__Num_NormedZmodule is not universe polymorphic
-Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%nat_scope
+Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%_nat_scope
 matrix_matrix__canonical__Num_NormedZmodule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__Num_NormedZmodule
@@ -608,7 +623,7 @@ library mathcomp.analysis.normedtype_theory.matrix_normedtype, line 179, charact
 forall K : numDomainType, nat -> nat -> normedZmodType K
 
 matrix_matrix__canonical__Num_NormedZmodule is not universe polymorphic
-Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%nat_scope
+Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%_nat_scope
 matrix_matrix__canonical__Num_NormedZmodule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__Num_NormedZmodule
@@ -618,7 +633,7 @@ library mathcomp.analysis.normedtype_theory.matrix_normedtype, line 179, charact
 forall K : numDomainType, nat -> nat -> normedZmodType K
 
 matrix_matrix__canonical__Num_NormedZmodule is not universe polymorphic
-Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%nat_scope
+Arguments matrix_matrix__canonical__Num_NormedZmodule K (m n)%_nat_scope
 matrix_matrix__canonical__Num_NormedZmodule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__Num_NormedZmodule
@@ -637,7 +652,7 @@ forall [K : numDomainType] [m n : nat] (M N : 'M_(m, n)),
 (`|M + N| <= `|M| + `|N|)%R
 
 matrix_triangle is not universe polymorphic
-Arguments matrix_triangle [K] [m n]%nat_scope (M N)%ring_scope
+Arguments matrix_triangle [K] [m n]%_nat_scope (M N)%_ring_scope
 matrix_triangle is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_triangle
@@ -682,7 +697,7 @@ library mathcomp.analysis.normedtype_theory.matrix_normedtype, line 191, charact
 forall (K : numFieldType) (m n : nat), ball = ball_ [eta normr]
 
 mx_norm_ball is not universe polymorphic
-Arguments mx_norm_ball K (m n)%nat_scope
+Arguments mx_norm_ball K (m n)%_nat_scope
 mx_norm_ball is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_norm_ball
@@ -709,7 +724,7 @@ forall K : numFieldType, nat -> nat -> pseudoMetricNormedZmodType K
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is not universe polymorphic
 Arguments
   matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
@@ -721,7 +736,7 @@ forall K : numFieldType, nat -> nat -> pseudoMetricNormedZmodType K
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is not universe polymorphic
 Arguments
   matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
@@ -733,7 +748,7 @@ forall K : numFieldType, nat -> nat -> pseudoMetricNormedZmodType K
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is not universe polymorphic
 Arguments
   matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
@@ -745,7 +760,7 @@ forall K : numFieldType, nat -> nat -> pseudoMetricNormedZmodType K
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is not universe polymorphic
 Arguments
   matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
@@ -779,8 +794,8 @@ exists
            R),
   (A `&` cluster F)%classic a
 
-Arguments bounded_closed_compact [R] [n]%nat_scope 
-  [A]%classical_set_scope _ _ [F] _ _
+Arguments bounded_closed_compact [R] [n]%_nat_scope 
+  [A]%_classical_set_scope _ _ [F] _ _
 bounded_closed_compact is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.bounded_closed_compact
@@ -811,7 +826,7 @@ forall [K : numDomainType] [m n : nat] (l : K) (x : 'M_(m, n)),
 `|l *: x|%R = (`|l| * `|x|)%R
 
 mx_normZ is not universe polymorphic
-Arguments mx_normZ [K] [m n]%nat_scope (l x)%ring_scope
+Arguments mx_normZ [K] [m n]%_nat_scope (l x)%_ring_scope
 mx_normZ is opaque
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.mx_normZ
@@ -834,7 +849,7 @@ forall K : numFieldType, nat -> nat -> normedModType K
 
 matrix_matrix__canonical__normed_module_NormedModule is not universe polymorphic
 Arguments matrix_matrix__canonical__normed_module_NormedModule 
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__normed_module_NormedModule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__normed_module_NormedModule
@@ -845,7 +860,7 @@ forall K : numFieldType, nat -> nat -> normedModType K
 
 matrix_matrix__canonical__normed_module_NormedModule is not universe polymorphic
 Arguments matrix_matrix__canonical__normed_module_NormedModule 
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__normed_module_NormedModule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__normed_module_NormedModule
@@ -856,7 +871,7 @@ forall K : numFieldType, nat -> nat -> normedModType K
 
 matrix_matrix__canonical__normed_module_NormedModule is not universe polymorphic
 Arguments matrix_matrix__canonical__normed_module_NormedModule 
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__normed_module_NormedModule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__normed_module_NormedModule
@@ -867,7 +882,7 @@ forall K : numFieldType, nat -> nat -> normedModType K
 
 matrix_matrix__canonical__normed_module_NormedModule is not universe polymorphic
 Arguments matrix_matrix__canonical__normed_module_NormedModule 
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__normed_module_NormedModule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__normed_module_NormedModule
@@ -878,7 +893,7 @@ forall K : numFieldType, nat -> nat -> normedModType K
 
 matrix_matrix__canonical__normed_module_NormedModule is not universe polymorphic
 Arguments matrix_matrix__canonical__normed_module_NormedModule 
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__normed_module_NormedModule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__normed_module_NormedModule
@@ -889,7 +904,7 @@ forall K : numFieldType, nat -> nat -> normedModType K
 
 matrix_matrix__canonical__normed_module_NormedModule is not universe polymorphic
 Arguments matrix_matrix__canonical__normed_module_NormedModule 
-  K (m n)%nat_scope
+  K (m n)%_nat_scope
 matrix_matrix__canonical__normed_module_NormedModule is transparent
 Expands to: Constant
             mathcomp.analysis.normedtype_theory.matrix_normedtype.matrix_matrix__canonical__normed_module_NormedModule
