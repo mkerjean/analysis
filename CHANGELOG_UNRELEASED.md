@@ -220,6 +220,7 @@
 - in `normed_module.v`, turned into `Let`'s:
   + local lemmas `add_continuous`, `scale_continuous`, `locally_convex`
 
+  
 ### Renamed
 
 - in `topology_structure.v`
@@ -263,6 +264,9 @@
 - in `lebesgue_integral_nonneg.v`:
   + lemmas `integral_itv_bndo_bndc`, `integral_itv_obnd_cbnd`,
     `integral_itv_bndoo`
+
+- in `convex.v`:
+  + definition `convex_function` (from a realType as domain to a convex_lmodType as domain)
 
 ### Deprecated
 
