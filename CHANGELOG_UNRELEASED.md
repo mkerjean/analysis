@@ -70,6 +70,9 @@
 - in `derive.v`:
   + lemmas `compact_EVT_max`, `compact_EVT_min`, `EVT_max_rV`, `EVT_min_rV`
 
+- in `convex.v`:
+  + lemma `convexW`
+
 ### Changed
 
 - in `constructive_ereal.v`: fixed the infamous `%E` scope bug.
@@ -220,6 +223,8 @@
 - in `normed_module.v`, turned into `Let`'s:
   + local lemmas `add_continuous`, `scale_continuous`, `locally_convex`
 
+- moved from `tvs.v` to `convex.v`
+  + definition `convex`
   
 ### Renamed
 
