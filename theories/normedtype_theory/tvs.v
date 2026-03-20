@@ -669,7 +669,7 @@ HB.instance Definition _ :=
   Uniform_isConvexTvs.Build K (E * F)%type prod_locally_convex.
 
 End prod_ConvexTvs.
- 
+
 HB.structure Definition LinearContinuous (K : numDomainType) (E : NbhsLmodule.type K)
   (F : NbhsZmodule.type) (s : K -> F -> F) :=
   {f of @GRing.Linear K E F s f &  @Continuous E F f }.
@@ -772,7 +772,7 @@ Context {R : numDomainType} {E F : NbhsLmodule.type R}
 Let lcfun_comp_subproof1 : linear_for s (g \o f).
 Proof. by move=> *; move=> *; rewrite !linearP. Qed.
 
-Let lcfun_comp_subproof2 : continuous (g \o f). 
+Let lcfun_comp_subproof2 : continuous (g \o f).
 Proof. by move=> x; apply: continuous_comp; exact/cts_fun. Qed.
 
 HB.instance Definition _ := @isLinearContinuous.Build R E S s (g \o f)
