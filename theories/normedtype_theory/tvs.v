@@ -37,7 +37,7 @@ From mathcomp Require Import pseudometric_normed_Zmodule.
 (*           UniformZmodule == HB class, join of UniformNmodule and Zmodule   *)
 (*                             with uniformly continuous opposite operator    *)
 (*      PreUniformLmodule K == HB class, join of Uniform and Lmodule over K   *)
-(*                             K is a numDomainType                           *)
+(*                             K is a numDomainType.                          *)
 (*         UniformLmodule K == HB class, join of UniformNmodule and Lmodule   *)
 (*                             with a uniformly continuous scaling operation  *)
 (*                             K is a numFieldType                            *)
