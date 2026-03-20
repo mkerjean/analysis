@@ -40,7 +40,7 @@ From mathcomp Require Import pseudometric_normed_Zmodule.
 (*                             K is a numDomainType.                          *)
 (*         UniformLmodule K == HB class, join of UniformNmodule and Lmodule   *)
 (*                             with a uniformly continuous scaling operation  *)
-(*                             K is a numFieldType                            *)
+(*                             K is a numFieldType.                           *)
 (*         convexTvsType R  == interface type for a locally convex            *)
 (*                             tvs on a numDomain R                           *)
 (*                             A convex tvs is constructed over a uniform     *)
