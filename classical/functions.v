@@ -2838,7 +2838,7 @@ Section linfun_lmodtype.
 Context {R : numDomainType} {E F : lmodType R}.
 Import GRing.Theory.
 
-Let linfun_submod_closed  : submod_closed (@linfun R E F *:%R).
+Let linfun_submod_closed : submod_closed (@linfun R E F *:%R).
 Proof.
 split; first by rewrite inE; exact/linearP.
 move=> r /= _ _ /linfunP[f] /linfunP[g].
@@ -2855,4 +2855,4 @@ End linfun_lmodtype.
 
 (* TODO: we wanted to declare this instance in classical_sets.v but failed and did not understand why, also we couldn't generalize *)
 HB.instance Definition _ {R : numDomainType} (E F : lmodType R) :=
-  isPointed.Build {linear E -> F} (\0)%R.
+  isPointed.Build {linear E -> F} 0.

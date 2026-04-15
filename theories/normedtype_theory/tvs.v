@@ -64,14 +64,13 @@ From mathcomp Require Import pseudometric_normed_Zmodule.
 (*                             lmodType to {linear_continuous E -> F | s}.    *)
 (*             lcfun_spec f == specification for membership of the linear     *)
 (*                             continuous function f                          *)
-
 (* ```                                                                        *)
 (* HB instances:                                                              *)
 (* - The type R^o (R : numFieldType) is endowed with the structure of         *)
 (*   ConvexTvs.                                                               *)
 (* - The product of two Tvs is endowed with the structure of ConvexTvs.       *)
-(* - {linear_continuous E-> F} is endowed with a lmodtType structure when E   *)
-(*    and F are convexTvs.                                                    *)
+(* - {linear_continuous E-> F} is endowed with a lmodType structure when E    *)
+(*   and F are convexTvs.                                                     *)
 (******************************************************************************)
 
 Reserved Notation "'{' 'linear_continuous' U '->' V '|' s '}'"
@@ -115,10 +114,13 @@ HB.structure Definition TopologicalNmodule :=
 Section TopologicalNmodule_theory.
 Variable (E : topologicalType) (F : TopologicalNmodule.type).
 
-(** NB : cvgD in pseudometric_normedZmodule could be lowered to some common
-  structure to topologicalNmodule and pseudometric, then `fun_cvgD` doesn't need
-  to exist anymore (we are however not sure that this deserves the introduction of
-  a new structure that combines nbhs and normedZmodule) *)
+(** TODO:
+  We have observed one thing:
+  `pseudometric_normedZmodType` is morally a `topologicalNmodule`
+  but `topologicalNmodule` is defined later in `tvs.v` (which imports `pseudometric_normed_zmodule.v`).
+  We think that it should be defined at the beginning of `pseudometric_normed_zmodule.v` and that
+  `pseudometric_normedZmodType` should be defined using `topologicalNmodule`.
+  We have realized this because of the lemmas such as `cvgD/fun_cvgD` that we needed to duplicate. *)
 Lemma fun_cvgD (U : set_system E) {FF : Filter U} (f g : E -> F) a b :
   f @ U --> a -> g @ U --> b -> (f \+ g) @ U --> a + b.
 Proof.
