@@ -861,7 +861,7 @@ Notation "E ^*" := {linear E -> _^o | *:%R}.
 Reserved Notation "''[' u , v ]"
   (at level 0, format "''[' u , v ]").
  
-Definition form  (R : numDomainType) (E: lmodType R) (u : E) (v : E^*) := (v u).
+Definition form  (R : numDomainType) (E: lmodType R) (v : E^*) (u : E):= (v u).
 
 Notation "''[' u , v ]" := (form u%R v%R) : ring_scope.
 
@@ -876,16 +876,16 @@ Qed.
 
 HB.instance Definition _ := @bilinear_isBilinear.Build _ _ _ _ _ _ (@form R E) bilinear_form. 
   
-Lemma alg_non_degenerate_left : forall (x : E), (forall (x' : E^*), '[x , x'] = 0) -> x = 0.
+Lemma alg_non_degenerate_left : forall (x : E), (forall (x' : E^*), '[x' , x] = 0) -> x = 0.
 Admitted.
 
-Let alg_non_degenerate_right : forall (x' : E^*), (forall (x : E), '[x , x'] = 0) -> x' = 0. 
+Let alg_non_degenerate_right : forall (x' : E^*), (forall (x : E), '[x' , x] = 0) -> x' = 0. 
 Proof.
 move => x' H; apply/linfun_eqP => x //=; exact: H. 
 Qed. 
 
 HB.instance Definition _ :=
-  @isDualpair.Build _ _ _ (@form R E) alg_non_degenerate_left alg_non_degenerate_right.
+  @isDualpair.Build _ _ _ (@form R E)  alg_non_degenerate_right alg_non_degenerate_left.
 (* TODO No new issue is created *)  
 End dual_lmod.
 
@@ -898,11 +898,11 @@ Notation "E ^'" :=  {linear_continuous E -> _^o | *:%R }.
 Section dual_tvs.
 Context (R : numFieldType) (E: convexTvsType R).
 
-Let top_non_degenerate_left : forall (x : E), (forall (x' : E^') , '[x , x'] = 0) -> x = 0.
+Let top_non_degenerate_left : forall (x : E), (forall (x' : E^') , '[x' , x] = 0) -> x = 0.
 (* NEED HAHN_BANACH *) 
 Admitted.
 
-Let top_non_degenerate_right : forall (x' : E^'), ((forall (x : E), '[x , x'] = 0) -> x' = 0 ). 
+Let top_non_degenerate_right : forall (x' : E^'), ((forall (x : E), '[x' , x] = 0) -> x' = 0 ). 
 Proof.
 move => x' H; apply/lcfun_eqP => x //=; exact: H. 
 Qed.
