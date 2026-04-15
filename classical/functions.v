@@ -2835,7 +2835,7 @@ Qed.
 End linfun.
 
 Section linfun_lmodtype.
-Context {R : numFieldType} {E F : lmodType R}.
+Context {R : numDomainType} {E F : lmodType R}.
 Import GRing.Theory.
 
 Let linfun_submod_closed  : submod_closed (@linfun R E F *:%R).
