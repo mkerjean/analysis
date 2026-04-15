@@ -1,6 +1,6 @@
 (* mathcomp analysis (c) 2017 Inria and AIST. License: CeCILL-C.              *)
 From HB Require Import structures.
-From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector.
+From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector sesquilinear.
 From mathcomp Require Import interval_inference.
 #[warning="-warn-library-file-internal-analysis"]
 From mathcomp Require Import unstable.
@@ -836,3 +836,57 @@ Lemma lcfun_linear : linear f.
 Proof. move => *; exact: linearP. Qed.
 
 End lcfunproperties.
+
+
+
+HB.mixin Record isDualpair (R : nzRingType) (U U' : lmodType R) 
+    (f : {bilinear U -> U' -> R^o}) := {
+  non_degenerate_left : forall x, ((forall x', f x x' = 0) -> x = 0) ;
+  non_degenerate_right : forall x', (forall x, f x x' = 0 -> x' = 0) ;
+ }.
+(* why the ^o on R ?*)
+
+#[short(type="dualpair")]
+HB.structure Definition Dualpair (R : nzRingType) (U U' : lmodType R) :=
+  {f of isDualpair R U U f}.
+
+
+Declare Scope tvs_scope.
+
+Reserved Notation "''[' u , v ]"
+  (at level 0, format "''[' u , v ]").
+
+Definition form  (R : numDomainType) (E: lmodType R) (u : E) (v : {scalar E}) := v u.
+
+Notation "''[' u , v ]" := (form u%R v%R) : ring_scope.
+
+
+Section dual_lmod.
+Context (R : numFieldType) (E: lmodType R).
+
+(*Reserved Notation "U ^*"
+  (at level 0, format "U ^*").
+
+Notation "E ^*" := {scalar E}.
+ *)
+
+Check ({linear E  -> R^o} : lmodType R). 
+Let alg_non_degenerate_left : forall (x : E), ((forall (x' : {scalar E}), '[x , x'] = 0) -> x = 0).
+Admitted.
+
+Let alg_non_degenerate_right : forall (x' : {linear E -> R^o}), ((forall (x : E), '[x , x'] = 0) -> x' = 0 ). 
+Proof.
+move => x' H; apply/linfun_eqP => x //=; exact: H. 
+Qed. 
+
+End dual_lmod.
+
+Section dual_tvs.
+Context (R : numDomainType) (E: convexTvsType R).
+
+Reserved Notation "U ^'"
+  (at level 1, format "U ^'").
+  
+Notation "E ^'" := {linear_continuous E -> _ | *:%R }.
+
+End dual_tvs.
