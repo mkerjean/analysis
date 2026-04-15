@@ -1,5 +1,5 @@
 (* mathcomp analysis (c) 2017 Inria and AIST. License: CeCILL-C.              *)
-From HB Require Import structures.
+From HB Require Import structures. 
 From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector sesquilinear.
 From mathcomp Require Import interval_inference.
 #[warning="-warn-library-file-internal-analysis"]
@@ -838,11 +838,10 @@ Proof. move => *; exact: linearP. Qed.
 End lcfunproperties.
 
 
-
-HB.mixin Record isDualpair (R : nzRingType) (U U' : lmodType R) 
+HB.mixin Record isDualpair (R : nzRingType) (U U' : lmodType R)
     (f : {bilinear U -> U' -> R^o}) := {
-  non_degenerate_left : forall x, ((forall x', f x x' = 0) -> x = 0) ;
-  non_degenerate_right : forall x', (forall x, f x x' = 0 -> x' = 0) ;
+  non_degenerate_left : forall x, (forall x', f x x' = 0) -> x = 0 ;
+  non_degenerate_right : forall x', (forall x, f x x' = 0) -> x' = 0 ;
  }.
 (* why the ^o on R ?*)
 
@@ -853,40 +852,64 @@ HB.structure Definition Dualpair (R : nzRingType) (U U' : lmodType R) :=
 
 Declare Scope tvs_scope.
 
+(*Reserved Notation "U ^*"
+  (at level 1, format "U ^*").
+ *)
+
+Notation "E ^*" := {linear E -> _^o | *:%R}.
+
 Reserved Notation "''[' u , v ]"
   (at level 0, format "''[' u , v ]").
-
-Definition form  (R : numDomainType) (E: lmodType R) (u : E) (v : {scalar E}) := v u.
+ 
+Definition form  (R : numDomainType) (E: lmodType R) (u : E) (v : E^*) := (v u).
 
 Notation "''[' u , v ]" := (form u%R v%R) : ring_scope.
 
-
 Section dual_lmod.
-Context (R : numFieldType) (E: lmodType R).
+Context (R : numDomainType) (E: lmodType R).
 
-(*Reserved Notation "U ^*"
-  (at level 0, format "U ^*").
 
-Notation "E ^*" := {scalar E}.
- *)
+Lemma bilinear_form : bilinear_for *:%R *:%R (@form _ E). 
+Proof.
+by split => r x y1 y2 //; apply: linearP. 
+Qed.
 
-Check ({linear E  -> R^o} : lmodType R). 
-Let alg_non_degenerate_left : forall (x : E), ((forall (x' : {scalar E}), '[x , x'] = 0) -> x = 0).
+HB.instance Definition _ := @bilinear_isBilinear.Build _ _ _ _ _ _ (@form R E) bilinear_form. 
+  
+Lemma alg_non_degenerate_left : forall (x : E), (forall (x' : E^*), '[x , x'] = 0) -> x = 0.
 Admitted.
 
-Let alg_non_degenerate_right : forall (x' : {linear E -> R^o}), ((forall (x : E), '[x , x'] = 0) -> x' = 0 ). 
+Let alg_non_degenerate_right : forall (x' : E^*), (forall (x : E), '[x , x'] = 0) -> x' = 0. 
 Proof.
 move => x' H; apply/linfun_eqP => x //=; exact: H. 
 Qed. 
 
+HB.instance Definition _ :=
+  @isDualpair.Build _ _ _ (@form R E) alg_non_degenerate_left alg_non_degenerate_right.
+(* TODO No new issue is created *)  
 End dual_lmod.
 
-Section dual_tvs.
-Context (R : numDomainType) (E: convexTvsType R).
 
 Reserved Notation "U ^'"
   (at level 1, format "U ^'").
-  
-Notation "E ^'" := {linear_continuous E -> _ | *:%R }.
+
+Notation "E ^'" :=  {linear_continuous E -> _^o | *:%R }.
+
+Section dual_tvs.
+Context (R : numFieldType) (E: convexTvsType R).
+
+Let top_non_degenerate_left : forall (x : E), (forall (x' : E^') , '[x , x'] = 0) -> x = 0.
+(* NEED HAHN_BANACH *) 
+Admitted.
+
+Let top_non_degenerate_right : forall (x' : E^'), ((forall (x : E), '[x , x'] = 0) -> x' = 0 ). 
+Proof.
+move => x' H; apply/lcfun_eqP => x //=; exact: H. 
+Qed.
+
+(*HB.instance Definition _ :=
+  @isDualpair.Build _ _ _ (@form R E) top_non_degenerate_left top_non_degenerate_right.
+*)
+
 
 End dual_tvs.
