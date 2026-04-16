@@ -4,7 +4,7 @@ From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector sesquilin
 From mathcomp Require Import interval_inference.
 #[warning="-warn-library-file-internal-analysis"]
 From mathcomp Require Import unstable.
-From mathcomp Require Import boolp classical_sets functions cardinality.
+From mathcomp Require Import boolp wochoice classical_sets functions cardinality.
 From mathcomp Require Import convex set_interval reals topology num_normedtype.
 From mathcomp Require Import pseudometric_normed_Zmodule.
 
@@ -838,16 +838,50 @@ Proof. move => *; exact: linearP. Qed.
 End lcfunproperties.
 
 (* Could go in classical *)
+
 Section hamelbasis.
 Context (R : numDomainType) (E : lmodType R).
 
+Definition generating_basis (B : pred E) :=
+  (forall v : E, exists n, exists (l : nat -> E), exists (l' : nat -> R), (forall i, B (l i)) /\ v = (\sum_(i < n) l'(i)*:l(i))).
+
+Definition linearly_independant (B : pred E) :=
+    (forall v : E , ~ (exists n, exists (l : nat -> E), exists (l' : nat -> R), (forall i, B (l i)) /\ v = \sum_(i < n) l'(i)*:l(i))).
+
 Definition hamel_basis (B : pred E):=
- (forall v : E, exists n, exists (l : nat -> E), exists (l' : nat -> R), (forall i, B (l i)) /\ v = (\sum_(i < n) l'(i)*:l(i)))
-  /\
- (forall v : E , ~ (exists n, exists (l : nat -> E), exists (l' : nat -> R), (forall i, B (l i)) /\ v = \sum_(i < n) l'(i)*:l(i))).
+  generating_basis B /\ linearly_independant B.
+
+(* Record zorn_type : Type := ZornType *)
+(*   { base : pred E ; specP : linearly_independant base}. *)
+
+(* Check Zorn's_lemma. *)
+
+(* Lemma zorn_type_eq z1 z2 : base z1 = base z2 -> z1 = z2. *)
+(* Proof. *)
+(* case: z1 => m1 pm1; case: z2 => m2 pm2 /= e; rewrite e in pm1 pm2 *. *)
+(* by congr ZornType; exact: Prop_irrelevance. *)
+(* Qed. *)
 
 Theorem basis_lmodtype : exists B, hamel_basis B.
 Proof.
+  Check (@Zorn's_lemma (pred E) (fun B C => asbool (forall x, B x -> C x))) (fun B => asbool (linearly_independant B)).
+have h1: {in fun B : pred E => `[< linearly_independant B >],
+             reflexive (fun B C : pred E => `[< forall x : E, B x -> C x >])}.
+admit.
+have h2: {in fun B : pred E => `[< linearly_independant B >] & &,
+      transitive (fun B C : pred E => `[< forall x : E, B x -> C x >])}.
+admit.
+have h3:  { in <= fun B : pred E => `[< linearly_independant B >],
+       forall C : {pred pred E},
+         wo_chain (fun B C0 : pred E => `[< forall x : E, B x -> C0 x >]) C
+         ->
+       exists2 z : pred E,
+         z \in (fun B : pred E => `[< linearly_independant B >]) &
+         upper_bound (fun B C0 : pred E => `[< forall x : E, B x -> C0 x >]) C z}.
+admit.
+move:
+  (@Zorn's_lemma (pred E) (fun B C => asbool (forall x, B x -> C x)) (fun B => asbool (linearly_independant B)) h1 h2 h3) => [B]; rewrite inE //= => Bindp Bmax.
+exists B; split; last by [].
 Admitted.
 
 End hamelbasis.
