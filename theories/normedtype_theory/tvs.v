@@ -837,6 +837,21 @@ Proof. move => *; exact: linearP. Qed.
 
 End lcfunproperties.
 
+(* Could go in classical *)
+Section hamelbasis.
+Context (R : numDomainType) (E : lmodType R).
+
+Definition hamel_basis (B : pred E):=
+ (forall v : E, exists n, exists (l : nat -> E), exists (l' : nat -> R), (forall i, B (l i)) /\ v = (\sum_(i < n) l'(i)*:l(i)))
+  /\
+ (forall v : E , ~ (exists n, exists (l : nat -> E), exists (l' : nat -> R), (forall i, B (l i)) /\ v = \sum_(i < n) l'(i)*:l(i))).
+
+Theorem basis_lmodtype : exists B, hamel_basis B.
+Proof.
+Admitted.
+
+End hamelbasis.
+
 
 HB.mixin Record isDualpair (R : nzRingType) (U U' : lmodType R)
     (f : {bilinear U -> U' -> R^o}) := {
@@ -877,7 +892,11 @@ Qed.
 HB.instance Definition _ := @bilinear_isBilinear.Build _ _ _ _ _ _ (@form R E) bilinear_form. 
   
 Lemma alg_non_degenerate_left : forall (x : E), (forall (x' : E^*), '[x' , x] = 0) -> x = 0.
+move=> x. apply: contraPP => xn0; apply/existsNP.
+move: (basis_lmodtype E) => [B] [gen indpt].  
+(* need the existence of hamel basis to define l := r *: x => r , _ => 0 *)  
 Admitted.
+         
 
 Let alg_non_degenerate_right : forall (x' : E^*), (forall (x : E), '[x' , x] = 0) -> x' = 0. 
 Proof.
