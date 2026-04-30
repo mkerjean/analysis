@@ -234,3 +234,69 @@ Proof.
 move=> cf z U [?/= [[W oW <-]]] /= Wsfz /filterS; apply; apply: cf.
 exact: open_nbhs_nbhs.
 Qed.
+
+
+Definition initial_fam_topology {S : Type} {T : Type} {I : pointedType}
+  (F : I -> (S -> T)) : Type := S.
+
+Section Initial_fam_Topology.
+Variable (S : choiceType) (T : topologicalType) (I : pointedType)  (F : I -> (S -> T)).
+Local Notation W := (initial_topology F).
+
+(* finitary union *)
+
+Definition iopen O := exists (n: nat) (J : nat -> I) A, (O = \bigcap_(j < n)  (F (J j)) @^-1` A) /\ open A.
+
+Local Lemma iopT : iopen [set: S].
+Proof.
+exists 1; exists (fun n => point); exists setT; split; last by apply: openT => //.
+by rewrite bigcapT //.
+Qed. 
+
+(*
+Local Lemma iopI : setI_closed iopen.
+Proof.
+move=> ? ? [C Cop [] x xI //] <- [D Dop [] y yI  <-]; exists (C `&` D) => //; first by exact: openI.
+  
+Qed.
+
+Local Lemma iop_bigU (I : Type) (g : I -> set W) :
+  (forall i, iopen (g i)) -> iopen (\bigcup_i g i).
+Proof.
+move=> gop.
+set opi := fun i => [set Ui | open Ui /\ g i = f @^-1` Ui].
+exists (\bigcup_i get (opi i)).
+  apply: bigcup_open => i.
+  by have /getPex [] : exists U, opi i U by have [U] := gop i; exists U.
+have g_preim i : g i = f @^-1` (get (opi i)).
+  by have /getPex [] : exists U, opi i U by have [U] := gop i; exists U.
+rewrite predeqE => s; split=> [[i _]|[i _]]; last by rewrite g_preim; exists i.
+by rewrite -[_ _]/((f @^-1` _) _) -g_preim; exists i.
+Qed.
+
+HB.instance Definition _ := Choice.on W.
+HB.instance Definition _ :=
+  isOpenTopological.Build S iopT iopI iop_bigU.
+
+Lemma initial_continuous : forall i, continuous ((F i) : S -> T).
+Proof. by apply/continuousP => A ?; exists A. Qed.
+
+Lemma cvg_image (F : set_system S) (s : S) :
+  Filter F -> f @` setT = setT ->
+  F --> (s : W) <-> ([set f @` A | A in F] : set_system _) --> f s.
+Proof.
+move=> FF fsurj; split=> [cvFs|cvfFfs].
+  move=> A /initial_continuous [B [Bop Bs sBAf]].
+  have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
+  rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
+  exact: image_preimage.
+move=> A /= [_ [[B Bop <-] Bfs sBfA]].
+have /cvfFfs [C FC fCeB] : nbhs (f s) B by rewrite nbhsE; exists B.
+rewrite nbhs_filterE; apply: filterS FC.
+by apply: subset_trans sBfA; rewrite -fCeB; apply: preimage_image.
+Qed.
+
+End Initial_fam_Topology.
+*)
+
+(* TODO : uniform structure for initial fam topology).
