@@ -1,6 +1,6 @@
 (* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)
 From HB Require Import structures.
-From mathcomp Require Import all_ssreflect_compat all_algebra all_classical.
+From mathcomp Require Import all_ssreflect_compat all_algebra all_classical finmap.
 #[warning="-warn-library-file-internal-analysis"]
 From mathcomp Require Import unstable.
 From mathcomp Require Import interval_inference reals topology_structure.
@@ -84,9 +84,9 @@ move=> FF fsurj; split=> [cvFs|cvfFfs].
   move=> A /initial_continuous [B [Bop Bs sBAf]].
   have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
   rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
-  exact: image_preimage.
+  exact: image_preimage. 
 move=> A /= [_ [[B Bop <-] Bfs sBfA]].
-have /cvfFfs [C FC fCeB] : nbhs (f s) B by rewrite nbhsE; exists B.
+have /cvfFfs [C FC fCeB] : nbhs (f s) B by rewrite nbhsE; exists B. 
 rewrite nbhs_filterE; apply: filterS FC.
 by apply: subset_trans sBfA; rewrite -fCeB; apply: preimage_image.
 Qed.
@@ -241,62 +241,55 @@ Definition initial_fam_topology {S : Type} {T : Type} {I : pointedType}
 
 Section Initial_fam_Topology.
 Variable (S : choiceType) (T : topologicalType) (I : pointedType)  (F : I -> (S -> T)).
-Local Notation W := (initial_topology F).
+Local Notation W := (initial_fam_topology F).
 
-(* finitary union *)
-
-Definition iopen O := exists (n: nat) (J : nat -> I) A, (O = \bigcap_(j < n)  (F (J j)) @^-1` A) /\ open A.
-
-Local Lemma iopT : iopen [set: S].
-Proof.
-exists 1; exists (fun n => point); exists setT; split; last by apply: openT => //.
-by rewrite bigcapT //.
-Qed. 
-
-(*
-Local Lemma iopI : setI_closed iopen.
-Proof.
-move=> ? ? [C Cop [] x xI //] <- [D Dop [] y yI  <-]; exists (C `&` D) => //; first by exact: openI.
-  
-Qed.
-
-Local Lemma iop_bigU (I : Type) (g : I -> set W) :
-  (forall i, iopen (g i)) -> iopen (\bigcup_i g i).
-Proof.
-move=> gop.
-set opi := fun i => [set Ui | open Ui /\ g i = f @^-1` Ui].
-exists (\bigcup_i get (opi i)).
-  apply: bigcup_open => i.
-  by have /getPex [] : exists U, opi i U by have [U] := gop i; exists U.
-have g_preim i : g i = f @^-1` (get (opi i)).
-  by have /getPex [] : exists U, opi i U by have [U] := gop i; exists U.
-rewrite predeqE => s; split=> [[i _]|[i _]]; last by rewrite g_preim; exists i.
-by rewrite -[_ _]/((f @^-1` _) _) -g_preim; exists i.
-Qed.
+Definition init_fam_subbase := [set O | exists i, exists2 A, (O = (F i) @^-1` A) & open A  ].
 
 HB.instance Definition _ := Choice.on W.
-HB.instance Definition _ :=
-  isOpenTopological.Build S iopT iopI iop_bigU.
+HB.instance Definition _ := isSubBaseTopological.Build W init_fam_subbase id.
 
-Lemma initial_continuous : forall i, continuous ((F i) : S -> T).
-Proof. by apply/continuousP => A ?; exists A. Qed.
-
-Lemma cvg_image (F : set_system S) (s : S) :
-  Filter F -> f @` setT = setT ->
-  F --> (s : W) <-> ([set f @` A | A in F] : set_system _) --> f s.
-Proof.
-move=> FF fsurj; split=> [cvFs|cvfFfs].
-  move=> A /initial_continuous [B [Bop Bs sBAf]].
-  have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
-  rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
-  exact: image_preimage.
-move=> A /= [_ [[B Bop <-] Bfs sBfA]].
-have /cvfFfs [C FC fCeB] : nbhs (f s) B by rewrite nbhsE; exists B.
-rewrite nbhs_filterE; apply: filterS FC.
-by apply: subset_trans sBfA; rewrite -fCeB; apply: preimage_image.
+Lemma initial_fam_continuous : forall i, continuous ((F i) : W -> T).
+Proof. move=> i; apply/continuousP => A oA.
+exists [set  (F i @^-1` A)]; last by rewrite bigcup_set1.  
+move=> /= O /= -> /= . rewrite /finI_from /=.  
+exists [fset  (F i @^-1` A)]%fset; last by rewrite set_fset1 bigcap_set1.
+by move => ? /=; rewrite inE; move/eqP ->; rewrite /init_fam_subbase in_setE /=; exists i; exists A.
 Qed.
+ 
+
+Lemma cvg_image_init_fam (G : set_system W) (s : W) :
+  Filter G -> (forall i, (F i) @` setT = setT) ->
+  G --> (s : W) <-> ( forall i, ([set (F i)  @` A | A in G] : set_system _) --> F i s).
+Proof.
+move=> FG fsurj; split=> [cvFs|cvfFfs].
+  move=> i A /initial_fam_continuous [B [//= Bop Bs sBAf]].
+  have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
+  rewrite nbhs_simpl; exists ((F i) @^-1` A); first exact: filterS FB.
+  exact: image_preimage.
+move=> A /= [].
+(* the following is ugly, can we do without or add a missing lemma ? *)  
+rewrite /= /Builders_14.open_from /=  /finI_from /init_fam_subbase/=.  
+move =>  _ [[]] H Hop <- [B HB Bs] sBfA /=; rewrite nbhs_filterE. 
+have BA : B `<=` A.
+  apply: subset_trans; last by exact: sBfA.
+  by move => y /= By; exists B =>//.
+apply: (@filterS _ G _  B) => //; move /(_ B HB): Hop  => /= [] C CO Bcap.
+(* can´t  apply fsubsetP or subsetP on CO  to obtain the following *)
+have Ci : forall (O : set S) , O \in C -> exists i : I, exists2 A : set T, O = F i @^-1` A & open A. 
+  by move => O /CO /set_mem //=. 
+move => {CO} {sBfA} {BA} {A}.
+have GO: forall (O : set S), O \in C -> G O. 
+  move => O OC; move: (OC) => /Ci [i [D OD openD]].
+  have : nbhs (F i s) D.
+    rewrite nbhsE; exists D => //; split => //.
+    by move: Bs; rewrite -Bcap /bigcap /= => /(_ O OC); rewrite OD. 
+  move/(cvfFfs i D); rewrite nbhs_filterE => //= [[O']] GO' /= O'D.
+  apply: filterS; last by exact: GO'.
+  by rewrite OD -O'D; apply: preimage_image.
+by rewrite -Bcap; apply: filter_bigI => /= O OC; apply: GO. 
+Qed. 
 
 End Initial_fam_Topology.
-*)
 
-(* TODO : uniform structure for initial fam topology).
+
+(* TODO : uniform structure for initial fam topology *)
