@@ -847,11 +847,40 @@ Proof. move => *; exact: linearP. Qed.
 
 End lcfunproperties.
 
+Import Norm.
+
+Section gauge.
+Context  (K : realType) (V : lmodType K) (A : set V). 
+(* K can be a numDomainType once #1959 is solved *)
+Definition gauge_fun (K : realType) (V : lmodType K) (A : set V) : V -> K
+    := fun v => inf [set r | r *: v \in A].   
+(* Definition gauge_fun (A : set V) : V -> K := fun v => inf [set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
+
+#[local] Lemma gauge0 :  gauge_fun A 0 = 0. 
+Admitted.
+
+#[local] Lemma gauge_ge0  : forall x, 0 <= gauge_fun A x.
+Admitted.
+
+#[local] Lemma ler_gaugeD   :
+  forall x y, gauge_fun A (x + y) <=  gauge_fun A x +  gauge_fun A y.
+Admitted.
+
+#[local] Lemma  gaugeZ :
+  forall r x, gauge_fun A (r *: x) = `|r| * gauge_fun A x.
+Admitted.
+
+HB.instance Definition _ := @isSemiNorm.Build K V (@gauge_fun K V A) gauge0 gauge_ge0 ler_gaugeD gaugeZ.   
+  
+End gauge.
+
 Section seminorm.
 Import Norm.
 Search "initial".
 (* https://www.math.uni-konstanz.de/~infusino/TVS-WS18-19/Lect9.pdf *)
 (* TODO : define initial topology wrt a family of functions in initial topology *)
+
+
 Theorem topology_seminorm  (R : numDomainType) (E : lmodType R) (I : Type) (p : I -> SemiNorm.type E) :
 true. (* the topology induced by the family p is a convextvs structure on E*) Admitted.
 
