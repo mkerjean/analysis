@@ -853,17 +853,33 @@ Section gauge.
 Context  (K : realType) (V : lmodType K) (A : set V). 
 (* K can be a numDomainType once #1959 is solved *)
 Definition gauge_fun (K : realType) (V : lmodType K) (A : set V) : V -> K
-    := fun v => inf [set r | (0 < r) /\ r *: v \in A].   
+    := fun v => inf [set r | (0 < r) /\ v \in (fun x => r *: x) @`A]. 
 (* Definition gauge_fun (A : set V) : V -> K := fun v => inf [set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
 
-#[local] Lemma gauge0 :  gauge_fun A 0 = 0.
+
+Definition absolutely_convex_set (A : set V) := convex_set A /\ (forall r, `|r| < 1 ->  (fun x => r *: x) @`A `<=` A).
+
+Definition absorbing_set (A : set V) := forall x : V, exists a, exists2 r, (a \in A) & ( x = r *:a). 
+
+Lemma absolutely_convex0 (B : set V) :  B !=set0 -> absolutely_convex_set B  ->  B 0. 
+Proof. 
+move => [] x Bx []  _ /(_ 0); rewrite normr0 ltr01 // => /(_ isT) /(_ 0); apply. 
+by exists x; rewrite //= scale0r.
+Qed. 
+
+Hypothesis (absA : absolutely_convex_set A).
+
+Lemma gauge0 :  gauge_fun A 0 = 0.
 Proof.
-rewrite /gauge_fun /inf /sup /supremum.
-case : ifP; first by rewrite oppr0. 
-Search (( _ = false) -> _).  move/negbT/set0P => [r] /= [r']; rewrite scaler0 => A0 rr'. 
-suff -> : (xget 0 (supremums [set - x | x in [set r | 0 < r /\ r *: 0 \in A]]) = 0) by rewrite oppr0. 
-Search "xget". 
-(* issue with sup of emptyset which should be infty *)
+rewrite /gauge_fun /inf /sup /supremum. 
+case : ifP; first  by rewrite oppr0. 
+move/negbT/set0P => [r] /= [r'] [r0]; rewrite inE /= => -[x] xa xr0 rr'. 
+have -> : [set r1 | 0 < r1 /\ 0 \in [set r1 *: x0 | x0 in A]] = [set r1 | 0 < r1]. 
+rewrite seteqP; split => y [] //=. 
+move=> y0; split; rewrite ?inE //=.
+have A0: A !=set0 by exists x. 
+exists 0; rewrite ?scaler0 //; exact (absolutely_convex0 A0 absA).
+have -> : (supremums [set - x | x in [set r1 | 0 < r1]]) = 0. 
 Admitted.
 
 #[local] Lemma gauge_ge0  : forall x, 0 <= gauge_fun A x.
