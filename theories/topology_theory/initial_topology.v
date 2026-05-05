@@ -101,7 +101,7 @@ Local Open Scope relation_scope.
 Variable (pS : choiceType) (U : uniformType) (f : pS -> U).
 
 Let S := initial_topology f.
-
+ 
 Definition initial_ent : set_system (S * S) :=
   filter_from (@entourage U) (fun V => (map_pair f)@^-1` V).
 
@@ -239,7 +239,7 @@ Qed.
 Definition initial_fam_topology {S : Type} {T : Type} {I : pointedType}
   (F : I -> (S -> T)) : Type := S.
 
-Section Initial_fam_Topology.
+Section initial_fam_Topology.
 Variable (S : choiceType) (T : topologicalType) (I : pointedType)  (F : I -> (S -> T)).
 Local Notation W := (initial_fam_topology F).
 
@@ -255,7 +255,6 @@ move=> /= O /= -> /= . rewrite /finI_from /=.
 exists [fset  (F i @^-1` A)]%fset; last by rewrite set_fset1 bigcap_set1.
 by move => ? /=; rewrite inE; move/eqP ->; rewrite /init_fam_subbase in_setE /=; exists i; exists A.
 Qed.
- 
 
 Lemma cvg_image_init_fam (G : set_system W) (s : W) :
   Filter G -> (forall i, (F i) @` setT = setT) ->
@@ -289,7 +288,11 @@ have GO: forall (O : set S), O \in C -> G O.
 by rewrite -Bcap; apply: filter_bigI => /= O OC; apply: GO. 
 Qed. 
 
-End Initial_fam_Topology.
+End initial_fam_Topology.
+
+
+HB.instance Definition _ (S : pointedType) (T : topologicalType)  (I : pointedType)  (F : I -> (S -> T)) :=
+  Pointed.on (initial_fam_topology F).
 
 
 (* TODO : uniform structure for initial fam topology *)
