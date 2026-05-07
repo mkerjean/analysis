@@ -879,10 +879,22 @@ rewrite seteqP; split => y [] //=.
 move=> y0; split; rewrite ?inE //=.
 have A0: A !=set0 by exists x. 
 exists 0; rewrite ?scaler0 //; exact (absolutely_convex0 A0 absA).
-have -> : (supremums [set - x | x in [set r1 | 0 < r1]]) = 0. 
+Check xgetPex. 
+have H: exists (x : K), (supremums [set - x | x in [set r1 | 0 < r1]]) x. admit.
+have -> : (supremums [set - x | x in [set r1 | 0 < r1]]) = [set (0 : K)].
+rewrite seteqP; split => t /=; last first. move => -> /=; split => t' /=. admit. 
+rewrite /ubound /=.
 Admitted.
 
 #[local] Lemma gauge_ge0  : forall x, 0 <= gauge_fun A x.
+Proof. 
+move => v. rewrite /gauge_fun.
+set P := (X in inf X).
+case : (EM (P !=set0)).
+  by move=> H; apply: lb_le_inf => // z; rewrite /P /= => -[] z0 _; rewrite ltW.  
+move => P0; rewrite /inf /sup /supremum; case : ifP; rewrite ?oppr0 //.
+have -> : xget 0 (supremums [set - x | x in P]) = 0. apply : xgetPN => /=. admit.
+by rewrite oppr0.
 Admitted.
 
 #[local] Lemma ler_gaugeD   :
@@ -905,8 +917,8 @@ Section convex_topology_seminorm.
 Context (R : numDomainType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
 
 Definition S := (initial_fam_topology p). 
-HB.about initial_fam_topology.
-Fail Check (S : topologicalType). 
+HB.about initial_fam_topology. 
+Fail Check (S : topologicalType).  
 Fail Check (initial_fam_topology p : topologicalType). (* why ?? *)
 
 (*
