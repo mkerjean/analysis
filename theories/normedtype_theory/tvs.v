@@ -867,13 +867,32 @@ move => [] x Bx []  _ /(_ 0); rewrite normr0 ltr01 // => /(_ isT) /(_ 0); apply.
 by exists x; rewrite //= scale0r.
 Qed. 
 
-Hypothesis (absA : absolutely_convex_set A).
+Lemma gauge0:  (absolutely_convex_set A) -> gauge_fun A 0 = 0.
+Proof. 
+move/absolutely_convex0=>  A0; rewrite /gauge_fun. 
+case : (EM (A = set0)). 
+move ->; rewrite /inf. 
+  set P := (X in sup X). 
+  have -> : P = set0 by rewrite seteqP; split => // x [] r [] r0 ; rewrite inE => /= -[v]. 
+  by rewrite sup0 oppr0.
+set P := (X in inf X).
+move/nonemptyPn/contrapT => Av.
+have infge0:  0 <= inf P.
+  apply: lb_le_inf.
+    by  exists 1; rewrite /P /=; split => //; rewrite inE; exists 0; rewrite ?scaler0 //; apply: A0. 
+  by move=> z; rewrite /P /= => -[z0] _; rewrite ltW.  
+have infle0 : inf P <= 0. 
+Search (inf _ <= _). 
+(* apply inf_le with inf set0 = 0).
+case : (EM (P = set0)).
+  move -> ; rewrite /inf /=. 
+  have -> : [set - (x : K) | x in set0] = set0 by rewrite seteqP; split => // x [] //=.
+  by rewrite sup0 oppr0. 
+move/nonemptyPn/contrapT => [/= x] Px.
+rewrite /inf; apply: oppr_inj; rewrite opprK oppr0. 
 
-Lemma gauge0 :  gauge_fun A 0 = 0.
-Proof.
-rewrite /gauge_fun /inf /sup /supremum. 
-case : ifP; first  by rewrite oppr0. 
-move/negbT/set0P => [r] /= [r'] [r0]; rewrite inE /= => -[x] xa xr0 rr'. 
+  Search (~ ~ _). Search (_ = set0) (_ !=set0). 
+move => [r] /= [r'] [r0]; rewrite inE /= => -[x] xa xr0 rr'. 
 have -> : [set r1 | 0 < r1 /\ 0 \in [set r1 *: x0 | x0 in A]] = [set r1 | 0 < r1]. 
 rewrite seteqP; split => y [] //=. 
 move=> y0; split; rewrite ?inE //=.
@@ -891,14 +910,16 @@ Proof.
 move => v. rewrite /gauge_fun.
 set P := (X in inf X).
 case : (EM (P !=set0)).
-  by move=> H; apply: lb_le_inf => // z; rewrite /P /= => -[] z0 _; rewrite ltW.  
-move => P0; rewrite /inf /sup /supremum; case : ifP; rewrite ?oppr0 //.
-have -> : xget 0 (supremums [set - x | x in P]) = 0. apply : xgetPN => /=. admit.
-by rewrite oppr0.
-Admitted.
+  by move=> H; apply: lb_le_inf => // z; rewrite /P /= => -[] z0 _; rewrite ltW.   
+move/nonemptyPn -> ;  rewrite  /inf /=.
+have -> : [set - (x : K) | x in set0] = set0 by rewrite seteqP; split => // x [] //=.
+by rewrite sup0 oppr0. 
+Qed.
 
-#[local] Lemma ler_gaugeD   :
+#[local] Lemma ler_gaugeD :
   forall x y, gauge_fun A (x + y) <=  gauge_fun A x +  gauge_fun A y.
+Proof.
+move => x y.   
 Admitted.
 
 #[local] Lemma  gaugeZ :
