@@ -849,30 +849,45 @@ End lcfunproperties.
 
 Import Norm.
 
-Section gauge.
-Context  (K : realType) (V : lmodType K)  (A : set V).
-(* K can be a numDomainType once #1959 is solved *)
-Definition gauge_fun (K : realType) (V : lmodType K) (A : set V) : V -> K
-    := fun v => inf [set r | (0 < r) /\ v \in (fun x => r *: x) @`A]. 
-(* Definition gauge_fun (A : set V) : V -> K := fun v => inf [set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
+
+Module DDist.
+Section dDist.
+Context (R: numDomainType) (n : nat).
+
+Record d :=  {
+   t :> n.-tuple R ;
+   le1 : \sum_(a <- t) `|a| <= 1}.
+
+End dDist.
+End DDist.
+Coercion DDist.t : DDist.d >-> tuple_of. 
 
 
+Reserved Notation "{ 'ddist' n }" (at level 0, format "{ 'ddist'  n }").
+Reserved Notation "R '.-ddist' n" (at level 2, format "R '.-ddist'  n").
+
+Notation "R '.-ddist' n" := (DDist.d R n%type).
+Notation "{ 'ddist' n }" := (_.-ddist n).
+
+Section absolutely_convex.
+Context (K : numDomainType) (V : lmodType K).
+          
 Definition absolutely_convex_set  (A : set V) := convex_set A /\ (forall r, `|r| < 1 ->  (fun x => r *: x) @`A `<=` A).
 
 Definition absorbing_set (A : set V) := forall x : V, exists a, exists2 r, (a \in A) & (x = r *:a).
 
-Definition absolutely_convex_hull  (A : set V) := \bigcap_(B in [set B | (absolutely_convex_set B) /\ (A `<=` B)]) B.
+Definition absolutely_convex_hull  (A : set V) := smallest absolutely_convex_set A.
 
-Lemma absolutely_convex_hull_set : absolutely_convex_set (absolutely_convex_hull A). 
+Lemma absolutely_convex_hull_set  (A : set V) : absolutely_convex_set (absolutely_convex_hull A).
 Proof.
 Admitted.
 
-(*
-Lemma absolutely_convex_hullE :
-  absolutely_convex_hull A = [set a | exists2 l: (seq K*A), (\sum_(i <- l) `|i.1| < 1 ) & (a = \sum_(i <- l) i.1 *: i.2)].
-Admitted.*)
+Lemma absolutely_convex_hullE  (A : set V):
+  absolutely_convex_hull A = [set a | exists n  (t: {ddist n}) (l : n.-tuple V),
+                             [set` l] `<=` A  /\  a = \sum_(i < n) t`_i *: l`_i].
+Admitted.
   
-Lemma absolutely_convex_hull_subset : A `<=` absolutely_convex_hull A.
+Lemma absolutely_convex_hull_subset  (A : set V): A `<=` absolutely_convex_hull A.
 Proof.
 Admitted. 
 
@@ -882,11 +897,31 @@ move => [] x Bx []  _ /(_ 0); rewrite normr0 ltr01 // => /(_ isT) /(_ 0); apply.
 by exists x; rewrite //= scale0r.
 Qed.
 
+End absolutely_convex.
+
+From mathcomp Require Import ereal.
+Section gauge.
+Context  (K : realType) (V : lmodType K)  (A : set V).
+Implicit Type (r : K).
+(* K can be a numDomainType once #1959 is solved *)
+(*Definition gauge_fun (K : realType) (V : lmodType K) (A : set V) : V -> \bar K
+    := fun v => ereal_inf (EFin @` [set r | 0 < r /\ v \in (fun x => r *: x) @`A]). *)
+
+ Definition gauge_fun (A : set V) : V -> \bar K := 
+fun v =>  let B := [set r  | (0 < r)%R &  r *: v \in A]%classic in
+  if B == set0 then +oo%E else (ereal_inf (EFin @` B)).
+
+(* Definition gauge_fun (A : set V) : V -> K := fun v => inf 
+[set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
+
+
 #[local] Lemma gauge0:  (absolutely_convex_set A) -> gauge_fun A 0 = 0.
-Proof. 
-move/absolutely_convex0=>  A0; rewrite /gauge_fun. 
-case : (EM (A = set0)). 
-move ->; rewrite /inf. 
+Proof.  
+move/absolutely_convex0=>  A0; rewrite /gauge_fun /=. 
+have [->|/set0P]:= eqVneq A set0. 
+rewrite [X in ereal_inf X](_ : _ = set0).  image_set0. Search "set0" "image". 
+apply/eqP; rewrite eq_le /=; apply/andP; split.
+Search 
   set P := (X in sup X). 
   have -> : P = set0 by rewrite seteqP; split => // x [] r [] r0 ; rewrite inE => /= -[v]. 
   by rewrite sup0 oppr0.
@@ -937,12 +972,12 @@ End gauge.
 (* TODO : define initial topology wrt a family of functions in initial topology *)
 
 Section convex_topology_seminorm.
-Context (R : numDomainType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
+Context (R : numFieldType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
 
 Definition S := (initial_fam_topology p). 
 HB.about initial_fam_topology. 
-Fail Check (S : topologicalType).  
-Fail Check (initial_fam_topology p : topologicalType). (* why ?? *)
+Check (S : topologicalType).  
+
 
 (*
 #[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2). Admitted.
@@ -961,10 +996,12 @@ Context  (K : realType) (V : convexTvsType K).
 
 Search "hull". 
 
-Lemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) /\ (absorbing_set b) & basis B. 
+Lemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
 Proof.
 move: (@locally_convex K V) => -[B] convexB basisB.
-exists [set b | exists2 a, B a & (b = absolutely_convex_hull a)]. 
+exists [set b | exists2 a, B a & (b = absolutely_convex_hull a)].
+  by move => b /= [a] Ba ->; exact: absolutely_convex_hull_set.
+rewrite /basis /=; split => b /=. 
 Admitted.
 
 Theorem seminorm_topology : true. (*the topology on E is generated the family of gauge function on the ababsolutely convex basis*)  Admitted.
