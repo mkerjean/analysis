@@ -464,7 +464,7 @@ split; first by exists [set: E]; split; first exact: filter_nbhsT.
   exists (U `&` V); split => [|xy].
     by exists (B `&` C); [exact: open_nbhsI|exact: setISS].
   by rewrite !in_setI => /andP[/Bxy-> /Cxy->].
-by move=> P Q PQ [U [HU Hxy]]; exists U; split=> [|xy /Hxy /[!inE] /PQ].
+by move=> P Q PQ [U [HU Hxy]]; exists U; split => [|xy /Hxy /[!inE] /PQ].
 Qed.
 
 Local Lemma entourage_refl (A : set (E * E)) :
@@ -899,46 +899,46 @@ Qed.
 
 End absolutely_convex.
 
-From mathcomp Require Import ereal.
-Section gauge.
-Context  (K : realType) (V : lmodType K)  (A : set V).
-Implicit Type (r : K).
+(*From mathcomp Require Import ereal.*)
+
+Definition gauge_fun  (K : realType) (V : lmodType K) (A : set V) (absA :  absolutely_convex_set A): V -> K :=  
+fun v => inf [set r | (0 < r) /\  v \in (fun x => r *: x) @` A].
+
+
 (* K can be a numDomainType once #1959 is solved *)
 (*Definition gauge_fun (K : realType) (V : lmodType K) (A : set V) : V -> \bar K
     := fun v => ereal_inf (EFin @` [set r | 0 < r /\ v \in (fun x => r *: x) @`A]). *)
 
- Definition gauge_fun (A : set V) : V -> \bar K := 
-fun v =>  let B := [set r  | (0 < r)%R &  r *: v \in A]%classic in
-  if B == set0 then +oo%E else (ereal_inf (EFin @` B)).
+Section gauge.
+Context (K : realType) (V : lmodType K) (A : set V) (absA :  absolutely_convex_set A).
+(*fun v =>  let B := [set r  | (0 < r) &  r *: v \in A]%classic in
+  if B == set0 then +oo%E else (ereal_inf (EFin @` B)).*)
 
 (* Definition gauge_fun (A : set V) : V -> K := fun v => inf 
 [set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
+Notation gauge_fun := (gauge_fun absA).
 
-
-#[local] Lemma gauge0:  (absolutely_convex_set A) -> gauge_fun A 0 = 0.
+#[local] Lemma gauge0: gauge_fun 0 = 0.
 Proof.  
-move/absolutely_convex0=>  A0; rewrite /gauge_fun /=. 
-have [->|/set0P]:= eqVneq A set0. 
-rewrite [X in ereal_inf X](_ : _ = set0).  image_set0. Search "set0" "image". 
-apply/eqP; rewrite eq_le /=; apply/andP; split.
-Search 
-  set P := (X in sup X). 
-  have -> : P = set0 by rewrite seteqP; split => // x [] r [] r0 ; rewrite inE => /= -[v]. 
-  by rewrite sup0 oppr0.
+have/absolutely_convex0 := absA =>  A0; rewrite /gauge_fun. 
+have [->|]:= eqVneq A set0. 
+  rewrite [X in inf X]( _ : _ = set0).
+  by rewrite  -subset0 => /= x /=; rewrite image_set0 inE => -[] //. 
+  by rewrite inf0.
 set P := (X in inf X).
-move/nonemptyPn/contrapT => Av.
-have infge0:  0 <= inf P.
+move/set0P/A0 => {}A0.
+apply/eqP; rewrite eq_le; apply/andP; split; last first.
   apply: lb_le_inf.
     by  exists 1; rewrite /P /=; split => //; rewrite inE; exists 0; rewrite ?scaler0 //; apply: A0. 
-  by move=> z; rewrite /P /= => -[z0] _; rewrite ltW.  
-  have infle : forall (r : K), (0 < r) -> r >= inf P.
-  move => r r0. rewrite /inf /sup /supremum. case: ifP.
-    by move=> _ ; rewrite oppr0; apply: ltW.
-    move => /negbT/set0P H. Check  (xgetPex _ H).
-(* too long *)
-Admitted.
+  by move=> z; rewrite /P /= => -[z0] _; rewrite ltW.
+have infle : forall (r : K), (0 < r) ->  inf P <= r.
+  move => r r0. 
+  have Pr : P r by split => //; rewrite inE; exists 0 => //; rewrite scaler0.
+  apply: ge_inf => //; exists 0 => z /= [] z0 _; rewrite ltW //.
+by apply/ler_addgt0Pl => /= r r0; rewrite addr0; apply: infle. 
+Qed.
 
-#[local] Lemma gauge_ge0  : forall x, 0 <= gauge_fun A x.
+#[local] Lemma gauge_ge0 : forall x, 0 <= gauge_fun x.
 Proof. 
 move => v. rewrite /gauge_fun.
 set P := (X in inf X).
@@ -949,22 +949,19 @@ have -> : [set - (x : K) | x in set0] = set0 by rewrite seteqP; split => // x []
 by rewrite sup0 oppr0. 
 Qed.
 
-#[local] Lemma ler_gaugeD :
-  forall x y, gauge_fun A (x + y) <=  gauge_fun A x +  gauge_fun A y.
+#[local] Lemma ler_gaugeD:
+  forall x y, gauge_fun (x + y) <=  gauge_fun x +  gauge_fun y.
 Proof.
-move => x y.   
+move => x y.
 Admitted.
 
+(* see coq-robot/ode_common.v *)
 #[local] Lemma  gaugeZ :
-  forall r x, gauge_fun A (r *: x) = `|r| * gauge_fun A x.
+  forall r x, gauge_fun  (r *: x) = `|r| * gauge_fun x.
 Admitted.
 
+HB.instance Definition _ := @isSemiNorm.Build  K V gauge_fun gauge0 gauge_ge0 ler_gaugeD gaugeZ.
 
-Hypothesis (absA :  (absolutely_convex_set A)).
-
-
-HB.instance Definition _ := @isSemiNorm.Build K V (@gauge_fun K V A) (gauge0 absA)  gauge_ge0 ler_gaugeD gaugeZ.  
-  
 End gauge.
 
 
@@ -992,9 +989,9 @@ Check (S : topologicalType).
 End convex_topology_seminorm.
 
 Section generating_seminorm.
-Context  (K : realType) (V : convexTvsType K).
+Context  (K : realType) (V : convexTvsType K) (A : set V) (absA : absolutely_convex_set A).
 
-Search "hull". 
+Check ((gauge_fun absA) : SemiNorm.type  V).  
 
 Lemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
 Proof.
