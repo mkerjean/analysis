@@ -872,9 +872,11 @@ Notation "{ 'ddist' n }" := (_.-ddist n).
 Section absolutely_convex.
 Context (K : numDomainType) (V : lmodType K).
           
-Definition absolutely_convex_set  (A : set V) := convex_set A /\ (forall r, `|r| < 1 ->  (fun x => r *: x) @`A `<=` A).
+Definition absolutely_convex_set  (A : set V) := convex_set A /\ (forall r, `|r| <= 1 ->  (fun x => r *: x) @`A `<=` A).
 
 Definition absorbing_set (A : set V) := forall x : V, exists a, exists2 r, (a \in A) & (x = r *:a).
+Definition pabsorbing_set (A : set V) := forall x : V, exists2 r, ( 0< r) & r*: x \in A.
+
 
 Definition absolutely_convex_hull  (A : set V) := smallest absolutely_convex_set A.
 
@@ -893,7 +895,7 @@ Admitted.
 
 Lemma absolutely_convex0 (B : set V) :  B !=set0 -> absolutely_convex_set B  ->  B 0. 
 Proof. 
-move => [] x Bx []  _ /(_ 0); rewrite normr0 ltr01 // => /(_ isT) /(_ 0); apply. 
+move => [] x Bx []  _ /(_ 0); rewrite normr0 ler01 // => /(_ isT) /(_ 0); apply. 
 by exists x; rewrite //= scale0r.
 Qed.
 
@@ -901,7 +903,9 @@ End absolutely_convex.
 
 (*From mathcomp Require Import ereal.*)
 
-Definition gauge_fun  (K : realType) (V : lmodType K) (A : set V) (absA :  absolutely_convex_set A): V -> K :=  
+Definition gauge_fun  (K : realType) (V : lmodType K) (A : set V)
+  (absA :  absolutely_convex_set A) (absorbA: pabsorbing_set A)
+  : V -> K :=  
 fun v => inf [set r | (0 < r) /\  v \in (fun x => r *: x) @` A].
 
 
@@ -910,13 +914,13 @@ fun v => inf [set r | (0 < r) /\  v \in (fun x => r *: x) @` A].
     := fun v => ereal_inf (EFin @` [set r | 0 < r /\ v \in (fun x => r *: x) @`A]). *)
 
 Section gauge.
-Context (K : realType) (V : lmodType K) (A : set V) (absA :  absolutely_convex_set A).
+Context (K : realType) (V : lmodType K) (A : set V) (absA :  absolutely_convex_set A) (absorbA: pabsorbing_set A).
 (*fun v =>  let B := [set r  | (0 < r) &  r *: v \in A]%classic in
   if B == set0 then +oo%E else (ereal_inf (EFin @` B)).*)
 
 (* Definition gauge_fun (A : set V) : V -> K := fun v => inf 
 [set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
-Notation gauge_fun := (gauge_fun absA).
+Notation gauge_fun := (gauge_fun absA absorbA).
 
 #[local] Lemma gauge0: gauge_fun 0 = 0.
 Proof.  
@@ -949,15 +953,80 @@ have -> : [set - (x : K) | x in set0] = set0 by rewrite seteqP; split => // x []
 by rewrite sup0 oppr0. 
 Qed.
 
+Lemma supS (B : set K) (C : set K) : B !=set0 -> has_sup C -> B `<=` C -> sup B <= sup C.
+Proof. 
+move=> B0 supC BC. 
+apply: sup_le => //. 
+apply: subset_trans; first by exact: BC. 
+by exact: le_down. 
+Qed. 
+
+Lemma infS (B : set K) (C : set K) : has_inf B -> C !=set0 -> C `<=` B -> inf B <= inf C.
+Proof. 
+move=> infB C0 BC. 
+rewrite /inf lerN2. 
+apply: supS. by apply/nonemptyN.
+by apply/has_inf_supN. 
+by apply: image_subset.
+Qed. 
+
+
+(* TODO : factorise*)
 #[local] Lemma ler_gaugeD:
   forall x y, gauge_fun (x + y) <=  gauge_fun x +  gauge_fun y.
 Proof.
-move => x y.
-Admitted.
+have A0 : A 0 by move: (absorbA 0)=> [??]; rewrite scaler0 inE.
+have :=  absA; rewrite /absolutely_convex_set => -[] convA /= balA.  
+move => x y; rewrite /gauge_fun. 
+have:= (absorbA x) => -[/= r r0]; rewrite inE /= => Arx. 
+have:= (absorbA y) => -[/= r' r0']; rewrite inE /= => Ary. 
+rewrite -inf_sumE.   
+- split => /=; rewrite /set0P.
+     exists r^-1 => //=; split=> //. 
+     rewrite ?invr_gt0 //. 
+     rewrite inE /=; exists (r *: x) => //.  
+     rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+     by exists 0 => z [z0 _]; rewrite ltW.
+- split => /=; rewrite /set0P.
+    exists r'^-1 => //=; split=> //. 
+     rewrite ?invr_gt0 //. 
+     rewrite inE /=; exists (r' *: y) => //.  
+     rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+     by exists 0 => z [z0 _]; rewrite ltW.
+apply: infS. 
+- split; last by exists 0 => [z] /= [z0 ] _ ; rewrite ltW.   
+  have:= (absorbA (x+y)) => -[/= r2 r20']; rewrite inE /= => Arxy. 
+    exists r2^-1 => //=; split=> //.  
+     rewrite ?invr_gt0 //. 
+     rewrite inE /=; exists (r2 *: (x + y)) => //.  
+     rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+- exists (  r^-1 + r'^-1) => /=.  
+  exists r^-1 => //=. split=> //. 
+  rewrite ?invr_gt0 //. 
+  rewrite inE /=; exists (r *: x) => //. 
+  rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+  exists r'^-1 => //=. split=> //. 
+  rewrite ?invr_gt0 //. 
+  rewrite inE /=; exists (r' *: y) => //.  
+  rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+move => z /= [t [t0]]; rewrite inE /= => [[v] Av rvx] [s] [s0]; rewrite inE /=. 
+move => [w Aw twy] <-. rewrite addr_gt0 => //; split => //; rewrite inE /=. 
+rewrite -twy -rvx. 
+exists  ((t + s)^-1 *: (t *: v + s *: w)).
+rewrite scalerDr !scalerA mulrC (mulrC _ s).   
+rewrite -divD_onem => //.
+pose st := Itv01 (mathcomp_extra.divDl_ge0 (ltW t0) (ltW s0))
+                      (mathcomp_extra.divDl_le1 (ltW t0) (ltW s0)). 
+have := convA v w st. 
+rewrite !inE => /(_ Av Aw); rewrite /conv /=; apply. 
+by rewrite !scalerA divff ?scale1r //; rewrite gt_eqF // addr_gt0.  
+Qed.  
+
 
 (* see coq-robot/ode_common.v *)
 #[local] Lemma  gaugeZ :
   forall r x, gauge_fun  (r *: x) = `|r| * gauge_fun x.
+move => r x.
 Admitted.
 
 HB.instance Definition _ := @isSemiNorm.Build  K V gauge_fun gauge0 gauge_ge0 ler_gaugeD gaugeZ.
@@ -971,20 +1040,28 @@ End gauge.
 Section convex_topology_seminorm.
 Context (R : numFieldType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
 
-Definition S := (initial_fam_topology p). 
-HB.about initial_fam_topology. 
-Check (S : topologicalType).  
+Lemma range_seminorm: forall f : SemiNorm.type E, range f = [set: R]. 
+Proof. 
+move => f; rewrite -subTset => r /= _. Admitted. (*issue if E = {0}*)
+
+Notation S := (initial_fam_topology p).
+HB.instance Definition _ := GRing.Lmodule.on S.
 
 
-(*
-#[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2). Admitted.
-#[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2). ). Admitted.
+
+#[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
+Proof.
+move => /= [x y] /=. 
+apply/cvg_image_init_fam.
+  move => i.
+dmitted.
+#[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).  Admitted.
 #[local] Lemma   initial_fam_locally_convex : exists2 B : set_system S,
-    (forall b, b \in B -> convex_set b) & basis B. ). Admitted.
+    (forall b, b \in B -> convex_set b) & basis B. Admitted.
 
                                             
-  HB.instance Definition _ :=  @PreTopologicalLmod_isConvexTvs R E initial_fam_add_continuous initial_fam_scale_continuous initial_fam_locally_convex.
-*)
+ HB.instance Definition _ :=  @PreTopologicalLmod_isConvexTvs.Build R S initial_fam_add_continuous initial_fam_scale_continuous initial_fam_locally_convex.
+
 
 End convex_topology_seminorm.
 
