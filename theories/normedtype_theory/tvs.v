@@ -1038,11 +1038,20 @@ End gauge.
 (* TODO : define initial topology wrt a family of functions in initial topology *)
 
 Section convex_topology_seminorm.
-Context (R : numFieldType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
+Context (R : realFieldType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
 
-Lemma range_seminorm: forall f : SemiNorm.type E, range f = [set: R]. 
+Lemma range_seminorm:  forall f : SemiNorm.type E, (exists x : E, (f x)!= 0 ) -> range f = [set r : R | 0 <= r]. 
 Proof. 
-move => f; rewrite -subTset => r /= _. Admitted. (*issue if E = {0}*)
+move => f [x /eqP fx] /=.
+rewrite eqEsubset; split => r; first by move => [t _] <-; apply: norm_ge0.
+have f0 : 0 < (f x).
+  have : 0<= f(x) by  apply: @norm_ge0. 
+  by rewrite le0r; move/orP => [/eqP /fx | ].
+have /ltW := f0; rewrite -eqr_norm_id; move/eqP => normf /=.
+exists ((r/ f(x) *: x))=> //.  
+rewrite normZ normrM normfV normf -mulrA [X in _ * X]mulrC divff ?mulr1; apply/eqP => //.  
+by rewrite // eqr_norm_id.
+Qed. 
 
 Notation S := (initial_fam_topology p).
 HB.instance Definition _ := GRing.Lmodule.on S.
@@ -1053,8 +1062,9 @@ HB.instance Definition _ := GRing.Lmodule.on S.
 Proof.
 move => /= [x y] /=. 
 apply/cvg_image_init_fam.
-  move => i.
-dmitted.
+  move => i. (* issue with range *)
+Admitted.
+
 #[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).  Admitted.
 #[local] Lemma   initial_fam_locally_convex : exists2 B : set_system S,
     (forall b, b \in B -> convex_set b) & basis B. Admitted.
