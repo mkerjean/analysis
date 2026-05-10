@@ -1060,25 +1060,24 @@ HB.instance Definition _ := GRing.Lmodule.on S.
 
 #[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
 Proof.
+(*forall U, V exists W in  B s.t. W subset U cap V *)
 move => /= [x y] /=. 
 apply/cvg_image_init_fam.
-  move => i. (* issue with range *)
+  move => i. (* issue with range *) admit. 
 Admitted.
 
 #[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).  Admitted.
-#[local] Lemma   initial_fam_locally_convex : exists2 B : set_system S,
+#[local] Lemma  initial_fam_locally_convex : exists2 B : set_system S,
     (forall b, b \in B -> convex_set b) & basis B. Admitted.
-
                                             
- HB.instance Definition _ :=  @PreTopologicalLmod_isConvexTvs.Build R S initial_fam_add_continuous initial_fam_scale_continuous initial_fam_locally_convex.
-
+HB.instance Definition _ :=  @PreTopologicalLmod_isConvexTvs.Build R S initial_fam_add_continuous initial_fam_scale_continuous initial_fam_locally_convex.
 
 End convex_topology_seminorm.
 
 Section generating_seminorm.
-Context  (K : realType) (V : convexTvsType K) (A : set V) (absA : absolutely_convex_set A).
+Context  (K : realType) (V : convexTvsType K) (A : set V) (absA : absolutely_convex_set A) (absorbA: pabsorbing_set A).
 
-Check ((gauge_fun absA) : SemiNorm.type  V).  
+Check ((gauge_fun absA absorbA) : SemiNorm.type  V).  
 
 Lemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
 Proof.
