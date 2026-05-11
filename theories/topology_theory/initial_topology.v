@@ -76,19 +76,26 @@ HB.instance Definition _ :=
 Lemma initial_continuous : continuous (f : W -> T).
 Proof. by apply/continuousP => A ?; exists A. Qed.
 
-Lemma cvg_image (F : set_system S) (s : S) :
-  Filter F -> f @` setT = setT ->
-  F --> (s : W) <-> ([set f @` A | A in F] : set_system _) --> f s.
+Lemma cvg_initial (F : set_system S) (s : S) :
+  Filter F ->
+ ([set f @` A | A in F] : set_system _) --> f s ->  F --> (s : W).
 Proof.
-move=> FF fsurj; split=> [cvFs|cvfFfs].
-  move=> A /initial_continuous [B [Bop Bs sBAf]].
-  have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
-  rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
-  exact: image_preimage. 
+move=> FF cvfFfs.
 move=> A /= [_ [[B Bop <-] Bfs sBfA]].
 have /cvfFfs [C FC fCeB] : nbhs (f s) B by rewrite nbhsE; exists B. 
 rewrite nbhs_filterE; apply: filterS FC.
 by apply: subset_trans sBfA; rewrite -fCeB; apply: preimage_image.
+Qed.
+
+Lemma cvg_image (F : set_system S) (s : S) :
+  Filter F -> f @` setT = setT ->
+  F --> (s : W) <-> ([set f @` A | A in F] : set_system _) --> f s.
+Proof.
+move=> FF fsurj; split=> [cvFs|/cvg_initial //].
+move=> A /initial_continuous [B [Bop Bs sBAf]].
+have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
+rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
+by exact: image_preimage. 
 Qed.
 
 End Initial_Topology.
@@ -256,19 +263,15 @@ exists [fset  (F i @^-1` A)]%fset; last by rewrite set_fset1 bigcap_set1.
 by move => ? /=; rewrite inE; move/eqP ->; rewrite /init_fam_subbase in_setE /=; exists i; exists A.
 Qed.
 
-Lemma cvg_image_init_fam (G : set_system W) (s : W) :
-  Filter G -> (forall i, (F i) @` setT = setT) ->
-  G --> (s : W) <-> ( forall i, ([set (F i)  @` A | A in G] : set_system _) --> F i s).
+Lemma cvg_init_fam (G : set_system W) (s : W) :
+  Filter G -> 
+  (forall i, ([set (F i)  @` A | A in G] : set_system _) --> F i s) ->  G --> (s : W) .
 Proof.
-move=> FG fsurj; split=> [cvFs|cvfFfs].
-  move=> i A /initial_fam_continuous [B [//= Bop Bs sBAf]].
-  have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
-  rewrite nbhs_simpl; exists ((F i) @^-1` A); first exact: filterS FB.
-  exact: image_preimage.
-move=> A /= [].
+move=> FG cvfFfs. 
 (* the following is ugly, can we do without or add a missing lemma ? *)  
+move => A -[] /=. 
 rewrite /= /Builders_14.open_from /=  /finI_from /init_fam_subbase/=.  
-move =>  _ [[]] H Hop <- [B HB Bs] sBfA /=; rewrite nbhs_filterE. 
+move => _  [[]] H Hop <- [B HB Bs] sBfA/=; rewrite nbhs_filterE. 
 have BA : B `<=` A.
   apply: subset_trans; last by exact: sBfA.
   by move => y /= By; exists B =>//.
@@ -286,6 +289,17 @@ have GO: forall (O : set S), O \in C -> G O.
   apply: filterS; last by exact: GO'.
   by rewrite OD -O'D; apply: preimage_image.
 by rewrite -Bcap; apply: filter_bigI => /= O OC; apply: GO. 
+Qed. 
+
+Lemma cvg_image_init_fam (G : set_system W) (s : W) :
+  Filter G -> (forall i, (F i) @` setT = setT) ->
+  G --> (s : W) <-> (forall i, ([set (F i)  @` A | A in G] : set_system _) --> F i s).
+Proof.
+move=> FG fsurj; split=> [cvFs|/cvg_init_fam] //.
+move=> i A /initial_fam_continuous [B [//= Bop Bs sBAf]].
+have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
+rewrite nbhs_simpl; exists ((F i) @^-1` A); first exact: filterS FB.
+by exact: image_preimage.
 Qed. 
 
 End initial_fam_Topology.
