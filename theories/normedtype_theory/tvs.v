@@ -1,4 +1,4 @@
-(* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)
+(* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)  
 From HB Require Import structures.
 From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector.
 From mathcomp Require Import interval_inference.
@@ -1060,10 +1060,32 @@ HB.instance Definition _ := GRing.Lmodule.on S.
 
 #[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
 Proof.
+  (*souci avec cvg_init_fam *) (* apply: subset_tran *)
+  move =>  /= [x y] /= C /=.
+  apply: cvg_init_fam => i /= A [/= esp /=eps0]; rewrite /ball_ /= =>  Aeps. 
+  (* apply : subset_trans *). exists A. 
+  exists ((p i) @^-1` [set r : R | `|r|<(esp/2)]) => /=.  
+  rewrite /Builders_14.open_from /= => -[A]/= Aset BA.
+  
+  
+  [/= eps /= eps0].   rewrite /ball_ /= =>  Beps.
+  Check [set [set p i x | x in A] | A in x0.1 + x0.2 @[x0 --> (x, y)]]. 
+  rewrite /nbhs /initial_fam_topology /= /filter_prod /filter_from /=.
+    Besp /=.
+
+exists ((p i) @^-1` B).
+
+A /= nA. ; apply: cvg_init_fam; last by exact: nA.
+move => i /= B [eps /= eps0]; rewrite /ball_ /= =>  Beps.
+rewrite /nbhs /=. Check open_nbhs_nbhs. 
+exists ((p i) @^-1` B).  ); last first. rewrite seteqP; split => r /=; first by move => [z] ? <- //. 
+move => Br. 
 (*forall U, V exists W in  B s.t. W subset U cap V *)
-move => /= [x y] /=. 
-apply/cvg_image_init_fam.
-  move => i. (* issue with range *) admit. 
+(* apply: cvg_init_fam.  *)
+(*  move => /= [x y] /= A /= [B /= [/= oB Bxy BA]]. *)
+(* exists (B,B) => /=; last first. move => [s t] /=. apply: open_nbhs_nbhs; split.  Search "nbhs" "open".  Search "nbhs" "P". rewrite nbhs_openE /=. open_nbhsE.   *)
+(* apply/cvg_image_init_fam. *)
+(*   move => i. (* issue with range *) admit.  *)
 Admitted.
 
 #[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).  Admitted.
