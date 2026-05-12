@@ -98,6 +98,21 @@ rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
 by exact: image_preimage. 
 Qed.
 
+Lemma continuous_initial_topology (U : topologicalType) (g : U -> W):
+  continuous g <-> (continuous (f \o g)).
+Proof.
+split => cont x.
+  apply: continuous_comp; first by apply: cont.
+  by apply: initial_continuous.   
+move => A [B/=]; rewrite /wopen /= => -[[C] oC fBC] Bgx BA.
+apply: filterS; first by exact: BA.   
+rewrite -fBC /nbhs /=.
+have -> : g @^-1` (f @^-1` C) = (f \o g) @^-1` C by rewrite seteqP; split => z //.
+apply: cont; apply: open_nbhs_nbhs; split => //. 
+have : f @` B `<=` C by move => z /= [t]; rewrite -fBC //= => ? <-. 
+by apply => /=; exists (g x). 
+Qed.
+
 End Initial_Topology.
 
 HB.instance Definition _ (S : pointedType) (T : topologicalType) (f : S -> T) :=
@@ -289,7 +304,7 @@ have GO: forall (O : set S), O \in C -> G O.
   apply: filterS; last by exact: GO'.
   by rewrite OD -O'D; apply: preimage_image.
 by rewrite -Bcap; apply: filter_bigI => /= O OC; apply: GO. 
-Qed. 
+Qed.
 
 Lemma cvg_image_init_fam (G : set_system W) (s : W) :
   Filter G -> (forall i, (F i) @` setT = setT) ->
@@ -300,7 +315,23 @@ move=> i A /initial_fam_continuous [B [//= Bop Bs sBAf]].
 have /cvFs FB : nbhs (s : W) B by apply: open_nbhs_nbhs.
 rewrite nbhs_simpl; exists ((F i) @^-1` A); first exact: filterS FB.
 by exact: image_preimage.
-Qed. 
+Qed.
+
+Lemma continuous_init_fam (V : topologicalType) (f : V -> W) :
+ (forall i, continuous ( (F i) \o (f : V -> S))) <-> continuous f.
+Proof.
+Admitted.
+
+(* The following uses an extra hypothesis *)
+(* Lemma continuous_init_fam (V : topologicalType) (f : V -> W) : *)
+(*    (forall i, (F i) @` setT = setT) -> (forall i, continuous ( (F i) \o (f : V -> S))) -> continuous f. *)
+(* Proof. *)
+(* move=> rangeF contFif x.  *)
+(* apply: cvg_init_fam => i A /contFif => nA. *)
+(* exists ((F i) @^-1` A) => //. *)
+(* rewrite seteqP; split => [z /=|z /=]; first by move => [t] At <- //. *)
+(* move=> Az.  *)
+(* Admitted. *)
 
 End initial_fam_Topology.
 
