@@ -1082,22 +1082,58 @@ Qed.
 
 Lemma ge0_infZl : forall (B : set K) [a : K], 0 <= a -> inf [set a * x | x in B] = a * inf B.
 Proof.
-move => B a a0; rewrite /inf. 
-Search "sup" (-%R). 
-rewrite mulrC mulNr mulrC -ge0_supZl //.
-have -> : [set - x | x in [set a * x | x in B]]  = [set a * x | x in [set - x | x in B]].
- admit.
-Admitted.
- 
-(* see coq-robot/ode_common.v *)
-#[local] Lemma  gaugeZ :
-  forall r x, gauge_fun (r *: x) = `|r| * gauge_fun x.
+move => B a a0; rewrite /inf mulrN -(ge0_supZl (-%R @` B) a0); congr (- sup _).
+by rewrite !image_comp/=; apply: eq_imagel => //= ? _; rewrite mulrN.
+Qed.
+
+Lemma inf_ge0  (B : set K) : (forall x, B x -> 0 <= x) -> 0 <= inf B.
 Proof.
-move=> r x; rewrite /gauge_fun.
-rewrite /inf.  (@ge0_supZl _ `|r|). (norm_ge0 r)).  
-Check  ge0_supZl.
-move => r x.
-Admitted.
+move=> B0; have [->|B0'] := eqVneq B set0; first by rewrite inf0.
+by apply: lb_le_inf => //; exact/set0P.
+Qed.
+
+Lemma inf_pos : inf [set r : K | 0 < r] = 0.
+Proof.
+apply/eqP; rewrite eq_le; apply/andP; split; last first.
+  by apply: inf_ge0 => x /ltW.
+apply/ler_addgt0Pr => e e0; rewrite add0r.
+apply: ge_inf => //=.
+by exists 0 => r /ltW.
+Qed.
+
+(* see coq-robot/ode_common.v *)
+#[local] Lemma gaugeZ r v : gauge_fun (r *: v) = `|r| * gauge_fun v.
+Proof.
+rewrite /gauge_fun; have [->|] := eqVneq r 0.
+  rewrite normr0 mul0r.
+  have A0 : A 0 by move: (absorbA 0)=> [??]; rewrite scaler0 inE.
+  rewrite [X in inf X](_ : _ = [set r0 | 0 < r0]).
+    apply/seteqP; split=> [s []//|s /= s0]/=; split => //.
+    by rewrite inE/=; exists 0 => //; rewrite scale0r scaler0.
+  exact: inf_pos.
+rewrite neq_lt -ge0_infZl// => /orP[r0|r0]; congr inf.
+- rewrite ltr0_norm//.
+  have balA w : A w -> A (- w).
+     move=> Aw; case: absA => _ /(_ (-1)); apply => /=; first by rewrite normrN1.
+     by exists w => //; rewrite scaleN1r.
+  apply/seteqP; split => [x [x0 /[!inE]-[w Aw xwry]]|_ [y [y0 /[!inE]-[w Aw <-{v} <-]]]]/=.
+    exists ((- r)^-1 * x); last by rewrite invrN mulrA mulrNN divff ?mul1r// lt_eqF.
+    rewrite mulr_gt0// ?invr_gt0 ?oppr_gt0//; split => //.
+    rewrite inE/=; exists (- w); first exact: balA.
+    rewrite scalerN invrN mulNr scaleNr opprK -scalerA xwry scalerA.
+    by rewrite mulVf ?scale1r ?lt_eqF.
+  rewrite inE/= mulr_gt0 ?oppr_gt0//; split => //.
+  exists (- w); first exact: balA.
+  by rewrite scalerN mulNr scaleNr opprK scalerA.
+- rewrite gtr0_norm//.
+  apply/seteqP; split => [x [x0 /[!inE]-[w Aw xwry]]|_ [y [y0 /[!inE]-[w Aw <-{v} <-]]]]/=.
+    exists (r^-1 * x); last by rewrite mulrA divff ?mul1r// gt_eqF.
+    rewrite mulr_gt0 ?invr_gt0 ?gt_eqF//; split => //.
+    rewrite inE/=; exists w => //.
+    by rewrite -[LHS]scalerA xwry scalerA mulVf ?scale1r// gt_eqF.
+  rewrite inE/= mulr_gt0//; split => //.
+  by exists w => //; rewrite scalerA.
+Qed.
 
 HB.instance Definition _ := @isSemiNorm.Build  K V gauge_fun gauge0 gauge_ge0 ler_gaugeD gaugeZ.
 
@@ -1145,7 +1181,7 @@ Context  (K : realType) (V : convexTvsType K) (A : set V) (absA : absolutely_con
 
 Check ((gauge_fun absA absorbA) : SemiNorm.type  V).  
 
-lLemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
+Lemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
 Proof.
 move: (@locally_convex K V) => -[B] convexB basisB.
 exists [set b | exists2 a, B a & (b = absolutely_convex_hull a)].
