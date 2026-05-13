@@ -326,7 +326,7 @@ rewrite nbhs_simpl; exists ((F i) @^-1` A); first exact: filterS FB.
 by exact: image_preimage.
 Qed.
 
-(*clean*)
+(*clean*) (* document the contingency of surjective of Fi in this context *)
 Lemma continuous_init_fam (V : topologicalType) (f : V -> W) :
  (forall i, continuous ((F i) \o (f : V -> S))) <-> continuous f.
 Proof.
