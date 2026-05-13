@@ -349,19 +349,8 @@ rewrite /init_fam_subbase /=.
 move=> -[j [A0 -> oA]].  
 rewrite -comp_preimage. 
 have /continuousP := cont j.
-apply. 
+by apply. 
 Qed. 
-
-(* The following uses an extra hypothesis *)
-(* Lemma continuous_init_fam (V : topologicalType) (f : V -> W) : *)
-(*    (forall i, (F i) @` setT = setT) -> (forall i, continuous ( (F i) \o (f : V -> S))) -> continuous f. *)
-(* Proof. *)
-(* move=> rangeF contFif x.  *)
-(* apply: cvg_init_fam => i A /contFif => nA. *)
-(* exists ((F i) @^-1` A) => //. *)
-(* rewrite seteqP; split => [z /=|z /=]; first by move => [t] At <- //. *)
-(* move=> Az.  *)
-(* Admitted. *)
 
 End initial_fam_Topology.
 
