@@ -76,6 +76,9 @@ HB.instance Definition _ :=
 Lemma initial_continuous : continuous (f : W -> T).
 Proof. by apply/continuousP => A ?; exists A. Qed.
 
+Search "image" "filter". 
+
+(* TODO : use image_set_system to be imported from measure theory *)
 Lemma cvg_initial (F : set_system S) (s : S) :
   Filter F ->
  ([set f @` A | A in F] : set_system _) --> f s ->  F --> (s : W).
@@ -98,6 +101,7 @@ rewrite nbhs_simpl; exists (f @^-1` A); first exact: filterS FB.
 by exact: image_preimage. 
 Qed.
 
+(* TODO: shorten this proof*)
 Lemma continuous_initial_topology (U : topologicalType) (g : U -> W):
   continuous g <-> (continuous (f \o g)).
 Proof.
@@ -106,8 +110,8 @@ split => cont x.
   by apply: initial_continuous.   
 move => A [B/=]; rewrite /wopen /= => -[[C] oC fBC] Bgx BA.
 apply: filterS; first by exact: BA.   
-rewrite -fBC /nbhs /=.
-have -> : g @^-1` (f @^-1` C) = (f \o g) @^-1` C by rewrite seteqP; split => z //.
+rewrite -fBC /nbhs /=. 
+rewrite -comp_preimage.
 apply: cont; apply: open_nbhs_nbhs; split => //. 
 have : f @` B `<=` C by move => z /= [t]; rewrite -fBC //= => ? <-. 
 by apply => /=; exists (g x). 
@@ -257,6 +261,11 @@ move=> cf z U [?/= [[W oW <-]]] /= Wsfz /filterS; apply; apply: cf.
 exact: open_nbhs_nbhs.
 Qed.
 
+Lemma bigsetI_open (U : topologicalType) (I: Type) (s : seq I) (P : pred I) (f : I -> set U) :
+ (forall i, P i ->  open (f i)) ->  open (\big[setI/setT]_(i<- s | P i) f i).
+Proof.
+move=> Pf. apply: big_ind => //. by apply: openT. exact: openI. 
+Qed. 
 
 Definition initial_fam_topology {S : Type} {T : Type} {I : pointedType}
   (F : I -> (S -> T)) : Type := S.
@@ -278,24 +287,24 @@ exists [fset  (F i @^-1` A)]%fset; last by rewrite set_fset1 bigcap_set1.
 by move => ? /=; rewrite inE; move/eqP ->; rewrite /init_fam_subbase in_setE /=; exists i; exists A.
 Qed.
 
+
+(* move open_from in topology_structure away from the builder *)
 Lemma cvg_init_fam (G : set_system W) (s : W) :
   Filter G -> 
   (forall i, ([set (F i)  @` A | A in G] : set_system _) --> F i s) ->  G --> (s : W) .
 Proof.
 move=> FG cvfFfs. 
-(* the following is ugly, can we do without or add a missing lemma ? *)  
 move => A -[] /=. 
-rewrite /= /Builders_14.open_from /=  /finI_from /init_fam_subbase/=.  
-move => _  [[]] H Hop <- [B HB Bs] sBfA/=; rewrite nbhs_filterE. 
+move => _  [[]] H Hop <- [B HB Bs] sBfA/=; rewrite nbhs_filterE.  
 have BA : B `<=` A.
   apply: subset_trans; last by exact: sBfA.
   by move => y /= By; exists B =>//.
-apply: (@filterS _ G _  B) => //; move /(_ B HB): Hop  => /= [] C CO Bcap.
+apply: (@filterS _ G _  B) => //; move /(_ B HB): Hop  => /= [] /= C CO Bcap.
 (* can´t  apply fsubsetP or subsetP on CO  to obtain the following *)
 have Ci : forall (O : set S) , O \in C -> exists i : I, exists2 A : set T, O = F i @^-1` A & open A. 
   by move => O /CO /set_mem //=. 
 move => {CO} {sBfA} {BA} {A}.
-have GO: forall (O : set S), O \in C -> G O. 
+have GC: forall (O : set S), O \in C -> G O. 
   move => O OC; move: (OC) => /Ci [i [D OD openD]].
   have : nbhs (F i s) D.
     rewrite nbhsE; exists D => //; split => //.
@@ -303,7 +312,7 @@ have GO: forall (O : set S), O \in C -> G O.
   move/(cvfFfs i D); rewrite nbhs_filterE => //= [[O']] GO' /= O'D.
   apply: filterS; last by exact: GO'.
   by rewrite OD -O'D; apply: preimage_image.
-by rewrite -Bcap; apply: filter_bigI => /= O OC; apply: GO. 
+by rewrite -Bcap; apply: filter_bigI => /= O OC; apply: GC. 
 Qed.
 
 Lemma cvg_image_init_fam (G : set_system W) (s : W) :
@@ -317,10 +326,31 @@ rewrite nbhs_simpl; exists ((F i) @^-1` A); first exact: filterS FB.
 by exact: image_preimage.
 Qed.
 
+(*clean*)
 Lemma continuous_init_fam (V : topologicalType) (f : V -> W) :
- (forall i, continuous ( (F i) \o (f : V -> S))) <-> continuous f.
+ (forall i, continuous ((F i) \o (f : V -> S))) <-> continuous f.
 Proof.
-Admitted.
+split=> cont; last first.
+  move=> i x; apply: continuous_comp; first by apply: cont.
+  apply: initial_fam_continuous.  
+move => x A; rewrite /nbhs /= => -[/= B].
+move => [Bfrom Bfx BA] /=.
+apply: filterS; first by apply: preimage_subset BA.
+apply: open_nbhs_nbhs; split => //. 
+rewrite /open_from /= in Bfrom.
+have:= Bfrom. move => -[] C CO <-. 
+rewrite preimage_bigcup.
+apply: bigcup_open => i /CO [] /= D Dsub <-.
+rewrite preimage_bigcap /=. 
+rewrite bigcap_fset /= big_seq.
+apply: bigsetI_open => /= E /Dsub.
+move/set_mem. 
+rewrite /init_fam_subbase /=. 
+move=> -[j [A0 -> oA]].  
+rewrite -comp_preimage. 
+have /continuousP := cont j.
+apply. 
+Qed. 
 
 (* The following uses an extra hypothesis *)
 (* Lemma continuous_init_fam (V : topologicalType) (f : V -> W) : *)
