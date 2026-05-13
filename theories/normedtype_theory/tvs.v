@@ -1,4 +1,4 @@
-(* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)  
+(* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)   
 From HB Require Import structures.
 From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector.
 From mathcomp Require Import interval_inference.
@@ -872,26 +872,64 @@ Notation "{ 'ddist' n }" := (_.-ddist n).
 Section absolutely_convex.
 Context (K : numDomainType) (V : lmodType K).
           
-Definition absolutely_convex_set  (A : set V) := convex_set A /\ (forall r, `|r| <= 1 ->  (fun x => r *: x) @`A `<=` A).
+Definition balanced_set (A : set V) := (forall r, `|r| <= 1 ->  (fun x => r *: x) @`A `<=` A).
+
+Definition absolutely_convex_set  (A : set V) := convex_set A /\ balanced_set A.
 
 Definition absorbing_set (A : set V) := forall x : V, exists a, exists2 r, (a \in A) & (x = r *:a).
-Definition pabsorbing_set (A : set V) := forall x : V, exists2 r, ( 0< r) & r*: x \in A.
 
+Definition pabsorbing_set (A : set V) := forall x : V, exists2 r, ( 0< r) & r*: x \in A.
 
 Definition absolutely_convex_hull  (A : set V) := smallest absolutely_convex_set A.
 
+
+
+(* TODO : move to convex.v *)
+Lemma setI_convex : setI_closed (@convex_set K V).
+Proof.
+move=> A B cA cB x y r /[!inE] -[xA xB] [yA yB]; split; apply/set_mem. 
+by apply/cA; apply/mem_set.
+by apply/cB; apply/mem_set.
+Qed.
+
+Lemma bigcap_convex : bigcap_closed (@convex_set K V).
+Proof.
+move=> H Hconv x y r /[!inE] /= Hx Hy A /[dup] HA /Hconv /(_ _ _ _ _ _ )/set_mem; apply. 
+- by apply: mem_set; apply: Hx.
+- by apply: mem_set; apply: Hy. 
+Qed.
+
+Lemma setI_balanced : setI_closed balanced_set.
+Proof.
+move=> A B bA bB x r /=; rewrite subsetI; split => z /= [t [At Bt] <-]. 
+- by apply: (bA _ r)  => //; exists t. 
+- by apply: (bB _ r)  => //; exists t. 
+Qed.
+
+Lemma bigcap_balanced : bigcap_closed balanced_set.
+Proof.
+move=> H Hconv /= r r1; apply: sub_bigcap => A HA x /= [t Ht <-].
+apply: (Hconv A HA r r1) => //.
+by exists t; first by apply: Ht.  
+Qed.
+
 Lemma absolutely_convex_hull_set  (A : set V) : absolutely_convex_set (absolutely_convex_hull A).
 Proof.
-Admitted.
+apply: bigcap_closed_smallest => H Habs.
+split. 
+- by apply: bigcap_convex; apply: (subset_trans Habs); apply: subIsetl. 
+- by apply: bigcap_balanced; apply: (subset_trans Habs); apply: subIsetr.  
+Qed.
 
 Lemma absolutely_convex_hullE  (A : set V):
   absolutely_convex_hull A = [set a | exists n  (t: {ddist n}) (l : n.-tuple V),
                              [set` l] `<=` A  /\  a = \sum_(i < n) t`_i *: l`_i].
-Admitted.
+Abort.
   
 Lemma absolutely_convex_hull_subset  (A : set V): A `<=` absolutely_convex_hull A.
 Proof.
-Admitted. 
+by exact: sub_gen_smallest.
+Qed.
 
 Lemma absolutely_convex0 (B : set V) :  B !=set0 -> absolutely_convex_set B  ->  B 0. 
 Proof. 
@@ -901,7 +939,8 @@ Qed.
 
 End absolutely_convex.
 
-(*From mathcomp Require Import ereal.*)
+
+
 
 Definition gauge_fun  (K : realType) (V : lmodType K) (A : set V)
   (absA :  absolutely_convex_set A) (absorbA: pabsorbing_set A)
@@ -915,11 +954,28 @@ fun v => inf [set r | (0 < r) /\  v \in (fun x => r *: x) @` A].
 
 Section gauge.
 Context (K : realType) (V : lmodType K) (A : set V) (absA :  absolutely_convex_set A) (absorbA: pabsorbing_set A).
-(*fun v =>  let B := [set r  | (0 < r) &  r *: v \in A]%classic in
-  if B == set0 then +oo%E else (ereal_inf (EFin @` B)).*)
 
-(* Definition gauge_fun (A : set V) : V -> K := fun v => inf 
-[set r | exists2 l, ( r = `| l | &  r *: v \in A].  *)
+(*TBD : from PR 1964 *)
+
+Lemma sup_ge0  (B : set K) : (forall x, B x -> 0 <= x) -> 0 <= sup B.
+Proof.
+Admitted.
+
+Lemma has_sup_wpZl (B : set K) (a : K) : 0 <= a ->  has_sup B -> has_sup [set a * x  | x in B ]. 
+Proof. 
+Admitted. 
+
+Lemma gt0_has_supZl (B : set K) (a : K) : 0 < a -> has_sup [set a * x  | x in B ] -> has_sup B. 
+Proof.
+Admitted. 
+
+Lemma ge0_supZl  (B : set K) (a : K) :
+  0 <= a -> sup [set a * x  | x in B ] = a * sup B  .
+Proof.
+Admitted.
+
+(* END TBD *)
+
 Notation gauge_fun := (gauge_fun absA absorbA).
 
 #[local] Lemma gauge0: gauge_fun 0 = 0.
@@ -953,6 +1009,7 @@ have -> : [set - (x : K) | x in set0] = set0 by rewrite seteqP; split => // x []
 by rewrite sup0 oppr0. 
 Qed.
 
+(*TO BE MOVED to reals *)
 Lemma supS (B : set K) (C : set K) : B !=set0 -> has_sup C -> B `<=` C -> sup B <= sup C.
 Proof. 
 move=> B0 supC BC. 
@@ -968,7 +1025,8 @@ rewrite /inf lerN2.
 apply: supS. by apply/nonemptyN.
 by apply/has_inf_supN. 
 by apply: image_subset.
-Qed. 
+Qed.
+(* END TO BE MOVED *) 
 
 
 (* TODO : factorise*)
@@ -1022,10 +1080,22 @@ rewrite !inE => /(_ Av Aw); rewrite /conv /=; apply.
 by rewrite !scalerA divff ?scale1r //; rewrite gt_eqF // addr_gt0.  
 Qed.  
 
-
+Lemma ge0_infZl : forall (B : set K) [a : K], 0 <= a -> inf [set a * x | x in B] = a * inf B.
+Proof.
+move => B a a0; rewrite /inf. 
+Search "sup" (-%R). 
+rewrite mulrC mulNr mulrC -ge0_supZl //.
+have -> : [set - x | x in [set a * x | x in B]]  = [set a * x | x in [set - x | x in B]].
+ admit.
+Admitted.
+ 
 (* see coq-robot/ode_common.v *)
 #[local] Lemma  gaugeZ :
-  forall r x, gauge_fun  (r *: x) = `|r| * gauge_fun x.
+  forall r x, gauge_fun (r *: x) = `|r| * gauge_fun x.
+Proof.
+move=> r x; rewrite /gauge_fun.
+rewrite /inf.  (@ge0_supZl _ `|r|). (norm_ge0 r)).  
+Check  ge0_supZl.
 move => r x.
 Admitted.
 
@@ -1060,32 +1130,6 @@ HB.instance Definition _ := GRing.Lmodule.on S.
 
 #[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
 Proof.
-  (*souci avec cvg_init_fam *) (* apply: subset_tran *)
-  move =>  /= [x y] /= C /=.
-  apply: cvg_init_fam => i /= A [/= esp /=eps0]; rewrite /ball_ /= =>  Aeps. 
-  (* apply : subset_trans *). exists A. 
-  exists ((p i) @^-1` [set r : R | `|r|<(esp/2)]) => /=.  
-  rewrite /Builders_14.open_from /= => -[A]/= Aset BA.
-  
-  
-  [/= eps /= eps0].   rewrite /ball_ /= =>  Beps.
-  Check [set [set p i x | x in A] | A in x0.1 + x0.2 @[x0 --> (x, y)]]. 
-  rewrite /nbhs /initial_fam_topology /= /filter_prod /filter_from /=.
-    Besp /=.
-
-exists ((p i) @^-1` B).
-
-A /= nA. ; apply: cvg_init_fam; last by exact: nA.
-move => i /= B [eps /= eps0]; rewrite /ball_ /= =>  Beps.
-rewrite /nbhs /=. Check open_nbhs_nbhs. 
-exists ((p i) @^-1` B).  ); last first. rewrite seteqP; split => r /=; first by move => [z] ? <- //. 
-move => Br. 
-(*forall U, V exists W in  B s.t. W subset U cap V *)
-(* apply: cvg_init_fam.  *)
-(*  move => /= [x y] /= A /= [B /= [/= oB Bxy BA]]. *)
-(* exists (B,B) => /=; last first. move => [s t] /=. apply: open_nbhs_nbhs; split.  Search "nbhs" "open".  Search "nbhs" "P". rewrite nbhs_openE /=. open_nbhsE.   *)
-(* apply/cvg_image_init_fam. *)
-(*   move => i. (* issue with range *) admit.  *)
 Admitted.
 
 #[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).  Admitted.
@@ -1101,7 +1145,7 @@ Context  (K : realType) (V : convexTvsType K) (A : set V) (absA : absolutely_con
 
 Check ((gauge_fun absA absorbA) : SemiNorm.type  V).  
 
-Lemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
+lLemma abs_convex_disk_basis : exists2 B :  set (set V), forall b, B b -> (absolutely_convex_set b) & basis B. 
 Proof.
 move: (@locally_convex K V) => -[B] convexB basisB.
 exists [set b | exists2 a, B a & (b = absolutely_convex_hull a)].
