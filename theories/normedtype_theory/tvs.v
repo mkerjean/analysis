@@ -1162,13 +1162,55 @@ Qed.
 Notation S := (initial_fam_topology p).
 HB.instance Definition _ := GRing.Lmodule.on S.
 
-
-
 #[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
 Proof.
+apply/continuous_init_fam => i/= [a b] /= A [e /= e0] piabeA.
+pose pia := p i @^-1` ball_ [eta normr] (p i a) (e / 2).
+pose pib := p i @^-1` ball_ [eta normr] (p i b) (e / 2).
+exists (pia, pib) => /=.
+  by split; apply: initial_fam_continuous; apply: nbhsx_ballx; rewrite divr_gt0.
+move=> [c d]/= [piac piad].
+apply: piabeA.
+rewrite /ball_/=.
+rewrite ger0_norm.
+  admit.
+rewrite /pia /= in piac.
+rewrite /pib /= in piad.
+have H1 := @ler_normD _ _ (p i) a b.
+have H2 := @ler_normD _ _ (p i) c d.
+rewrite (@le_lt_trans _ _ ((p i a + p i b) - (p i c + p i d)))//.
+  rewrite lerD// lerN2.
+  admit.
+rewrite opprD.
+rewrite addrAC addrA.
+rewrite -addrA.
+rewrite (addrC _ (p i b)).
+
+
+rewrite -addrACA.
+
+
+
+rewrite (splitr e)//.
+rewrite (le_lt_trans (ler_normB _ _))//.
+rewrite ltrD//.
+
+ler_normD
+
+
+
+
+red.
+
+
+apply/continuousP => /= A openA.
+
+
 Admitted.
 
-#[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).  Admitted.
+#[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).
+
+  Admitted.
 #[local] Lemma  initial_fam_locally_convex : exists2 B : set_system S,
     (forall b, b \in B -> convex_set b) & basis B. Admitted.
                                             
