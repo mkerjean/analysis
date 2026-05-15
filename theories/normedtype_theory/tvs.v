@@ -525,7 +525,166 @@ HB.instance Definition _ := Nbhs_isUniform_mixin.Build E
     entourage_filter entourage_refl
     entourage_inv entourage_split_ex
     nbhsE.
+
+HB.instance Definition _ := PreTopologicalNmodule_isTopologicalNmodule.Build E add_continuous.
+
+HB.instance Definition _ := TopologicalNmodule_isTopologicalLmodule.Build R E scale_continuous.
+
+
+HB.instance Definition _ := Uniform_isConvexTvs.Build R E locally_convex.
+
 HB.end.
+
+
+Search "isOpenTopological". 
+
+Notation "A `+ B" := [set x + y | x in A & y in B] (at level 54).
+Notation "r `*: B" := [set r *: x | x  in B] (at level 54).
+
+(* TODO : incorporate it in the next factories, but has to be redefined on open_from_basisat0 and open_from_subbasisat0
+HB.mixin Record isConvexTvsat (R: numDomainType) E & GRing.Lmodule R E :=
+{
+open_at0 : set_system E;
+mem0_setsystem : forall B, open_at0 B -> B (0 : E);
+split_setsystem : forall B, open_at0 B -> exists2 C, open_at0 C & ( C `+ C  `<=` B);
+expand_setsystem : forall B r, open_at0 B -> (0 <r ) -> exists2 U, open_at0 U & (r `*: U `<=` B);
+convex_setsystem : forall B, open_at0 B -> convex_set B
+}.
+
+HB.structure Definition ConvexTvsat (R : numDomainType) := {E of GRing.Lmodule R E & isConvexTvsat R E}.
+*)
+
+HB.factory Record Openat0_isConvexTvs (R: numDomainType) E  & GRing.Lmodule R E (*& isConvexTvsat R E*)
+:= { 
+open_at0 : set_system E;
+mem0_open : forall B, open_at0 B -> B 0;
+split_open : forall B, open_at0 B -> exists2 C, open_at0 C & ( C `+ C  `<=` B);
+expand_open : forall B r, open_at0 B -> (0 < r) -> exists2 U, open_at0 U & (r `*: U `<=` B);
+convex_open : forall B, open_at0 B -> convex_set B;
+openat0T : open_at0 [set: E] ;
+open_atI : setI_closed open_at0 ;
+open_at0_bigU : forall (I : Type) (f : I -> set E), (forall i, open_at0 (f i)) -> 
+    open_at0 (\bigcup_i f i) 
+}.
+
+Definition open_from_openat0 (R: numDomainType) (E : zmodType) (open_at0 : set_system E):=
+ [set [set a] `+ B | a in setT & B in open_at0].
+
+HB.builders Context R E & Openat0_isConvexTvs R E. 
+
+Local Notation open_from_openat0 := (open_from_openat0 R open_at0).
+
+#[local] Lemma opT : open_from_openat0 setT. Admitted.
+
+#[local]  Lemma opI : setI_closed open_from_openat0 . Admitted.
+
+#[local] Lemma op_bigU : forall (I : Type) (f : I -> set E), 
+ (forall i, open_from_openat0 (f i)) -> open_from_openat0  (\bigcup_i f i). Admitted. 
+
+HB.instance Definition _ := @isOpenTopological.Build E open_from_openat0  opT opI op_bigU.
+
+#[local] Lemma  add_continuous : continuous (fun x : E * E => x.1 + x.2). Admitted.
+
+#[local] Lemma scale_continuous : continuous (fun z : R^o * E => z.1 *: z.2). Admitted. 
+
+#[local] Lemma locally_convex : exists2 B : set_system E,
+    (forall b, b \in B -> convex_set b) & basis B. Admitted.
+ 
+HB.instance Definition _ := @PreTopologicalLmod_isConvexTvs.Build R E add_continuous scale_continuous locally_convex.  
+
+HB.end. 
+
+(* Mimicking the isBase factory in topology_structure *)
+HB.factory Record Basisat0_isConvexTvs (R: numDomainType) E  & GRing.Lmodule R E (*& isConvexTvsat R E*) := {
+basis_at0 : set_system E;
+mem0_basis : forall B, basis_at0 B -> B 0;
+split_basis : forall B, basis_at0 B -> exists2 C, basis_at0 C & ( C `+ C  `<=` B);
+expand_basis : forall B r, basis_at0 B -> (0 <r ) -> exists2 U, basis_at0 U & (r `*: U `<=` B);
+convex_basis: forall B, basis_at0 B -> convex_set B;
+ basisat0T : basis_at0 setT ;
+ basisI : setI_closed basis_at0
+}.
+
+Definition open_from_basisat0 (R: numDomainType) (E : zmodType) (basis_at0 : set_system E) :
+set_system E := open_from basis_at0 id. 
+(* swip open_from and open_from_openat0 ? *)
+
+HB.builders Context R E & Basisat0_isConvexTvs R E. 
+
+Local Definition open_from_basisat0 := open_from_basisat0 R (basis_at0).
+
+#[local] Lemma mem0_open : forall B, open_from_basisat0 B -> B (0 : E).  Admitted.
+
+#[local] Lemma split_open : forall B, open_from_basisat0 B -> exists2 C, open_from_basisat0 C & ( C `+ C  `<=` B).  Admitted.
+
+#[local] Lemma expand_open : forall B r, open_from_basisat0 B -> (0 <r ) -> exists2 U, open_from_basisat0 U & (r `*: U `<=` B).  Admitted.
+#[local] Lemma convex_open : forall B, open_from_basisat0 B -> convex_set B.   Admitted.
+
+(*HB.instance Definition _ := @isConvexTvsat.Build R E open_from_basisat0 mem0_setsystem split_setsystem expand_setsystem convex_setsystem.*)
+ 
+#[local] Lemma opT : open_from_basisat0 setT. Admitted.
+
+#[local]  Lemma opI : setI_closed open_from_basisat0. Admitted.
+
+#[local] Lemma open_from_basis_bigU : forall (I : Type) (f : I -> set E), (forall i, open_from_basisat0 (f i)) -> 
+     open_from_basisat0 (\bigcup_i f i). 
+Proof. 
+(* similar to this proof in topology structure *)
+(*Let open_from_bigU (I0 : Type) (f : I0 -> set T) :
+  (forall i, open_from (f i)) -> open_from (\bigcup_i f i).
+Proof.
+set fop := fun j => [set Dj | Dj `<=` D /\ f j = \bigcup_(i in Dj) b i].
+exists (\bigcup_j get (fop j)).
+  move=> i [j _ fopji].
+  suff /getPex [/(_ _ fopji)] : exists Dj, fop j Dj by [].
+  by have [Dj] := H j; exists Dj.
+rewrite predeqE => t; split=> [[i [j _ fopji bit]]|[j _]].
+  exists j => //; suff /getPex [_ ->] : exists Dj, fop j Dj by exists i.
+  by have [Dj] := H j; exists Dj.
+have /getPex [_ ->] : exists Dj, fop j Dj by have [Dj] := H j; exists Dj.
+by move=> [i]; exists i => //; exists j.
+Qed.*)
+Admitted.
+
+HB.instance Definition _ := @Openat0_isConvexTvs.Build R E open_from_basisat0 mem0_open split_open expand_open convex_open opT opI open_from_basis_bigU.
+
+HB.end. 
+
+(* Mimicking the isSubBase factory in topology_structure *)
+HB.factory Record SubBasisat0_isConvexTvs (R: numDomainType) E & GRing.Lmodule R E (*& isConvexTvsat R E*) := {
+subbasis_at0 : set_system E;
+mem0_subbasis : forall B, subbasis_at0 B -> B 0;
+split_subbasis : forall B, subbasis_at0 B -> exists2 C, subbasis_at0 C & ( C `+ C  `<=` B);
+expand_subbasis : forall B r, subbasis_at0 B -> (0 <r ) -> exists2 U, subbasis_at0 U & (r `*: U `<=` B);
+convex_subbasis: forall B, subbasis_at0 B -> convex_set B;
+basisat0T : subbasis_at0 setT ;
+}.
+
+Definition open_from_subbasisat0 (R: numDomainType) (E : lmodType R) (subbasis_at0 : set_system E) :
+set_system E := finI_from subbasis_at0 id.
+
+HB.builders Context R E & SubBasisat0_isConvexTvs R E. 
+
+Local Definition open_from_subbasisat0 := open_from_subbasisat0 (subbasis_at0).
+
+#[local] Lemma mem0_basis : forall B, open_from_subbasisat0 B -> B (0 : E).  Admitted.
+
+#[local] Lemma split_basis : forall B, open_from_subbasisat0 B -> exists2 C, open_from_subbasisat0 C & ( C `+ C  `<=` B).  Admitted.
+
+#[local] Lemma expand_basis : forall B r, open_from_subbasisat0 B -> (0 <r ) -> exists2 U, open_from_subbasisat0 U & (r `*: U `<=` B).  Admitted.
+#[local] Lemma convex_basis : forall B, open_from_subbasisat0 B -> convex_set B.   Admitted.
+
+(*HB.instance Definition _ := @isConvexTvsat.Build R E open_from_basisat0 mem0_setsystem split_setsystem expand_setsystem convex_setsystem.*)
+ 
+#[local] Lemma opT : open_from_subbasisat0 setT. Admitted.
+
+#[local]  Lemma opI : setI_closed open_from_subbasisat0. Admitted.
+
+HB.instance Definition _ := @Basisat0_isConvexTvs.Build R E open_from_subbasisat0 mem0_basis split_basis expand_basis convex_basis opT opI.
+ 
+HB.end. 
+
+
 
 Section ConvexTvs_numDomain.
 Context (R : numDomainType) (E : convexTvsType R) (U : set E).
@@ -1146,6 +1305,37 @@ End gauge.
 Section convex_topology_seminorm.
 Context (R : realFieldType) (E : lmodType R) (I : pointedType) (p : I -> SemiNorm.type E).
 
+Definition seminorm_on  : Type := E. 
+
+
+HB.instance Definition _ := GRing.Lmodule.on seminorm_on.
+Definition seminorm_subbasis := 
+[set A | exists i, exists2 e, (0 < e) & (A = (p i) @^-1` (ball (0 : R) e))] : set_system E. 
+
+Lemma mem0_seminorm_subbasis : forall B, seminorm_subbasis B -> B 0. Admitted. 
+
+Lemma split_seminorm_subbasis : forall B, seminorm_subbasis B -> exists2 C, seminorm_subbasis C & ( C `+ C  `<=` B). Admitted. (*use the following  initial_fam_add_continuous *)
+
+Lemma expand_seminorm_subbasis : forall B r, seminorm_subbasis B -> (0 <r ) -> exists2 U, seminorm_subbasis U & (r `*: U `<=` B). Admitted.
+
+Lemma convex_seminorm_subbasis: forall B, seminorm_subbasis B -> convex_set B. Admitted. 
+
+Lemma basisat0T : seminorm_subbasis setT. Admitted. 
+ 
+(*Lemma open_atI : setI_closed seminorm_subbasis. Admitted.
+
+Lemma open_at0_bigU : forall (I : Type) (f : I -> set F), (forall i, seminorm_subbasis (f i)) -> 
+    seminorm_subbasis (\bigcup_i f i). Admitted.  
+
+HB.instance Definition _ :=  @Openat0_isConvexTvs.Build R F seminorm_subbasis mem0_seminorm_subbasis split_seminorm_subbasis expand_seminorm_subbasis convex_seminorm_subbasis basisat0T open_atI open_at0_bigU.
+
+Check (F : convexTvsType R). 
+*)
+
+HB.instance Definition _ :=  @SubBasisat0_isConvexTvs.Build R (seminorm_on) seminorm_subbasis mem0_seminorm_subbasis split_seminorm_subbasis expand_seminorm_subbasis convex_seminorm_subbasis basisat0T.  
+  
+Check (seminorm_on : convexTvsType R). 
+
 Lemma range_seminorm:  forall f : SemiNorm.type E, (exists x : E, (f x)!= 0 ) -> range f = [set r : R | 0 <= r]. 
 Proof. 
 move => f [x /eqP fx] /=.
@@ -1159,10 +1349,13 @@ rewrite normZ normrM normfV normf -mulrA [X in _ * X]mulrC divff ?mulr1; apply/e
 by rewrite // eqr_norm_id.
 Qed. 
 
-Notation S := (initial_fam_topology p).
-HB.instance Definition _ := GRing.Lmodule.on S.
 
-#[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
+
+
+(* NB: this doesn't work as we strongly need a 0 basis. Here we are considering nbhs a = [ [A : set E |, exists e , A = [x | |p(x) - p(a)| <e]], while working from a 0 basis gives us nbhs a = [A : set E |, exists e , A = [x | p(x -a) < e]] *)
+
+(*
+#[local] Lemma  initial_fam_add_continuous : continuous (fun x : seminorm_on *  seminorm_on => x.1 + x.2).
 Proof.
 apply/continuous_init_fam => i/= [a b] /= A [e /= e0] piabeA.
 have lerB_seminormD v w : p i (v) - p i w <= p i (v + w).
@@ -1198,7 +1391,7 @@ Admitted.
     (forall b, b \in B -> convex_set b) & basis B. Admitted.
                                             
 HB.instance Definition _ :=  @PreTopologicalLmod_isConvexTvs.Build R S initial_fam_add_continuous initial_fam_scale_continuous initial_fam_locally_convex.
-
+*)
 End convex_topology_seminorm.
 
 Section generating_seminorm.
@@ -1223,3 +1416,5 @@ End generating_seminorm.
 
 
  (* TODO : apply it to hahn banach *)
+
+ (* TODO : define O-basis *)
