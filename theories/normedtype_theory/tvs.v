@@ -1165,47 +1165,30 @@ HB.instance Definition _ := GRing.Lmodule.on S.
 #[local] Lemma  initial_fam_add_continuous : continuous (fun x : S * S => x.1 + x.2).
 Proof.
 apply/continuous_init_fam => i/= [a b] /= A [e /= e0] piabeA.
+have lerB_seminormD v w : p i (v) - p i w <= p i (v + w).
+by rewrite -{1}[v](addrK w) lterBDl (le_trans (ler_normD _ _))// addrC Norm.Theory.normN.
+have ler_Bseminorm x y :   p i (x) - p i (y) <=  p i ( x - y).
+ by rewrite -[p i y]Norm.Theory.normN lerB_seminormD. 
+have ler_seminorm_norm x y :   `|p i (x) - p i (y)| <=  p i ( x - y). 
+  have [||_|_] // := @real_leP R (p i x) (p i y) => //; rewrite ?realE ?ger0_norm ?norm_ge0 //.   
+  by rewrite -(Norm.Theory.normN _ (x - y)) opprB; exact: ler_Bseminorm. 
 pose pia := p i @^-1` ball_ [eta normr] (p i a) (e / 2).
 pose pib := p i @^-1` ball_ [eta normr] (p i b) (e / 2).
+rewrite /nbhs /= /filter_prod /filter_from /=.
 exists (pia, pib) => /=.
   by split; apply: initial_fam_continuous; apply: nbhsx_ballx; rewrite divr_gt0.
-move=> [c d]/= [piac piad].
-apply: piabeA.
-rewrite /ball_/=.
-rewrite ger0_norm.
-  admit.
-rewrite /pia /= in piac.
-rewrite /pib /= in piad.
-have H1 := @ler_normD _ _ (p i) a b.
-have H2 := @ler_normD _ _ (p i) c d.
-rewrite (@le_lt_trans _ _ ((p i a + p i b) - (p i c + p i d)))//.
-  rewrite lerD// lerN2.
-  admit.
-rewrite opprD.
-rewrite addrAC addrA.
-rewrite -addrA.
-rewrite (addrC _ (p i b)).
-
-
-rewrite -addrACA.
-
-
-
-rewrite (splitr e)//.
-rewrite (le_lt_trans (ler_normB _ _))//.
-rewrite ltrD//.
-
-ler_normD
-
-
-
-
-red.
-
-
-apply/continuousP => /= A openA.
-
-
+move=> [c d]/= [piac piad]. rewrite /pia /= in piac.  rewrite /pib /= in piad. 
+apply: piabeA; rewrite /ball_ /=. 
+Search `| `| _ | - `| _ | | . 
+apply: le_lt_trans.  
+apply: ler_seminorm_norm. 
+rewrite opprD addrACA.
+have lem: p i (a - c + (b - d)) <= p i (a - c) + p i (b - d). 
+  by rewrite ?ler_normD //.
+apply: le_lt_trans; first by exact: lem.
+rewrite (splitr e); apply: ltrD. 
+move : (piac); rewrite /pia /=. (* apply: ler_seminorm_norm. 
+*)
 Admitted.
 
 #[local] Lemma  initial_fam_scale_continuous : continuous (fun z : R^o * S => z.1 *: z.2).
