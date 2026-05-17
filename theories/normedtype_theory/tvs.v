@@ -1,4 +1,4 @@
-(* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)   
+(* mathcomp analysis (c) 2026 Inria and AIST. License: CeCILL-C.              *)    
 From HB Require Import structures.
 From mathcomp Require Import all_ssreflect_compat ssralg ssrnum vector.
 From mathcomp Require Import interval_inference.
@@ -526,23 +526,22 @@ HB.instance Definition _ := Nbhs_isUniform_mixin.Build E
     entourage_inv entourage_split_ex
     nbhsE.
 
+(* TO BE DELETED once PR#1974 is merged *)
+
 HB.instance Definition _ := PreTopologicalNmodule_isTopologicalNmodule.Build E add_continuous.
 
 HB.instance Definition _ := TopologicalNmodule_isTopologicalLmodule.Build R E scale_continuous.
 
-
 HB.instance Definition _ := Uniform_isConvexTvs.Build R E locally_convex.
+(* END TO BE DELETED *)
 
 HB.end.
 
 
-Search "isOpenTopological". 
-
 Notation "A `+ B" := [set x + y | x in A & y in B] (at level 54).
 Notation "r `*: B" := [set r *: x | x  in B] (at level 54).
 
-(* TODO : incorporate it in the next factories, but has to be redefined on open_from_basisat0 and open_from_subbasisat0
-HB.mixin Record isConvexTvsat (R: numDomainType) E & GRing.Lmodule R E :=
+(* TODO : how to make a mixin isConvexTvssat of the following axioms, as open_at0 has to be redefined each time 
 {
 open_at0 : set_system E;
 mem0_setsystem : forall B, open_at0 B -> B (0 : E);
@@ -1193,39 +1192,29 @@ Qed.
   forall x y, gauge_fun (x + y) <=  gauge_fun x +  gauge_fun y.
 Proof.
 have A0 : A 0 by move: (absorbA 0)=> [??]; rewrite scaler0 inE.
-have :=  absA; rewrite /absolutely_convex_set => -[] convA /= balA.  
-move => x y; rewrite /gauge_fun. 
-have:= (absorbA x) => -[/= r r0]; rewrite inE /= => Arx. 
-have:= (absorbA y) => -[/= r' r0']; rewrite inE /= => Ary. 
-rewrite -inf_sumE.   
-- split => /=; rewrite /set0P.
-     exists r^-1 => //=; split=> //. 
-     rewrite ?invr_gt0 //. 
-     rewrite inE /=; exists (r *: x) => //.  
-     rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
-     by exists 0 => z [z0 _]; rewrite ltW.
-- split => /=; rewrite /set0P.
-    exists r'^-1 => //=; split=> //. 
-     rewrite ?invr_gt0 //. 
-     rewrite inE /=; exists (r' *: y) => //.  
-     rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
-     by exists 0 => z [z0 _]; rewrite ltW.
-apply: infS. 
-- split; last by exists 0 => [z] /= [z0 ] _ ; rewrite ltW.   
-  have:= (absorbA (x+y)) => -[/= r2 r20']; rewrite inE /= => Arxy. 
-    exists r2^-1 => //=; split=> //.  
-     rewrite ?invr_gt0 //. 
-     rewrite inE /=; exists (r2 *: (x + y)) => //.  
-     rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
-- exists (  r^-1 + r'^-1) => /=.  
-  exists r^-1 => //=. split=> //. 
+have :=  absA; rewrite /absolutely_convex_set => -[] convA /= balA.
+have lem (w : V) : (exists2 r, (0 < r) & A (r *: w)) -> has_inf [set t | 0 < t /\ w \in t `*: A].
+  move => [r r0 Aw]; split => /=; rewrite /set0P; last by exists 0 => z [z0 _]; rewrite ltW.
+  exists r^-1 => //=; split=> //.
   rewrite ?invr_gt0 //. 
-  rewrite inE /=; exists (r *: x) => //. 
-  rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
-  exists r'^-1 => //=. split=> //. 
-  rewrite ?invr_gt0 //. 
+  rewrite inE /=; exists (r *: w) => //.
+  by rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+move => x y; rewrite /gauge_fun.
+have:= (absorbA x) => -[/= r r0]; rewrite inE /= => Arx.
+have:= (absorbA y) => -[/= r' r0']; rewrite inE /= => Ary.
+have:= (absorbA (x+y)) => -[/= r2 r20']; rewrite inE /= => Arxy. 
+rewrite -inf_sumE; first by apply: lem; exists r.
+  by apply: lem; exists r'.
+apply: infS; first by apply: lem;  exists r2. 
+  exists (r^-1 + r'^-1) => /=.
+  exists r^-1 => //=. 
+    split=> //; rewrite ?invr_gt0 //. 
+    rewrite inE /=; exists (r *: x) => //. 
+    by rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+  exists r'^-1 => //=.
+  split=> //; rewrite ?invr_gt0 //. 
   rewrite inE /=; exists (r' *: y) => //.  
-  rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
+  by rewrite scalerA mulVf ?scale1r ?lt0r_neq0 //.
 move => z /= [t [t0]]; rewrite inE /= => [[v] Av rvx] [s] [s0]; rewrite inE /=. 
 move => [w Aw twy] <-. rewrite addr_gt0 => //; split => //; rewrite inE /=. 
 rewrite -twy -rvx. 
@@ -1237,7 +1226,7 @@ pose st := Itv01 (mathcomp_extra.divDl_ge0 (ltW t0) (ltW s0))
 have := convA v w st. 
 rewrite !inE => /(_ Av Aw); rewrite /conv /=; apply. 
 by rewrite !scalerA divff ?scale1r //; rewrite gt_eqF // addr_gt0.  
-Qed.  
+Qed.
 
 Lemma ge0_infZl : forall (B : set K) [a : K], 0 <= a -> inf [set a * x | x in B] = a * inf B.
 Proof.
@@ -1307,30 +1296,42 @@ Context (R : realFieldType) (E : lmodType R) (I : pointedType) (p : I -> SemiNor
 
 Definition seminorm_on  : Type := E. 
 
-
 HB.instance Definition _ := GRing.Lmodule.on seminorm_on.
 Definition seminorm_subbasis := 
 [set A | exists i, exists2 e, (0 < e) & (A = (p i) @^-1` (ball (0 : R) e))] : set_system E. 
 
-Lemma mem0_seminorm_subbasis : forall B, seminorm_subbasis B -> B 0. Admitted. 
+Lemma mem0_seminorm_subbasis : forall B, seminorm_subbasis B -> B 0.
+Proof. 
+by move=> B; rewrite /seminorm_subbasis /= => [[i] [e] e0 ->] /=; rewrite norm0; exact: ballxx.
+Qed.
 
-Lemma split_seminorm_subbasis : forall B, seminorm_subbasis B -> exists2 C, seminorm_subbasis C & ( C `+ C  `<=` B). Admitted. (*use the following  initial_fam_add_continuous *)
+Lemma split_seminorm_subbasis : 
+  forall B, seminorm_subbasis B -> exists2 C, seminorm_subbasis C & ( C `+ C  `<=` B).
+Proof.  
+move=> B; rewrite /seminorm_subbasis /= => [[i] [e] e0 ->] /=.
+exists (p i @^-1` (ball (0 : R) (e/2))); first by exists i; exists (e/2); rewrite ?divr_gt0.
+rewrite /ball /= => z /=; rewrite sub0r normrN => -[x]; rewrite sub0r normrN => ballx [y]. 
+rewrite sub0r normrE => bally <-; rewrite (splitr e).
+apply: le_lt_trans; last first. 
+  apply: ltrD; first by exact: ballx.
+  by exact: bally.
+(* Beware that now that we opened the Norm module ler_normD refers to semiNorm and not to norm*)
+apply: le_trans; last by apply: Num.Theory.ler_normD. 
+have :  p i (x + y) <= p i x + p i y by apply: ler_normD. 
+by rewrite ger0_le_norm ?nnegrE ?addr_ge0 ?norm_ge0. 
+Qed.
 
-Lemma expand_seminorm_subbasis : forall B r, seminorm_subbasis B -> (0 <r ) -> exists2 U, seminorm_subbasis U & (r `*: U `<=` B). Admitted.
+Lemma expand_seminorm_subbasis : 
+  forall B r, seminorm_subbasis B -> (0 <r ) -> exists2 U, seminorm_subbasis U & (r `*: U `<=` B). 
+move=> B r; rewrite /seminorm_subbasis /= => [[i] [e] e0 ->] r0/=.
+exists (p i @^-1` (ball (0 : R) (e/r))); first by exists i; exists (e/r); rewrite ?divr_gt0.
+rewrite /ball /= => z /=; rewrite sub0r normrN => -[x]; rewrite sub0r normrN => ballx <-.
+by rewrite normZ normrM normr_id [X in X*_]gtr0_norm // mulrC -ltr_pdivlMr.
+Qed.
 
 Lemma convex_seminorm_subbasis: forall B, seminorm_subbasis B -> convex_set B. Admitted. 
 
 Lemma basisat0T : seminorm_subbasis setT. Admitted. 
- 
-(*Lemma open_atI : setI_closed seminorm_subbasis. Admitted.
-
-Lemma open_at0_bigU : forall (I : Type) (f : I -> set F), (forall i, seminorm_subbasis (f i)) -> 
-    seminorm_subbasis (\bigcup_i f i). Admitted.  
-
-HB.instance Definition _ :=  @Openat0_isConvexTvs.Build R F seminorm_subbasis mem0_seminorm_subbasis split_seminorm_subbasis expand_seminorm_subbasis convex_seminorm_subbasis basisat0T open_atI open_at0_bigU.
-
-Check (F : convexTvsType R). 
-*)
 
 HB.instance Definition _ :=  @SubBasisat0_isConvexTvs.Build R (seminorm_on) seminorm_subbasis mem0_seminorm_subbasis split_seminorm_subbasis expand_seminorm_subbasis convex_seminorm_subbasis basisat0T.  
   
@@ -1347,7 +1348,7 @@ have /ltW := f0; rewrite -eqr_norm_id; move/eqP => normf /=.
 exists ((r/ f(x) *: x))=> //.  
 rewrite normZ normrM normfV normf -mulrA [X in _ * X]mulrC divff ?mulr1; apply/eqP => //.  
 by rewrite // eqr_norm_id.
-Qed. 
+Qed.
 
 
 
