@@ -8,6 +8,12 @@ digraph depend {
 		"theories/ereal"	[URL="mathcomp.analysis.ereal.html",
 			fillcolor=5,
 			label=ereal];
+		"theories/esum"	[URL="mathcomp.analysis.esum.html",
+			fillcolor=5,
+			label=esum];
+		"theories/numfun"	[URL="mathcomp.analysis.numfun.html",
+			fillcolor=5,
+			label=numfun];
 		"theories/landau"	[URL="mathcomp.analysis.landau.html",
 			fillcolor=5,
 			label=landau];
@@ -38,15 +44,15 @@ digraph depend {
 		"theories/convex"	[URL="mathcomp.analysis.convex.html",
 			fillcolor=5,
 			label=convex];
+		"theories/functional_analysis/hahn_banach_theorem"	[URL="mathcomp.analysis.hahn_banach_theorem.html",
+			fillcolor=5,
+			label=hahn_banach_theorem];
 		"theories/realfun"	[URL="mathcomp.analysis.realfun.html",
 			fillcolor=5,
 			label=realfun];
 		"theories/derive"	[URL="mathcomp.analysis.derive.html",
 			fillcolor=5,
 			label=derive];
-		"theories/numfun"	[URL="mathcomp.analysis.numfun.html",
-			fillcolor=5,
-			label=numfun];
 		"theories/exp"	[URL="mathcomp.analysis.exp.html",
 			fillcolor=5,
 			label=exp];
@@ -56,9 +62,6 @@ digraph depend {
 		"theories/ftc"	[URL="mathcomp.analysis.ftc.html",
 			fillcolor=5,
 			label=ftc];
-		"theories/esum"	[URL="mathcomp.analysis.esum.html",
-			fillcolor=5,
-			label=esum];
 		"theories/lebesgue_stieltjes_measure"	[URL="mathcomp.analysis.lebesgue_stieltjes_measure.html",
 			fillcolor=5,
 			label=lebesgue_stieltjes_measure];
@@ -459,6 +462,7 @@ digraph depend {
 	"classical/all_classical" -> "theories/topology_theory/topology_structure";
 	"classical/boolp" -> "classical/contra";
 	"classical/cardinality" -> "classical/fsbigop";
+	"classical/cardinality" -> "theories/measure_theory/measurable_structure";
 	"classical/classical_orders" -> "classical/all_classical";
 	"classical/classical_sets" -> "classical/functions";
 	"classical/contra" -> "classical/wochoice";
@@ -476,7 +480,7 @@ digraph depend {
 	"classical/all_ssreflect_compat" -> "classical/unstable";
 	"classical/all_ssreflect_compat" -> "experimental_reals/xfinmap";
 	"classical/wochoice" -> "classical/classical_sets";
-	"classical/unstable" -> "classical/functions";
+	"classical/unstable" -> "classical/classical_sets";
 	"reals/constructive_ereal" -> "reals/real_interval";
 	"reals/constructive_ereal" -> "experimental_reals/realseq";
 	"reals/constructive_ereal" -> "reals_stdlib/nsatz_realtype";
@@ -485,6 +489,7 @@ digraph depend {
 	"reals/reals" -> "reals_stdlib/Rstruct";
 	"reals/reals" -> "reals_stdlib/nsatz_realtype";
 	"reals/reals" -> "theories/topology_theory/pseudometric_structure";
+	"reals/reals" -> "theories/measure_theory/measurable_structure";
 	"reals/real_interval" -> "reals/all_reals";
 	"reals/prodnormedzmodule" -> "reals/all_reals";
 	"reals/all_reals" -> "theories/topology_theory/discrete_topology";
@@ -492,9 +497,13 @@ digraph depend {
 	"experimental_reals/discrete" -> "experimental_reals/realseq";
 	"experimental_reals/realseq" -> "experimental_reals/realsum";
 	"experimental_reals/realsum" -> "experimental_reals/distr";
-	"reals_stdlib/Rstruct" -> "analysis_stdlib/Rstruct_topology";
 	"theories/ereal" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
 	"theories/ereal" -> "theories/normedtype_theory/ereal_normedtype";
+	"theories/esum" -> "experimental_reals/realsum";
+	"theories/esum" -> "theories/measure_theory/measure_function";
+	"theories/numfun" -> "theories/esum";
+	"theories/numfun" -> "theories/realfun";
+	"reals_stdlib/Rstruct" -> "analysis_stdlib/Rstruct_topology";
 	"theories/topology_theory/topology" -> "theories/ereal";
 	"theories/topology_theory/topology" -> "theories/homotopy_theory/wedge_sigT";
 	"theories/topology_theory/topology" -> "theories/cantor";
@@ -503,6 +512,7 @@ digraph depend {
 	"theories/landau" -> "theories/sequences";
 	"theories/landau" -> "theories/derive";
 	"theories/normedtype_theory/normedtype" -> "theories/landau";
+	"theories/normedtype_theory/normedtype" -> "theories/functional_analysis/hahn_banach_theorem";
 	"theories/normedtype_theory/normedtype" -> "theories/showcase/summability";
 	"theories/topology_theory/bool_topology" -> "theories/topology_theory/topology";
 	"theories/topology_theory/compact" -> "theories/topology_theory/product_topology";
@@ -547,7 +557,6 @@ digraph depend {
 	"theories/measurable_realfun" -> "theories/lebesgue_measure";
 	"theories/measure_theory/measure" -> "theories/lebesgue_stieltjes_measure";
 	"theories/sequences" -> "theories/numfun";
-	"theories/sequences" -> "theories/measure_theory/measurable_structure";
 	"theories/sequences" -> "theories/showcase/pnt";
 	"theories/cantor" -> "theories/all_analysis";
 	"theories/normedtype_theory/num_normedtype" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
@@ -568,8 +577,6 @@ digraph depend {
 	"theories/realfun" -> "theories/lebesgue_stieltjes_measure";
 	"theories/derive" -> "theories/realfun";
 	"theories/derive" -> "theories/measure_theory/signed_measure";
-	"theories/numfun" -> "theories/realfun";
-	"theories/numfun" -> "theories/esum";
 	"theories/exp" -> "theories/measurable_realfun";
 	"theories/exp" -> "analysis_stdlib/Rstruct_topology";
 	"theories/trigo" -> "theories/gauss_integral";
@@ -584,7 +591,6 @@ digraph depend {
 	"theories/lebesgue_integral_theory/lebesgue_integral" -> "theories/probability_theory/uniform_distribution";
 	"theories/lebesgue_integral_theory/lebesgue_integral" -> "theories/probability_theory/poisson_distribution";
 	"theories/lebesgue_integral_theory/lebesgue_integral" -> "theories/charge";
-	"theories/esum" -> "theories/measure_theory/measure_function";
 	"theories/measure_theory/measurable_structure" -> "theories/measure_theory/measurable_function";
 	"theories/measure_theory/measure_function" -> "theories/measure_theory/counting_measure";
 	"theories/measure_theory/measure_function" -> "theories/measure_theory/dirac_measure";

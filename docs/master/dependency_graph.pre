@@ -36,6 +36,7 @@ subgraph cluster_classical { "classical/classical_sets"[label="classical_sets",U
   "classical/all_ssreflect_compat" -> "classical/classical_sets";
   "classical/boolp" -> "classical/classical_sets";
   "classical/mathcomp_extra" -> "classical/classical_sets";
+  "classical/unstable" -> "classical/classical_sets";
   "classical/wochoice" -> "classical/classical_sets";
 subgraph cluster_classical { "classical/mathcomp_extra"[label="mathcomp_extra",URL="mathcomp.classical.mathcomp_extra.html",fillcolor=1]}
   "classical/all_ssreflect_compat" -> "classical/mathcomp_extra";
@@ -121,9 +122,10 @@ subgraph cluster_reals { "experimental_reals/realseq"[label="realseq",URL="mathc
   "experimental_reals/xfinmap" -> "experimental_reals/realseq";
   "reals/constructive_ereal" -> "experimental_reals/realseq";
   "reals/reals" -> "experimental_reals/realseq";
-subgraph cluster_reals { "experimental_reals/realsum"[label="realsum",URL="mathcomp.experimental_reals.realsum.html",fillcolor=2,fontcolor=white]}  "classical/all_ssreflect_compat" -> "experimental_reals/realsum";
-  "classical/boolp" -> "experimental_reals/realsum";
+subgraph cluster_reals { "experimental_reals/realsum"[label="realsum",URL="mathcomp.experimental_reals.realsum.html",fillcolor=2,fontcolor=white]}  "classical/boolp" -> "experimental_reals/realsum";
+  "classical/cardinality" -> "experimental_reals/realsum";
   "classical/classical_sets" -> "experimental_reals/realsum";
+  "classical/fsbigop" -> "experimental_reals/realsum";
   "classical/functions" -> "experimental_reals/realsum";
   "classical/unstable" -> "experimental_reals/realsum";
   "experimental_reals/discrete" -> "experimental_reals/realsum";
@@ -131,6 +133,9 @@ subgraph cluster_reals { "experimental_reals/realsum"[label="realsum",URL="mathc
   "experimental_reals/xfinmap" -> "experimental_reals/realsum";
   "reals/constructive_ereal" -> "experimental_reals/realsum";
   "reals/reals" -> "experimental_reals/realsum";
+  "theories/ereal" -> "experimental_reals/realsum";
+  "theories/esum" -> "experimental_reals/realsum";
+  "theories/numfun" -> "experimental_reals/realsum";
 subgraph cluster_reals { "experimental_reals/distr"[label="distr",URL="mathcomp.experimental_reals.distr.html",fillcolor=2,fontcolor=white]}  "classical/all_ssreflect_compat" -> "experimental_reals/distr";
   "classical/boolp" -> "experimental_reals/distr";
   "classical/classical_sets" -> "experimental_reals/distr";
@@ -435,6 +440,8 @@ subgraph cluster_normedtype { "theories/normedtype_theory/num_normedtype"[label=
 subgraph cluster_normedtype { "theories/normedtype_theory/matrix_normedtype"[label="matrix_normedtype",URL="mathcomp.analysis.normedtype_theory.matrix_normedtype.html",fillcolor=9]}  "classical/all_ssreflect_compat" -> "theories/normedtype_theory/matrix_normedtype";
   "classical/boolp" -> "theories/normedtype_theory/matrix_normedtype";
   "classical/classical_sets" -> "theories/normedtype_theory/matrix_normedtype";
+  "classical/contra" -> "theories/normedtype_theory/matrix_normedtype";
+  "classical/unstable" -> "theories/normedtype_theory/matrix_normedtype";
   "reals/prodnormedzmodule" -> "theories/normedtype_theory/matrix_normedtype";
   "reals/reals" -> "theories/normedtype_theory/matrix_normedtype";
   "theories/normedtype_theory/normed_module" -> "theories/normedtype_theory/matrix_normedtype";
@@ -537,6 +544,16 @@ subgraph cluster_normedtype { "theories/normedtype_theory/normedtype"[label="nor
   "theories/normedtype_theory/tvs" -> "theories/normedtype_theory/normedtype";
   "theories/normedtype_theory/urysohn" -> "theories/normedtype_theory/normedtype";
   "theories/normedtype_theory/vitali_lemma" -> "theories/normedtype_theory/normedtype";
+subgraph cluster_analysis { "theories/functional_analysis/hahn_banach_theorem"[label="hahn_banach_theorem",URL="mathcomp.analysis.hahn_banach_theorem.html",fillcolor=5]}  "classical/boolp" -> "theories/functional_analysis/hahn_banach_theorem";
+  "classical/classical_sets" -> "theories/functional_analysis/hahn_banach_theorem";
+  "classical/contra" -> "theories/functional_analysis/hahn_banach_theorem";
+  "classical/filter" -> "theories/functional_analysis/hahn_banach_theorem";
+  "classical/mathcomp_extra" -> "theories/functional_analysis/hahn_banach_theorem";
+  "classical/unstable" -> "theories/functional_analysis/hahn_banach_theorem";
+  "reals/reals" -> "theories/functional_analysis/hahn_banach_theorem";
+  "theories/convex" -> "theories/functional_analysis/hahn_banach_theorem";
+  "theories/normedtype_theory/normedtype" -> "theories/functional_analysis/hahn_banach_theorem";
+  "theories/topology_theory/topology" -> "theories/functional_analysis/hahn_banach_theorem";
 subgraph cluster_analysis { "theories/sequences"[label="sequences",URL="mathcomp.analysis.sequences.html",fillcolor=5]}  "classical/all_ssreflect_compat" -> "theories/sequences";
   "classical/boolp" -> "theories/sequences";
   "classical/cardinality" -> "theories/sequences";
@@ -613,6 +630,7 @@ subgraph cluster_analysis { "theories/esum"[label="esum",URL="mathcomp.analysis.
   "classical/fsbigop" -> "theories/esum";
   "classical/functions" -> "theories/esum";
   "classical/mathcomp_extra" -> "theories/esum";
+  "classical/unstable" -> "theories/esum";
   "reals/reals" -> "theories/esum";
   "theories/ereal" -> "theories/esum";
   "theories/normedtype_theory/normedtype" -> "theories/esum";
@@ -653,10 +671,6 @@ subgraph cluster_measure { "theories/measure_theory/measurable_structure"[label=
   "classical/functions" -> "theories/measure_theory/measurable_structure";
   "classical/unstable" -> "theories/measure_theory/measurable_structure";
   "reals/reals" -> "theories/measure_theory/measurable_structure";
-  "theories/ereal" -> "theories/measure_theory/measurable_structure";
-  "theories/normedtype_theory/normedtype" -> "theories/measure_theory/measurable_structure";
-  "theories/sequences" -> "theories/measure_theory/measurable_structure";
-  "theories/topology_theory/topology" -> "theories/measure_theory/measurable_structure";
 subgraph cluster_measure { "theories/measure_theory/measure_function"[label="measure_function",URL="mathcomp.analysis.measure_theory.measure_function.html",fillcolor=11]}  "classical/all_ssreflect_compat" -> "theories/measure_theory/measure_function";
   "classical/boolp" -> "theories/measure_theory/measure_function";
   "classical/cardinality" -> "theories/measure_theory/measure_function";
@@ -743,16 +757,10 @@ subgraph cluster_measure { "theories/measure_theory/measure_extension"[label="me
   "theories/topology_theory/topology" -> "theories/measure_theory/measure_extension";
 subgraph cluster_measure { "theories/measure_theory/measurable_function"[label="measurable_function",URL="mathcomp.analysis.measure_theory.measurable_function.html",fillcolor=11]}  "classical/all_ssreflect_compat" -> "theories/measure_theory/measurable_function";
   "classical/boolp" -> "theories/measure_theory/measurable_function";
-  "classical/cardinality" -> "theories/measure_theory/measurable_function";
   "classical/classical_sets" -> "theories/measure_theory/measurable_function";
   "classical/functions" -> "theories/measure_theory/measurable_function";
   "classical/unstable" -> "theories/measure_theory/measurable_function";
-  "reals/reals" -> "theories/measure_theory/measurable_function";
-  "theories/ereal" -> "theories/measure_theory/measurable_function";
   "theories/measure_theory/measurable_structure" -> "theories/measure_theory/measurable_function";
-  "theories/normedtype_theory/normedtype" -> "theories/measure_theory/measurable_function";
-  "theories/sequences" -> "theories/measure_theory/measurable_function";
-  "theories/topology_theory/topology" -> "theories/measure_theory/measurable_function";
 subgraph cluster_measure { "theories/measure_theory/signed_measure"[label="signed_measure",URL="mathcomp.analysis.measure_theory.signed_measure.html",fillcolor=11]}  "classical/all_ssreflect_compat" -> "theories/measure_theory/signed_measure";
   "classical/boolp" -> "theories/measure_theory/signed_measure";
   "classical/cardinality" -> "theories/measure_theory/signed_measure";
