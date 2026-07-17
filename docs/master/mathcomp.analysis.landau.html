@@ -514,15 +514,7 @@ transitivity, product of functions, etc.
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> ring_scope</span>.<br/>
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> classical_set_scope</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="the_tag" class="id"><div name="the_tag" class=" tooltip">the_tag<span class='tooltip-area'><p>ocitv : forall [R : realType], set (set R)
-
-ocitv is not universe polymorphic
-Arguments ocitv [R] _
-ocitv is transparent
-Expands to: Constant mathcomp.analysis.lebesgue_stieltjes_measure.ocitv
-Declared in
-library mathcomp.analysis.lebesgue_stieltjes_measure, line 118, characters 11-16
-ocitv_display : Type -> measure_display
+<span class="vernacular">Definition</span><span class="id"> </span><span id="the_tag" class="id"><div name="the_tag" class=" tooltip">the_tag<span class='tooltip-area'><p>ocitv_display : Type -> measure_display
 
 ocitv_display is not universe polymorphic
 Arguments ocitv_display _%_type_scope
@@ -551,8 +543,7 @@ Expands to: Constant
             mathcomp.analysis.lebesgue_stieltjes_measure.lebesgue_stieltjes_measure
 Declared in
 library mathcomp.analysis.lebesgue_stieltjes_measure, line 500, characters 11-37
-</p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="gen_tag" class="id"><div name="gen_tag" class=" tooltip">gen_tag<span class='tooltip-area'><p>measurableTypeR : realType -> Type
+measurableTypeR : realType -> Type
 
 measurableTypeR is not universe polymorphic
 Arguments measurableTypeR R
@@ -561,8 +552,7 @@ Expands to: Constant
             mathcomp.analysis.lebesgue_stieltjes_measure.measurableTypeR
 Declared in
 library mathcomp.analysis.lebesgue_stieltjes_measure, line 516, characters 11-26
-</p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="a_tag" class="id"><div name="a_tag" class=" tooltip">a_tag<span class='tooltip-area'><p>lebesgue_display : realType -> measure_display
+lebesgue_display : realType -> measure_display
 
 lebesgue_display is not universe polymorphic
 Arguments lebesgue_display {R}
@@ -571,7 +561,33 @@ Expands to: Constant
             mathcomp.analysis.lebesgue_stieltjes_measure.lebesgue_display
 Declared in
 library mathcomp.analysis.lebesgue_stieltjes_measure, line 522, characters 11-27
+measurableR : forall {R : realType}, set (set R)
+
+measurableR is not universe polymorphic
+Arguments measurableR {R} _
+measurableR is transparent
+Expands to: Constant mathcomp.analysis.lebesgue_stieltjes_measure.measurableR
+Declared in
+library mathcomp.analysis.lebesgue_stieltjes_measure, line 524, characters 11-22
 </p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="gen_tag" class="id"><div name="gen_tag" class=" tooltip">gen_tag<span class='tooltip-area'><p>completed_lebesgue_stieltjes_measure :
+forall {R : realType} (f : cumulative R R),
+set
+  (caratheodory_type (R:=R)
+     (T:=lebesgue_stieltjes_measure_ocitv_type__canonical__measurable_structure_SemiRingOfSets
+           R)
+     (wlength f)^*%mu) ->
+\bar R
+
+completed_lebesgue_stieltjes_measure is not universe polymorphic
+Arguments completed_lebesgue_stieltjes_measure {R} f _%_classical_set_scope
+completed_lebesgue_stieltjes_measure is transparent
+Expands to: Constant
+            mathcomp.analysis.lebesgue_stieltjes_measure.completed_lebesgue_stieltjes_measure
+Declared in
+library mathcomp.analysis.lebesgue_stieltjes_measure, line 549, characters 11-47
+</p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="a_tag" class="id"><div name="a_tag" class=" tooltip">a_tag<span class='tooltip-area'></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="showo" class="id"><a name="showo" class="">showo</a></span><span class="id"> :</span> (<span class="id"><a href="mathcomp.analysis.landau.html#gen_tag">gen_tag</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span> (<span class="id"><a href="mathcomp.analysis.landau.html#the_tag">the_tag</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span> (<span class="id"><a href="mathcomp.analysis.landau.html#a_tag">a_tag</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>)<br/>
 <details>
 <summary class="toggleproof">Proof.</summary>
@@ -601,15 +617,7 @@ library mathcomp.analysis.lebesgue_stieltjes_measure, line 522, characters 11-27
 <span class="gallina-kwd"> by</span><span class="id"> case:</span><span class="id"> f</span><span class="id"> =&gt;</span><span class="id"> ?</span>. Qed.</div></details>
 <span class="vernacular">Hint</span><span class="id"> Resolve</span><span class="id"> littleo_class</span><span class="id"> :</span><span class="id"> core</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="littleo_clone" class="id"><div name="littleo_clone" class=" tooltip">littleo_clone<span class='tooltip-area'><p>measurableR : forall {R : realType}, set (set R)
-
-measurableR is not universe polymorphic
-Arguments measurableR {R} _
-measurableR is transparent
-Expands to: Constant mathcomp.analysis.lebesgue_stieltjes_measure.measurableR
-Declared in
-library mathcomp.analysis.lebesgue_stieltjes_measure, line 524, characters 11-22
-</p></span></div></span> (<span id="F:19" class="id"><a name="F:19" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span>) (<span id="g:20" class="id"><a name="g:20" class="">g</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.W">W</a></span>) (<span id="f:21" class="id"><a name="f:21" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.V">V</a></span>) (<span id="fT:22" class="id"><a name="fT:22" class="">fT</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#998309f02ce4cf4424ec64bf91deaa9e">{o_</a></span><span class="id"><a href="mathcomp.analysis.landau.html#F:19">F</a></span><span class="id"><a href="mathcomp.analysis.landau.html#998309f02ce4cf4424ec64bf91deaa9e"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#g:20">g</a></span><span class="id"><a href="mathcomp.analysis.landau.html#998309f02ce4cf4424ec64bf91deaa9e">}</a></span>)<span class="id"> </span><span id="c:23" class="id"><a name="c:23" class="">c</a></span><br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="littleo_clone" class="id"><div name="littleo_clone" class=" tooltip">littleo_clone<span class='tooltip-area'></span></div></span> (<span id="F:19" class="id"><a name="F:19" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span>) (<span id="g:20" class="id"><a name="g:20" class="">g</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.W">W</a></span>) (<span id="f:21" class="id"><a name="f:21" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.V">V</a></span>) (<span id="fT:22" class="id"><a name="fT:22" class="">fT</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#998309f02ce4cf4424ec64bf91deaa9e">{o_</a></span><span class="id"><a href="mathcomp.analysis.landau.html#F:19">F</a></span><span class="id"><a href="mathcomp.analysis.landau.html#998309f02ce4cf4424ec64bf91deaa9e"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#g:20">g</a></span><span class="id"><a href="mathcomp.analysis.landau.html#998309f02ce4cf4424ec64bf91deaa9e">}</a></span>)<span class="id"> </span><span id="c:23" class="id"><a name="c:23" class="">c</a></span><br/>
 &nbsp;&nbsp;<span class="id">&amp;</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#phant_id">phant_id</a></span> (<span class="id"><a href="mathcomp.analysis.landau.html#littleo_class">littleo_class</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#fT:22">fT</a></span>)<span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#c:23">c</a></span><span class="id"> :=</span><span class="id"> @</span><span class="id"><a href="mathcomp.analysis.landau.html#Littleo">Littleo</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#F:19">F</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#g:20">g</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#f:21">f</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#c:23">c</a></span>.<br/>
 <span class="vernacular">Notation</span> <span id="eb7776ed86f7e370e52c40e63e874f2a" class="id"><a name="eb7776ed86f7e370e52c40e63e874f2a" class="">&quot;[littleo 'of' f 'for' fT ]&quot;</a></span><span class="id"> :=</span> (<span class="id">@</span><span class="id"><a href="mathcomp.analysis.landau.html#littleo_clone">littleo_clone</a></span><span class="id"> _</span><span class="id"> _</span><span class="id"> f</span><span class="id"> fT</span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#idfun">idfun</a></span>).<br/>
 <span class="vernacular">Notation</span> <span id="3e21c8a5bc05314c523d761411156a62" class="id"><a name="3e21c8a5bc05314c523d761411156a62" class="">&quot;[littleo 'of' f ]&quot;</a></span><span class="id"> :=</span> (<span class="id">@</span><span class="id"><a href="mathcomp.analysis.landau.html#littleo_clone">littleo_clone</a></span><span class="id"> _</span><span class="id"> _</span><span class="id"> f</span><span class="id"> _</span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#idfun">idfun</a></span>).<br/>
@@ -623,23 +631,7 @@ library mathcomp.analysis.lebesgue_stieltjes_measure, line 524, characters 11-22
 <span class="gallina-kwd">by</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.Theory.mulr_ge0">mulr_ge0</a></span><span class="id"> //</span><span class="id"> ltrW</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="littleo0" class="id"><div name="littleo0" class=" tooltip">littleo0<span class='tooltip-area'><p>completed_lebesgue_stieltjes_measure :
-forall {R : realType} (f : cumulative R R),
-set
-  (caratheodory_type (R:=R)
-     (T:=lebesgue_stieltjes_measure_ocitv_type__canonical__measurable_structure_SemiRingOfSets
-           R)
-     (wlength f)^*%mu) ->
-\bar R
-
-completed_lebesgue_stieltjes_measure is not universe polymorphic
-Arguments completed_lebesgue_stieltjes_measure {R} f _%_classical_set_scope
-completed_lebesgue_stieltjes_measure is transparent
-Expands to: Constant
-            mathcomp.analysis.lebesgue_stieltjes_measure.completed_lebesgue_stieltjes_measure
-Declared in
-library mathcomp.analysis.lebesgue_stieltjes_measure, line 549, characters 11-47
-</p></span></div></span> (<span id="F:26" class="id"><a name="F:26" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span>)<span class="id"> </span><span id="g:27" class="id"><a name="g:27" class="">g</a></span><span class="id"> :=</span><br/>
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="littleo0" class="id"><div name="littleo0" class=" tooltip">littleo0<span class='tooltip-area'></span></div></span> (<span id="F:26" class="id"><a name="F:26" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span>)<span class="id"> </span><span id="g:27" class="id"><a name="g:27" class="">g</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.landau.html#Littleo">Littleo</a></span> (<span class="id"><a href="mathcomp.classical.boolp.html#asboolT">asboolT</a></span> (<span class="id">@</span><span class="id"><a href="mathcomp.analysis.landau.html#littleo0_subproof">littleo0_subproof</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#F:26">F</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#g:27">g</a></span><span class="id"> _</span>)).<br/>
 <br/>
 <span class="vernacular">Definition</span><span class="id"> </span><span id="the_littleo" class="id"><div name="the_littleo" class=" tooltip">the_littleo<span class='tooltip-area'></span></div></span> (_<span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span>) (<span id="F:28" class="id"><a name="F:28" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination.T">T</a></span>)<br/>
