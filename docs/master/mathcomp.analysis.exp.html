@@ -297,18 +297,18 @@ temporary: it should be subsumed by a proper theory of power series.
 <br/>
 <span class="vernacular">Variable</span><span class="id"> </span><span id="PseriesDiff.R" class="id"><a name="PseriesDiff.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.reals.html#Real.Exports.realType">realType</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="pseries" class="id"><div name="pseries" class=" tooltip">pseries<span class='tooltip-area'><p>compact_open_of_nbhs :
-forall {T U : topology_structure.Topological.type}
-  {K : set (topology_structure.Topological.sort T)},
-set (set compact_openK)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="pseries" class="id"><div name="pseries" class=" tooltip">pseries<span class='tooltip-area'><p>compactly_in :
+forall {U : topology_structure.Topological.type},
+set (topology_structure.Topological.sort U) ->
+set (set (topology_structure.Topological.sort U))
 
-compact_open_of_nbhs is not universe polymorphic
-Arguments compact_open_of_nbhs {T U} {K}%_classical_set_scope _
-compact_open_of_nbhs is transparent
+compactly_in is not universe polymorphic
+Arguments compactly_in {U} A%_classical_set_scope _
+compactly_in is transparent
 Expands to: Constant
-            mathcomp.analysis.topology_theory.function_spaces.compact_open_of_nbhs
+            mathcomp.analysis.topology_theory.function_spaces.compactly_in
 Declared in
-library mathcomp.analysis.topology_theory.function_spaces, line 954, characters 11-31
+library mathcomp.analysis.topology_theory.function_spaces, line 1082, characters 11-23
 </p></span></div></span><span class="id"> </span><span id="f:5" class="id"><a name="f:5" class="">f</a></span> (<span id="x:6" class="id"><a name="x:6" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#PseriesDiff.R">R</a></span>)<span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.sequences.html#bc57632c901d6913382d86a67ab7e110">[series</a></span><span class="id"><a href="mathcomp.analysis.sequences.html#bc57632c901d6913382d86a67ab7e110"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#f:5">f</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:7">i</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> *</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#x:6">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#663140372ac3b275aae871b74b140513"> ^+</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#663140372ac3b275aae871b74b140513"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#i:7">i</a></span><span class="id"><a href="mathcomp.analysis.sequences.html#bc57632c901d6913382d86a67ab7e110">]_</a></span><span id="i:7" class="id"><a name="i:7" class="">i</a></span>.<br/>
 <br/>
 <span class="vernacular">Fact</span><span class="id"> </span><span id="is_cvg_pseries_inside_norm" class="id"><a name="is_cvg_pseries_inside_norm" class="">is_cvg_pseries_inside_norm</a></span><span class="id"> </span><span id="f:8" class="id"><a name="f:8" class="">f</a></span> (<span id="x:9" class="id"><a name="x:9" class="">x</a></span><span class="id"> </span><span id="z:10" class="id"><a name="z:10" class="">z</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#PseriesDiff.R">R</a></span>)<span class="id"> :</span><br/>
@@ -345,17 +345,15 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#is_cvg_pseries_inside_norm">is_cvg_pseries_inside_norm</a></span><span class="id"> Cx</span><span class="id"> _;</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.Theory.normr_id">normr_id</a></span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="pseries_diffs" class="id"><div name="pseries_diffs" class=" tooltip">pseries_diffs<span class='tooltip-area'><p>compact_open_def :
-topology_structure.Topological.type ->
-topology_structure.Topological.type -> Type
+<span class="vernacular">Definition</span><span class="id"> </span><span id="pseries_diffs" class="id"><div name="pseries_diffs" class=" tooltip">pseries_diffs<span class='tooltip-area'><p>singletons : forall {T : Type}, set (set T)
 
-compact_open_def is not universe polymorphic
-Arguments compact_open_def {T U}
-compact_open_def is transparent
+singletons is not universe polymorphic
+Arguments singletons {T}%_type_scope _
+singletons is transparent
 Expands to: Constant
-            mathcomp.analysis.topology_theory.function_spaces.compact_open_def
+            mathcomp.analysis.topology_theory.function_spaces.singletons
 Declared in
-library mathcomp.analysis.topology_theory.function_spaces, line 977, characters 11-27
+library mathcomp.analysis.topology_theory.function_spaces, line 1130, characters 11-21
 </p></span></div></span> (<span id="f:20" class="id"><a name="f:20" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#nat">nat</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#PseriesDiff.R">R</a></span>)<span class="id"> </span><span id="i:21" class="id"><a name="i:21" class="">i</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:21">i</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#bda89d73ec4a8f23ae92b565ffb5aaa6">+1</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#6411ed08724033ae48d2865f0380d533">%:R</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> *</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#f:20">f</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:21">i</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#bda89d73ec4a8f23ae92b565ffb5aaa6">+1</a></span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="pseries_diffsN" class="id"><a name="pseries_diffsN" class="">pseries_diffsN</a></span> (<span id="f:22" class="id"><a name="f:22" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#nat">nat</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#PseriesDiff.R">R</a></span>)<span class="id"> :</span> <span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#pseries_diffs">pseries_diffs</a></span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:'-'_x">-</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:'-'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#f:22">f</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:'-'_x">-</a></span>(<span class="id"><a href="mathcomp.analysis.exp.html#pseries_diffs">pseries_diffs</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#f:22">f</a></span>).<br/>
@@ -931,39 +929,7 @@ Qed.</div></details>
 Qed.</div></details>
 <span class="vernacular">Local</span><span class="vernacular"> Close</span><span class="vernacular"> Scope</span><span class="id"> convex_scope</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="expR_itv_boundl" class="id"><div name="expR_itv_boundl" class=" tooltip">expR_itv_boundl<span class='tooltip-area'><p>singletons : forall {T : Type}, set (set T)
-
-singletons is not universe polymorphic
-Arguments singletons {T}%_type_scope _
-singletons is transparent
-Expands to: Constant
-            mathcomp.analysis.topology_theory.function_spaces.singletons
-Declared in
-library mathcomp.analysis.topology_theory.function_spaces, line 1130, characters 11-21
-</p></span></div></span><span class="id"> </span><span id="b:201" class="id"><a name="b:201" class="">b</a></span><span class="id"> :=</span><br/>
-&nbsp;&nbsp;<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.preorder.html#Order.max">Order</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.preorder.html#Order.max">max</a></span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BRight">BRight</a></span><span class="id"> 0%Z</span>) (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#IntItv.add_boundl">IntItv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#IntItv.add_boundl">add_boundl</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#b:201">b</a></span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BLeft">BLeft</a></span><span class="id"> 1</span>)).<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="expR_itv_boundr" class="id"><div name="expR_itv_boundr" class=" tooltip">expR_itv_boundr<span class='tooltip-area'><p>equicontinuous :
-forall {X : topology_structure.Topological.type} {Y : puniformType}
-  {I : Type},
-set I -> (I -> topology_structure.Topological.sort X -> Y) -> Prop
-
-equicontinuous is not universe polymorphic
-Arguments equicontinuous {X Y} {I}%_type_scope W%_classical_set_scope
-  d%_function_scope
-equicontinuous is transparent
-Expands to: Constant
-            mathcomp.analysis.topology_theory.function_spaces.equicontinuous
-Declared in
-library mathcomp.analysis.topology_theory.function_spaces, line 1173, characters 11-25
-</p></span></div></span><span class="id"> </span><span id="b:202" class="id"><a name="b:202" class="">b</a></span><span class="id"> :=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#b:202">b</a></span><span class="gallina-kwd"> with</span><br/>
-&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BSide">BSide</a></span><span class="id"> _</span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.ssrint.html#Negz">Negz</a></span><span class="id"> _</span>)<span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BLeft">BLeft</a></span><span class="id"> 1%Z</span><br/>
-&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BSide">BSide</a></span><span class="id"> b</span><span class="id"> 0%Z</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BSide">BSide</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#b:202">b</a></span><span class="id"> 1%Z</span><br/>
-&nbsp;&nbsp;<span class="id">|</span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#eb71d3676c6a8a76db4e9bd0a59bada9">+oo</a></span><span class="id">%O</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="expR_itv" class="id"><div name="expR_itv" class=" tooltip">expR_itv<span class='tooltip-area'><p>pointwise_precompact :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="expR_itv_boundl" class="id"><div name="expR_itv_boundl" class=" tooltip">expR_itv_boundl<span class='tooltip-area'><p>pointwise_precompact :
 forall {X : topology_structure.Topological.type} {Y : puniformType}
   {I : Type},
 set I -> (I -> topology_structure.Topological.sort X -> Y) -> Prop
@@ -976,6 +942,45 @@ Expands to: Constant
             mathcomp.analysis.topology_theory.function_spaces.pointwise_precompact
 Declared in
 library mathcomp.analysis.topology_theory.function_spaces, line 1208, characters 11-31
+</p></span></div></span><span class="id"> </span><span id="b:201" class="id"><a name="b:201" class="">b</a></span><span class="id"> :=</span><br/>
+&nbsp;&nbsp;<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.preorder.html#Order.max">Order</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.preorder.html#Order.max">max</a></span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BRight">BRight</a></span><span class="id"> 0%Z</span>) (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#IntItv.add_boundl">IntItv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#IntItv.add_boundl">add_boundl</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#b:201">b</a></span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BLeft">BLeft</a></span><span class="id"> 1</span>)).<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="expR_itv_boundr" class="id"><div name="expR_itv_boundr" class=" tooltip">expR_itv_boundr<span class='tooltip-area'><p>small_ent_sub :
+forall {Y : puniformType} [E : set (Y * Y)],
+entourage E ->
+filter.prop_near1 (filter.powerset_filter_from entourage) (P:=subset^~ E)
+  (inPhantom (forall E' : set (Y * Y), (E' `<=` E)%classic))
+
+small_ent_sub is not universe polymorphic
+Arguments small_ent_sub {Y} [E]%_classical_set_scope _
+small_ent_sub is transparent
+Expands to: Constant
+            mathcomp.analysis.topology_theory.function_spaces.small_ent_sub
+Declared in
+library mathcomp.analysis.topology_theory.function_spaces, line 1281, characters 11-24
+</p></span></div></span><span class="id"> </span><span id="b:202" class="id"><a name="b:202" class="">b</a></span><span class="id"> :=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#b:202">b</a></span><span class="gallina-kwd"> with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BSide">BSide</a></span><span class="id"> _</span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.ssrint.html#Negz">Negz</a></span><span class="id"> _</span>)<span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BLeft">BLeft</a></span><span class="id"> 1%Z</span><br/>
+&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BSide">BSide</a></span><span class="id"> b</span><span class="id"> 0%Z</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#BSide">BSide</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#b:202">b</a></span><span class="id"> 1%Z</span><br/>
+&nbsp;&nbsp;<span class="id">|</span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#eb71d3676c6a8a76db4e9bd0a59bada9">+oo</a></span><span class="id">%O</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="expR_itv" class="id"><div name="expR_itv" class=" tooltip">expR_itv<span class='tooltip-area'><p>eval :
+forall {X Y : topology_structure.Topological.type},
+topology_structure.Continuous.type
+  (topology_structure.Topological.Exports.topology_structure_Topological__to__filter_Nbhs
+     X)
+  (topology_structure.Topological.Exports.topology_structure_Topological__to__filter_Nbhs
+     Y) *
+topology_structure.Topological.sort X ->
+topology_structure.Topological.sort Y
+
+eval is not universe polymorphic
+Arguments eval {X Y} _
+eval is transparent
+Expands to: Constant mathcomp.analysis.topology_theory.function_spaces.eval
+Declared in
+library mathcomp.analysis.topology_theory.function_spaces, line 1605, characters 11-15
 </p></span></div></span><span class="id"> </span><span id="i:204" class="id"><a name="i:204" class="">i</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:204">i</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Top">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Top">Top</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Real">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Real">Real</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#c5d1424554ae4f6d783beb7e2b68e8c1">`[</a></span><span class="id">0%Z</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#c5d1424554ae4f6d783beb7e2b68e8c1">,</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#c5d1424554ae4f6d783beb7e2b68e8c1"> +oo[</a></span><br/>
@@ -1003,19 +1008,16 @@ library mathcomp.analysis.topology_theory.function_spaces, line 1208, characters
 &nbsp;&nbsp;<span class="id">+</span><span class="gallina-kwd"> by</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#expR_lt1">expR_lt1</a></span><span class="id"> =&gt;</span><span class="id"> /</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.order.html#Order.POrderTheory.le_lt_trans">le_lt_trans</a></span><span class="id">;</span><span class="id"> apply</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="expR_inum" class="id"><div name="expR_inum" class=" tooltip">expR_inum<span class='tooltip-area'><p>small_ent_sub :
-forall {Y : puniformType} [E : set (Y * Y)],
-entourage E ->
-filter.prop_near1 (filter.powerset_filter_from entourage) (P:=subset^~ E)
-  (inPhantom (forall E' : set (Y * Y), (E' `<=` E)%classic))
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="expR_inum" class="id"><div name="expR_inum" class=" tooltip">expR_inum<span class='tooltip-area'><p>connected :
+forall {T : topology_structure.Topological.type},
+set (topology_structure.Topological.sort T) -> Prop
 
-small_ent_sub is not universe polymorphic
-Arguments small_ent_sub {Y} [E]%_classical_set_scope _
-small_ent_sub is transparent
-Expands to: Constant
-            mathcomp.analysis.topology_theory.function_spaces.small_ent_sub
+connected is not universe polymorphic
+Arguments connected {T} A%_classical_set_scope
+connected is transparent
+Expands to: Constant mathcomp.analysis.topology_theory.connected.connected
 Declared in
-library mathcomp.analysis.topology_theory.function_spaces, line 1281, characters 11-24
+library mathcomp.analysis.topology_theory.connected, line 30, characters 11-20
 </p></span></div></span> (<span id="i:209" class="id"><a name="i:209" class="">i</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.t">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.t">t</a></span>) (<span id="x:210" class="id"><a name="x:210" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.def">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.def">def</a></span> (<span class="id">@</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.num_sem">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.num_sem">num_sem</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#expR.R">R</a></span>)<span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:209">i</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.mk">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.mk">mk</a></span> (<span class="id"><a href="mathcomp.analysis.exp.html#num_spec_expR">num_spec_expR</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#x:210">x</a></span>).<br/>
 <br/>
@@ -1027,22 +1029,17 @@ library mathcomp.analysis.topology_theory.function_spaces, line 1281, characters
 <br/>
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> ereal_scope</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="expeR" class="id"><div name="expeR" class=" tooltip">expeR<span class='tooltip-area'><p>eval :
-forall {X Y : topology_structure.Topological.type},
-topology_structure.Continuous.type
-  (topology_structure.Topological.Exports.topology_structure_Topological__to__filter_Nbhs
-     X)
-  (topology_structure.Topological.Exports.topology_structure_Topological__to__filter_Nbhs
-     Y) *
-topology_structure.Topological.sort X ->
-topology_structure.Topological.sort Y
+<span class="vernacular">Definition</span><span class="id"> </span><span id="expeR" class="id"><div name="expeR" class=" tooltip">expeR<span class='tooltip-area'><p>separated :
+forall [T : topology_structure.Topological.type],
+set (topology_structure.Topological.sort T) ->
+set (topology_structure.Topological.sort T) -> Prop
 
-eval is not universe polymorphic
-Arguments eval {X Y} _
-eval is transparent
-Expands to: Constant mathcomp.analysis.topology_theory.function_spaces.eval
+separated is not universe polymorphic
+Arguments separated [T] (A B)%_classical_set_scope
+separated is transparent
+Expands to: Constant mathcomp.analysis.topology_theory.connected.separated
 Declared in
-library mathcomp.analysis.topology_theory.function_spaces, line 1605, characters 11-15
+library mathcomp.analysis.topology_theory.connected, line 37, characters 11-20
 </p></span></div></span><span class="id"> </span><span id="x:212" class="id"><a name="x:212" class="">x</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#x:212">x</a></span><span class="gallina-kwd"> with</span><span class="id"> |</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span> (<span class="id"><a href="mathcomp.analysis.sequences.html#expR">expR</a></span><span class="id"> r</span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> |</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> |</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> =&gt;</span><span class="id"> 0</span><span class="gallina-kwd"> end</span>.<br/>
 <br/>
@@ -1148,16 +1145,19 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Notation</span><span class="id"> </span><span id="exp" class="id"><a name="exp" class="">exp</a></span><span class="id"> :=</span> (<span class="id">@</span><span class="id"><a href="mathcomp.analysis.sequences.html#expR">expR</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#Ln.R">R</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="ln" class="id"><div name="ln" class=" tooltip">ln<span class='tooltip-area'><p>connected :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="ln" class="id"><div name="ln" class=" tooltip">ln<span class='tooltip-area'><p>connected_component :
 forall {T : topology_structure.Topological.type},
-set (topology_structure.Topological.sort T) -> Prop
+set (topology_structure.Topological.sort T) ->
+topology_structure.Topological.sort T ->
+set (topology_structure.Topological.sort T)
 
-connected is not universe polymorphic
-Arguments connected {T} A%_classical_set_scope
-connected is transparent
-Expands to: Constant mathcomp.analysis.topology_theory.connected.connected
+connected_component is not universe polymorphic
+Arguments connected_component {T} A%_classical_set_scope x _
+connected_component is transparent
+Expands to: Constant
+            mathcomp.analysis.topology_theory.connected.connected_component
 Declared in
-library mathcomp.analysis.topology_theory.connected, line 30, characters 11-20
+library mathcomp.analysis.topology_theory.connected, line 160, characters 11-30
 </p></span></div></span><span class="id"> </span><span id="x:233" class="id"><a name="x:233" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#Ln.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#e477842ee7959a2992c582e0ee2b070d">[get</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e477842ee7959a2992c582e0ee2b070d"> </a></span><span id="y:234" class="id"><a name="y:234" class="">y</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e477842ee7959a2992c582e0ee2b070d"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e477842ee7959a2992c582e0ee2b070d"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#exp">exp</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#y:234">y</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#x:233">x</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e477842ee7959a2992c582e0ee2b070d"> ]</a></span>.<br/>
 <br/>
 <span class="vernacular">Fact</span><span class="id"> </span><span id="ln0" class="id"><a name="ln0" class="">ln0</a></span><span class="id"> </span><span id="x:235" class="id"><a name="x:235" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#x:235">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#cb42ec59ad57b25928e1718b4e69e031"> &lt;=</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#cb42ec59ad57b25928e1718b4e69e031"> </a></span><span class="id">0</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#ln">ln</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#x:235">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id">0</span>.<br/>
@@ -1345,17 +1345,18 @@ Qed.</div></details>
 <span class="vernacular">Variable</span><span class="id"> </span><span id="PowR.R" class="id"><a name="PowR.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.reals.html#Real.Exports.realType">realType</a></span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> a</span><span class="id"> x</span><span class="id"> y</span><span class="id"> z</span><span class="id"> r</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#PowR.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="powR" class="id"><div name="powR" class=" tooltip">powR<span class='tooltip-area'><p>separated :
-forall [T : topology_structure.Topological.type],
-set (topology_structure.Topological.sort T) ->
-set (topology_structure.Topological.sort T) -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="powR" class="id"><div name="powR" class=" tooltip">powR<span class='tooltip-area'><p>sigT_nbhs :
+forall {I : choiceType} {X : I -> topology_structure.Topological.type},
+{i : I & topology_structure.Topological.sort (X i)} ->
+set_system {i : I & topology_structure.Topological.sort (X i)}
 
-separated is not universe polymorphic
-Arguments separated [T] (A B)%_classical_set_scope
-separated is transparent
-Expands to: Constant mathcomp.analysis.topology_theory.connected.separated
+sigT_nbhs is not universe polymorphic
+Arguments sigT_nbhs {I} {X}%_function_scope x _
+sigT_nbhs is transparent
+Expands to: Constant
+            mathcomp.analysis.topology_theory.sigT_topology.sigT_nbhs
 Declared in
-library mathcomp.analysis.topology_theory.connected, line 37, characters 11-20
+library mathcomp.analysis.topology_theory.sigT_topology, line 26, characters 11-20
 </p></span></div></span><span class="id"> </span><span id="a:272" class="id"><a name="a:272" class="">a</a></span><span class="id"> </span><span id="x:273" class="id"><a name="x:273" class="">x</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x">if</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#a:272">a</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id">0</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> then</a></span> (<span class="id"><a href="mathcomp.analysis.exp.html#x:273">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id">0</span>)<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#6411ed08724033ae48d2865f0380d533">%:R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> else</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> </a></span><span class="id"><a href="mathcomp.analysis.sequences.html#expR">expR</a></span> (<span class="id"><a href="mathcomp.analysis.exp.html#x:273">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> *</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#ln">ln</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#a:272">a</a></span>).<br/>
 <br/>
 <span class="vernacular">Local</span><span class="vernacular"> Notation</span> <span id="b5ece597013eae69a3b336b8aded14c8" class="id"><a name="b5ece597013eae69a3b336b8aded14c8" class="">&quot;a `^ x&quot;</a></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.analysis.exp.html#powR">powR</a></span><span class="id"> a</span><span class="id"> x</span>).<br/>
@@ -1674,20 +1675,7 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> rewrite</span><span class="id"> 2![_</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.divalg.html#4e5a4c91ec0aa12de06dfe1cc07ea126">^-1</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> *</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> </a></span><span class="id">_]</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#GRing.Theory.mulrC">mulrC</a></span><span class="id"> 3?</span><span class="id"><a href="mathcomp.analysis.exp.html#lnK">lnK</a></span><span class="id"> ?</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.Theory.posrE">posrE</a></span><span class="id">//</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.Theory.addr_gt0">addr_gt0</a></span><span class="id">//</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.Theory.mulr_gt0">mulr_gt0</a></span><span class="id">//</span><span class="id"> ?</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.Theory.invr_gt0">invr_gt0</a></span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="powR_itv" class="id"><div name="powR_itv" class=" tooltip">powR_itv<span class='tooltip-area'><p>connected_component :
-forall {T : topology_structure.Topological.type},
-set (topology_structure.Topological.sort T) ->
-topology_structure.Topological.sort T ->
-set (topology_structure.Topological.sort T)
-
-connected_component is not universe polymorphic
-Arguments connected_component {T} A%_classical_set_scope x _
-connected_component is transparent
-Expands to: Constant
-            mathcomp.analysis.topology_theory.connected.connected_component
-Declared in
-library mathcomp.analysis.topology_theory.connected, line 160, characters 11-30
-</p></span></div></span><span class="id"> </span><span id="i:361" class="id"><a name="i:361" class="">i</a></span><span class="id"> :=</span><br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="powR_itv" class="id"><div name="powR_itv" class=" tooltip">powR_itv<span class='tooltip-area'></span></div></span><span class="id"> </span><span id="i:361" class="id"><a name="i:361" class="">i</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:361">i</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Top">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Top">Top</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Real">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Real">Real</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#2d0f4f3a8486d97a7c68fd4d2f96ccac">`]-oo,</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#2d0f4f3a8486d97a7c68fd4d2f96ccac"> +oo[</a></span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Real">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.Real">Real</a></span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval.html#Interval">Interval</a></span><span class="id"> l</span><span class="id"> u</span>)<span class="id"> =&gt;</span><br/>
@@ -1709,19 +1697,7 @@ library mathcomp.analysis.topology_theory.connected, line 160, characters 11-30
 <span class="id">-</span><span class="gallina-kwd"> by</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#powR_gt0">powR_gt0</a></span><span class="id">;</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.order.html#Order.POrderTheory.le_lt_trans">le_lt_trans</a></span><span class="id"> lx</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="powR_inum" class="id"><div name="powR_inum" class=" tooltip">powR_inum<span class='tooltip-area'><p>sigT_nbhs :
-forall {I : choiceType} {X : I -> topology_structure.Topological.type},
-{i : I & topology_structure.Topological.sort (X i)} ->
-set_system {i : I & topology_structure.Topological.sort (X i)}
-
-sigT_nbhs is not universe polymorphic
-Arguments sigT_nbhs {I} {X}%_function_scope x _
-sigT_nbhs is transparent
-Expands to: Constant
-            mathcomp.analysis.topology_theory.sigT_topology.sigT_nbhs
-Declared in
-library mathcomp.analysis.topology_theory.sigT_topology, line 26, characters 11-20
-</p></span></div></span> (<span id="i:367" class="id"><a name="i:367" class="">i</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.t">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.t">t</a></span>) (<span id="x:368" class="id"><a name="x:368" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.def">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.def">def</a></span> (<span class="id">@</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.num_sem">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.num_sem">num_sem</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#PowR.R">R</a></span>)<span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:367">i</a></span>)<span class="id"> </span><span id="p:369" class="id"><a name="p:369" class="">p</a></span><span class="id"> :=</span><br/>
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="powR_inum" class="id"><div name="powR_inum" class=" tooltip">powR_inum<span class='tooltip-area'></span></div></span> (<span id="i:367" class="id"><a name="i:367" class="">i</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.t">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.t">t</a></span>) (<span id="x:368" class="id"><a name="x:368" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.def">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.def">def</a></span> (<span class="id">@</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.num_sem">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.num_sem">num_sem</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#PowR.R">R</a></span>)<span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#i:367">i</a></span>)<span class="id"> </span><span id="p:369" class="id"><a name="p:369" class="">p</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.mk">Itv</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#Itv.mk">mk</a></span> (<span class="id"><a href="mathcomp.analysis.exp.html#num_spec_powR">num_spec_powR</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#x:368">x</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#p:369">p</a></span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="powR_cvg0" class="id"><a name="powR_cvg0" class="">powR_cvg0</a></span> (<span id="x:370" class="id"><a name="x:370" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.exp.html#PowR.R">R</a></span>)<span class="id"> :</span><span class="id"> 0</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.Syntax.::ring_scope:x_'&lt;'_x"> &lt;</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.Syntax.::ring_scope:x_'&lt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#x:370">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#a:371">a</a></span><span class="id"><a href="mathcomp.analysis.exp.html#b5ece597013eae69a3b336b8aded14c8"> `^</a></span><span class="id"><a href="mathcomp.analysis.exp.html#b5ece597013eae69a3b336b8aded14c8"> </a></span><span class="id"><a href="mathcomp.analysis.exp.html#x:370">x</a></span><span class="id"><a href="mathcomp.classical.filter.html#9ae20bc67dba0e37ea0806b2f353bb2f"> @[</a></span><span id="a:371" class="id"><a name="a:371" class="">a</a></span><span class="id"><a href="mathcomp.classical.filter.html#9ae20bc67dba0e37ea0806b2f353bb2f"> --&gt;</a></span><span class="id"><a href="mathcomp.classical.filter.html#9ae20bc67dba0e37ea0806b2f353bb2f"> </a></span><span class="id">0</span><span class="id"><a href="mathcomp.analysis.topology_theory.num_topology.html#02fa8d8231c69eb0b6a7453874088890">^'+</a></span><span class="id"><a href="mathcomp.classical.filter.html#9ae20bc67dba0e37ea0806b2f353bb2f">]</a></span><span class="id"><a href="mathcomp.classical.filter.html#::classical_set_scope:x_'--&gt;'_x"> --&gt;</a></span><span class="id"><a href="mathcomp.classical.filter.html#::classical_set_scope:x_'--&gt;'_x"> </a></span><span class="id">0</span>.<br/>
