@@ -561,8 +561,7 @@ Expands to: Constant
             mathcomp.analysis.lebesgue_stieltjes_measure.lebesgue_display
 Declared in
 library mathcomp.analysis.lebesgue_stieltjes_measure, line 522, characters 11-27
-</p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="gen_tag" class="id"><div name="gen_tag" class=" tooltip">gen_tag<span class='tooltip-area'><p>measurableR : forall {R : realType}, set (set R)
+measurableR : forall {R : realType}, set (set R)
 
 measurableR is not universe polymorphic
 Arguments measurableR {R} _
@@ -571,7 +570,7 @@ Expands to: Constant mathcomp.analysis.lebesgue_stieltjes_measure.measurableR
 Declared in
 library mathcomp.analysis.lebesgue_stieltjes_measure, line 524, characters 11-22
 </p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="a_tag" class="id"><div name="a_tag" class=" tooltip">a_tag<span class='tooltip-area'><p>completed_lebesgue_stieltjes_measure :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="gen_tag" class="id"><div name="gen_tag" class=" tooltip">gen_tag<span class='tooltip-area'><p>completed_lebesgue_stieltjes_measure :
 forall {R : realType} (f : cumulative R R),
 set
   (caratheodory_type (R:=R)
@@ -588,6 +587,7 @@ Expands to: Constant
 Declared in
 library mathcomp.analysis.lebesgue_stieltjes_measure, line 549, characters 11-47
 </p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="a_tag" class="id"><div name="a_tag" class=" tooltip">a_tag<span class='tooltip-area'></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>.<br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="showo" class="id"><a name="showo" class="">showo</a></span><span class="id"> :</span> (<span class="id"><a href="mathcomp.analysis.landau.html#gen_tag">gen_tag</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span> (<span class="id"><a href="mathcomp.analysis.landau.html#the_tag">the_tag</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span> (<span class="id"><a href="mathcomp.analysis.landau.html#a_tag">a_tag</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#tt">tt</a></span>)<br/>
 <details>
 <summary class="toggleproof">Proof.</summary>
@@ -1103,12 +1103,6 @@ the_tag is not universe polymorphic
 the_tag is transparent
 Expands to: Constant mathcomp.analysis.landau.the_tag
 Declared in library mathcomp.analysis.landau, line 296, characters 11-18
-gen_tag : unit
-
-gen_tag is not universe polymorphic
-gen_tag is transparent
-Expands to: Constant mathcomp.analysis.landau.gen_tag
-Declared in library mathcomp.analysis.landau, line 297, characters 11-18
 </p></span></div></span> (<span id="tag:318" class="id"><a name="tag:318" class="">tag</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#unit">unit</a></span>) (<span id="F:319" class="id"><a name="F:319" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination_numFieldType.T">T</a></span>)<br/>
 &nbsp;&nbsp;(<span id="phF:320" class="id"><a name="phF:320" class="">phF</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#phantom">phantom</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#Domination_numFieldType.T">T</a></span>)<span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#F:319">F</a></span>)<span class="id"> </span><span id="f:321" class="id"><a name="f:321" class="">f</a></span><span class="id"> </span><span id="h:322" class="id"><a name="h:322" class="">h</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#da0138731dadbcedaffb05ecba183c05">[bigO</a></span><span class="id"><a href="mathcomp.analysis.landau.html#da0138731dadbcedaffb05ecba183c05"> of</a></span><span class="id"><a href="mathcomp.analysis.landau.html#da0138731dadbcedaffb05ecba183c05"> </a></span><span class="id"><a href="mathcomp.analysis.landau.html#the_littleo">the_littleo</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#tag:318">tag</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#phF:320">phF</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#f:321">f</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#h:322">h</a></span><span class="id"><a href="mathcomp.analysis.landau.html#da0138731dadbcedaffb05ecba183c05">]</a></span>.<br/>
 <br/>
@@ -1244,7 +1238,13 @@ Declared in library mathcomp.analysis.landau, line 297, characters 11-18
 &nbsp;&nbsp;&nbsp;<span class="id">apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.landau.html#littleoP">littleoP</a></span>.<br/>
 <span class="id">Unshelve</span>. <span class="id">all:</span><span class="gallina-kwd"> by</span><span class="id"> end_near</span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="add_littleo" class="id"><div name="add_littleo" class=" tooltip">add_littleo<span class='tooltip-area'><p>a_tag : unit
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="add_littleo" class="id"><div name="add_littleo" class=" tooltip">add_littleo<span class='tooltip-area'><p>gen_tag : unit
+
+gen_tag is not universe polymorphic
+gen_tag is transparent
+Expands to: Constant mathcomp.analysis.landau.gen_tag
+Declared in library mathcomp.analysis.landau, line 297, characters 11-18
+a_tag : unit
 
 a_tag is not universe polymorphic
 a_tag is transparent

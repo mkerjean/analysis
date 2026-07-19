@@ -360,17 +360,7 @@ Qed.</div></details>
 <span class="vernacular">Section</span><span class="id"> itv_semiRingOfSets</span>.<br/>
 <span class="vernacular">Variable</span><span class="id"> </span><span id="itv_semiRingOfSets.R" class="id"><a name="itv_semiRingOfSets.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.reals.html#Real.Exports.realType">realType</a></span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span> (<span class="id">I</span><span class="id"> J</span><span class="id"> K</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#itv_semiRingOfSets.R">R</a></span>).<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="ocitv_type" class="id"><div name="ocitv_type" class=" tooltip">ocitv_type<span class='tooltip-area'><p>lebesgue_measure : forall {R : realType}, set R -> \bar R
-
-lebesgue_measure is not universe polymorphic
-Arguments lebesgue_measure {R} _%_classical_set_scope
-lebesgue_measure is transparent
-Expands to: Constant mathcomp.analysis.lebesgue_measure.lebesgue_measure
-Declared in
-library mathcomp.analysis.lebesgue_measure, line 340, characters 11-27
-</p></span></div></span><span class="id"> :</span><span class="gallina-kwd"> Type</span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#itv_semiRingOfSets.R">R</a></span>.<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="ocitv" class="id"><div name="ocitv" class=" tooltip">ocitv<span class='tooltip-area'><p>completed_lebesgue_measure :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="ocitv_type" class="id"><div name="ocitv_type" class=" tooltip">ocitv_type<span class='tooltip-area'><p>completed_lebesgue_measure :
 forall {R : realType},
 set
   (caratheodory_type (R:=R)
@@ -386,6 +376,16 @@ Expands to: Constant
             mathcomp.analysis.lebesgue_measure.completed_lebesgue_measure
 Declared in
 library mathcomp.analysis.lebesgue_measure, line 352, characters 11-37
+</p></span></div></span><span class="id"> :</span><span class="gallina-kwd"> Type</span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#itv_semiRingOfSets.R">R</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="ocitv" class="id"><div name="ocitv" class=" tooltip">ocitv<span class='tooltip-area'><p>elebesgue_measure : forall [R : realType], set \bar R -> \bar R
+
+elebesgue_measure is not universe polymorphic
+Arguments elebesgue_measure [R] _%_classical_set_scope
+elebesgue_measure is transparent
+Expands to: Constant mathcomp.analysis.lebesgue_measure.elebesgue_measure
+Declared in
+library mathcomp.analysis.lebesgue_measure, line 539, characters 11-28
 </p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0">`]</a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#x:34">x</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.1'">1</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0">,</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#x:34">x</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.2'">2</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0">]</a></span><span class="id">%classic</span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df"> </a></span><span id="x:34" class="id"><a name="x:34" class="">x</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df"> in</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#36b9f1631384d2c3b944cb9d5855cd98">[set:</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#36b9f1631384d2c3b944cb9d5855cd98"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#itv_semiRingOfSets.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#itv_semiRingOfSets.R">R</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#36b9f1631384d2c3b944cb9d5855cd98">]</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#7e4573e059f309ba0ef27b7fc70cc4df">]</a></span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="is_ocitv" class="id"><a name="is_ocitv" class="">is_ocitv</a></span><span class="id"> </span><span id="a:35" class="id"><a name="a:35" class="">a</a></span><span class="id"> </span><span id="b:36" class="id"><a name="b:36" class="">b</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#ocitv">ocitv</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0">`]</a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#a:35">a</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0">,</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#b:36">b</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#8e027a9428c1529a00eda7b3474672c0">]</a></span><span class="id">%classic</span>.<br/>
@@ -450,14 +450,17 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> rewrite</span><span class="id"> -</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#negb_or">negb_or</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.order.html#Order.TotalTheory.le_total">le_total</a></span><span class="id">/=</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="ocitv_display" class="id"><div name="ocitv_display" class=" tooltip">ocitv_display<span class='tooltip-area'><p>elebesgue_measure : forall [R : realType], set \bar R -> \bar R
+<span class="vernacular">Definition</span><span class="id"> </span><span id="ocitv_display" class="id"><div name="ocitv_display" class=" tooltip">ocitv_display<span class='tooltip-area'><p>vitali_cover :
+forall {R : numFieldType},
+set R -> forall [I : Type], (I -> set R) -> set I -> Prop
 
-elebesgue_measure is not universe polymorphic
-Arguments elebesgue_measure [R] _%_classical_set_scope
-elebesgue_measure is transparent
-Expands to: Constant mathcomp.analysis.lebesgue_measure.elebesgue_measure
+vitali_cover is not universe polymorphic
+Arguments vitali_cover {R} E%_classical_set_scope 
+  [I]%_type_scope B%_function_scope D%_classical_set_scope
+vitali_cover is transparent
+Expands to: Constant mathcomp.analysis.lebesgue_measure.vitali_cover
 Declared in
-library mathcomp.analysis.lebesgue_measure, line 539, characters 11-28
+library mathcomp.analysis.lebesgue_measure, line 1099, characters 11-23
 </p></span></div></span><span class="id"> :</span><span class="id"> Type</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.measure_theory.measurable_structure.html#measure_display">measure_display</a></span><br/>
 <details>
 <summary class="toggleproof">Proof.</summary>
@@ -485,18 +488,7 @@ library mathcomp.analysis.lebesgue_measure, line 539, characters 11-28
 <br/>
 <span class="vernacular">Let</span><span class="id"> </span><span id="wlength.g" class="id"><a name="wlength.g" class="">g</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#er_map">er_map</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.f">f</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="wlength" class="id"><div name="wlength" class=" tooltip">wlength<span class='tooltip-area'><p>vitali_cover :
-forall {R : numFieldType},
-set R -> forall [I : Type], (I -> set R) -> set I -> Prop
-
-vitali_cover is not universe polymorphic
-Arguments vitali_cover {R} E%_classical_set_scope 
-  [I]%_type_scope B%_function_scope D%_classical_set_scope
-vitali_cover is transparent
-Expands to: Constant mathcomp.analysis.lebesgue_measure.vitali_cover
-Declared in
-library mathcomp.analysis.lebesgue_measure, line 1099, characters 11-23
-</p></span></div></span> (<span id="A:43" class="id"><a name="A:43" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#ocitv_type">ocitv_type</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span>))<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span><span class="id"> :=</span><br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="wlength" class="id"><div name="wlength" class=" tooltip">wlength<span class='tooltip-area'></span></div></span> (<span id="A:43" class="id"><a name="A:43" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span> (<span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#ocitv_type">ocitv_type</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span>))<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">let</span><span class="id"> </span><span id="i:44" class="id"><a name="i:44" class="">i</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.normedtype_theory.normed_module.html#Rhull">Rhull</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#A:43">A</a></span><span class="gallina-kwd"> in</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.g">g</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#i:44">i</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.2'">2</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:x_'-'_x"> -</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:x_'-'_x"> </a></span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.g">g</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#i:44">i</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.1'">1</a></span>.<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="wlength0" class="id"><a name="wlength0" class="">wlength0</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength">wlength</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set0">set0</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.lebesgue_stieltjes_measure.html#wlength.R">R</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id">0</span>.<br/>
