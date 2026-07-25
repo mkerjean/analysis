@@ -1446,7 +1446,29 @@ fct_lmodMixin is transparent
 Expands to: Constant mathcomp.classical.functions.fct_lmodMixin
 Declared in library mathcomp.classical.functions, line 2669, characters 19-32
 </p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#FilterType">FilterType</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#eventually">eventually</a></span><span class="id"> _</span>.<br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="eventually_pfilterType" class="id"><div name="eventually_pfilterType" class=" tooltip">eventually_pfilterType<span class='tooltip-area'></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#PFilterType">PFilterType</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#eventually">eventually</a></span> (<span class="id"><a href="mathcomp.classical.filter.html#filter_not_empty">filter_not_empty</a></span><span class="id"> _</span>).<br/>
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="eventually_pfilterType" class="id"><div name="eventually_pfilterType" class=" tooltip">eventually_pfilterType<span class='tooltip-area'><p>fctE :
+(forall (T T' : Type) (x : T), cst x = (fun=> x)) *
+(forall (T1 T2 T3 : Type) (f : T1 -> T2) (g : T2 -> T3),
+ g \o f = (fun x : T1 => g (f x))) *
+(forall (T : Type) (K : GRing.Zmodule.Exports.zmodType) (f : T -> K),
+ (- f)%R = (fun x : T => (- f x)%R)) *
+(forall (T : Type) (K : GRing.Nmodule.Exports.nmodType) (f g : T -> K),
+ (f + g)%R = (fun x : T => (f x + g x)%R)) *
+(forall (T : Type) (K : pzRingType) (f g : T -> K),
+ (f * g)%R = (fun x : T => (f x * g x)%R)) *
+(forall (T : Type) (K : pzRingType) (L : lmodType K) (k : K) (f : T -> L),
+ (k *: f)%R = (fun x : T => (k *: f x)%R)) *
+(forall (T : Type) (K : pzRingType) (f : T -> K) (n : nat),
+ (f ^+ n)%R = (fun x : T => (f x ^+ n)%R)) *
+(forall (T : Type) (K : GRing.Nmodule.Exports.nmodType) (x : T),
+ (0%R : T -> K) x = 0%R) *
+(forall (T : Type) (K : pzRingType) (x : T), (1%R : T -> K) x = 1%R)
+
+fctE is not universe polymorphic
+fctE is transparent
+Expands to: Constant mathcomp.classical.functions.fctE
+Declared in library mathcomp.classical.functions, line 2766, characters 11-15
+</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#PFilterType">PFilterType</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#eventually">eventually</a></span> (<span class="id"><a href="mathcomp.classical.filter.html#filter_not_empty">filter_not_empty</a></span><span class="id"> _</span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="filter_bigI" class="id"><a name="filter_bigI" class="">filter_bigI</a></span><span class="id"> </span><span id="T:473" class="id"><a name="T:473" class="">T</a></span> (<span id="I:474" class="id"><a name="I:474" class="">I</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#Choice.Exports.choiceType">choiceType</a></span>) (<span id="D:475" class="id"><a name="D:475" class="">D</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">{fset</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#I:474">I</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">}</a></span>) (<span id="f:476" class="id"><a name="f:476" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#I:474">I</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:473">T</a></span>)<br/>
 &nbsp;&nbsp;(<span id="F:477" class="id"><a name="F:477" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:473">T</a></span>)<span class="id"> :</span><br/>
@@ -1487,28 +1509,14 @@ Qed.</div></details>
 <br/>
 <div class="doc">Limits expressed with filters </div>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fmap" class="id"><div name="fmap" class=" tooltip">fmap<span class='tooltip-area'><p>fctE :
-(forall (T T' : Type) (x : T), cst x = (fun=> x)) *
-(forall (T1 T2 T3 : Type) (f : T1 -> T2) (g : T2 -> T3),
- g \o f = (fun x : T1 => g (f x))) *
-(forall (T : Type) (K : GRing.Zmodule.Exports.zmodType) (f : T -> K),
- (- f)%R = (fun x : T => (- f x)%R)) *
-(forall (T : Type) (K : GRing.Nmodule.Exports.nmodType) (f g : T -> K),
- (f + g)%R = (fun x : T => (f x + g x)%R)) *
-(forall (T : Type) (K : pzRingType) (f g : T -> K),
- (f * g)%R = (fun x : T => (f x * g x)%R)) *
-(forall (T : Type) (K : pzRingType) (L : lmodType K) (k : K) (f : T -> L),
- (k *: f)%R = (fun x : T => (k *: f x)%R)) *
-(forall (T : Type) (K : pzRingType) (f : T -> K) (n : nat),
- (f ^+ n)%R = (fun x : T => (f x ^+ n)%R)) *
-(forall (T : Type) (K : GRing.Nmodule.Exports.nmodType) (x : T),
- (0%R : T -> K) x = 0%R) *
-(forall (T : Type) (K : pzRingType) (x : T), (1%R : T -> K) x = 1%R)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fmap" class="id"><div name="fmap" class=" tooltip">fmap<span class='tooltip-area'><p>linfun :
+forall {K : numDomainType} {E F : lmodType K}, (K -> F -> F) -> {pred E -> F}
 
-fctE is not universe polymorphic
-fctE is transparent
-Expands to: Constant mathcomp.classical.functions.fctE
-Declared in library mathcomp.classical.functions, line 2766, characters 11-15
+linfun is not universe polymorphic
+Arguments linfun {K E F} {s}%_function_scope _
+linfun is transparent
+Expands to: Constant mathcomp.classical.functions.linfun
+Declared in library mathcomp.classical.functions, line 2796, characters 11-17
 </p></span></div></span><span class="id"> {</span><span id="T:511" class="id"><a name="T:511" class="">T</a></span><span class="id"> </span><span id="U:512" class="id"><a name="U:512" class="">U</a></span><span class="id"> :</span><span class="id"> Type}</span> (<span id="f:513" class="id"><a name="f:513" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:511">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#U:512">U</a></span>) (<span id="F:514" class="id"><a name="F:514" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:511">T</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#U:512">U</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span id="P:515" class="id"><a name="P:515" class="">P</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#F:514">F</a></span> (<span class="id"><a href="mathcomp.classical.filter.html#f:513">f</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#9017aea2311f0e1b346e16db298ca58c"> @^-1`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#9017aea2311f0e1b346e16db298ca58c"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#P:515">P</a></span>)<span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">]</a></span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#fmap">fmap</a></span><span class="id"> _</span><span class="id"> _</span><span class="id"> _</span><span class="id"> _</span><span class="id"> _</span><span class="id"> /</span>.<br/>
@@ -1548,14 +1556,15 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> move=&gt;</span><span class="id"> FF;</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#Build_ProperFilter">Build_ProperFilter</a></span><span class="id">;</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#fmapE">fmapE</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#preimage_set0">preimage_set0</a></span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fmapi" class="id"><div name="fmapi" class=" tooltip">fmapi<span class='tooltip-area'><p>linfun :
-forall {K : numDomainType} {E F : lmodType K}, (K -> F -> F) -> {pred E -> F}
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fmapi" class="id"><div name="fmapi" class=" tooltip">fmapi<span class='tooltip-area'><p>linfun_key :
+forall {K : numDomainType} {E F : lmodType K} {s : K -> F -> F},
+pred_key (T:=E -> F) linfun
 
-linfun is not universe polymorphic
-Arguments linfun {K E F} {s}%_function_scope _
-linfun is transparent
-Expands to: Constant mathcomp.classical.functions.linfun
-Declared in library mathcomp.classical.functions, line 2796, characters 11-17
+linfun_key is not universe polymorphic
+Arguments linfun_key {K E F} {s}%_function_scope
+linfun_key is opaque
+Expands to: Constant mathcomp.classical.functions.linfun_key
+Declared in library mathcomp.classical.functions, line 2798, characters 11-21
 </p></span></div></span><span class="id"> {</span><span id="T:531" class="id"><a name="T:531" class="">T</a></span><span class="id"> </span><span id="U:532" class="id"><a name="U:532" class="">U</a></span><span class="id"> :</span><span class="id"> Type}</span> (<span id="f:533" class="id"><a name="f:533" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:531">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#U:532">U</a></span>) (<span id="F:534" class="id"><a name="F:534" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:531">T</a></span>)<span class="id"> :</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> _</span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span id="P:535" class="id"><a name="P:535" class="">P</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#be9d045413b70f39126ce7af3de2a77f">\forall</a></span><span class="id"><a href="mathcomp.classical.filter.html#be9d045413b70f39126ce7af3de2a77f"> </a></span><span id="x:536" class="id"><a name="x:536" class="">x</a></span><span class="id"><a href="mathcomp.classical.filter.html#be9d045413b70f39126ce7af3de2a77f"> \near</a></span><span class="id"><a href="mathcomp.classical.filter.html#be9d045413b70f39126ce7af3de2a77f"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#F:534">F</a></span><span class="id"><a href="mathcomp.classical.filter.html#be9d045413b70f39126ce7af3de2a77f">,</a></span><span class="id"><a href="mathcomp.classical.filter.html#be9d045413b70f39126ce7af3de2a77f"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#a883bdd010993579f99d60b3775bcf54">exists</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"> </a></span><span id="y:537" class="id"><a name="y:537" class="">y</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#a883bdd010993579f99d60b3775bcf54">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#a883bdd010993579f99d60b3775bcf54"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#f:533">f</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:536">x</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#y:537">y</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"> /\</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#P:535">P</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#y:537">y</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">]</a></span>.<br/>
@@ -1702,15 +1711,15 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_app">filter_app</a></span><span class="id"> fFG;</span><span class="id"> near</span><span class="id"> do</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filterS">filterS</a></span><span class="id"> =&gt;</span><span class="id"> x</span><span class="id"> /=</span><span class="id"> -&gt;</span>.<br/>
 <span class="id">Unshelve</span>. <span class="id">all:</span><span class="gallina-kwd"> by</span><span class="id"> end_near</span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="continuous_at" class="id"><div name="continuous_at" class=" tooltip">continuous_at<span class='tooltip-area'><p>linfun_key :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="continuous_at" class="id"><div name="continuous_at" class=" tooltip">continuous_at<span class='tooltip-area'><p>linfun_keyed :
 forall {K : numDomainType} {E F : lmodType K} {s : K -> F -> F},
-pred_key (T:=E -> F) linfun
+keyed_pred linfun_key
 
-linfun_key is not universe polymorphic
-Arguments linfun_key {K E F} {s}%_function_scope
-linfun_key is opaque
-Expands to: Constant mathcomp.classical.functions.linfun_key
-Declared in library mathcomp.classical.functions, line 2798, characters 11-21
+linfun_keyed is not universe polymorphic
+Arguments linfun_keyed {K E F} {s}%_function_scope
+linfun_keyed is transparent
+Expands to: Constant mathcomp.classical.functions.linfun_keyed
+Declared in library mathcomp.classical.functions, line 2800, characters 10-22
 </p></span></div></span> (<span id="T:631" class="id"><a name="T:631" class="">T</a></span><span class="id"> </span><span id="U:632" class="id"><a name="U:632" class="">U</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#nbhsType">nbhsType</a></span>) (<span id="x:633" class="id"><a name="x:633" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:631">T</a></span>) (<span id="f:634" class="id"><a name="f:634" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:631">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#U:632">U</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;(<span class="id"><a href="mathcomp.classical.filter.html#f:634">f</a></span><span class="id">%function</span><span class="id"><a href="mathcomp.classical.filter.html#cd15f258bbfe5f8dd5d2f871f9f5a736"> @</a></span><span class="id"><a href="mathcomp.classical.filter.html#cd15f258bbfe5f8dd5d2f871f9f5a736"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#x:633">x</a></span><span class="id"><a href="mathcomp.classical.filter.html#::classical_set_scope:x_'--&gt;'_x"> --&gt;</a></span><span class="id"><a href="mathcomp.classical.filter.html#::classical_set_scope:x_'--&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#f:634">f</a></span><span class="id">%function</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:633">x</a></span>).<br/>
 <span class="vernacular">Notation</span><span class="id"> </span><span id="continuous" class="id"><a name="continuous" class="">continuous</a></span><span class="id"> f</span><span class="id"> :=</span> (<span class="gallina-kwd">forall</span><span class="id"> </span><span id="x:635" class="id"><a name="x:635" class="">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#continuous_at">continuous_at</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:635">x</a></span><span class="id"> f</span>).<br/>
@@ -1742,15 +1751,7 @@ Declared in library mathcomp.classical.functions, line 2798, characters 11-21
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#near_fun">near_fun</a></span><span class="id"> {T</span><span class="id"> T'}</span><span class="id"> f</span><span class="id"> x</span>.<br/>
 <br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="globally" class="id"><div name="globally" class=" tooltip">globally<span class='tooltip-area'><p>linfun_keyed :
-forall {K : numDomainType} {E F : lmodType K} {s : K -> F -> F},
-keyed_pred linfun_key
-
-linfun_keyed is not universe polymorphic
-Arguments linfun_keyed {K E F} {s}%_function_scope
-linfun_keyed is transparent
-Expands to: Constant mathcomp.classical.functions.linfun_keyed
-Declared in library mathcomp.classical.functions, line 2800, characters 10-22
+<span class="vernacular">Definition</span><span class="id"> </span><span id="globally" class="id"><div name="globally" class=" tooltip">globally<span class='tooltip-area'><p>linfun_Sub_subproof not a defined object.
 </p></span></div></span><span class="id"> {</span><span id="T:662" class="id"><a name="T:662" class="">T</a></span><span class="id"> :</span><span class="id"> Type}</span> (<span id="A:663" class="id"><a name="A:663" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:662">T</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:662">T</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span id="P:664" class="id"><a name="P:664" class="">P</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> :</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:662">T</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span class="gallina-kwd">forall</span><span class="id"> </span><span id="x:665" class="id"><a name="x:665" class="">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#A:663">A</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:665">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#P:664">P</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:665">x</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b">]</a></span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#globally">globally</a></span><span class="id"> {T}</span><span class="id"> A</span><span class="id"> _</span><span class="id"> /</span>.<br/>
@@ -1782,7 +1783,16 @@ Qed.</div></details>
 <span class="vernacular">Section</span><span class="id"> frechet_filter</span>.<br/>
 <span class="vernacular">Variable</span><span class="id"> </span><span id="frechet_filter.T" class="id"><a name="frechet_filter.T" class="">T</a></span><span class="id"> :</span><span class="gallina-kwd"> Type</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="frechet_filter" class="id"><div name="frechet_filter" class=" tooltip">frechet_filter<span class='tooltip-area'><p>linfun_Sub_subproof not a defined object.
+<span class="vernacular">Definition</span><span class="id"> </span><span id="frechet_filter" class="id"><div name="frechet_filter" class=" tooltip">frechet_filter<span class='tooltip-area'><p>linfun_Sub :
+forall {R : numDomainType} {E F : lmodType R} {s : GRing.Scale.law R F}
+  [f : E -> F],
+f \in linfun -> {linear E -> F | s}
+
+linfun_Sub is not universe polymorphic
+Arguments linfun_Sub {R E F s} [f]%_function_scope fP
+linfun_Sub is transparent
+Expands to: Constant mathcomp.classical.functions.linfun_Sub
+Declared in library mathcomp.classical.functions, line 2819, characters 11-21
 </p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span id="S:675" class="id"><a name="S:675" class="">S</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> :</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#frechet_filter.T">T</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#finite_set">finite_set</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#a89cad8a77dea0eb3c15a935f79663f1">~`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#a89cad8a77dea0eb3c15a935f79663f1"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#S:675">S</a></span>)<span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b">]</a></span>.<br/>
 <br/>
 <span class="id">Global</span><span class="vernacular"> Instance</span><span class="id"> </span><span id="frechet_properfilter" class="id"><a name="frechet_properfilter" class="">frechet_properfilter</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.cardinality.html#infinite_set">infinite_set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#36b9f1631384d2c3b944cb9d5855cd98">[set:</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#36b9f1631384d2c3b944cb9d5855cd98"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#frechet_filter.T">T</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#36b9f1631384d2c3b944cb9d5855cd98">]</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><br/>
@@ -1819,16 +1829,14 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> move=&gt;</span><span class="id"> [x</span><span class="id"> y]</span><span class="id"> [/=</span><span class="id"> [??]</span><span class="id"> []]</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="prod_filter_on" class="id"><div name="prod_filter_on" class=" tooltip">prod_filter_on<span class='tooltip-area'><p>linfun_Sub :
-forall {R : numDomainType} {E F : lmodType R} {s : GRing.Scale.law R F}
-  [f : E -> F],
-f \in linfun -> {linear E -> F | s}
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="prod_filter_on" class="id"><div name="prod_filter_on" class=" tooltip">prod_filter_on<span class='tooltip-area'><p>Eq_rect_eq_on : forall (U : Type) (p : U) (Q : U -> Type), Q p -> Prop
 
-linfun_Sub is not universe polymorphic
-Arguments linfun_Sub {R E F s} [f]%_function_scope fP
-linfun_Sub is transparent
-Expands to: Constant mathcomp.classical.functions.linfun_Sub
-Declared in library mathcomp.classical.functions, line 2819, characters 11-21
+Eq_rect_eq_on is not universe polymorphic
+Arguments Eq_rect_eq_on U%_type_scope p Q%_function_scope x
+Eq_rect_eq_on is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_rect_eq_on
+Declared in
+library mathcomp.classical.internal_Eqdep_dec, line 36, characters 11-24
 </p></span></div></span><span class="id"> </span><span id="T:680" class="id"><a name="T:680" class="">T</a></span><span class="id"> </span><span id="U:681" class="id"><a name="U:681" class="">U</a></span> (<span id="F:682" class="id"><a name="F:682" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:680">T</a></span>) (<span id="G:683" class="id"><a name="G:683" class="">G</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#U:681">U</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.filter.html#FilterType">FilterType</a></span> (<span class="id"><a href="mathcomp.classical.filter.html#filter_prod">filter_prod</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#F:682">F</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#G:683">G</a></span>) (<span class="id"><a href="mathcomp.classical.filter.html#filter_prod_filter">filter_prod_filter</a></span><span class="id"> _</span><span class="id"> _</span>).<br/>
 <br/>
@@ -1861,14 +1869,14 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> move=&gt;</span><span class="id"> FP;</span><span class="gallina-kwd"> exists</span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#setT">setT</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id">P</span>)<span class="id">=&gt;</span><span class="id"> //=</span><span class="id"> [|[??</span><span class="id"> []//]];</span><span class="id"> split=&gt;</span><span class="id"> //;</span><span class="id"> exact:</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filterT">filterT</a></span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="id">Program</span><span class="vernacular"> Definition</span><span class="id"> </span><span id="in_filter_prod" class="id"><div name="in_filter_prod" class=" tooltip">in_filter_prod<span class='tooltip-area'><p>Eq_rect_eq_on : forall (U : Type) (p : U) (Q : U -> Type), Q p -> Prop
+<span class="id">Program</span><span class="vernacular"> Definition</span><span class="id"> </span><span id="in_filter_prod" class="id"><div name="in_filter_prod" class=" tooltip">in_filter_prod<span class='tooltip-area'><p>Eq_rect_eq : Type -> Prop
 
-Eq_rect_eq_on is not universe polymorphic
-Arguments Eq_rect_eq_on U%_type_scope p Q%_function_scope x
-Eq_rect_eq_on is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_rect_eq_on
+Eq_rect_eq is not universe polymorphic
+Arguments Eq_rect_eq U%_type_scope
+Eq_rect_eq is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_rect_eq
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 36, characters 11-24
+library mathcomp.classical.internal_Eqdep_dec, line 38, characters 11-21
 </p></span></div></span><span class="id"> {</span><span id="T:706" class="id"><a name="T:706" class="">T</a></span><span class="id"> </span><span id="U:707" class="id"><a name="U:707" class="">U</a></span><span class="id">}</span><span class="id"> {</span><span id="F:708" class="id"><a name="F:708" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:706">T</a></span><span class="id">}</span><span class="id"> {</span><span id="G:709" class="id"><a name="G:709" class="">G</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#U:707">U</a></span><span class="id">}</span><br/>
 &nbsp;&nbsp;(<span id="P:710" class="id"><a name="P:710" class="">P</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#in_filter">in_filter</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#F:708">F</a></span>) (<span id="Q:711" class="id"><a name="Q:711" class="">Q</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#in_filter">in_filter</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#G:709">G</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#in_filter">in_filter</a></span> (<span class="id"><a href="mathcomp.classical.filter.html#filter_prod">filter_prod</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#F:708">F</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#G:709">G</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id">@</span><span class="id"><a href="mathcomp.classical.filter.html#InFilter">InFilter</a></span><span class="id"> _</span><span class="id"> _</span> (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:712" class="id"><a name="x:712" class="">x</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#prop_of">prop_of</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#P:710">P</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:712">x</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.1'">1</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"> /\</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#ba2b0e492d2b4675a0acf3ea92aabadd"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#prop_of">prop_of</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#Q:711">Q</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:712">x</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.2'">2</a></span>)<span class="id"> _</span>.<br/>
@@ -1962,14 +1970,14 @@ Qed.</div></details>
 &nbsp;&nbsp;<span class="id">apply:</span> (<span class="id"><a href="mathcomp.classical.filter.html#have_near">have_near</a></span><span class="id"> F</span>)<span class="id">;</span><span class="id"> near=&gt;</span><span class="id"> x</span><span class="id"> y</span>.<br/>
 <br/>
 <span class="vernacular">Module</span><span class="vernacular"> Export</span><span class="id"> </span><span id="NearMap" class="id"><a name="NearMap" class="">NearMap</a></span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="NearMap.near_simpl" class="id"><div name="NearMap.near_simpl" class=" tooltip">near_simpl<span class='tooltip-area'><p>Eq_rect_eq : Type -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="NearMap.near_simpl" class="id"><div name="NearMap.near_simpl" class=" tooltip">near_simpl<span class='tooltip-area'><p>Eq_dep_eq_on : forall (U : Type) (P : U -> Type) (p : U), P p -> Prop
 
-Eq_rect_eq is not universe polymorphic
-Arguments Eq_rect_eq U%_type_scope
-Eq_rect_eq is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_rect_eq
+Eq_dep_eq_on is not universe polymorphic
+Arguments Eq_dep_eq_on U%_type_scope P%_function_scope p x
+Eq_dep_eq_on is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_dep_eq_on
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 38, characters 11-21
+library mathcomp.classical.internal_Eqdep_dec, line 40, characters 11-23
 </p></span></div></span><span class="id"> :=</span> (<span class="id">@</span><span class="id"><a href="mathcomp.classical.filter.html#near_simpl">near_simpl</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id">@</span><span class="id"><a href="mathcomp.classical.filter.html#near_map">near_map</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id">@</span><span class="id"><a href="mathcomp.classical.filter.html#near_mapi">near_mapi</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id">@</span><span class="id"><a href="mathcomp.classical.filter.html#near_map2">near_map2</a></span>).<br/>
 <span class="vernacular">Ltac</span><span class="id"> near_simpl</span><span class="id"> :=</span><span class="id"> rewrite</span><span class="id"> ?</span><span class="id"><a href="mathcomp.classical.filter.html#NearMap.near_simpl">near_simpl</a></span>.<br/>
 <span class="vernacular">End</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#NearMap">NearMap</a></span>.<br/>
@@ -2004,14 +2012,14 @@ library mathcomp.classical.internal_Eqdep_dec, line 38, characters 11-21
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> move=&gt;</span><span class="id"> fFG</span><span class="id"> gFH</span><span class="id"> hGHI</span><span class="id"> P</span><span class="id"> /=</span><span class="id"> IP;</span><span class="id"> apply:</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#cvg_pair">cvg_pair</a></span> (<span class="id">hGHI</span><span class="id"> _</span><span class="id"> IP</span>). Qed.</div></details>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#cvg_comp2">cvg_comp2</a></span><span class="id"> {T</span><span class="id"> U</span><span class="id"> V</span><span class="id"> W</span><span class="id"> F</span><span class="id"> G</span><span class="id"> H</span><span class="id"> I</span><span class="id"> FF</span><span class="id"> FG</span><span class="id"> FH</span><span class="id"> f</span><span class="id"> g</span><span class="id"> h}</span><span class="id"> _</span><span class="id"> _</span><span class="id"> _</span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="cvg_to_comp_2" class="id"><div name="cvg_to_comp_2" class=" tooltip">cvg_to_comp_2<span class='tooltip-area'><p>Eq_dep_eq_on : forall (U : Type) (P : U -> Type) (p : U), P p -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="cvg_to_comp_2" class="id"><div name="cvg_to_comp_2" class=" tooltip">cvg_to_comp_2<span class='tooltip-area'><p>Eq_dep_eq : Type -> Prop
 
-Eq_dep_eq_on is not universe polymorphic
-Arguments Eq_dep_eq_on U%_type_scope P%_function_scope p x
-Eq_dep_eq_on is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_dep_eq_on
+Eq_dep_eq is not universe polymorphic
+Arguments Eq_dep_eq U%_type_scope
+Eq_dep_eq is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_dep_eq
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 40, characters 11-23
+library mathcomp.classical.internal_Eqdep_dec, line 42, characters 11-20
 </p></span></div></span><span class="id"> :=</span><span class="id"> @</span><span class="id"><a href="mathcomp.classical.filter.html#cvg_comp2">cvg_comp2</a></span>.<br/>
 <br/>
 <br/>
@@ -2021,14 +2029,14 @@ library mathcomp.classical.internal_Eqdep_dec, line 40, characters 11-23
 <span class="vernacular">Context</span><span class="id"> {</span><span id="within.T" class="id"><a name="within.T" class="">T</a></span><span class="id"> :</span><span class="id"> Type}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span> (<span class="id">D</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#within.T">T</a></span>) (<span class="id">F</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#within.T">T</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="within" class="id"><div name="within" class=" tooltip">within<span class='tooltip-area'><p>Eq_dep_eq : Type -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="within" class="id"><div name="within" class=" tooltip">within<span class='tooltip-area'><p>Streicher_K_on_ : forall (U : Type) (x : U), (x = x -> Prop) -> Prop
 
-Eq_dep_eq is not universe polymorphic
-Arguments Eq_dep_eq U%_type_scope
-Eq_dep_eq is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Eq_dep_eq
+Streicher_K_on_ is not universe polymorphic
+Arguments Streicher_K_on_ U%_type_scope x P%_function_scope
+Streicher_K_on_ is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Streicher_K_on_
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 42, characters 11-20
+library mathcomp.classical.internal_Eqdep_dec, line 44, characters 11-26
 </p></span></div></span><span class="id"> </span><span id="D:813" class="id"><a name="D:813" class="">D</a></span><span class="id"> </span><span id="F:814" class="id"><a name="F:814" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#within.T">T</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span id="P:815" class="id"><a name="P:815" class="">P</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#5b88bba1a0d3085b56928b27b84bfd97">{near</a></span><span class="id"><a href="mathcomp.classical.filter.html#5b88bba1a0d3085b56928b27b84bfd97"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#F:814">F</a></span><span class="id"><a href="mathcomp.classical.filter.html#5b88bba1a0d3085b56928b27b84bfd97">,</a></span><span class="id"><a href="mathcomp.classical.filter.html#5b88bba1a0d3085b56928b27b84bfd97"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#D:813">D</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e19db46c1d4073266228fb7781521a56"> `&lt;=`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e19db46c1d4073266228fb7781521a56"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#P:815">P</a></span><span class="id"><a href="mathcomp.classical.filter.html#5b88bba1a0d3085b56928b27b84bfd97">}</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">]</a></span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#within">within</a></span><span class="id"> :</span><span class="id"> simpl</span><span class="id"> never</span>.<br/>
 <br/>
@@ -2079,14 +2087,14 @@ Qed.</div></details>
 <br/>
 <span class="id">#[global]</span><span class="id"> Typeclasses</span><span class="vernacular"> Opaque</span><span class="id"> within</span>.<br/>
 <br/>
-<span class="vernacular">Canonical</span><span class="id"> </span><span id="within_filter_on" class="id"><div name="within_filter_on" class=" tooltip">within_filter_on<span class='tooltip-area'><p>Streicher_K_on_ : forall (U : Type) (x : U), (x = x -> Prop) -> Prop
+<span class="vernacular">Canonical</span><span class="id"> </span><span id="within_filter_on" class="id"><div name="within_filter_on" class=" tooltip">within_filter_on<span class='tooltip-area'><p>Streicher_K_ : Type -> Prop
 
-Streicher_K_on_ is not universe polymorphic
-Arguments Streicher_K_on_ U%_type_scope x P%_function_scope
-Streicher_K_on_ is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Streicher_K_on_
+Streicher_K_ is not universe polymorphic
+Arguments Streicher_K_ U%_type_scope
+Streicher_K_ is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Streicher_K_
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 44, characters 11-26
+library mathcomp.classical.internal_Eqdep_dec, line 46, characters 11-23
 </p></span></div></span><span class="id"> </span><span id="T:833" class="id"><a name="T:833" class="">T</a></span><span class="id"> </span><span id="D:834" class="id"><a name="D:834" class="">D</a></span> (<span id="F:835" class="id"><a name="F:835" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_on">filter_on</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:833">T</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.filter.html#FilterType">FilterType</a></span> (<span class="id"><a href="mathcomp.classical.filter.html#within">within</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#D:834">D</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#F:835">F</a></span>) (<span class="id"><a href="mathcomp.classical.filter.html#within_filter">within_filter</a></span><span class="id"> _</span><span class="id"> _</span>).<br/>
 <br/>
@@ -2099,14 +2107,14 @@ library mathcomp.classical.internal_Eqdep_dec, line 44, characters 11-26
 <div class="proofscript">
 <span class="id"> move=&gt;</span><span class="id"> FF</span><span class="id"> FfD;</span><span class="id"> exact:</span> (<span class="id">@</span><span class="id"><a href="mathcomp.classical.filter.html#filter_bigI">filter_bigI</a></span><span class="id"> T</span><span class="id"> I</span><span class="id"> D</span><span class="id"> f</span><span class="id"> _</span> (<span class="id"><a href="mathcomp.classical.filter.html#within_filter">within_filter</a></span><span class="id"> P</span><span class="id"> FF</span>)). Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="subset_filter" class="id"><div name="subset_filter" class=" tooltip">subset_filter<span class='tooltip-area'><p>Streicher_K_ : Type -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="subset_filter" class="id"><div name="subset_filter" class=" tooltip">subset_filter<span class='tooltip-area'><p>Inj_dep_pair_on : forall (U : Type) (P : U -> Type) (p : U), P p -> Prop
 
-Streicher_K_ is not universe polymorphic
-Arguments Streicher_K_ U%_type_scope
-Streicher_K_ is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Streicher_K_
+Inj_dep_pair_on is not universe polymorphic
+Arguments Inj_dep_pair_on U%_type_scope P%_function_scope p x
+Inj_dep_pair_on is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Inj_dep_pair_on
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 46, characters 11-23
+library mathcomp.classical.internal_Eqdep_dec, line 151, characters 11-26
 </p></span></div></span><span class="id"> {</span><span id="T:846" class="id"><a name="T:846" class="">T</a></span><span class="id">}</span> (<span id="F:847" class="id"><a name="F:847" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:846">T</a></span>) (<span id="D:848" class="id"><a name="D:848" class="">D</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#T:846">T</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span id="P:850" class="id"><a name="P:850" class="">P</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> :</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#bc4528e836ab0e91ea7e942fb09e898f">{</a></span><span id="x:849" class="id"><a name="x:849" class="">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#bc4528e836ab0e91ea7e942fb09e898f"> |</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#bc4528e836ab0e91ea7e942fb09e898f"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#D:848">D</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:849">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#bc4528e836ab0e91ea7e942fb09e898f">}</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#F:847">F</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span id="x:851" class="id"><a name="x:851" class="">x</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span class="gallina-kwd">forall</span><span class="id"> </span><span id="Dx:852" class="id"><a name="Dx:852" class="">Dx</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#D:848">D</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:851">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#P:850">P</a></span> (<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#exist">exist</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#x:851">x</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#Dx:852">Dx</a></span>)<span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">]</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#b4e6034ee20673e7601398ff7b1b7d1b">]</a></span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#subset_filter">subset_filter</a></span><span class="id"> {T}</span><span class="id"> F</span><span class="id"> D</span><span class="id"> _</span>.<br/>
@@ -2137,14 +2145,14 @@ Qed.</div></details>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="NearSet.Y" class="id"><a name="NearSet.Y" class="">Y</a></span><span class="id"> :</span><span class="id"> Type}</span>.<br/>
 <span class="vernacular">Context</span> (<span id="NearSet.F" class="id"><a name="NearSet.F" class="">F</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#NearSet.Y">Y</a></span>) (<span id="NearSet.PF" class="id"><a name="NearSet.PF" class="">PF</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#ProperFilter">ProperFilter</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#F:863">F</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="powerset_filter_from" class="id"><div name="powerset_filter_from" class=" tooltip">powerset_filter_from<span class='tooltip-area'><p>Inj_dep_pair_on : forall (U : Type) (P : U -> Type) (p : U), P p -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="powerset_filter_from" class="id"><div name="powerset_filter_from" class=" tooltip">powerset_filter_from<span class='tooltip-area'><p>Inj_dep_pair : Type -> Prop
 
-Inj_dep_pair_on is not universe polymorphic
-Arguments Inj_dep_pair_on U%_type_scope P%_function_scope p x
-Inj_dep_pair_on is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Inj_dep_pair_on
+Inj_dep_pair is not universe polymorphic
+Arguments Inj_dep_pair U%_type_scope
+Inj_dep_pair is transparent
+Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Inj_dep_pair
 Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 151, characters 11-26
+library mathcomp.classical.internal_Eqdep_dec, line 153, characters 11-23
 </p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span> (<span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#NearSet.Y">Y</a></span>)<span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#filter_from">filter_from</a></span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span id="M:865" class="id"><a name="M:865" class="">M</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> |</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#d7e433f5d2fe56f5b712860a9ff2a681">[/\</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#d7e433f5d2fe56f5b712860a9ff2a681"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#M:865">M</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e19db46c1d4073266228fb7781521a56"> `&lt;=`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e19db46c1d4073266228fb7781521a56"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#NearSet.F">F</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#d7e433f5d2fe56f5b712860a9ff2a681">,</a></span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="gallina-kwd">forall</span><span class="id"> </span><span id="E1:866" class="id"><a name="E1:866" class="">E1</a></span><span class="id"> </span><span id="E2:867" class="id"><a name="E2:867" class="">E2</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#M:865">M</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#E1:866">E1</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#NearSet.F">F</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#E2:867">E2</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#E2:867">E2</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e19db46c1d4073266228fb7781521a56"> `&lt;=`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#e19db46c1d4073266228fb7781521a56"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#E1:866">E1</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#M:865">M</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#E2:867">E2</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#d7e433f5d2fe56f5b712860a9ff2a681"> &amp;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#d7e433f5d2fe56f5b712860a9ff2a681"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#M:865">M</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#f10328901eec42a91736ddd004ac4166"> !=set0</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#d7e433f5d2fe56f5b712860a9ff2a681"> ]</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#075f2dd209aa707f1415a58a026b96d9"> ]</a></span><br/>
@@ -2253,15 +2261,7 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Section</span><span class="id"> PrincipalFilters</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="principal_filter" class="id"><div name="principal_filter" class=" tooltip">principal_filter<span class='tooltip-area'><p>Inj_dep_pair : Type -> Prop
-
-Inj_dep_pair is not universe polymorphic
-Arguments Inj_dep_pair U%_type_scope
-Inj_dep_pair is transparent
-Expands to: Constant mathcomp.classical.internal_Eqdep_dec.Inj_dep_pair
-Declared in
-library mathcomp.classical.internal_Eqdep_dec, line 153, characters 11-23
-</p></span></div></span><span class="id"> {</span><span id="X:910" class="id"><a name="X:910" class="">X</a></span><span class="id"> :</span><span class="id"> Type}</span> (<span id="x:911" class="id"><a name="x:911" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#X:910">X</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#X:910">X</a></span><span class="id"> :=</span><br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="principal_filter" class="id"><div name="principal_filter" class=" tooltip">principal_filter<span class='tooltip-area'></span></div></span><span class="id"> {</span><span id="X:910" class="id"><a name="X:910" class="">X</a></span><span class="id"> :</span><span class="id"> Type}</span> (<span id="x:911" class="id"><a name="x:911" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#X:910">X</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set_system">set_system</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.filter.html#X:910">X</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.filter.html#globally">globally</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#29c78c22490f2dae838b1b504eb858a2">[set</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#29c78c22490f2dae838b1b504eb858a2"> </a></span><span class="id"><a href="mathcomp.classical.filter.html#x:911">x</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#29c78c22490f2dae838b1b504eb858a2">]</a></span>.<br/>
 <br/>
 <div class="doc">we introducing an alias for pointed types with principal filters </div>
