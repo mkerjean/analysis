@@ -380,7 +380,19 @@ Detailed documentation:
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> move=&gt;</span><span class="id"> a</span><span class="id"> b;</span><span class="id"> case</span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="dual_extended" class="id"><div name="dual_extended" class=" tooltip">dual_extended<span class='tooltip-area'><p>Internals.and3_nProp :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="dual_extended" class="id"><div name="dual_extended" class=" tooltip">dual_extended<span class='tooltip-area'><p>Internals.and_nProp :
+forall (P : Prop) [tQ : bool] [nQ : Prop],
+Internals.negatedProp tQ nQ -> Internals.properNegatedProp (P -> nQ)
+
+Internals.and_nProp is not universe polymorphic
+Arguments Internals.and_nProp P%_type_scope [tQ]%_bool_scope 
+  [nQ]%_type_scope Q
+Internals.and_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.and_nProp
+Declared in library mathcomp.classical.contra, line 297, characters 10-19
+</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#extended">extended</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="dEFin" class="id"><div name="dEFin" class=" tooltip">dEFin<span class='tooltip-area'><p>Internals.and3_nProp :
 forall (P Q : Prop) [tR : bool] [nR : Prop],
 Internals.negatedProp tR nR -> Internals.properNegatedProp (P -> Q -> nR)
 
@@ -390,19 +402,6 @@ Arguments Internals.and3_nProp (P Q)%_type_scope [tR]%_bool_scope
 Internals.and3_nProp is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.and3_nProp
 Declared in library mathcomp.classical.contra, line 302, characters 10-20
-</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#extended">extended</a></span>.<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="dEFin" class="id"><div name="dEFin" class=" tooltip">dEFin<span class='tooltip-area'><p>Internals.and4_nProp :
-forall (P Q R : Prop) [tS : bool] [nS : Prop],
-Internals.negatedProp tS nS ->
-Internals.properNegatedProp (P -> Q -> R -> nS)
-
-Internals.and4_nProp is not universe polymorphic
-Arguments Internals.and4_nProp (P Q R)%_type_scope 
-  [tS]%_bool_scope [nS]%_type_scope S
-Internals.and4_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.and4_nProp
-Declared in library mathcomp.classical.contra, line 308, characters 10-20
 </p></span></div></span><span class="id"> :</span><span class="gallina-kwd"> forall</span><span class="id"> {</span><span id="R:5" class="id"><a name="R:5" class="">R</a></span><span class="id">},</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#R:5">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#dual_extended">dual_extended</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#R:5">R</a></span><span class="id"> :=</span><span class="id"> @</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#EFin">EFin</a></span>.<br/>
 <br/>
 <span class="vernacular">Notation</span> <span id="78e564c7ecacb57c4b0a0cf13b41fea4" class="id"><a name="78e564c7ecacb57c4b0a0cf13b41fea4" class="">&quot;+oo&quot;</a></span><span class="id"> :=</span> (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#EPInf">EPInf</a></span><span class="id"> _</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#dual_extended">dual_extended</a></span><span class="id"> _</span>)<span class="id"> :</span><span class="id"> ereal_dual_scope</span>.<br/>
@@ -426,17 +425,17 @@ Declared in library mathcomp.classical.contra, line 308, characters 10-20
 <br/>
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> ereal_scope</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="er_map" class="id"><div name="er_map" class=" tooltip">er_map<span class='tooltip-area'><p>Internals.and5_nProp :
-forall (P Q R S : Prop) [tT : bool] [nT : Prop],
-Internals.negatedProp tT nT ->
-Internals.properNegatedProp (P -> Q -> R -> S -> nT)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="er_map" class="id"><div name="er_map" class=" tooltip">er_map<span class='tooltip-area'><p>Internals.and4_nProp :
+forall (P Q R : Prop) [tS : bool] [nS : Prop],
+Internals.negatedProp tS nS ->
+Internals.properNegatedProp (P -> Q -> R -> nS)
 
-Internals.and5_nProp is not universe polymorphic
-Arguments Internals.and5_nProp (P Q R S)%_type_scope 
-  [tT]%_bool_scope [nT]%_type_scope T
-Internals.and5_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.and5_nProp
-Declared in library mathcomp.classical.contra, line 314, characters 10-20
+Internals.and4_nProp is not universe polymorphic
+Arguments Internals.and4_nProp (P Q R)%_type_scope 
+  [tS]%_bool_scope [nS]%_type_scope S
+Internals.and4_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.and4_nProp
+Declared in library mathcomp.classical.contra, line 308, characters 10-20
 </p></span></div></span><span class="id"> </span><span id="T:6" class="id"><a name="T:6" class="">T</a></span><span class="id"> </span><span id="T':7" class="id"><a name="T':7" class="">T'</a></span> (<span id="f:8" class="id"><a name="f:8" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#T:6">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#T':7">T'</a></span>) (<span id="x:9" class="id"><a name="x:9" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#T:6">T</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#T':7">T'</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:9">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#f:8">f</a></span><span class="id"> r</span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -450,7 +449,23 @@ Declared in library mathcomp.classical.contra, line 314, characters 10-20
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> case:</span><span class="id"> x</span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fine" class="id"><div name="fine" class=" tooltip">fine<span class='tooltip-area'><p>Internals.or_nProp :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fine" class="id"><div name="fine" class=" tooltip">fine<span class='tooltip-area'><p>Internals.and5_nProp :
+forall (P Q R S : Prop) [tT : bool] [nT : Prop],
+Internals.negatedProp tT nT ->
+Internals.properNegatedProp (P -> Q -> R -> S -> nT)
+
+Internals.and5_nProp is not universe polymorphic
+Arguments Internals.and5_nProp (P Q R S)%_type_scope 
+  [tT]%_bool_scope [nT]%_type_scope T
+Internals.and5_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.and5_nProp
+Declared in library mathcomp.classical.contra, line 314, characters 10-20
+</p></span></div></span><span class="id"> {</span><span id="R:13" class="id"><a name="R:13" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.nmodule.html#Algebra.Zmodule.Exports.zmodType">zmodType</a></span><span class="id">}</span><span class="id"> </span><span id="x:14" class="id"><a name="x:14" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#R:13">R</a></span><span class="id"> :=</span><span class="gallina-kwd"> if</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:14">x</a></span><span class="id"> is</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#EFin">EFin</a></span><span class="id"> v</span><span class="gallina-kwd"> then</span><span class="id"> v</span><span class="gallina-kwd"> else</span><span class="id"> 0</span>.<br/>
+<br/>
+<span class="vernacular">Section</span><span class="id"> EqEReal</span>.<br/>
+<span class="vernacular">Variable</span> (<span id="EqEReal.R" class="id"><a name="EqEReal.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#Equality.Exports.eqType">eqType</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="eq_ereal" class="id"><div name="eq_ereal" class=" tooltip">eq_ereal<span class='tooltip-area'><p>Internals.or_nProp :
 forall [tP : bool] [nP : Prop],
 Internals.negatedProp tP nP ->
 forall [tQ : bool] [nQ : Prop],
@@ -462,26 +477,6 @@ Arguments Internals.or_nProp [tP]%_bool_scope [nP]%_type_scope
 Internals.or_nProp is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.or_nProp
 Declared in library mathcomp.classical.contra, line 320, characters 10-18
-</p></span></div></span><span class="id"> {</span><span id="R:13" class="id"><a name="R:13" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.nmodule.html#Algebra.Zmodule.Exports.zmodType">zmodType</a></span><span class="id">}</span><span class="id"> </span><span id="x:14" class="id"><a name="x:14" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#R:13">R</a></span><span class="id"> :=</span><span class="gallina-kwd"> if</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:14">x</a></span><span class="id"> is</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#EFin">EFin</a></span><span class="id"> v</span><span class="gallina-kwd"> then</span><span class="id"> v</span><span class="gallina-kwd"> else</span><span class="id"> 0</span>.<br/>
-<br/>
-<span class="vernacular">Section</span><span class="id"> EqEReal</span>.<br/>
-<span class="vernacular">Variable</span> (<span id="EqEReal.R" class="id"><a name="EqEReal.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#Equality.Exports.eqType">eqType</a></span>).<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="eq_ereal" class="id"><div name="eq_ereal" class=" tooltip">eq_ereal<span class='tooltip-area'><p>Internals.or3_nProp :
-forall [tP : bool] [nP : Prop],
-Internals.negatedProp tP nP ->
-forall [tQ : bool] [nQ : Prop],
-Internals.negatedProp tQ nQ ->
-forall [tR : bool] [nR : Prop],
-Internals.negatedProp tR nR -> Internals.properNegatedProp [/\ nP, nQ & nR]
-
-Internals.or3_nProp is not universe polymorphic
-Arguments Internals.or3_nProp [tP]%_bool_scope [nP]%_type_scope 
-  P [tQ]%_bool_scope [nQ]%_type_scope Q [tR]%_bool_scope 
-  [nR]%_type_scope R
-Internals.or3_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.or3_nProp
-Declared in library mathcomp.classical.contra, line 326, characters 10-19
 </p></span></div></span> (<span id="x:18" class="id"><a name="x:18" class="">x</a></span><span class="id"> </span><span id="y:19" class="id"><a name="y:19" class="">y</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#EqEReal.R">R</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:18">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:19">y</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span><span class="id"> x</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id">,</span><span class="id"> y</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:18">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:19">y</a></span><br/>
@@ -509,7 +504,29 @@ Declared in library mathcomp.classical.contra, line 326, characters 10-19
 <span class="vernacular">Section</span><span class="id"> ERealChoice</span>.<br/>
 <span class="vernacular">Variable</span> (<span id="ERealChoice.R" class="id"><a name="ERealChoice.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#Choice.Exports.choiceType">choiceType</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="code" class="id"><div name="code" class=" tooltip">code<span class='tooltip-area'><p>Internals.or4_nProp :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="code" class="id"><div name="code" class=" tooltip">code<span class='tooltip-area'><p>Internals.or3_nProp :
+forall [tP : bool] [nP : Prop],
+Internals.negatedProp tP nP ->
+forall [tQ : bool] [nQ : Prop],
+Internals.negatedProp tQ nQ ->
+forall [tR : bool] [nR : Prop],
+Internals.negatedProp tR nR -> Internals.properNegatedProp [/\ nP, nQ & nR]
+
+Internals.or3_nProp is not universe polymorphic
+Arguments Internals.or3_nProp [tP]%_bool_scope [nP]%_type_scope 
+  P [tQ]%_bool_scope [nQ]%_type_scope Q [tR]%_bool_scope 
+  [nR]%_type_scope R
+Internals.or3_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.or3_nProp
+Declared in library mathcomp.classical.contra, line 326, characters 10-19
+</p></span></div></span> (<span id="x:26" class="id"><a name="x:26" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealChoice.R">R</a></span>)<span class="id"> :=</span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:26">x</a></span><span class="gallina-kwd"> with</span><br/>
+&nbsp;&nbsp;<span class="id">|</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 0</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d">[::</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Leaf">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Leaf">Leaf</a></span><span class="id"> r</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d">]</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 1</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#0a934e621391740b862762275992e626">[::]</a></span><br/>
+&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 2</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#0a934e621391740b862762275992e626">[::]</a></span><br/>
+&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="decode" class="id"><div name="decode" class=" tooltip">decode<span class='tooltip-area'><p>Internals.or4_nProp :
 forall [tP : bool] [nP : Prop],
 Internals.negatedProp tP nP ->
 forall [tQ : bool] [nQ : Prop],
@@ -528,20 +545,6 @@ Arguments Internals.or4_nProp [tP]%_bool_scope [nP]%_type_scope
 Internals.or4_nProp is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.or4_nProp
 Declared in library mathcomp.classical.contra, line 333, characters 10-19
-</p></span></div></span> (<span id="x:26" class="id"><a name="x:26" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealChoice.R">R</a></span>)<span class="id"> :=</span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:26">x</a></span><span class="gallina-kwd"> with</span><br/>
-&nbsp;&nbsp;<span class="id">|</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 0</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d">[::</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Leaf">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Leaf">Leaf</a></span><span class="id"> r</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d">]</a></span><br/>
-&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 1</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#0a934e621391740b862762275992e626">[::]</a></span><br/>
-&nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 2</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#0a934e621391740b862762275992e626">[::]</a></span><br/>
-&nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="decode" class="id"><div name="decode" class=" tooltip">decode<span class='tooltip-area'><p>Internals.unary_and_rhs : forall P : Prop, Internals.andRHS false P P P
-
-Internals.unary_and_rhs is not universe polymorphic
-Arguments Internals.unary_and_rhs P%_type_scope
-Internals.unary_and_rhs is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.unary_and_rhs
-Declared in library mathcomp.classical.contra, line 347, characters 10-23
 </p></span></div></span> (<span id="x:28" class="id"><a name="x:28" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.tree">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.tree">tree</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealChoice.R">R</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#option">option</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealChoice.R">R</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:28">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Node">Node</a></span><span class="id"> 0</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d">[::</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Leaf">GenTree</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#GenTree.Leaf">Leaf</a></span><span class="id"> r</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.seq.html#506674b18256ef8f50efed43fa1dfd7d">]</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#Some">Some</a></span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -571,14 +574,13 @@ Declared in library mathcomp.classical.contra, line 347, characters 10-23
 <span class="vernacular">Context</span><span class="id"> {</span><span id="ERealOrder.R" class="id"><a name="ERealOrder.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.NumDomain.Exports.numDomainType">numDomainType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> x</span><span class="id"> y</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealOrder.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="le_ereal" class="id"><div name="le_ereal" class=" tooltip">le_ereal<span class='tooltip-area'><p>Internals.binary_and_rhs :
-forall P Q : Prop, Internals.andRHS true P Q (P /\ Q)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="le_ereal" class="id"><div name="le_ereal" class=" tooltip">le_ereal<span class='tooltip-area'><p>Internals.unary_and_rhs : forall P : Prop, Internals.andRHS false P P P
 
-Internals.binary_and_rhs is not universe polymorphic
-Arguments Internals.binary_and_rhs (P Q)%_type_scope
-Internals.binary_and_rhs is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.binary_and_rhs
-Declared in library mathcomp.classical.contra, line 348, characters 10-24
+Internals.unary_and_rhs is not universe polymorphic
+Arguments Internals.unary_and_rhs P%_type_scope
+Internals.unary_and_rhs is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.unary_and_rhs
+Declared in library mathcomp.classical.contra, line 347, characters 10-23
 </p></span></div></span><span class="id"> </span><span id="x1:33" class="id"><a name="x1:33" class="">x1</a></span><span class="id"> </span><span id="x2:34" class="id"><a name="x2:34" class="">x2</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x1:33">x1</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x2:34">x2</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id">,</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> |</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> r</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> \is</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">Num</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">real</a></span><br/>
@@ -587,18 +589,14 @@ Declared in library mathcomp.classical.contra, line 348, characters 10-24
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id">,</span><span class="id"> _</span>   <span class="id"> |</span><span class="id"> _,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#false">false</a></span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_ereal" class="id"><div name="lt_ereal" class=" tooltip">lt_ereal<span class='tooltip-area'><p>Internals.imply_nProp :
-forall [b : bool] [P nQ PnQ : Prop] [tR : bool]
-  [nR : Internals.andRHS b P nQ PnQ],
-Internals.negatedProp tR (Internals.and_RHS nR) ->
-Internals.properNegatedProp PnQ
+<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_ereal" class="id"><div name="lt_ereal" class=" tooltip">lt_ereal<span class='tooltip-area'><p>Internals.binary_and_rhs :
+forall P Q : Prop, Internals.andRHS true P Q (P /\ Q)
 
-Internals.imply_nProp is not universe polymorphic
-Arguments Internals.imply_nProp [b]%_bool_scope [P nQ PnQ]%_type_scope
-  [tR]%_bool_scope [nR] R
-Internals.imply_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.imply_nProp
-Declared in library mathcomp.classical.contra, line 353, characters 10-21
+Internals.binary_and_rhs is not universe polymorphic
+Arguments Internals.binary_and_rhs (P Q)%_type_scope
+Internals.binary_and_rhs is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.binary_and_rhs
+Declared in library mathcomp.classical.contra, line 348, characters 10-24
 </p></span></div></span><span class="id"> </span><span id="x1:37" class="id"><a name="x1:37" class="">x1</a></span><span class="id"> </span><span id="x2:38" class="id"><a name="x2:38" class="">x2</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x1:37">x1</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x2:38">x2</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id">,</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> |</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> r</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> \is</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">Num</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">real</a></span><br/>
@@ -709,17 +707,18 @@ Qed.</div></details>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="ERealZsemimodule.R" class="id"><a name="ERealZsemimodule.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.nmodule.html#Algebra.Nmodule.Exports.nmodType">nmodType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> x</span><span class="id"> y</span><span class="id"> z</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="adde" class="id"><div name="adde" class=" tooltip">adde<span class='tooltip-area'><p>Internals.exists_nProp :
-forall [A : Type] [tP : bool] [nP : A -> Prop],
-(forall x : A, Internals.negatedProp tP (nP x)) ->
-Internals.properNegatedProp (forall x : A, nP x)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="adde" class="id"><div name="adde" class=" tooltip">adde<span class='tooltip-area'><p>Internals.imply_nProp :
+forall [b : bool] [P nQ PnQ : Prop] [tR : bool]
+  [nR : Internals.andRHS b P nQ PnQ],
+Internals.negatedProp tR (Internals.and_RHS nR) ->
+Internals.properNegatedProp PnQ
 
-Internals.exists_nProp is not universe polymorphic
-Arguments Internals.exists_nProp [A]%_type_scope [tP]%_bool_scope
-  [nP]%_function_scope P%_function_scope
-Internals.exists_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.exists_nProp
-Declared in library mathcomp.classical.contra, line 362, characters 10-22
+Internals.imply_nProp is not universe polymorphic
+Arguments Internals.imply_nProp [b]%_bool_scope [P nQ PnQ]%_type_scope
+  [tR]%_bool_scope [nR] R
+Internals.imply_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.imply_nProp
+Declared in library mathcomp.classical.contra, line 353, characters 10-21
 </p></span></div></span><span class="id"> </span><span id="x:48" class="id"><a name="x:48" class="">x</a></span><span class="id"> </span><span id="y:49" class="id"><a name="y:49" class="">y</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:48">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:49">y</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> x</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> ,</span><span class="id"> y</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span> <span class="id"> =&gt;</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:48">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> +</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:49">y</a></span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -730,18 +729,17 @@ Declared in library mathcomp.classical.contra, line 362, characters 10-22
 &nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#adde">adde</a></span><span class="id"> :</span><span class="id"> simpl</span><span class="id"> never</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="dual_adde" class="id"><div name="dual_adde" class=" tooltip">dual_adde<span class='tooltip-area'><p>Internals.exists2_nProp :
-forall [A : Type] (P : A -> Prop) [tQ : bool] [nQ : A -> Prop],
-(forall x : A, Internals.negatedProp tQ (nQ x)) ->
-Internals.properNegatedProp (forall x : A, P x -> nQ x)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="dual_adde" class="id"><div name="dual_adde" class=" tooltip">dual_adde<span class='tooltip-area'><p>Internals.exists_nProp :
+forall [A : Type] [tP : bool] [nP : A -> Prop],
+(forall x : A, Internals.negatedProp tP (nP x)) ->
+Internals.properNegatedProp (forall x : A, nP x)
 
-Internals.exists2_nProp is not universe polymorphic
-Arguments Internals.exists2_nProp [A]%_type_scope 
-  P%_function_scope [tQ]%_bool_scope [nQ]%_function_scope 
-  Q%_function_scope
-Internals.exists2_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.exists2_nProp
-Declared in library mathcomp.classical.contra, line 368, characters 10-23
+Internals.exists_nProp is not universe polymorphic
+Arguments Internals.exists_nProp [A]%_type_scope [tP]%_bool_scope
+  [nP]%_function_scope P%_function_scope
+Internals.exists_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.exists_nProp
+Declared in library mathcomp.classical.contra, line 362, characters 10-22
 </p></span></div></span><span class="id"> </span><span id="x:52" class="id"><a name="x:52" class="">x</a></span><span class="id"> </span><span id="y:53" class="id"><a name="y:53" class="">y</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:52">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:53">y</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> x</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> ,</span><span class="id"> y</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span> <span class="id"> =&gt;</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:52">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> +</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:53">y</a></span>)<span class="id">%R</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -795,7 +793,21 @@ Declared in library mathcomp.classical.contra, line 368, characters 10-23
 <span id="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddSemigroup" class="id"><span id="HB_unnamed_mixin_50" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddUMagma" class="id"><span id="HB_unnamed_mixin_49" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddMagma" class="id"><span id="HB_unnamed_mixin_48" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddUMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddUMagma" class="id"><span id="HB_unnamed_mixin_47" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddMagma" class="id"><span id="HB_unnamed_mixin_46" class="id"><span id="GRing_isNmodule__to__Algebra_hasAdd__45" class="id"><span id="GRing_isNmodule__to__Algebra_hasZero__43" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddUMagma_isAddUMagma__41" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddMagma_isAddMagma__39" class="id"><span id="GRing_isNmodule__to__Algebra_AddMagma_isAddSemigroup__37" class="id"><span id="HB_unnamed_factory_35" class="id"><a name="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="">HB</a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>.<span id="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddSemigroup" class="id"><span id="HB_unnamed_mixin_50" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddUMagma" class="id"><span id="HB_unnamed_mixin_49" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddMagma" class="id"><span id="HB_unnamed_mixin_48" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddUMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddUMagma" class="id"><span id="HB_unnamed_mixin_47" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddMagma" class="id"><span id="HB_unnamed_mixin_46" class="id"><span id="GRing_isNmodule__to__Algebra_hasAdd__45" class="id"><span id="GRing_isNmodule__to__Algebra_hasZero__43" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddUMagma_isAddUMagma__41" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddMagma_isAddMagma__39" class="id"><span id="GRing_isNmodule__to__Algebra_AddMagma_isAddSemigroup__37" class="id"><span id="HB_unnamed_factory_35" class="id"><a name="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="">instance</a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span id="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddSemigroup" class="id"><span id="HB_unnamed_mixin_50" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddUMagma" class="id"><span id="HB_unnamed_mixin_49" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddMagma" class="id"><span id="HB_unnamed_mixin_48" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddUMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddUMagma" class="id"><span id="HB_unnamed_mixin_47" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddMagma" class="id"><span id="HB_unnamed_mixin_46" class="id"><span id="GRing_isNmodule__to__Algebra_hasAdd__45" class="id"><span id="GRing_isNmodule__to__Algebra_hasZero__43" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddUMagma_isAddUMagma__41" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddMagma_isAddMagma__39" class="id"><span id="GRing_isNmodule__to__Algebra_AddMagma_isAddSemigroup__37" class="id"><span id="HB_unnamed_factory_35" class="id"><a name="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class=""> Definition</a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span id="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddSemigroup" class="id"><span id="HB_unnamed_mixin_50" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddUMagma" class="id"><span id="HB_unnamed_mixin_49" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddMagma" class="id"><span id="HB_unnamed_mixin_48" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddUMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddUMagma" class="id"><span id="HB_unnamed_mixin_47" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddMagma" class="id"><span id="HB_unnamed_mixin_46" class="id"><span id="GRing_isNmodule__to__Algebra_hasAdd__45" class="id"><span id="GRing_isNmodule__to__Algebra_hasZero__43" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddUMagma_isAddUMagma__41" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddMagma_isAddMagma__39" class="id"><span id="GRing_isNmodule__to__Algebra_AddMagma_isAddSemigroup__37" class="id"><span id="HB_unnamed_factory_35" class="id"><a name="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class=""> _</a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span id="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddSemigroup" class="id"><span id="HB_unnamed_mixin_50" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddUMagma" class="id"><span id="HB_unnamed_mixin_49" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddMagma" class="id"><span id="HB_unnamed_mixin_48" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddUMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddUMagma" class="id"><span id="HB_unnamed_mixin_47" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddMagma" class="id"><span id="HB_unnamed_mixin_46" class="id"><span id="GRing_isNmodule__to__Algebra_hasAdd__45" class="id"><span id="GRing_isNmodule__to__Algebra_hasZero__43" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddUMagma_isAddUMagma__41" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddMagma_isAddMagma__39" class="id"><span id="GRing_isNmodule__to__Algebra_AddMagma_isAddSemigroup__37" class="id"><span id="HB_unnamed_factory_35" class="id"><a name="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class=""> :=</a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span id="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddSemigroup" class="id"><span id="HB_unnamed_mixin_50" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddUMagma" class="id"><span id="HB_unnamed_mixin_49" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_AddMagma" class="id"><span id="HB_unnamed_mixin_48" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddUMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddUMagma" class="id"><span id="HB_unnamed_mixin_47" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_ChoiceBaseAddMagma" class="id"><span id="constructive_ereal_dual_extended__canonical__Algebra_BaseAddMagma" class="id"><span id="HB_unnamed_mixin_46" class="id"><span id="GRing_isNmodule__to__Algebra_hasAdd__45" class="id"><span id="GRing_isNmodule__to__Algebra_hasZero__43" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddUMagma_isAddUMagma__41" class="id"><span id="GRing_isNmodule__to__Algebra_BaseAddMagma_isAddMagma__39" class="id"><span id="GRing_isNmodule__to__Algebra_AddMagma_isAddSemigroup__37" class="id"><span id="HB_unnamed_factory_35" class="id"><a name="constructive_ereal_dual_extended__canonical__Algebra_Nmodule" class=""> GRing</a></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#Dummy.GRing.isNmodule.Build">isNmodule</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#Dummy.GRing.isNmodule.Build">Build</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#2cb025ec4d0c54de5e8ffaf7f945cdbb">\bar^d</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#2cb025ec4d0c54de5e8ffaf7f945cdbb"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span>)<br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.reals.constructive_ereal.html#daddeA_subproof">daddeA_subproof</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#daddeC_subproof">daddeC_subproof</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#dadd0e_subproof">dadd0e_subproof</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="enatmul" class="id"><div name="enatmul" class=" tooltip">enatmul<span class='tooltip-area'><p>Internals.inhabited_nProp :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="enatmul" class="id"><div name="enatmul" class=" tooltip">enatmul<span class='tooltip-area'><p>Internals.exists2_nProp :
+forall [A : Type] (P : A -> Prop) [tQ : bool] [nQ : A -> Prop],
+(forall x : A, Internals.negatedProp tQ (nQ x)) ->
+Internals.properNegatedProp (forall x : A, P x -> nQ x)
+
+Internals.exists2_nProp is not universe polymorphic
+Arguments Internals.exists2_nProp [A]%_type_scope 
+  P%_function_scope [tQ]%_bool_scope [nQ]%_function_scope 
+  Q%_function_scope
+Internals.exists2_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.exists2_nProp
+Declared in library mathcomp.classical.contra, line 368, characters 10-23
+</p></span></div></span><span class="id"> </span><span id="x:56" class="id"><a name="x:56" class="">x</a></span><span class="id"> </span><span id="n:57" class="id"><a name="n:57" class="">n</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#iterop">iterop</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#n:57">n</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2bf9e19782bb5bbd8d6a51d139904c00">+%R</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:56">x</a></span><span class="id"> 0</span>.<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="ednatmul" class="id"><div name="ednatmul" class=" tooltip">ednatmul<span class='tooltip-area'><p>Internals.inhabited_nProp :
 forall T : Type, Internals.properNegatedProp (T -> False)
 
 Internals.inhabited_nProp is not universe polymorphic
@@ -803,21 +815,6 @@ Arguments Internals.inhabited_nProp T%_type_scope
 Internals.inhabited_nProp is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.inhabited_nProp
 Declared in library mathcomp.classical.contra, line 373, characters 10-25
-</p></span></div></span><span class="id"> </span><span id="x:56" class="id"><a name="x:56" class="">x</a></span><span class="id"> </span><span id="n:57" class="id"><a name="n:57" class="">n</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#iterop">iterop</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#n:57">n</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2bf9e19782bb5bbd8d6a51d139904c00">+%R</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:56">x</a></span><span class="id"> 0</span>.<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="ednatmul" class="id"><div name="ednatmul" class=" tooltip">ednatmul<span class='tooltip-area'><p>Internals.forall_nProp :
-forall [A : Type] [b : bool] [P nQ : A -> Prop] [tR : bool] [nR : A -> Prop],
-(forall x : A, Internals.nBody b P nQ tR nR x) ->
-Internals.negatedProp false
-  (if b then exists2 x : A, P x & nQ x else exists x : A, nQ x)
-
-Internals.forall_nProp is not universe polymorphic
-Arguments Internals.forall_nProp [A]%_type_scope [b]%_bool_scope
-  [P nQ]%_function_scope [tR]%_bool_scope [nR]%_function_scope
-  R%_function_scope
-Internals.forall_nProp is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.forall_nProp
-Declared in library mathcomp.classical.contra, line 409, characters 10-22
 </p></span></div></span> (<span id="x:58" class="id"><a name="x:58" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#2cb025ec4d0c54de5e8ffaf7f945cdbb">\bar^d</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#2cb025ec4d0c54de5e8ffaf7f945cdbb"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span>)<span class="id"> </span><span id="n:59" class="id"><a name="n:59" class="">n</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#2cb025ec4d0c54de5e8ffaf7f945cdbb">\bar^d</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#2cb025ec4d0c54de5e8ffaf7f945cdbb"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#iterop">iterop</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#n:59">n</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2bf9e19782bb5bbd8d6a51d139904c00">+%R</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:58">x</a></span><span class="id"> 0</span>.<br/>
 <br/>
 <span class="vernacular">End</span><span class="id"> ERealZsemimodule</span>.<br/>
@@ -1054,7 +1051,22 @@ Qed.</div></details>
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> case:</span><span class="id"> x</span><span class="id"> =&gt;</span><span class="id"> //=</span><span class="id"> r;</span><span class="id"> exact:</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.Theory.num_real">num_real</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="lteey" class="id"><div name="lteey" class=" tooltip">lteey<span class='tooltip-area'><p>Internals.proper_nBody :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="lteey" class="id"><div name="lteey" class=" tooltip">lteey<span class='tooltip-area'><p>Internals.forall_nProp :
+forall [A : Type] [b : bool] [P nQ : A -> Prop] [tR : bool] [nR : A -> Prop],
+(forall x : A, Internals.nBody b P nQ tR nR x) ->
+Internals.negatedProp false
+  (if b then exists2 x : A, P x & nQ x else exists x : A, nQ x)
+
+Internals.forall_nProp is not universe polymorphic
+Arguments Internals.forall_nProp [A]%_type_scope [b]%_bool_scope
+  [P nQ]%_function_scope [tR]%_bool_scope [nR]%_function_scope
+  R%_function_scope
+Internals.forall_nProp is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.forall_nProp
+Declared in library mathcomp.classical.contra, line 409, characters 10-22
+</p></span></div></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#ltey">ltey</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#leey">leey</a></span>).<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="lteNye" class="id"><div name="lteNye" class=" tooltip">lteNye<span class='tooltip-area'><p>Internals.proper_nBody :
 forall [b : bool] [P nQ nR : Prop],
 Internals.properNegatedForallBody b P nQ nR ->
 Internals.negatedForallBody b P nQ false nR
@@ -1064,18 +1076,6 @@ Arguments Internals.proper_nBody [b]%_bool_scope [P nQ nR]%_type_scope R
 Internals.proper_nBody is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.proper_nBody
 Declared in library mathcomp.classical.contra, line 415, characters 10-22
-</p></span></div></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#ltey">ltey</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#leey">leey</a></span>).<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="lteNye" class="id"><div name="lteNye" class=" tooltip">lteNye<span class='tooltip-area'><p>Internals.nonproper_nBody :
-forall [tP : bool] [nP : Prop],
-Internals.negatedProp tP nP ->
-Internals.negatedForallBody false True nP tP nP
-
-Internals.nonproper_nBody is not universe polymorphic
-Arguments Internals.nonproper_nBody [tP]%_bool_scope [nP]%_type_scope P
-Internals.nonproper_nBody is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.nonproper_nBody
-Declared in library mathcomp.classical.contra, line 418, characters 10-25
 </p></span></div></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#ltNye">ltNye</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#leNye">leNye</a></span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="le_er_map" class="id"><a name="le_er_map" class="">le_er_map</a></span> (<span id="f:88" class="id"><a name="f:88" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealOrder_realDomainType.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealOrder_realDomainType.R">R</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02">{homo</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#f:88">f</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02"> :</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02"> </a></span><span id="x:91" class="id"><span id="x:89" class="id"><a name="x:91" class="">x</a></span></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02"> </a></span><span id="y:92" class="id"><span id="y:90" class="id"><a name="y:92" class="">y</a></span></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02"> /</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:89">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#cb42ec59ad57b25928e1718b4e69e031"> &lt;=</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#cb42ec59ad57b25928e1718b4e69e031"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:90">y</a></span>)<span class="id">%R</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#a5aeb8c3f096bffee5d65fb0b6810e02">}</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><br/>
@@ -1106,18 +1106,16 @@ Qed.</div></details>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="ERealZmodule.R" class="id"><a name="ERealZmodule.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.nmodule.html#Algebra.Zmodule.Exports.zmodType">zmodType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> x</span><span class="id"> y</span><span class="id"> z</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZmodule.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="oppe" class="id"><div name="oppe" class=" tooltip">oppe<span class='tooltip-area'><p>Internals.bounded_nBody :
-forall [b : bool] [P nQ PnQ : Prop] [tR : bool]
-  [nR : Internals.andRHS b P nQ PnQ],
-Internals.negatedProp tR (Internals.and_RHS nR) ->
-Internals.properNegatedForallBody b P nQ PnQ
+<span class="vernacular">Definition</span><span class="id"> </span><span id="oppe" class="id"><div name="oppe" class=" tooltip">oppe<span class='tooltip-area'><p>Internals.nonproper_nBody :
+forall [tP : bool] [nP : Prop],
+Internals.negatedProp tP nP ->
+Internals.negatedForallBody false True nP tP nP
 
-Internals.bounded_nBody is not universe polymorphic
-Arguments Internals.bounded_nBody [b]%_bool_scope 
-  [P nQ PnQ]%_type_scope [tR]%_bool_scope [nR] R
-Internals.bounded_nBody is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.bounded_nBody
-Declared in library mathcomp.classical.contra, line 423, characters 10-23
+Internals.nonproper_nBody is not universe polymorphic
+Arguments Internals.nonproper_nBody [tP]%_bool_scope [nP]%_type_scope P
+Internals.nonproper_nBody is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.nonproper_nBody
+Declared in library mathcomp.classical.contra, line 418, characters 10-25
 </p></span></div></span><span class="id"> </span><span id="x:98" class="id"><a name="x:98" class="">x</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:98">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span> <span class="id"> =&gt;</span> (<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:'-'_x">-</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:'-'_x"> </a></span><span class="id">r</span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -1131,16 +1129,18 @@ Declared in library mathcomp.classical.contra, line 423, characters 10-23
 <span class="vernacular">Context</span><span class="id"> {</span><span id="ERealArith.R" class="id"><a name="ERealArith.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.NumDomain.Exports.numDomainType">numDomainType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> x</span><span class="id"> y</span><span class="id"> z</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealArith.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="mule" class="id"><div name="mule" class=" tooltip">mule<span class='tooltip-area'><p>Internals.unbounded_nBody :
-forall [nQ : Prop],
-Internals.properNegatedProp nQ ->
-Internals.properNegatedForallBody false True nQ nQ
+<span class="vernacular">Definition</span><span class="id"> </span><span id="mule" class="id"><div name="mule" class=" tooltip">mule<span class='tooltip-area'><p>Internals.bounded_nBody :
+forall [b : bool] [P nQ PnQ : Prop] [tR : bool]
+  [nR : Internals.andRHS b P nQ PnQ],
+Internals.negatedProp tR (Internals.and_RHS nR) ->
+Internals.properNegatedForallBody b P nQ PnQ
 
-Internals.unbounded_nBody is not universe polymorphic
-Arguments Internals.unbounded_nBody [nQ]%_type_scope Q
-Internals.unbounded_nBody is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.unbounded_nBody
-Declared in library mathcomp.classical.contra, line 425, characters 10-25
+Internals.bounded_nBody is not universe polymorphic
+Arguments Internals.bounded_nBody [b]%_bool_scope 
+  [P nQ PnQ]%_type_scope [tR]%_bool_scope [nR] R
+Internals.bounded_nBody is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.bounded_nBody
+Declared in library mathcomp.classical.contra, line 423, characters 10-23
 </p></span></div></span><span class="id"> </span><span id="x:101" class="id"><a name="x:101" class="">x</a></span><span class="id"> </span><span id="y:102" class="id"><a name="y:102" class="">y</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:101">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:102">y</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> x</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> ,</span><span class="id"> y</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:101">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> *</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#2d0cfb150261028f4ebd2ba355623dcc"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:102">y</a></span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -1151,7 +1151,19 @@ Declared in library mathcomp.classical.contra, line 425, characters 10-25
 &nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mule">mule</a></span><span class="id"> :</span><span class="id"> simpl</span><span class="id"> never</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="abse" class="id"><div name="abse" class=" tooltip">abse<span class='tooltip-area'><p>Internals.is_true_nProp :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="abse" class="id"><div name="abse" class=" tooltip">abse<span class='tooltip-area'><p>Internals.unbounded_nBody :
+forall [nQ : Prop],
+Internals.properNegatedProp nQ ->
+Internals.properNegatedForallBody false True nQ nQ
+
+Internals.unbounded_nBody is not universe polymorphic
+Arguments Internals.unbounded_nBody [nQ]%_type_scope Q
+Internals.unbounded_nBody is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.unbounded_nBody
+Declared in library mathcomp.classical.contra, line 425, characters 10-25
+</p></span></div></span><span class="id"> </span><span id="x:105" class="id"><a name="x:105" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealArith.R">R</a></span><span class="id"> :=</span><span class="gallina-kwd"> if</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:105">x</a></span><span class="id"> is</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="gallina-kwd"> then</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#55297ec87c6b3f98c14c99daeafb55d3">`|</a></span><span class="id">r</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#55297ec87c6b3f98c14c99daeafb55d3">|</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="gallina-kwd"> else</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>.<br/>
+<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="inve" class="id"><div name="inve" class=" tooltip">inve<span class='tooltip-area'><p>Internals.is_true_nProp :
 forall [nP : Prop],
 Internals.negatedBool nP -> Internals.properNegatedProp nP
 
@@ -1160,14 +1172,6 @@ Arguments Internals.is_true_nProp [nP]%_type_scope b
 Internals.is_true_nProp is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.is_true_nProp
 Declared in library mathcomp.classical.contra, line 448, characters 10-23
-</p></span></div></span><span class="id"> </span><span id="x:105" class="id"><a name="x:105" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealArith.R">R</a></span><span class="id"> :=</span><span class="gallina-kwd"> if</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:105">x</a></span><span class="id"> is</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="gallina-kwd"> then</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#55297ec87c6b3f98c14c99daeafb55d3">`|</a></span><span class="id">r</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#55297ec87c6b3f98c14c99daeafb55d3">|</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="gallina-kwd"> else</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>.<br/>
-<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="inve" class="id"><div name="inve" class=" tooltip">inve<span class='tooltip-area'><p>Internals.true_neg : Internals.negatedBool False
-
-Internals.true_neg is not universe polymorphic
-Internals.true_neg is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.true_neg
-Declared in library mathcomp.classical.contra, line 454, characters 10-18
 </p></span></div></span><span class="id"> </span><span id="x:107" class="id"><a name="x:107" class="">x</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:107">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> x</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x">if</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:107">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id">0%R</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> then</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#::boolean_if_scope:'if'_x_'then'_x_'else'_x"> else</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:107">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.divalg.html#4e5a4c91ec0aa12de06dfe1cc07ea126">^-1</a></span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>
@@ -1176,12 +1180,12 @@ Declared in library mathcomp.classical.contra, line 454, characters 10-18
 &nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#inve">inve</a></span><span class="id"> :</span><span class="id"> simpl</span><span class="id"> never</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="expe" class="id"><div name="expe" class=" tooltip">expe<span class='tooltip-area'><p>Internals.true_pos : Internals.positedBool True
+<span class="vernacular">Definition</span><span class="id"> </span><span id="expe" class="id"><div name="expe" class=" tooltip">expe<span class='tooltip-area'><p>Internals.true_neg : Internals.negatedBool False
 
-Internals.true_pos is not universe polymorphic
-Internals.true_pos is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.true_pos
-Declared in library mathcomp.classical.contra, line 455, characters 10-18
+Internals.true_neg is not universe polymorphic
+Internals.true_neg is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.true_neg
+Declared in library mathcomp.classical.contra, line 454, characters 10-18
 </p></span></div></span><span class="id"> </span><span id="x:109" class="id"><a name="x:109" class="">x</a></span><span class="id"> </span><span id="n:110" class="id"><a name="n:110" class="">n</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#iterop">iterop</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#n:110">n</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mule">mule</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:109">x</a></span><span class="id"> 1</span>.<br/>
 <br/>
 <span class="vernacular">End</span><span class="id"> ERealArith</span>.<br/>
@@ -1254,12 +1258,12 @@ for more explanations.</div>
 <span class="vernacular">Inductive</span><span class="id"> </span><span id="IEFin_sind" class="id"><span id="IEFin_rec" class="id"><span id="IEFin_ind" class="id"><span id="IEFin_rect" class="id"><span id="IEFin" class="id"><a name="IEFin_sind" class="">IEFin</a></span></span></span></span></span><span class="id"> :=</span><span class="id"> </span><span id="IEFinP" class="id"><a name="IEFinP" class="">IEFinP</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#Inatmul">Inatmul</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFin:115">IEFin</a></span><span class="id"> |</span><span class="id"> </span><span id="IEFinN" class="id"><a name="IEFinN" class="">IEFinN</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFin:115">IEFin</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFin:115">IEFin</a></span>.<br/>
 <span class="vernacular">Variant</span><span class="id"> </span><span id="Idummy_placeholder" class="id"><a name="Idummy_placeholder" class="">Idummy_placeholder</a></span><span class="id"> :=</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="parse" class="id"><div name="parse" class=" tooltip">parse<span class='tooltip-area'><p>Internals.false_neg : Internals.negatedBool True
+<span class="vernacular">Definition</span><span class="id"> </span><span id="parse" class="id"><div name="parse" class=" tooltip">parse<span class='tooltip-area'><p>Internals.true_pos : Internals.positedBool True
 
-Internals.false_neg is not universe polymorphic
-Internals.false_neg is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.false_neg
-Declared in library mathcomp.classical.contra, line 456, characters 10-19
+Internals.true_pos is not universe polymorphic
+Internals.true_pos is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.true_pos
+Declared in library mathcomp.classical.contra, line 455, characters 10-18
 </p></span></div></span> (<span id="x:119" class="id"><a name="x:119" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Number.html#int">Number</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Number.html#int">int</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFin">IEFin</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:119">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Number.html#IntDecimal">Number</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Number.html#IntDecimal">IntDecimal</a></span> (<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Decimal.html#Pos">Decimal</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Decimal.html#Pos">Pos</a></span><span class="id"> u</span>)<span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFinP">IEFinP</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#INatmul">INatmul</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IOne">IOne</a></span> (<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Nat.html#of_uint">Nat</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Nat.html#of_uint">of_uint</a></span><span class="id"> u</span>))<br/>
@@ -1271,12 +1275,12 @@ Declared in library mathcomp.classical.contra, line 456, characters 10-19
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFinN">IEFinN</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFinP">IEFinP</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#INatmul">INatmul</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IOne">IOne</a></span> (<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Nat.html#of_hex_uint">Nat</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Nat.html#of_hex_uint">of_hex_uint</a></span><span class="id"> u</span>)))<br/>
 &nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="print" class="id"><div name="print" class=" tooltip">print<span class='tooltip-area'><p>Internals.false_pos : Internals.positedBool False
+<span class="vernacular">Definition</span><span class="id"> </span><span id="print" class="id"><div name="print" class=" tooltip">print<span class='tooltip-area'><p>Internals.false_neg : Internals.negatedBool True
 
-Internals.false_pos is not universe polymorphic
-Internals.false_pos is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.false_pos
-Declared in library mathcomp.classical.contra, line 457, characters 10-19
+Internals.false_neg is not universe polymorphic
+Internals.false_neg is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.false_neg
+Declared in library mathcomp.classical.contra, line 456, characters 10-19
 </p></span></div></span> (<span id="x:121" class="id"><a name="x:121" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFin">IEFin</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#option">option</a></span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Number.html#int">Number</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Number.html#int">int</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:121">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IEFinP">IEFinP</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#INatmul">INatmul</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#IOne">IOne</a></span><span class="id"> n</span>)<span class="id"> =&gt;</span><br/>
@@ -1554,13 +1558,12 @@ Qed.</div></details>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="finNumPred.R" class="id"><a name="finNumPred.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.NumDomain.Exports.numDomainType">numDomainType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="gallina-kwd"> Type</span> (<span class="id">x</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#finNumPred.R">R</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fin_num" class="id"><div name="fin_num" class=" tooltip">fin_num<span class='tooltip-area'><p>Internals.id_neg : forall b : bool, Internals.negatedBool (~~ b)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fin_num" class="id"><div name="fin_num" class=" tooltip">fin_num<span class='tooltip-area'><p>Internals.false_pos : Internals.positedBool False
 
-Internals.id_neg is not universe polymorphic
-Arguments Internals.id_neg b%_bool_scope
-Internals.id_neg is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.id_neg
-Declared in library mathcomp.classical.contra, line 460, characters 10-16
+Internals.false_pos is not universe polymorphic
+Internals.false_pos is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.false_pos
+Declared in library mathcomp.classical.contra, line 457, characters 10-19
 </p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f">[qualify</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f"> a</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f"> </a></span><span id="x:287" class="id"><a name="x:287" class="">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f"> :</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#finNumPred.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f"> |</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:287">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#c385a484ee9d1b4e0615924561a9b75e"> !=</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#c385a484ee9d1b4e0615924561a9b75e"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> &amp;&amp;</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:287">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#c385a484ee9d1b4e0615924561a9b75e"> !=</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#c385a484ee9d1b4e0615924561a9b75e"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#65c8f47ea0daafc83f7bb18bc9eca61f">]</a></span>.<br/>
 <span class="vernacular">Fact</span><span class="id"> </span><span id="fin_num_key" class="id"><a name="fin_num_key" class="">fin_num_key</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#pred_key">pred_key</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#fin_num">fin_num</a></span><br/>
 <details>
@@ -1723,13 +1726,13 @@ Declared in library mathcomp.classical.contra, line 460, characters 10-16
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> move=&gt;</span><span class="id"> x</span><span class="id"> y;</span><span class="id"> rewrite</span><span class="id"> !</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.order.order.html#Order.POrderTheory.maxElt">maxElt</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#lte_fin">lte_fin</a></span><span class="id"> -</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#fun_if">fun_if</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="adde_def" class="id"><div name="adde_def" class=" tooltip">adde_def<span class='tooltip-area'><p>Internals.id_pos : forall b : bool, Internals.positedBool b
+<span class="vernacular">Definition</span><span class="id"> </span><span id="adde_def" class="id"><div name="adde_def" class=" tooltip">adde_def<span class='tooltip-area'><p>Internals.id_neg : forall b : bool, Internals.negatedBool (~~ b)
 
-Internals.id_pos is not universe polymorphic
-Arguments Internals.id_pos b%_bool_scope
-Internals.id_pos is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.id_pos
-Declared in library mathcomp.classical.contra, line 461, characters 10-16
+Internals.id_neg is not universe polymorphic
+Arguments Internals.id_neg b%_bool_scope
+Internals.id_neg is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.id_neg
+Declared in library mathcomp.classical.contra, line 460, characters 10-16
 </p></span></div></span><span class="id"> </span><span id="x:348" class="id"><a name="x:348" class="">x</a></span><span class="id"> </span><span id="y:349" class="id"><a name="y:349" class="">y</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#b3ebd0deddd84fd60e149cb5ef719351">~~</a></span> ((<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:348">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> &amp;&amp;</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:349">y</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span>))<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> &amp;&amp;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> </a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#b3ebd0deddd84fd60e149cb5ef719351">~~</a></span> ((<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:348">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> &amp;&amp;</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:349">y</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>)).<br/>
 <br/>
@@ -1974,14 +1977,13 @@ Qed.</div></details>
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> elim:</span><span class="id"> n</span><span class="id"> =&gt;</span><span class="id"> [//|n</span><span class="id"> IHn];</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#GRing.Theory.exprS">exprS</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#EFinM">EFinM</a></span><span class="id"> IHn</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#expeS">expeS</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="mule_def" class="id"><div name="mule_def" class=" tooltip">mule_def<span class='tooltip-area'><p>Internals.negb_neg :
-forall [P : Prop], Internals.positedBool P -> Internals.negatedBool P
+<span class="vernacular">Definition</span><span class="id"> </span><span id="mule_def" class="id"><div name="mule_def" class=" tooltip">mule_def<span class='tooltip-area'><p>Internals.id_pos : forall b : bool, Internals.positedBool b
 
-Internals.negb_neg is not universe polymorphic
-Arguments Internals.negb_neg [P]%_type_scope b
-Internals.negb_neg is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.negb_neg
-Declared in library mathcomp.classical.contra, line 465, characters 10-18
+Internals.id_pos is not universe polymorphic
+Arguments Internals.id_pos b%_bool_scope
+Internals.id_pos is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.id_pos
+Declared in library mathcomp.classical.contra, line 461, characters 10-16
 </p></span></div></span><span class="id"> </span><span id="x:403" class="id"><a name="x:403" class="">x</a></span><span class="id"> </span><span id="y:404" class="id"><a name="y:404" class="">y</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:403">x</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:404">y</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> _</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id">,</span><span class="id"> _</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> |</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> |</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> |</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> |</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#true">true</a></span><br/>
@@ -1990,14 +1992,14 @@ Declared in library mathcomp.classical.contra, line 465, characters 10-18
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mule_def">mule_def</a></span><span class="id"> :</span><span class="id"> simpl</span><span class="id"> never</span>.<br/>
 <span class="vernacular">Local</span><span class="vernacular"> Notation</span> <span id="6f9191f66ee20ac903230b5750d8d4e2" class="id"><a name="6f9191f66ee20ac903230b5750d8d4e2" class="">&quot;x *? y&quot;</a></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#mule_def">mule_def</a></span><span class="id"> x</span><span class="id"> y</span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="mule_defE" class="id"><div name="mule_defE" class=" tooltip">mule_defE<span class='tooltip-area'><p>Internals.negb_pos :
-forall [nP : Prop], Internals.negatedBool nP -> Internals.positedBool nP
+<span class="vernacular">Definition</span><span class="id"> </span><span id="mule_defE" class="id"><div name="mule_defE" class=" tooltip">mule_defE<span class='tooltip-area'><p>Internals.negb_neg :
+forall [P : Prop], Internals.positedBool P -> Internals.negatedBool P
 
-Internals.negb_pos is not universe polymorphic
-Arguments Internals.negb_pos [nP]%_type_scope b
-Internals.negb_pos is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.negb_pos
-Declared in library mathcomp.classical.contra, line 468, characters 10-18
+Internals.negb_neg is not universe polymorphic
+Arguments Internals.negb_neg [P]%_type_scope b
+Internals.negb_neg is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.negb_neg
+Declared in library mathcomp.classical.contra, line 465, characters 10-18
 </p></span></div></span><span class="id"> </span><span id="x:407" class="id"><a name="x:407" class="">x</a></span><span class="id"> </span><span id="y:408" class="id"><a name="y:408" class="">y</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:407">x</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#6f9191f66ee20ac903230b5750d8d4e2"> *?</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#6f9191f66ee20ac903230b5750d8d4e2"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:408">y</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><br/>
 &nbsp;&nbsp;<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#b3ebd0deddd84fd60e149cb5ef719351">~~</a></span> (((<span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:407">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id">0</span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> &amp;&amp;</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#baaea4d1d2e6cce26f49e2f830fd4e9f">`|</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#baaea4d1d2e6cce26f49e2f830fd4e9f"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:408">y</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#baaea4d1d2e6cce26f49e2f830fd4e9f"> |</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>))<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#081ff67d3116402bb680e8692aa39185"> ||</a></span> ((<span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:408">y</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id">0</span>)<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#::bool_scope:x_'&amp;&amp;'_x"> &amp;&amp;</a></span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#baaea4d1d2e6cce26f49e2f830fd4e9f">`|</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#baaea4d1d2e6cce26f49e2f830fd4e9f"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:407">x</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#baaea4d1d2e6cce26f49e2f830fd4e9f"> |</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> ==</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#df45e8c2e8370fd4f0f7c4fdaf208180"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>))).<br/>
 <details>
@@ -2492,13 +2494,14 @@ Qed.</div></details>
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> move=&gt;</span><span class="id"> rreal;</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#muleC">muleC</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#real_mulrNy">real_mulrNy</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="real_mulr_infty" class="id"><div name="real_mulr_infty" class=" tooltip">real_mulr_infty<span class='tooltip-area'><p>Internals.neg_ltn_LHS : forall n m : nat, Internals.negatedLeqLHS n (n <= m)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="real_mulr_infty" class="id"><div name="real_mulr_infty" class=" tooltip">real_mulr_infty<span class='tooltip-area'><p>Internals.negb_pos :
+forall [nP : Prop], Internals.negatedBool nP -> Internals.positedBool nP
 
-Internals.neg_ltn_LHS is not universe polymorphic
-Arguments Internals.neg_ltn_LHS (n m)%_nat_scope
-Internals.neg_ltn_LHS is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.neg_ltn_LHS
-Declared in library mathcomp.classical.contra, line 479, characters 10-21
+Internals.negb_pos is not universe polymorphic
+Arguments Internals.negb_pos [nP]%_type_scope b
+Internals.negb_pos is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.negb_pos
+Declared in library mathcomp.classical.contra, line 468, characters 10-18
 </p></span></div></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#real_mulry">real_mulry</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#real_mulyr">real_mulyr</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#real_mulrNy">real_mulrNy</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#real_mulNyr">real_mulNyr</a></span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="mulN1e" class="id"><a name="mulN1e" class="">mulN1e</a></span><span class="id"> </span><span id="x:632" class="id"><a name="x:632" class="">x</a></span><span class="id"> :</span><span class="id"> -1</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#f1c2ddfea282f8f8d7539f61e14c08e4"> *</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#f1c2ddfea282f8f8d7539f61e14c08e4"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:632">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-'_x">-</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:632">x</a></span>.<br/>
@@ -3360,22 +3363,20 @@ Qed.</div></details>
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#muleC">muleC</a></span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mulrNy">mulrNy</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="mulr_infty" class="id"><div name="mulr_infty" class=" tooltip">mulr_infty<span class='tooltip-area'><p>Internals.neg_leq_LHS : forall n m : nat, Internals.negatedLeqLHS n (n < m)
+<span class="vernacular">Definition</span><span class="id"> </span><span id="mulr_infty" class="id"><div name="mulr_infty" class=" tooltip">mulr_infty<span class='tooltip-area'><p>Internals.neg_ltn_LHS : forall n m : nat, Internals.negatedLeqLHS n (n <= m)
+
+Internals.neg_ltn_LHS is not universe polymorphic
+Arguments Internals.neg_ltn_LHS (n m)%_nat_scope
+Internals.neg_ltn_LHS is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.neg_ltn_LHS
+Declared in library mathcomp.classical.contra, line 479, characters 10-21
+Internals.neg_leq_LHS : forall n m : nat, Internals.negatedLeqLHS n (n < m)
 
 Internals.neg_leq_LHS is not universe polymorphic
 Arguments Internals.neg_leq_LHS (n m)%_nat_scope
 Internals.neg_leq_LHS is transparent
 Expands to: Constant mathcomp.classical.contra.Internals.neg_leq_LHS
 Declared in library mathcomp.classical.contra, line 480, characters 10-21
-Internals.leq_neg :
-forall [n : nat] [lt_nm : bool],
-Internals.negatedLeqLHS n lt_nm -> Internals.negatedBool lt_nm
-
-Internals.leq_neg is not universe polymorphic
-Arguments Internals.leq_neg [n]%_nat_scope [lt_nm]%_bool_scope m
-Internals.leq_neg is transparent
-Expands to: Constant mathcomp.classical.contra.Internals.leq_neg
-Declared in library mathcomp.classical.contra, line 484, characters 10-17
 </p></span></div></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.reals.constructive_ereal.html#mulry">mulry</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mulyr">mulyr</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mulrNy">mulrNy</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#mulNyr">mulNyr</a></span>).<br/>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="lte_mul_pinfty" class="id"><a name="lte_mul_pinfty" class="">lte_mul_pinfty</a></span><span class="id"> </span><span id="x:908" class="id"><a name="x:908" class="">x</a></span><span class="id"> </span><span id="y:909" class="id"><a name="y:909" class="">y</a></span><span class="id"> :</span><span class="id"> 0</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#63b01a542aec2e4c61e028256cf5a548"> &lt;=</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#63b01a542aec2e4c61e028256cf5a548"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:908">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:908">x</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#f6c65697fefaf4504de1d4d641cd4409"> \is</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#f6c65697fefaf4504de1d4d641cd4409"> a</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#f6c65697fefaf4504de1d4d641cd4409"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#fin_num">fin_num</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:909">y</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:x_'&lt;'_x"> &lt;</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:x_'&lt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x:908">x</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#f1c2ddfea282f8f8d7539f61e14c08e4"> *</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#f1c2ddfea282f8f8d7539f61e14c08e4"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#y:909">y</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:x_'&lt;'_x"> &lt;</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:x_'&lt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span>.<br/>
@@ -4919,7 +4920,16 @@ Qed.</div></details>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="esg.R" class="id"><a name="esg.R" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.RealDomain.Exports.realDomainType">realDomainType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> x</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#esg.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="esg" class="id"><div name="esg" class=" tooltip">esg<span class='tooltip-area'><p>Internals.eq_nProp :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="esg" class="id"><div name="esg" class=" tooltip">esg<span class='tooltip-area'><p>Internals.leq_neg :
+forall [n : nat] [lt_nm : bool],
+Internals.negatedLeqLHS n lt_nm -> Internals.negatedBool lt_nm
+
+Internals.leq_neg is not universe polymorphic
+Arguments Internals.leq_neg [n]%_nat_scope [lt_nm]%_bool_scope m
+Internals.leq_neg is transparent
+Expands to: Constant mathcomp.classical.contra.Internals.leq_neg
+Declared in library mathcomp.classical.contra, line 484, characters 10-17
+Internals.eq_nProp :
 forall [nP : Prop] [T : Type] [x : T],
 Internals.neqRHS nP x -> Internals.properNegatedProp nP
 

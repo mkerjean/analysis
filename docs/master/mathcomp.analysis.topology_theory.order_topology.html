@@ -480,6 +480,15 @@ Expands to: Constant
             mathcomp.analysis.topology_theory.topology_structure.nbhs_filter_on
 Declared in
 library mathcomp.analysis.topology_theory.topology_structure, line 136, characters 10-24
+interior : forall {T : topologicalType}, set T -> T -> Prop
+
+interior is not universe polymorphic
+Arguments interior {T} A%_classical_set_scope x
+interior is transparent
+Expands to: Constant
+            mathcomp.analysis.topology_theory.topology_structure.interior
+Declared in
+library mathcomp.analysis.topology_theory.topology_structure, line 152, characters 11-19
 </p></span></div></span> (<span id="T:61" class="id"><a name="T:61" class="">T</a></span><span class="id"> :</span><span class="gallina-kwd"> Type</span>)<span class="id"> :</span><span class="gallina-kwd"> Type</span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.order_topology.html#T:61">T</a></span>.<br/>
 <br/>
 <span class="vernacular">Section</span><span class="id"> induced_order_topology</span>.<br/>
