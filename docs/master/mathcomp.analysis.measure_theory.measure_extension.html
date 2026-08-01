@@ -505,15 +505,6 @@ Expands to: Constant
             mathcomp.analysis.measure_theory.measurable_structure.finN0_bigcap_closed
 Declared in
 library mathcomp.analysis.measure_theory.measurable_structure, line 167, characters 11-30
-fin_bigcup_closed : forall {T : Type}, set_system T -> Prop
-
-fin_bigcup_closed is not universe polymorphic
-Arguments fin_bigcup_closed {T}%_type_scope G
-fin_bigcup_closed is transparent
-Expands to: Constant
-            mathcomp.analysis.measure_theory.measurable_structure.fin_bigcup_closed
-Declared in
-library mathcomp.analysis.measure_theory.measurable_structure, line 172, characters 11-28
 </p></span></div></span> (<span id="R:98" class="id"><a name="R:98" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.reals.html#Real.Exports.realType">realType</a></span>) (<span id="T:99" class="id"><a name="T:99" class="">T</a></span><span class="id"> :</span><span class="gallina-kwd"> Type</span>)<br/>
 &nbsp;&nbsp;(<span id="mu:100" class="id"><a name="mu:100" class="">mu</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#T:99">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#R:98">R</a></span>) (<span id="A:101" class="id"><a name="A:101" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#T:99">T</a></span>)<span class="id"> :=</span><span class="gallina-kwd"> forall</span><span class="id"> </span><span id="X:102" class="id"><a name="X:102" class="">X</a></span><span class="id">,</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#mu:100">mu</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#X:102">X</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> =</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"> </a></span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#mu:100">mu</a></span> (<span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#X:102">X</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#c7636f45aa1745dbf533da3d408cece1"> `&amp;`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#c7636f45aa1745dbf533da3d408cece1"> </a></span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#A:101">A</a></span>)<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> +</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> </a></span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#mu:100">mu</a></span> (<span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#X:102">X</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#c7636f45aa1745dbf533da3d408cece1"> `&amp;`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#c7636f45aa1745dbf533da3d408cece1"> </a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#a89cad8a77dea0eb3c15a935f79663f1">~`</a></span><span class="id"><a href="mathcomp.classical.classical_sets.html#a89cad8a77dea0eb3c15a935f79663f1"> </a></span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#A:101">A</a></span>).<br/>
@@ -729,7 +720,16 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">End</span><span class="id"> caratheodory_theorem_sigma_algebra</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="caratheodory_type" class="id"><div name="caratheodory_type" class=" tooltip">caratheodory_type<span class='tooltip-area'><p>semi_setD_closed : forall {T : Type}, set_system T -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="caratheodory_type" class="id"><div name="caratheodory_type" class=" tooltip">caratheodory_type<span class='tooltip-area'><p>fin_bigcup_closed : forall {T : Type}, set_system T -> Prop
+
+fin_bigcup_closed is not universe polymorphic
+Arguments fin_bigcup_closed {T}%_type_scope G
+fin_bigcup_closed is transparent
+Expands to: Constant
+            mathcomp.analysis.measure_theory.measurable_structure.fin_bigcup_closed
+Declared in
+library mathcomp.analysis.measure_theory.measurable_structure, line 172, characters 11-28
+semi_setD_closed : forall {T : Type}, set_system T -> Prop
 
 semi_setD_closed is not universe polymorphic
 Arguments semi_setD_closed {T}%_type_scope G
@@ -1182,7 +1182,16 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Let</span><span class="id"> </span><span id="measure_extension.I" class="id"><a name="measure_extension.I" class="">I</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.measure_theory.measurable_structure.html#Measurable.Exports.measurableType">measurableType</a></span><span class="id"> _</span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.measure_theory.measurable_structure.html#g_sigma_algebraType">g_sigma_algebraType</a></span> (<span class="id">@</span><span class="id"><a href="mathcomp.analysis.measure_theory.measurable_structure.html#measurable">measurable</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.measure_theory.measure_extension.html#measure_extension.T">T</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="measure_extension" class="id"><div name="measure_extension" class=" tooltip">measure_extension<span class='tooltip-area'><p>g_sigma_algebraType : forall {T : Type}, set_system T -> Type
+<span class="vernacular">Definition</span><span class="id"> </span><span id="measure_extension" class="id"><div name="measure_extension" class=" tooltip">measure_extension<span class='tooltip-area'><p>sigma_display : forall {T : Type}, set_system T -> measure_display
+
+sigma_display is not universe polymorphic
+Arguments sigma_display {T}%_type_scope _
+sigma_display is opaque
+Expands to: Constant
+            mathcomp.analysis.measure_theory.measurable_structure.sigma_display
+Declared in
+library mathcomp.analysis.measure_theory.measurable_structure, line 1303, characters 11-24
+g_sigma_algebraType : forall {T : Type}, set_system T -> Type
 
 g_sigma_algebraType is not universe polymorphic
 Arguments g_sigma_algebraType {T}%_type_scope G
