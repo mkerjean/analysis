@@ -514,7 +514,15 @@ transitivity, product of functions, etc.
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> ring_scope</span>.<br/>
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> classical_set_scope</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="the_tag" class="id"><div name="the_tag" class=" tooltip">the_tag<span class='tooltip-area'><p>near_covering_within : forall {X : topologicalType}, set X -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="the_tag" class="id"><div name="the_tag" class=" tooltip">the_tag<span class='tooltip-area'><p>near_covering : forall {X : topologicalType}, set X -> Prop
+
+near_covering is not universe polymorphic
+Arguments near_covering {X} K%_classical_set_scope
+near_covering is transparent
+Expands to: Constant mathcomp.analysis.topology_theory.compact.near_covering
+Declared in
+library mathcomp.analysis.topology_theory.compact, line 147, characters 11-24
+near_covering_within : forall {X : topologicalType}, set X -> Prop
 
 near_covering_within is not universe polymorphic
 Arguments near_covering_within {X} K%_classical_set_scope
