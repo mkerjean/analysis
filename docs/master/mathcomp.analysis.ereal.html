@@ -1677,9 +1677,7 @@ The reduction tactics never unfold eseries
 eseries is transparent
 Expands to: Constant mathcomp.analysis.sequences.eseries
 Declared in library mathcomp.analysis.sequences, line 1292, characters 11-18
-</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#monoLR_in">monoLR_in</a></span><br/>
-&nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:498" class="id"><a name="x:498" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:498">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#le_expand_in">le_expand_in</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_expandLR" class="id"><div name="lt_expandLR" class=" tooltip">lt_expandLR<span class='tooltip-area'><p>etelescope : forall {R : numDomainType}, (\bar R) ^nat -> (\bar R) ^nat
+etelescope : forall {R : numDomainType}, (\bar R) ^nat -> (\bar R) ^nat
 
 etelescope is not universe polymorphic
 Arguments etelescope {R} u_ n : simpl never
@@ -1689,23 +1687,32 @@ etelescope is transparent
 Expands to: Constant mathcomp.analysis.sequences.etelescope
 Declared in library mathcomp.analysis.sequences, line 1293, characters 11-21
 </p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#monoLR_in">monoLR_in</a></span><br/>
-&nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:499" class="id"><a name="x:499" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:499">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#lt_expand">lt_expand</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="le_expandRL" class="id"><div name="le_expandRL" class=" tooltip">le_expandRL<span class='tooltip-area'><p>sdrop : forall [T : Type], T ^nat -> nat -> set T
+&nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:498" class="id"><a name="x:498" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:498">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#le_expand_in">le_expand_in</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_expandLR" class="id"><div name="lt_expandLR" class=" tooltip">lt_expandLR<span class='tooltip-area'><p>sdrop : forall [T : Type], T ^nat -> nat -> set T
 
 sdrop is not universe polymorphic
 Arguments sdrop [T]%_type_scope u n%_nat_scope _
 sdrop is transparent
 Expands to: Constant mathcomp.analysis.sequences.sdrop
 Declared in library mathcomp.analysis.sequences, line 2099, characters 11-16
-</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#monoRL_in">monoRL_in</a></span><br/>
-&nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:500" class="id"><a name="x:500" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:500">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#le_expand_in">le_expand_in</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_expandRL" class="id"><div name="lt_expandRL" class=" tooltip">lt_expandRL<span class='tooltip-area'><p>sups : forall [R : realType], (R^o) ^nat -> R ^nat
+</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#monoLR_in">monoLR_in</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:499" class="id"><a name="x:499" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:499">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#lt_expand">lt_expand</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="le_expandRL" class="id"><div name="le_expandRL" class=" tooltip">le_expandRL<span class='tooltip-area'><p>sups : forall [R : realType], (R^o) ^nat -> R ^nat
 
 sups is not universe polymorphic
 Arguments sups [R] u _
 sups is transparent
 Expands to: Constant mathcomp.analysis.sequences.sups
 Declared in library mathcomp.analysis.sequences, line 2123, characters 11-15
+</p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#monoRL_in">monoRL_in</a></span><br/>
+&nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:500" class="id"><a name="x:500" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:500">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#le_expand_in">le_expand_in</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_expandRL" class="id"><div name="lt_expandRL" class=" tooltip">lt_expandRL<span class='tooltip-area'><p>infs : forall [R : realType], (R^o) ^nat -> R ^nat
+
+infs is not universe polymorphic
+Arguments infs [R] u _
+infs is transparent
+Expands to: Constant mathcomp.analysis.sequences.infs
+Declared in library mathcomp.analysis.sequences, line 2125, characters 11-15
 </p></span></div></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#monoRL_in">monoRL_in</a></span><br/>
 &nbsp;&nbsp;(<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#in_onW_can">in_onW_can</a></span><span class="id"> _</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#predT">predT</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contractK">contractK</a></span>) (<span class="gallina-kwd">fun</span><span class="id"> </span><span id="x:501" class="id"><a name="x:501" class="">x</a></span><span class="id"> _</span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#contract_le1">contract_le1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:501">x</a></span>) (<span class="id">@</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#lt_expand">lt_expand</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#contract_expand.R">R</a></span>).<br/>
 <br/>
@@ -2221,14 +2228,7 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> move=&gt;</span><span class="id"> P</span><span class="id"> [_/</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#posnumP">posnumP</a></span><span class="id">[e]</span><span class="id"> reP]</span><span class="id"> //=;</span><span class="gallina-kwd"> exists</span><span class="id"> e</span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.interval_inference.html#1c0324eabc1cbd2d8f3ac221154b0692">%:num</a></span><span class="id"> =&gt;</span><span class="id"> //=</span><span class="id"> ?</span><span class="id"> ?</span><span class="id"> ?;</span><span class="id"> exact:</span><span class="id"> reP</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="ereal_loc_seq" class="id"><div name="ereal_loc_seq" class=" tooltip">ereal_loc_seq<span class='tooltip-area'><p>infs : forall [R : realType], (R^o) ^nat -> R ^nat
-
-infs is not universe polymorphic
-Arguments infs [R] u _
-infs is transparent
-Expands to: Constant mathcomp.analysis.sequences.infs
-Declared in library mathcomp.analysis.sequences, line 2125, characters 11-15
-limn_sup :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="ereal_loc_seq" class="id"><div name="ereal_loc_seq" class=" tooltip">ereal_loc_seq<span class='tooltip-area'><p>limn_sup :
 forall [R : realType],
 (R^o) ^nat ->
 join_order_topology_POrderedPointedTopological_between_Order_POrder_and_filter_PointedNbhs
@@ -2240,6 +2240,27 @@ Arguments limn_sup [R] u
 limn_sup is transparent
 Expands to: Constant mathcomp.analysis.sequences.limn_sup
 Declared in library mathcomp.analysis.sequences, line 2260, characters 11-19
+limn_inf :
+forall [R : realType],
+(R^o) ^nat ->
+join_pseudometric_normed_Zmodule_PseudoMetricNormedZmod_between_Algebra_BaseZmodule_and_filter_PointedNbhs
+  (numFieldNormedType.Real_sort__canonical__pseudometric_normed_Zmodule_PseudoMetricNormedZmod
+     R)
+
+limn_inf is not universe polymorphic
+Arguments limn_inf [R] u
+limn_inf is transparent
+Expands to: Constant mathcomp.analysis.sequences.limn_inf
+Declared in library mathcomp.analysis.sequences, line 2262, characters 11-19
+esups :
+forall [R : realType],
+(\bar R) ^nat -> constructive_ereal_extended__canonical__Order_POrder ^nat
+
+esups is not universe polymorphic
+Arguments esups [R] u _
+esups is transparent
+Expands to: Constant mathcomp.analysis.sequences.esups
+Declared in library mathcomp.analysis.sequences, line 2414, characters 11-16
 </p></span></div></span> (<span id="R:574" class="id"><a name="R:574" class="">R</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.numeric_hierarchy.numdomain.html#Num.NumDomain.Exports.numDomainType">numDomainType</a></span>) (<span id="x:575" class="id"><a name="x:575" class="">x</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.analysis.ereal.html#R:574">R</a></span>) (<span id="n:576" class="id"><a name="n:576" class="">n</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#nat">nat</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.ereal.html#x:575">x</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id">|</span><span class="id"> x</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> =&gt;</span> (<span class="id"><a href="mathcomp.analysis.ereal.html#x:575">x</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> +</a></span> (<span class="id"><a href="mathcomp.analysis.ereal.html#n:576">n</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#6411ed08724033ae48d2865f0380d533">%:R</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> +</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> </a></span><span class="id">1</span>)<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.divalg.html#4e5a4c91ec0aa12de06dfe1cc07ea126">^-1</a></span>)<span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><br/>

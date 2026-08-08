@@ -662,7 +662,21 @@ Qed.</div></details>
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> move=&gt;</span><span class="id"> /</span><span class="id"><a href="mathcomp.analysis.derive.html#deriveE">deriveE</a></span><span class="id">-&gt;;</span><span class="id"> rewrite</span><span class="id"> /</span><span class="id"><a href="mathcomp.analysis.derive.html#jacobian">jacobian</a></span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.matrix.html#mul_rV_lin1">mul_rV_lin1</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="derive1" class="id"><div name="derive1" class=" tooltip">derive1<span class='tooltip-area'></span></div></span><span class="id"> </span><span id="V:192" class="id"><a name="V:192" class="">V</a></span> (<span id="f:193" class="id"><a name="f:193" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#DifferentialR2.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.derive.html#V:192">V</a></span>) (<span id="a:194" class="id"><a name="a:194" class="">a</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#DifferentialR2.R">R</a></span>)<span class="id"> :=</span><br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="derive1" class="id"><div name="derive1" class=" tooltip">derive1<span class='tooltip-area'><p>exponential_pdf :
+forall {R : realType},
+R ->
+join_Num_POrderNmodule_between_Algebra_BaseAddUMagma_and_Order_POrder
+  (join_Num_POrderZmodule_between_Algebra_BaseZmodule_and_Num_POrderNmodule R) ->
+numFieldTopology.Real_sort__canonical__classical_sets_Pointed R
+
+exponential_pdf is not universe polymorphic
+Arguments exponential_pdf {R} rate%_ring_scope u
+exponential_pdf is transparent
+Expands to: Constant
+            mathcomp.analysis.probability_theory.exponential_distribution.exponential_pdf
+Declared in
+library mathcomp.analysis.probability_theory.exponential_distribution, line 38, characters 11-26
+</p></span></div></span><span class="id"> </span><span id="V:192" class="id"><a name="V:192" class="">V</a></span> (<span id="f:193" class="id"><a name="f:193" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#DifferentialR2.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.derive.html#V:192">V</a></span>) (<span id="a:194" class="id"><a name="a:194" class="">a</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#DifferentialR2.R">R</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="mathcomp.classical.filter.html#lim">lim</a></span> ((<span class="gallina-kwd">fun</span><span class="id"> </span><span id="h:195" class="id"><a name="h:195" class="">h</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#h:195">h</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.divalg.html#4e5a4c91ec0aa12de06dfe1cc07ea126">^-1</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#3b05480e39db306e67fadbc79d394529"> *:</a></span> (<span class="id"><a href="mathcomp.analysis.derive.html#f:193">f</a></span> (<span class="id"><a href="mathcomp.analysis.derive.html#h:195">h</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> +</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#c7f78cf1f6a5e4f664654f7d671ca752"> </a></span><span class="id"><a href="mathcomp.analysis.derive.html#a:194">a</a></span>)<span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:x_'-'_x"> -</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#::ring_scope:x_'-'_x"> </a></span><span class="id"><a href="mathcomp.analysis.derive.html#f:193">f</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#a:194">a</a></span>))<span class="id"><a href="mathcomp.classical.filter.html#cd15f258bbfe5f8dd5d2f871f9f5a736"> @</a></span><span class="id"><a href="mathcomp.classical.filter.html#cd15f258bbfe5f8dd5d2f871f9f5a736"> </a></span><span class="id">0</span><span class="id"><a href="mathcomp.analysis.topology_theory.topology_structure.html#f8c5a58f3e97f5207acd97345df460ee">^'</a></span>).<br/>
 <br/>
 <span class="vernacular">Local</span><span class="vernacular"> Notation</span> <span id="56c93937c1d191ac65397e870d56cf9a" class="id"><a name="56c93937c1d191ac65397e870d56cf9a" class="">&quot;f ^` ()&quot;</a></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.analysis.derive.html#derive1">derive1</a></span><span class="id"> f</span>).<br/>
@@ -682,20 +696,19 @@ Qed.</div></details>
 <div class="proofscript">
 <span class="gallina-kwd"> by</span><span class="id"> move=&gt;</span><span class="id"> ?;</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#derive1E">derive1E</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#deriveE">deriveE</a></span>. Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="derive1n" class="id"><div name="derive1n" class=" tooltip">derive1n<span class='tooltip-area'><p>exponential_pdf :
+<span class="vernacular">Definition</span><span class="id"> </span><span id="derive1n" class="id"><div name="derive1n" class=" tooltip">derive1n<span class='tooltip-area'><p>exponential_prob :
 forall {R : realType},
 R ->
-join_Num_POrderNmodule_between_Algebra_BaseAddUMagma_and_Order_POrder
-  (join_Num_POrderZmodule_between_Algebra_BaseZmodule_and_Num_POrderNmodule R) ->
-numFieldTopology.Real_sort__canonical__classical_sets_Pointed R
+set Real_sort__canonical__measurable_structure_Measurable ->
+GRing.BaseAddMagma.sort \bar R
 
-exponential_pdf is not universe polymorphic
-Arguments exponential_pdf {R} rate%_ring_scope u
-exponential_pdf is transparent
+exponential_prob is not universe polymorphic
+Arguments exponential_prob {R} rate%_ring_scope V%_classical_set_scope
+exponential_prob is transparent
 Expands to: Constant
-            mathcomp.analysis.probability_theory.exponential_distribution.exponential_pdf
+            mathcomp.analysis.probability_theory.exponential_distribution.exponential_prob
 Declared in
-library mathcomp.analysis.probability_theory.exponential_distribution, line 38, characters 11-26
+library mathcomp.analysis.probability_theory.exponential_distribution, line 92, characters 11-27
 </p></span></div></span><span class="id"> </span><span id="V:202" class="id"><a name="V:202" class="">V</a></span><span class="id"> </span><span id="n:203" class="id"><a name="n:203" class="">n</a></span> (<span id="f:204" class="id"><a name="f:204" class="">f</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#DifferentialR2.R">R</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Logic.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.derive.html#V:202">V</a></span>)<span class="id"> :=</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.ssrnat.html#iter">iter</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#n:203">n</a></span> (<span class="id">@</span><span class="id"><a href="mathcomp.analysis.derive.html#derive1">derive1</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#V:202">V</a></span>)<span class="id"> </span><span class="id"><a href="mathcomp.analysis.derive.html#f:204">f</a></span>.<br/>
 <br/>
 <span class="vernacular">Local</span><span class="vernacular"> Notation</span> <span id="99ae3a75aac5de45bdf76a2cc948ad8f" class="id"><a name="99ae3a75aac5de45bdf76a2cc948ad8f" class="">&quot;f ^` ( n )&quot;</a></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.analysis.derive.html#derive1n">derive1n</a></span><span class="id"> n</span><span class="id"> f</span>).<br/>
