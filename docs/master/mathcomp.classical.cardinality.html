@@ -1388,17 +1388,7 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> move=&gt;</span><span class="id"> r/=</span><span class="id"> [x</span><span class="id"> Xx</span><span class="id"> &lt;-];</span><span class="gallina-kwd"> exists</span> (<span class="id">fa</span><span class="id"> x</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079">,</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"> </a></span><span class="id">fb</span><span class="id"> x</span>)<span class="id"> =&gt;</span><span class="id"> //;</span><span class="id"> split;</span><span class="gallina-kwd"> exists</span><span class="id"> x</span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fset_set" class="id"><div name="fset_set" class=" tooltip">fset_set<span class='tooltip-area'><p>subLmodule_isSubNormedmodule :
-forall [R : realFieldType] [V : normedModType R], pred V -> Type -> Type
-
-subLmodule_isSubNormedmodule is not universe polymorphic
-Arguments subLmodule_isSubNormedmodule [R V] S U%_type_scope
-subLmodule_isSubNormedmodule is transparent
-Expands to: Constant
-            mathcomp.analysis.normedtype_theory.normed_module.subLmodule_isSubNormedmodule
-Declared in
-library mathcomp.analysis.normedtype_theory.normed_module, line 379, characters 11-39
-</p></span></div></span> (<span id="T:563" class="id"><a name="T:563" class="">T</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#Choice.Exports.choiceType">choiceType</a></span>) (<span id="A:564" class="id"><a name="A:564" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.cardinality.html#T:563">T</a></span>)<span class="id"> :=</span><br/>
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fset_set" class="id"><div name="fset_set" class=" tooltip">fset_set<span class='tooltip-area'></span></div></span> (<span id="T:563" class="id"><a name="T:563" class="">T</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#Choice.Exports.choiceType">choiceType</a></span>) (<span id="A:564" class="id"><a name="A:564" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.cardinality.html#T:563">T</a></span>)<span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">if</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.boolp.html#pselect">pselect</a></span> (<span class="id"><a href="mathcomp.classical.cardinality.html#finite_set">finite_set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.classical.cardinality.html#A:564">A</a></span>)<span class="id"> is</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#left">left</a></span><span class="id"> Afin</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">then</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Specif.html#projT1">projT1</a></span> (<span class="id"><a href="mathcomp.classical.boolp.html#cid">cid</a></span> (<span class="id"><a href="mathcomp.classical.cardinality.html#finite_fsetP">finite_fsetP</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.1'">1</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.1'"> Afin</a></span>))<span class="gallina-kwd"> else</span><span class="id"> </span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#fset0">fset0</a></span>.<br/>
 <br/>
@@ -1510,20 +1500,19 @@ Qed.</div></details>
 <span class="gallina-kwd">by</span><span class="id"> move=&gt;</span><span class="id"> /</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#andP">andP</a></span><span class="id">[];</span><span class="id"> rewrite</span><span class="id"> !</span><span class="id"><a href="mathcomp.classical.classical_sets.html#inE">inE</a></span>.<br/>
 Qed.</div></details>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fst_fset" class="id"><div name="fst_fset" class=" tooltip">fst_fset<span class='tooltip-area'><p>normu not a defined object.
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fst_fset" class="id"><div name="fst_fset" class=" tooltip">fst_fset<span class='tooltip-area'><p>subLmodule_isSubNormedmodule :
+forall [R : realFieldType] [V : normedModType R], pred V -> Type -> Type
+
+subLmodule_isSubNormedmodule is not universe polymorphic
+Arguments subLmodule_isSubNormedmodule [R V] S U%_type_scope
+subLmodule_isSubNormedmodule is transparent
+Expands to: Constant
+            mathcomp.analysis.normedtype_theory.normed_module.subLmodule_isSubNormedmodule
+Declared in
+library mathcomp.analysis.normedtype_theory.normed_module, line 379, characters 11-39
 </p></span></div></span> (<span id="T1:596" class="id"><a name="T1:596" class="">T1</a></span><span class="id"> </span><span id="T2:597" class="id"><a name="T2:597" class="">T2</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#Choice.Exports.choiceType">choiceType</a></span>) (<span id="A:598" class="id"><a name="A:598" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">{fset</a></span> (<span class="id"><a href="mathcomp.classical.cardinality.html#T1:596">T1</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#T2:597">T2</a></span>)<span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">}</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">{fset</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#T1:596">T1</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">}</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89">[fset</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#x:599">x</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.1'">1</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> |</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> </a></span><span id="x:599" class="id"><a name="x:599" class="">x</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> in</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#A:598">A</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89">]</a></span><span class="id">%fset</span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="snd_fset" class="id"><div name="snd_fset" class=" tooltip">snd_fset<span class='tooltip-area'><p>self_sub :
-forall {K : numDomainType} {V W : normedModType K}, (V -> W) -> V * V -> W
-
-self_sub is not universe polymorphic
-Arguments self_sub {K V W} f%_function_scope x /
-The reduction tactics unfold self_sub when applied to 5 arguments
-self_sub is transparent
-Expands to: Constant
-            mathcomp.analysis.normedtype_theory.normed_module.self_sub
-Declared in
-library mathcomp.analysis.normedtype_theory.normed_module, line 474, characters 11-19
+<span class="vernacular">Definition</span><span class="id"> </span><span id="snd_fset" class="id"><div name="snd_fset" class=" tooltip">snd_fset<span class='tooltip-area'><p>normu not a defined object.
 </p></span></div></span> (<span id="T1:600" class="id"><a name="T1:600" class="">T1</a></span><span class="id"> </span><span id="T2:601" class="id"><a name="T2:601" class="">T2</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.choice.html#Choice.Exports.choiceType">choiceType</a></span>) (<span id="A:602" class="id"><a name="A:602" class="">A</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">{fset</a></span> (<span class="id"><a href="mathcomp.classical.cardinality.html#T1:600">T1</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> *</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#T2:601">T2</a></span>)<span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">}</a></span>)<span class="id"> :</span><span class="id"> </span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">{fset</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#T2:601">T2</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#56b55a79be47ef2ec896f3a7734c305c">}</a></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89">[fset</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#x:603">x</a></span>.<span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrfun.html#::pair_scope:x_'.2'">2</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> |</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> </a></span><span id="x:603" class="id"><a name="x:603" class="">x</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> in</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89"> </a></span><span class="id"><a href="mathcomp.classical.cardinality.html#A:602">A</a></span><span class="id"><a href="NOTFOUND the module url for mathcomp.finmap.finmap#6001bf45df8f6b6e57fd188448320a89">]</a></span><span class="id">%fset</span>.<br/>
 <span class="vernacular">Notation</span> <span id="18d2f9d0ec0b31d06037469aaf9184f7" class="id"><a name="18d2f9d0ec0b31d06037469aaf9184f7" class="">&quot;A .`1&quot;</a></span><span class="id"> :=</span> (<span class="id"><a href="mathcomp.classical.cardinality.html#fst_fset">fst_fset</a></span><span class="id"> A</span>)<span class="id"> :</span><span class="id"> fset_scope</span>.<br/>
@@ -2156,7 +2145,18 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Section</span><span class="id"> fimfun_pred</span>.<br/>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="fimfun_pred.aT" class="id"><a name="fimfun_pred.aT" class="">aT</a></span><span class="id"> </span><span id="fimfun_pred.rT" class="id"><a name="fimfun_pred.rT" class="">rT</a></span><span class="id"> :</span><span class="id"> Type}</span>.<br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="fimfun" class="id"><div name="fimfun" class=" tooltip">fimfun<span class='tooltip-area'><p>Rhull : forall [R : realType], set R -> interval R
+<span class="vernacular">Definition</span><span class="id"> </span><span id="fimfun" class="id"><div name="fimfun" class=" tooltip">fimfun<span class='tooltip-area'><p>self_sub :
+forall {K : numDomainType} {V W : normedModType K}, (V -> W) -> V * V -> W
+
+self_sub is not universe polymorphic
+Arguments self_sub {K V W} f%_function_scope x /
+The reduction tactics unfold self_sub when applied to 5 arguments
+self_sub is transparent
+Expands to: Constant
+            mathcomp.analysis.normedtype_theory.normed_module.self_sub
+Declared in
+library mathcomp.analysis.normedtype_theory.normed_module, line 474, characters 11-19
+Rhull : forall [R : realType], set R -> interval R
 
 Rhull is not universe polymorphic
 Arguments Rhull [R] X%_classical_set_scope
