@@ -287,15 +287,17 @@ Qed.</div></details>
 <span class="vernacular">Variables</span><span class="id"> </span><span id="pi_irrational.algebraic_part.na" class="id"><a name="pi_irrational.algebraic_part.na" class="">na</a></span><span class="id"> </span><span id="pi_irrational.algebraic_part.nb" class="id"><a name="pi_irrational.algebraic_part.nb" class="">nb</a></span><span class="id"> </span><span id="pi_irrational.algebraic_part.n" class="id"><a name="pi_irrational.algebraic_part.n" class="">n</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#nat">nat</a></span>.<br/>
 <span class="vernacular">Hypothesis</span><span class="id"> </span><span id="pi_irrational.algebraic_part.nb0" class="id"><a name="pi_irrational.algebraic_part.nb0" class="">nb0</a></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.pi_irrational.html#pi_irrational.algebraic_part.nb">nb</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#c385a484ee9d1b4e0615924561a9b75e"> !=</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.boot.eqtype.html#c385a484ee9d1b4e0615924561a9b75e"> </a></span><span class="id">0%N</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="pi_irrational.a" class="id"><div name="pi_irrational.a" class=" tooltip">a<span class='tooltip-area'><p>bernoulli_prob : forall {R : realFieldType}, R -> set bool -> \bar R
+<span class="vernacular">Definition</span><span class="id"> </span><span id="pi_irrational.a" class="id"><div name="pi_irrational.a" class=" tooltip">a<span class='tooltip-area'><p>subspace_ball :
+forall {R : numDomainType} {X : pseudoMetricType R} [A : set X],
+subspace A -> R -> set X
 
-bernoulli_prob is not universe polymorphic
-Arguments bernoulli_prob {R} p%_ring_scope _%_classical_set_scope
-bernoulli_prob is transparent
+subspace_ball is not universe polymorphic
+Arguments subspace_ball {R X} [A]%_classical_set_scope x r%_ring_scope _
+subspace_ball is transparent
 Expands to: Constant
-            mathcomp.analysis.probability_theory.bernoulli_distribution.bernoulli_prob
+            mathcomp.analysis.topology_theory.subspace_topology.subspace_ball
 Declared in
-library mathcomp.analysis.probability_theory.bernoulli_distribution, line 61, characters 11-25
+library mathcomp.analysis.topology_theory.subspace_topology, line 516, characters 11-24
 </p></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.pi_irrational.html#pi_irrational.algebraic_part.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.pi_irrational.html#pi_irrational.algebraic_part.na">na</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#6411ed08724033ae48d2865f0380d533">%:R</a></span>.<br/>
 <br/>
 <span class="vernacular">Definition</span><span class="id"> </span><span id="pi_irrational.b" class="id"><div name="pi_irrational.b" class=" tooltip">b<span class='tooltip-area'></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.pi_irrational.html#pi_irrational.algebraic_part.R">R</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.pi_irrational.html#pi_irrational.algebraic_part.nb">nb</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_5_0/mathcomp.algebra.algebraic_hierarchy.rings_modules_and_algebras.html#6411ed08724033ae48d2865f0380d533">%:R</a></span>.<br/>
