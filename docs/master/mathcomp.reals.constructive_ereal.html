@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Module mathcomp.reals.constructive_ereal</title>
-<meta name="description" content="Documentation of Coq module Mathcomp Analysis c016f6e 2026.08.24-19:11" />
+<meta name="description" content="Documentation of Coq module Mathcomp Analysis c016f6e 2026.08.25-19:18" />
 <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/markdown-it-deflist/dist/markdown-it-deflist.min.js"></script>
@@ -541,6 +541,14 @@ code is transparent
 Expands to: Constant mathcomp.reals.constructive_ereal.code
 Declared in
 library mathcomp.reals.constructive_ereal, line 214, characters 11-15
+decode : forall [R : choiceType], GenTree.tree R -> option \bar R
+
+decode is not universe polymorphic
+Arguments decode [R] x
+decode is transparent
+Expands to: Constant mathcomp.reals.constructive_ereal.decode
+Declared in
+library mathcomp.reals.constructive_ereal, line 221, characters 11-17
 </p><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L246' target='_blank'>Source code</a></span></div></span><span class="id"> </span><span id="x1:33" class="id"><div name="x1:33" class=" tooltip">x1<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L246' target='_blank'>Source code</a></span></div></span><span class="id"> </span><span id="x2:34" class="id"><div name="x2:34" class=" tooltip">x2<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L246' target='_blank'>Source code</a></span></div></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x1:33">x1</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x2:34">x2</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id">,</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> |</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> r</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> \is</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_6_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">Num</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_6_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">real</a></span><br/>
@@ -549,14 +557,14 @@ library mathcomp.reals.constructive_ereal, line 214, characters 11-15
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id">,</span><span class="id"> _</span>   <span class="id"> |</span><span class="id"> _,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id"> =&gt;</span><span class="id"> </span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Datatypes.html#false">false</a></span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">end</span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_ereal" class="id"><div name="lt_ereal" class=" tooltip">lt_ereal<span class='tooltip-area'><p>decode : forall [R : choiceType], GenTree.tree R -> option \bar R
+<span class="vernacular">Definition</span><span class="id"> </span><span id="lt_ereal" class="id"><div name="lt_ereal" class=" tooltip">lt_ereal<span class='tooltip-area'><p>le_ereal : forall {R : numDomainType}, \bar R -> \bar R -> bool
 
-decode is not universe polymorphic
-Arguments decode [R] x
-decode is transparent
-Expands to: Constant mathcomp.reals.constructive_ereal.decode
+le_ereal is not universe polymorphic
+Arguments le_ereal {R} (x1 x2)%_ereal_scope
+le_ereal is transparent
+Expands to: Constant mathcomp.reals.constructive_ereal.le_ereal
 Declared in
-library mathcomp.reals.constructive_ereal, line 221, characters 11-17
+library mathcomp.reals.constructive_ereal, line 246, characters 11-19
 </p><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L254' target='_blank'>Source code</a></span></div></span><span class="id"> </span><span id="x1:37" class="id"><div name="x1:37" class=" tooltip">x1<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L254' target='_blank'>Source code</a></span></div></span><span class="id"> </span><span id="x2:38" class="id"><div name="x2:38" class=" tooltip">x2<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L254' target='_blank'>Source code</a></span></div></span><span class="id"> :=</span><br/>
 &nbsp;&nbsp;<span class="gallina-kwd">match</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x1:37">x1</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#x2:38">x2</a></span><span class="gallina-kwd"> with</span><br/>
 &nbsp;&nbsp;<span class="id">|</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#::ereal_scope:'-oo'">-oo</a></span><span class="id">,</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"> |</span><span class="id"> r</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id">,</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#d5becfdd26043e7de5a21e6270f35a00">+oo</a></span><span class="id"> =&gt;</span><span class="id"> r</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> \is</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#c94c2df86ca03f22f8f8b739cd7e1e88"> </a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_6_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">Num</a></span>.<span class="id"><a href="https://math-comp.github.io/htmldoc_2_6_0/mathcomp.algebra.numeric_hierarchy.orderedzmod.html#Num.real">real</a></span><br/>
@@ -667,15 +675,7 @@ Qed.</div></details>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="ERealZsemimodule.R" class="id"><div name="ERealZsemimodule.R" class=" tooltip">R<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/c016f6e4d4d818ca0af03e8373332c5734c10c51/reals/constructive_ereal.v#L338' target='_blank'>Source code</a></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_6_0/mathcomp.boot.nmodule.html#Algebra.Nmodule.Exports.nmodType">nmodType</a></span><span class="id">}</span>.<br/>
 <span class="vernacular">Implicit</span><span class="id"> Types</span><span class="id"> x</span><span class="id"> y</span><span class="id"> z</span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3">\bar</a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#4c9ddfb63ff52527d9adecfde4a667c3"> </a></span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ERealZsemimodule.R">R</a></span>.<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="adde" class="id"><div name="adde" class=" tooltip">adde<span class='tooltip-area'><p>le_ereal : forall {R : numDomainType}, \bar R -> \bar R -> bool
-
-le_ereal is not universe polymorphic
-Arguments le_ereal {R} (x1 x2)%_ereal_scope
-le_ereal is transparent
-Expands to: Constant mathcomp.reals.constructive_ereal.le_ereal
-Declared in
-library mathcomp.reals.constructive_ereal, line 246, characters 11-19
-lt_ereal : forall {R : numDomainType}, \bar R -> \bar R -> bool
+<span class="vernacular">Definition</span><span class="id"> </span><span id="adde" class="id"><div name="adde" class=" tooltip">adde<span class='tooltip-area'><p>lt_ereal : forall {R : numDomainType}, \bar R -> \bar R -> bool
 
 lt_ereal is not universe polymorphic
 Arguments lt_ereal {R} (x1 x2)%_ereal_scope
