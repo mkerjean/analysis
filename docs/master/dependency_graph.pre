@@ -5,6 +5,7 @@ digraph dependencies {
   subgraph cluster_ExperimentalReals { label="ExperimentalReals" }
   subgraph cluster_Reals { label="Reals" }
   subgraph cluster_Analysis { label="Analysis" }
+  subgraph cluster_ElementaryFunctions { label="ElementaryFunctions" }
   subgraph cluster_FunctionalAnalysis { label="FunctionalAnalysis" }
   subgraph cluster_Topology { label="Topology" }
   subgraph cluster_LebesgueIntegral { label="LebesgueIntegral" }
@@ -230,7 +231,6 @@ subgraph cluster_Reals {
     ]
 }
   "reals/constructive_ereal" -> "reals/all_reals";
-  "reals/prodnormedzmodule" -> "reals/all_reals";
   "reals/real_interval" -> "reals/all_reals";
   "reals/reals" -> "reals/all_reals";
 
@@ -355,7 +355,6 @@ subgraph cluster_Analysis {
   "classical/boolp" -> "theories/landau";
   "classical/classical_sets" -> "theories/landau";
   "classical/functions" -> "theories/landau";
-  "reals/prodnormedzmodule" -> "theories/landau";
   "reals/reals" -> "theories/landau";
   "theories/ereal" -> "theories/landau";
   "theories/normedtype_theory/normedtype" -> "theories/landau";
@@ -823,7 +822,6 @@ subgraph cluster_Normedtype {
   "classical/functions" -> "theories/normedtype_theory/num_normedtype";
   "classical/set_interval" -> "theories/normedtype_theory/num_normedtype";
   "classical/unstable" -> "theories/normedtype_theory/num_normedtype";
-  "reals/prodnormedzmodule" -> "theories/normedtype_theory/num_normedtype";
   "reals/real_interval" -> "theories/normedtype_theory/num_normedtype";
   "reals/reals" -> "theories/normedtype_theory/num_normedtype";
   "theories/topology_theory/topology" -> "theories/normedtype_theory/num_normedtype";
@@ -839,7 +837,6 @@ subgraph cluster_Normedtype {
   "classical/classical_sets" -> "theories/normedtype_theory/matrix_normedtype";
   "classical/contra" -> "theories/normedtype_theory/matrix_normedtype";
   "classical/unstable" -> "theories/normedtype_theory/matrix_normedtype";
-  "reals/prodnormedzmodule" -> "theories/normedtype_theory/matrix_normedtype";
   "reals/reals" -> "theories/normedtype_theory/matrix_normedtype";
   "theories/normedtype_theory/normed_module" -> "theories/normedtype_theory/matrix_normedtype";
   "theories/normedtype_theory/pseudometric_normed_Zmodule" -> "theories/normedtype_theory/matrix_normedtype";
@@ -873,7 +870,7 @@ subgraph cluster_Normedtype {
   "classical/classical_sets" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
   "classical/functions" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
   "classical/set_interval" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
-  "reals/prodnormedzmodule" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
+  "classical/unstable" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
   "reals/reals" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
   "theories/ereal" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
   "theories/normedtype_theory/num_normedtype" -> "theories/normedtype_theory/pseudometric_normed_Zmodule";
@@ -912,7 +909,6 @@ subgraph cluster_Normedtype {
   "classical/functions" -> "theories/normedtype_theory/normed_module";
   "classical/set_interval" -> "theories/normedtype_theory/normed_module";
   "classical/unstable" -> "theories/normedtype_theory/normed_module";
-  "reals/prodnormedzmodule" -> "theories/normedtype_theory/normed_module";
   "reals/real_interval" -> "theories/normedtype_theory/normed_module";
   "reals/reals" -> "theories/normedtype_theory/normed_module";
   "theories/convex" -> "theories/normedtype_theory/normed_module";
@@ -1049,7 +1045,6 @@ subgraph cluster_Analysis {
   "classical/contra" -> "theories/realfun";
   "classical/functions" -> "theories/realfun";
   "classical/unstable" -> "theories/realfun";
-  "reals/prodnormedzmodule" -> "theories/realfun";
   "reals/real_interval" -> "theories/realfun";
   "reals/reals" -> "theories/realfun";
   "theories/convex" -> "theories/realfun";
@@ -1082,6 +1077,14 @@ subgraph cluster_Analysis {
   "theories/realfun" -> "theories/exp";
   "theories/sequences" -> "theories/exp";
   "theories/topology_theory/topology" -> "theories/exp";
+
+subgraph cluster_ElementaryFunctions {
+    "theories/elementary_functions/trigonometry_functions"[
+        label="trigonometry_functions",
+        URL="mathcomp.analysis.elementary_functions.trigonometry_functions.html",
+        fillcolor=6
+    ]
+}
   "classical/boolp" -> "theories/elementary_functions/trigonometry_functions";
   "classical/classical_sets" -> "theories/elementary_functions/trigonometry_functions";
   "classical/functions" -> "theories/elementary_functions/trigonometry_functions";
@@ -1095,6 +1098,14 @@ subgraph cluster_Analysis {
   "theories/realfun" -> "theories/elementary_functions/trigonometry_functions";
   "theories/sequences" -> "theories/elementary_functions/trigonometry_functions";
   "theories/topology_theory/topology" -> "theories/elementary_functions/trigonometry_functions";
+
+subgraph cluster_ElementaryFunctions {
+    "theories/elementary_functions/trigonometry_integral"[
+        label="trigonometry_integral",
+        URL="mathcomp.analysis.elementary_functions.trigonometry_integral.html",
+        fillcolor=6
+    ]
+}
   "classical/boolp" -> "theories/elementary_functions/trigonometry_integral";
   "classical/classical_sets" -> "theories/elementary_functions/trigonometry_integral";
   "classical/functions" -> "theories/elementary_functions/trigonometry_integral";
@@ -1113,6 +1124,14 @@ subgraph cluster_Analysis {
   "theories/realfun" -> "theories/elementary_functions/trigonometry_integral";
   "theories/sequences" -> "theories/elementary_functions/trigonometry_integral";
   "theories/topology_theory/topology" -> "theories/elementary_functions/trigonometry_integral";
+
+subgraph cluster_ElementaryFunctions {
+    "theories/elementary_functions/trigo"[
+        label="trigo",
+        URL="mathcomp.analysis.elementary_functions.trigo.html",
+        fillcolor=6
+    ]
+}
   "theories/elementary_functions/trigonometry_functions" -> "theories/elementary_functions/trigo";
   "theories/elementary_functions/trigonometry_integral" -> "theories/elementary_functions/trigo";
 
@@ -1148,7 +1167,6 @@ subgraph cluster_Analysis {
   "classical/contra" -> "theories/derive";
   "classical/functions" -> "theories/derive";
   "classical/unstable" -> "theories/derive";
-  "reals/prodnormedzmodule" -> "theories/derive";
   "reals/reals" -> "theories/derive";
   "theories/landau" -> "theories/derive";
   "theories/normedtype_theory/normedtype" -> "theories/derive";
@@ -1507,7 +1525,6 @@ subgraph cluster_LebesgueIntegral {
   "classical/classical_sets" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
   "classical/fsbigop" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
   "classical/functions" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
-  "classical/unstable" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
   "reals/real_interval" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
   "reals/reals" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
   "theories/ereal" -> "theories/lebesgue_integral_theory/lebesgue_integral_definition";
@@ -1842,7 +1859,6 @@ subgraph cluster_LebesgueIntegral {
   "classical/fsbigop" -> "theories/lebesgue_integral_theory/radon_nikodym";
   "classical/functions" -> "theories/lebesgue_integral_theory/radon_nikodym";
   "classical/set_interval" -> "theories/lebesgue_integral_theory/radon_nikodym";
-  "classical/unstable" -> "theories/lebesgue_integral_theory/radon_nikodym";
   "reals/reals" -> "theories/lebesgue_integral_theory/radon_nikodym";
   "theories/derive" -> "theories/lebesgue_integral_theory/radon_nikodym";
   "theories/ereal" -> "theories/lebesgue_integral_theory/radon_nikodym";
@@ -2328,7 +2344,6 @@ subgraph cluster_Analysis {
         fillcolor=5
     ]
 }
-  "reals/prodnormedzmodule" -> "theories/all_analysis";
   "theories/cantor" -> "theories/all_analysis";
   "theories/convex" -> "theories/all_analysis";
   "theories/derive" -> "theories/all_analysis";
@@ -2393,6 +2408,7 @@ subgraph cluster_AnalysisStdlib {
   "classical/classical_sets" -> "analysis_stdlib/Rstruct_topology";
   "reals/reals" -> "analysis_stdlib/Rstruct_topology";
   "reals_stdlib/Rstruct" -> "analysis_stdlib/Rstruct_topology";
+  "theories/elementary_functions/trigonometry_functions" -> "analysis_stdlib/Rstruct_topology";
   "theories/exp" -> "analysis_stdlib/Rstruct_topology";
   "theories/normedtype_theory/normedtype" -> "analysis_stdlib/Rstruct_topology";
   "theories/sequences" -> "analysis_stdlib/Rstruct_topology";

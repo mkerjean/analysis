@@ -180,6 +180,18 @@ digraph dependencies {
 			fillcolor=5,
 			label=pnt];
 	}
+	subgraph cluster_ElementaryFunctions {
+		graph [label=ElementaryFunctions];
+		"theories/elementary_functions/trigonometry_functions"	[URL="mathcomp.analysis.elementary_functions.trigonometry_functions.html",
+			fillcolor=6,
+			label=trigonometry_functions];
+		"theories/elementary_functions/trigonometry_integral"	[URL="mathcomp.analysis.elementary_functions.trigonometry_integral.html",
+			fillcolor=6,
+			label=trigonometry_integral];
+		"theories/elementary_functions/trigo"	[URL="mathcomp.analysis.elementary_functions.trigo.html",
+			fillcolor=6,
+			label=trigo];
+	}
 	subgraph cluster_FunctionalAnalysis {
 		graph [label=FunctionalAnalysis];
 		"theories/functional_analysis/hahn_banach_theorem"	[URL="mathcomp.analysis.functional_analysis.hahn_banach_theorem.html",
@@ -441,7 +453,6 @@ digraph dependencies {
 	"reals/reals" -> "theories/topology_theory/pseudometric_structure";
 	"reals/reals" -> "theories/measure_theory/measurable_structure";
 	"reals/real_interval" -> "reals/all_reals";
-	"reals/prodnormedzmodule" -> "reals/all_reals";
 	"reals/all_reals" -> "theories/topology_theory/discrete_topology";
 	"experimental_reals/xfinmap" -> "experimental_reals/discrete";
 	"experimental_reals/discrete" -> "experimental_reals/realseq";
@@ -529,8 +540,8 @@ digraph dependencies {
 	"theories/derive" -> "theories/measure_theory/signed_measure";
 	"theories/exp" -> "theories/measurable_realfun";
 	"theories/exp" -> "theories/elementary_functions/trigonometry_functions";
-	"theories/exp" -> "analysis_stdlib/Rstruct_topology";
 	"theories/elementary_functions/trigonometry_functions" -> "theories/elementary_functions/trigonometry_integral";
+	"theories/elementary_functions/trigonometry_functions" -> "analysis_stdlib/Rstruct_topology";
 	"theories/elementary_functions/trigonometry_integral" -> "theories/elementary_functions/trigo";
 	"theories/ftc" -> "theories/elementary_functions/trigonometry_integral";
 	"theories/ftc" -> "theories/probability_theory/exponential_distribution";
