@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Module mathcomp.analysis.topology_theory.subspace_topology</title>
-<meta name="description" content="Documentation of Coq module Mathcomp Analysis 921d430 2026.09.29-22:37" />
+<meta name="description" content="Documentation of Coq module Mathcomp Analysis 921d430 2026.09.30-22:37" />
 <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/markdown-it-deflist/dist/markdown-it-deflist.min.js"></script>
@@ -676,6 +676,18 @@ Expands to: Constant
             mathcomp.analysis.topology_theory.compact.locally_compact
 Declared in
 library mathcomp.analysis.topology_theory.compact, line 282, characters 11-26
+finite_subset_cover :
+forall [I : choiceType],
+set I -> forall [U : Type], (I -> set U) -> set U -> Prop
+
+finite_subset_cover is not universe polymorphic
+Arguments finite_subset_cover [I] D%_classical_set_scope 
+  [U]%_type_scope F%_function_scope A%_classical_set_scope
+finite_subset_cover is transparent
+Expands to: Constant
+            mathcomp.analysis.topology_theory.compact.finite_subset_cover
+Declared in
+library mathcomp.analysis.topology_theory.compact, line 286, characters 11-30
 </p><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L316' target='_blank'>Source code</a></span></div></span><span class="id"> {</span><span id="T:70" class="id"><div name="T:70" class=" tooltip">T<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L316' target='_blank'>Source code</a></span></div></span><span class="id"> </span><span id="U:71" class="id"><div name="U:71" class=" tooltip">U<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L316' target='_blank'>Source code</a></span></div></span><span class="id"> :</span><span class="id"> Type}</span> (<span id="A:72" class="id"><div name="A:72" class=" tooltip">A<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L316' target='_blank'>Source code</a></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#T:70">T</a></span>) (<span id="f:73" class="id"><div name="f:73" class=" tooltip">f<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L316' target='_blank'>Source code</a></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#T:70">T</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Notations.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Notations.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#U:71">U</a></span>)<br/>
 &nbsp;&nbsp;<span class="id">:</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#subspace">subspace</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#A:72">A</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Notations.html#::type_scope:x_'-&gt;'_x"> -&gt;</a></span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.Init.Notations.html#::type_scope:x_'-&gt;'_x"> </a></span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#U:71">U</a></span><span class="id"> :=</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#f:73">f</a></span>.<br/>
 <span class="vernacular">Arguments</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#from_subspace">from_subspace</a></span><span class="id"> {T</span><span class="id"> U}</span><span class="id"> A</span><span class="id"> f</span>.<br/>
@@ -825,19 +837,7 @@ Qed.</div></details>
 <span class="vernacular">Local</span><span class="vernacular"> Open</span><span class="vernacular"> Scope</span><span class="id"> relation_scope</span>.<br/>
 <span class="vernacular">Context</span><span class="id"> {</span><span id="SubspaceUniform.X" class="id"><div name="SubspaceUniform.X" class=" tooltip">X<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L437' target='_blank'>Source code</a></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.uniform_structure.html#Uniform.Exports.uniformType">uniformType</a></span><span class="id">}</span> (<span id="SubspaceUniform.A" class="id"><div name="SubspaceUniform.A" class=" tooltip">A<span class='tooltip-area'><hr/><a href='https://github.com/math-comp/analysis/tree/921d4308101175617f4425de645ce81c4da89c41/theories/topology_theory/subspace_topology.v#L437' target='_blank'>Source code</a></span></div></span><span class="id"> :</span><span class="id"> </span><span class="id"><a href="mathcomp.classical.classical_sets.html#set">set</a></span><span class="id"> </span><span class="id"><a href="mathcomp.analysis.topology_theory.subspace_topology.html#X:115">X</a></span>).<br/>
 <br/>
-<span class="vernacular">Definition</span><span class="id"> </span><span id="subspace_ent" class="id"><div name="subspace_ent" class=" tooltip">subspace_ent<span class='tooltip-area'><p>finite_subset_cover :
-forall [I : choiceType],
-set I -> forall [U : Type], (I -> set U) -> set U -> Prop
-
-finite_subset_cover is not universe polymorphic
-Arguments finite_subset_cover [I] D%_classical_set_scope 
-  [U]%_type_scope F%_function_scope A%_classical_set_scope
-finite_subset_cover is transparent
-Expands to: Constant
-            mathcomp.analysis.topology_theory.compact.finite_subset_cover
-Declared in
-library mathcomp.analysis.topology_theory.compact, line 286, characters 11-30
-cover_compact : forall [T : topologicalType], set T -> Prop
+<span class="vernacular">Definition</span><span class="id"> </span><span id="subspace_ent" class="id"><div name="subspace_ent" class=" tooltip">subspace_ent<span class='tooltip-area'><p>cover_compact : forall [T : topologicalType], set T -> Prop
 
 cover_compact is not universe polymorphic
 Arguments cover_compact [T] A%_classical_set_scope
